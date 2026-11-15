@@ -65,6 +65,21 @@ final class AiService
         return PromptBuilder::parse($raw);
     }
 
+    /**
+     * Modelos disponibles de un proveedor. Usa los datos del formulario si vienen; si no, los guardados.
+     * @return list<array{id:string,name:string,vision:?bool,price:?string}>
+     */
+    public static function listModels(string $provider, string $key = '', string $baseUrl = ''): array
+    {
+        if (!isset(self::PROVIDERS[$provider])) throw new AiException('Proveedor desconocido');
+        $class = self::PROVIDERS[$provider];
+        $key = $key !== '' ? $key : Setting::get("ai_key_$provider");
+        $baseUrl = $baseUrl !== '' ? $baseUrl : Setting::get("ai_base_url_$provider");
+        if ($class::needsKey() && $key === '' && $provider !== 'openrouter') throw new AiException('Pega primero la API key de este proveedor');
+        if ($class::needsBaseUrl() && $baseUrl === '') throw new AiException('Indica primero la URL base de la API');
+        return (new $class($key, '', $baseUrl ?: null))->models();
+    }
+
     /** Prueba de conexión con una imagen sintética. Devuelve la respuesta tal cual. */
     public static function test(): array
     {

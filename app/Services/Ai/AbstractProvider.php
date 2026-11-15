@@ -30,6 +30,12 @@ abstract class AbstractProvider
     /** ¿La API key es obligatoria? */
     public static function needsKey(): bool { return true; }
 
+    /**
+     * Lista de modelos disponibles para elegir en los ajustes.
+     * @return list<array{id:string,name:string,vision:?bool,price:?string}> vision: true/false si se sabe, null si no.
+     */
+    public function models(): array { throw new AiException('Este proveedor no permite listar modelos'); }
+
     /** Envía prompt + imagen JPEG (base64) y devuelve el texto de respuesta. */
     abstract public function ask(string $prompt, string $jpegBase64): string;
 }

@@ -49,6 +49,20 @@ final class SettingsController
         Response::redirect('/admin/ajustes');
     }
 
+    /** AJAX: lista de modelos del proveedor (con la key escrita en el formulario o la guardada). */
+    public function models(array $p = []): void
+    {
+        Auth::guard(true); Csrf::verify();
+        try {
+            $list = AiService::listModels(
+                (string) ($_POST['provider'] ?? ''), trim((string) ($_POST['key'] ?? '')), trim((string) ($_POST['base_url'] ?? ''))
+            );
+            Response::json(['ok' => true, 'models' => $list]);
+        } catch (AiException $e) {
+            Response::json(['ok' => false, 'error' => $e->getMessage()], 502);
+        }
+    }
+
     /** AJAX: prueba la conexión con la configuración YA guardada. */
     public function test(array $p = []): void
     {

@@ -30,5 +30,6 @@ $router->post('/admin/foto/{id}/borrar',     [$ph, 'delete']);
 $router->get('/admin/ajustes',               [$st, 'show']);
 $router->post('/admin/ajustes',              [$st, 'save']);
 $router->post('/admin/ajustes/probar',       [$st, 'test']);
+$router->post('/admin/ajustes/modelos',      [$st, 'models']);
 
 $router->dispatch($_SERVER['REQUEST_METHOD'] ?? 'GET', $_SERVER['REQUEST_URI'] ?? '/');

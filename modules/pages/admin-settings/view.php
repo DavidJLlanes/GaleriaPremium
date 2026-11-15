@@ -23,8 +23,19 @@
                     <?php if ($pv['key_url']): ?><p class="ad-hint">Consíguela en <a class="ad-link" href="<?= e($pv['key_url']) ?>" target="_blank" rel="noopener"><?= e(parse_url($pv['key_url'], PHP_URL_HOST)) ?></a></p><?php endif; ?>
                     <?php if ($pv['key_set']): ?><label class="ad-check" style="margin-top:.4rem"><input type="checkbox" name="ai_clear_<?= e($id) ?>"> Borrar la clave guardada</label><?php endif; ?></div>
                 <div><label>Modelo (con visión)</label>
-                    <input type="text" name="ai_model_<?= e($id) ?>" value="<?= e($pv['model']) ?>" placeholder="<?= e($pv['default_model']) ?>">
-                    <p class="ad-hint">Debe aceptar imágenes. Cámbialo cuando quieras por otro modelo del proveedor.</p></div>
+                    <div class="as-modelrow">
+                        <input type="text" name="ai_model_<?= e($id) ?>" value="<?= e($pv['model']) ?>" placeholder="<?= e($pv['default_model']) ?>">
+                        <button type="button" class="ad-btn is-ghost is-small as-load">Ver modelos</button>
+                    </div>
+                    <p class="ad-hint">Debe aceptar imágenes. Pulsa «Ver modelos» para elegir de la lista del proveedor.</p></div>
+            </div>
+            <div class="as-models" hidden>
+                <div class="as-mhead">
+                    <input type="text" class="as-mq" placeholder="Buscar modelo…" aria-label="Buscar modelo">
+                    <label class="ad-check as-vis"><input type="checkbox" class="as-mvis" checked> Solo con visión</label>
+                    <span class="ad-hint as-mcount"></span>
+                </div>
+                <div class="as-mlist"></div>
             </div>
         </div>
     <?php endforeach; ?>

@@ -12,6 +12,27 @@ abstract class OpenAiCompatible extends AbstractProvider
     protected function extraHeaders(): array { return []; }
     protected function tokenParam(): string { return 'max_tokens'; }
 
+    public function models(): array
+    {
+        $base    = rtrim($this->baseUrl ?: $this->defaultBaseUrl(), '/');
+        $headers = $this->extraHeaders();
+        if ($this->apiKey !== '') $headers[] = 'Authorization: Bearer ' . $this->apiKey;
+        $out = [];
+        foreach (Http::getJson("$base/models", $headers)['data'] ?? [] as $m) {
+            if (!is_array($m) || !isset($m['id'])) continue;
+            $out[] = $this->describeModel($m);
+        }
+        $out = array_values(array_filter($out));
+        usort($out, static fn ($a, $b) => strcasecmp($a['name'], $b['name']));
+        return $out;
+    }
+
+    /** Convierte una entrada de /models en ['id','name','vision','price']; null = descartar. */
+    protected function describeModel(array $m): ?array
+    {
+        return ['id' => (string) $m['id'], 'name' => (string) ($m['name'] ?? $m['id']), 'vision' => null, 'price' => null];
+    }
+
     public function ask(string $prompt, string $jpegBase64): string
     {
         $base    = rtrim($this->baseUrl ?: $this->defaultBaseUrl(), '/');
