@@ -37,5 +37,8 @@ bash deploy/deploy.sh
 echo "▶ 5/5 Administrador '$ADMIN' (te pedirá la contraseña, mínimo 8 caracteres)"
 php bin/admin.php "$ADMIN"
 
+echo "▶ Permisos finales (la BD la toca el usuario de PHP-FPM, no root)"
+bash deploy/deploy.sh
+
 echo
 echo "✔ Todo listo → https://warpstudio.es   ·   Panel: https://warpstudio.es/admin"
