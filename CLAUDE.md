@@ -20,6 +20,9 @@
 8. **Organización de código ante todo**: no engordar archivos innecesariamente. Cada componente, cada diseño de galería, cada zona de la web, cada plugin y cada sección tiene SIEMPRE sus archivos aislados (carpeta propia en `modules/` con `view.php`, `style.css`, `script.js`, `module.php`).
 9. **Todas las fotos se convierten a formato WebP con calidad 75%**, en todos los casos (originales, miniaturas, subidas y demo).
 10. Anotar todas las peticiones de David en este archivo; y cada vez que diga "anota orden", añadirla aquí como regla obligatoria.
+11. **Cada foto se sube con nombre (título) y descripción.** La descripción puede generarse automáticamente con IA (opcional) cuando se deja vacía.
+12. **Sistema de IA con APIs comunes, incluido OpenRouter** (también OpenAI, Anthropic, Gemini y endpoint compatible OpenAI personalizado). La IA genera el **título con un estilo definido en las opciones de la web** (Admin → Ajustes). Cada proveedor vive en su propio archivo (`app/Services/Ai/Providers/`).
+13. **Despliegue en VPS**: la web vive en `/var/www/warpstudio.es`; Nginx apunta su `root` a `/var/www/warpstudio.es/public`. David usa Nginx puro (sin Virtualmin). Dar siempre UN solo comando, ordenado y sencillo.
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```
