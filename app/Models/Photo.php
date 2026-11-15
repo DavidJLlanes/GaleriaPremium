@@ -14,6 +14,19 @@ final class Photo
         );
     }
 
+    /** Guarda el orden de las fotos de una galería. $ids = ids en el orden deseado. */
+    public static function reorder(int $galleryId, array $ids): void
+    {
+        $valid = array_column(Database::all('SELECT id FROM photos WHERE gallery_id = ?', [$galleryId]), 'id');
+        $ids = array_values(array_filter(array_map('intval', $ids), fn($i) => in_array($i, array_map('intval', $valid), true)));
+        $pdo = Database::pdo(); $pdo->beginTransaction();
+        try {
+            $st = $pdo->prepare('UPDATE photos SET sort_order = ? WHERE id = ? AND gallery_id = ?');
+            foreach ($ids as $pos => $id) $st->execute([$pos, $id, $galleryId]);
+            $pdo->commit();
+        } catch (\Throwable $e) { $pdo->rollBack(); throw $e; }
+    }
+
     public static function find(int $id): ?array
     {
         return Database::one('SELECT * FROM photos WHERE id = ?', [$id]);

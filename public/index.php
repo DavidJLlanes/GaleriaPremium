@@ -22,6 +22,7 @@ $router->get('/admin/galeria/{id}',          [$ag, 'show']);
 $router->post('/admin/galeria/{id}/editar',  [$ag, 'update']);
 $router->post('/admin/galeria/{id}/borrar',  [$ag, 'delete']);
 $router->post('/admin/galeria/{id}/subir',   [$ag, 'upload']);
+$router->post('/admin/galeria/{id}/orden',   [$ag, 'reorder']);
 $router->post('/admin/foto/{id}/editar',     [$ph, 'update']);
 $router->post('/admin/foto/{id}/ia',         [$ph, 'ai']);
 $router->post('/admin/foto/{id}/portada',    [$ph, 'cover']);

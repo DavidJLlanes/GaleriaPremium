@@ -5,10 +5,12 @@
 
 <?= Module::render('components/uploader', ['galleryId' => $gid, 'aiConfigured' => $aiConfigured, 'aiAuto' => $aiAuto]) ?>
 
+<?php Module::use('components/sortable'); ?>
 <section class="ad-card">
     <h2>Fotos</h2>
+    <?php if (count($photos) > 1): ?><p class="ad-hint" style="margin:-.6rem 0 1rem">Arrastra el icono ⠿ para cambiar el orden. Se guarda solo.</p><?php endif; ?>
     <?php if (!$photos): ?><p class="ad-hint">Todavía no hay fotos. Sube la primera arriba.</p><?php endif; ?>
-    <div class="pr-list">
+    <div class="pr-list" data-reorder-url="/admin/galeria/<?= $gid ?>/orden">
         <?php foreach ($photos as $p): ?>
             <?= Module::render('components/photo-row', ['p' => $p, 'isCover' => (int) $gallery['cover_photo_id'] === (int) $p['id'], 'aiConfigured' => $aiConfigured]) ?>
         <?php endforeach; ?>

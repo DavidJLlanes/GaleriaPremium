@@ -28,6 +28,16 @@ final class GalleryController
         Response::redirect("/admin/galeria/$id");
     }
 
+    public function reorder(array $p): void
+    {
+        Auth::guard(true); Csrf::verify();
+        $g = Gallery::find((int) $p['id']);
+        if (!$g) Response::json(['ok' => false, 'error' => 'Galería no encontrada.'], 404);
+        $ids = array_filter(explode(',', (string) ($_POST['ids'] ?? '')), 'strlen');
+        Photo::reorder((int) $g['id'], $ids);
+        Response::json(['ok' => true]);
+    }
+
     public function show(array $p): void
     {
         Auth::guard();
