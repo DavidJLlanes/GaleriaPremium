@@ -1,2 +1,8 @@
 .ftr{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding:2rem var(--pad);
   border-top:1px solid rgba(242,239,233,.08);color:var(--muted);font-size:.78rem;letter-spacing:.1em}
+
+.ftr{align-items:center}
+.ftr-links{display:flex;gap:1.2rem}
+.ftr-links a{color:var(--muted);transition:color .25s}
+.ftr-links a:hover{color:var(--accent)}
+@media(max-width:640px){.ftr{flex-direction:column;align-items:flex-start}}
