@@ -1,0 +1,4 @@
+.as-prov{display:none}
+.as-prov.is-on{display:block}
+.as-actions{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
+#aiTestOut.is-ok{color:#9fd4a6}#aiTestOut.is-err{color:#eba399}

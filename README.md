@@ -16,7 +16,8 @@ Estilos de galería: masonry · justified · grid · filmstrip. Heroes: `single`
 ## Desarrollo local
 ```
 php bin/install.php --demo   # (--reset recarga la demo)
-php -S 127.0.0.1:8000 -t public public/router.php   # sirve los assets de /modules directamente
+php -S 127.0.0.1:8000 -d upload_max_filesize=40M -d post_max_size=48M -t public public/router.php
+# sirve los assets de /modules directamente. Admin: php bin/admin.php <usuario>  →  http://127.0.0.1:8000/admin
 ```
 
 ## Hoja de ruta

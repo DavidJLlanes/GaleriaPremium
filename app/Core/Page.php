@@ -5,15 +5,15 @@ namespace App\Core;
 final class Page
 {
     /**
-     * Renderiza un módulo de tipo "pages/*" dentro del layout principal.
+     * Renderiza un módulo "pages/*" dentro de un layout (por defecto layouts/main).
      * $meta: title, bodyClass...
      */
-    public static function render(string $page, array $data = [], array $meta = []): void
+    public static function render(string $page, array $data = [], array $meta = [], string $layout = 'layouts/main'): void
     {
-        Module::use('layouts/main'); // el CSS base va siempre primero
+        Module::use('layouts/base'); // tokens + reset: siempre primero
+        Module::use($layout);        // el layout antes que la página (el JS del admin define window.Admin)
         $content = Module::render($page, $data);
-        $html = Module::render('layouts/main', $meta + ['content' => $content]);
-        echo Assets::inject($html);
+        echo Assets::inject(Module::render($layout, $meta + ['content' => $content]));
     }
 
     public static function notFound(): void

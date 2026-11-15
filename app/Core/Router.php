@@ -6,11 +6,14 @@ final class Router
 {
     private array $routes = [];
 
-    public function get(string $pattern, callable $handler): void
+    public function get(string $pattern, callable $handler): void  { $this->add('GET', $pattern, $handler); }
+    public function post(string $pattern, callable $handler): void { $this->add('POST', $pattern, $handler); }
+
+    private function add(string $method, string $pattern, callable $handler): void
     {
         // /galeria/{slug} -> regex con grupos con nombre
         $regex = '#^' . preg_replace('#\{(\w+)\}#', '(?P<$1>[^/]+)', $pattern) . '/?$#';
-        $this->routes['GET'][] = [$regex, $handler];
+        $this->routes[$method][] = [$regex, $handler];
     }
 
     public function dispatch(string $method, string $uri): void
