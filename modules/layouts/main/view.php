@@ -16,6 +16,7 @@ $showHeader = Site::on(!empty($isHome) ? 'header_home' : 'header_pages'); ?>
 <?php if ($showHeader) echo Module::render('components/header'); ?>
 <main><?= $content ?></main>
 <?= Module::render('components/footer') ?>
+<?= Module::render('components/drop-upload') ?>
 <!--assets:js-->
 </body>
 </html>

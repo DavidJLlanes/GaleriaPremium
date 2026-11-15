@@ -34,6 +34,7 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
     <?= $content ?>
 </main>
 <div class="ad-toasts" id="adToasts" aria-live="polite"></div>
+<?= App\Core\Module::render('components/drop-upload') ?>
 <!--assets:js-->
 </body>
 </html>
