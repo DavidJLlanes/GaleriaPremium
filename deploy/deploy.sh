@@ -11,8 +11,9 @@ php bin/install.php          # crea/actualiza el esquema (idempotente)
 php bin/assets.php           # publica el CSS/JS de los módulos
 
 # Permisos: PHP debe poder escribir en la BD y en las fotos
-OWNER="${WEB_USER:-$(stat -c %U "$APP")}"
-[ "$OWNER" = "root" ] && OWNER="www-data"
+# (se detecta el usuario con el que corre PHP-FPM; se puede forzar con WEB_USER=...)
+OWNER="${WEB_USER:-$(ps -eo user:32,comm | awk '$2 ~ /php-fpm/ && $1 != "root" {print $1; exit}')}"
+OWNER="${OWNER:-www-data}"
 chown -R "$OWNER":"$(id -gn "$OWNER")" storage public/uploads public/assets
 chmod -R u+rwX,g+rwX storage public/uploads
 echo "✔ Desplegado $(git rev-parse --short HEAD) (propietario: $OWNER)"
