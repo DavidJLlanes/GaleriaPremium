@@ -1,0 +1,8 @@
+/storage/*.sqlite*
+/public/uploads/originals/*
+/public/uploads/thumbs/*
+!/public/uploads/originals/.gitkeep
+!/public/uploads/thumbs/.gitkeep
+/config/config.local.php
+.DS_Store
+*.log
