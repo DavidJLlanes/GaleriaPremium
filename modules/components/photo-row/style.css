@@ -9,3 +9,6 @@
 .pr-meta{margin-left:auto;font-size:.72rem;color:var(--muted)}
 .pr button.is-busy{opacity:.5;pointer-events:none}
 @media(max-width:640px){.pr{grid-template-columns:80px 1fr}.pr>img{width:80px;height:80px}.pr-line{grid-template-columns:1fr}}
+.pr-th{position:relative;width:120px;max-height:180px;overflow:hidden;border-radius:5px;align-self:start;background:#111}
+.pr-th img{position:absolute;max-width:none;height:auto}
+@media(max-width:640px){.pr-th{width:80px}}

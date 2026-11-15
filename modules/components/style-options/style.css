@@ -1,0 +1,4 @@
+.so{margin:1.2rem 0 0;padding:1rem 1.2rem;border:1px solid rgba(216,179,106,.25);border-radius:8px;background:rgba(216,179,106,.04)}
+.so legend{padding:0 .5rem;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.so-row{margin-bottom:.9rem}
+.so-row:last-child{margin-bottom:0}

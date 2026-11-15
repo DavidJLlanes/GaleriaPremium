@@ -1,0 +1,12 @@
+/* Lightbox · Deslizar (dirección según next/prev; al abrir sube desde abajo) */
+.lb[data-fx=slide]{--lb-in:550;--lb-out:300}
+.lb[data-fx=slide] .lb-img.is-in{animation:lbsl-in-r .55s var(--ease) both}
+.lb[data-fx=slide][data-dir=prev] .lb-img.is-in{animation-name:lbsl-in-l}
+.lb[data-fx=slide][data-dir=open] .lb-img.is-in{animation-name:lbsl-in-up}
+.lb[data-fx=slide] .lb-img.is-out{animation:lbsl-out-l .3s cubic-bezier(.5,0,.75,0) forwards}
+.lb[data-fx=slide][data-dir=prev] .lb-img.is-out{animation-name:lbsl-out-r}
+@keyframes lbsl-in-r{from{opacity:0;transform:translateX(18vw)}to{opacity:1;transform:none}}
+@keyframes lbsl-in-l{from{opacity:0;transform:translateX(-18vw)}to{opacity:1;transform:none}}
+@keyframes lbsl-in-up{from{opacity:0;transform:translateY(12vh)}to{opacity:1;transform:none}}
+@keyframes lbsl-out-l{to{opacity:0;transform:translateX(-18vw)}}
+@keyframes lbsl-out-r{to{opacity:0;transform:translateX(18vw)}}

@@ -1,15 +1,18 @@
-.lb{position:fixed;inset:0;z-index:100;background:rgba(6,6,7,.96);backdrop-filter:blur(8px);display:grid;place-items:center;
-  opacity:0;transition:opacity .45s var(--ease)}
+/* Lightbox base (los efectos viven en modules/lightboxes/<efecto>/). La foto se escala SIEMPRE para llenar la pantalla activa sin deformarse. */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(6,6,7,.97);opacity:0;transition:opacity .4s var(--ease);overflow:hidden;--lb-in:450;--lb-out:250;--lb-close:380}
 .lb.is-open{opacity:1}
+.lb.is-closing{opacity:0;transition-duration:.38s}
 .lb[hidden]{display:none}
-.lb figure{max-width:92vw;max-height:88vh;text-align:center}
-.lb img{max-width:92vw;max-height:82vh;object-fit:contain;border-radius:2px;transition:opacity .35s,transform .6s var(--ease)}
-.lb img.is-swap{opacity:0;transform:scale(.97)}
-.lb figcaption{margin-top:1rem;font:300 1rem var(--serif);color:var(--muted)}
-.lb-close,.lb-nav{position:absolute;background:none;border:0;color:var(--fg);cursor:pointer;opacity:.6;transition:opacity .3s,transform .3s}
+.lb-bg{position:absolute;inset:-6%;background:center/cover no-repeat;filter:blur(70px) saturate(1.4);opacity:0;transition:opacity .9s;pointer-events:none}
+.lb-fig{position:absolute;inset:0;margin:0;display:grid;place-items:center;padding-bottom:3rem}
+.lb-img{display:block;border-radius:2px;box-shadow:0 30px 100px rgba(0,0,0,.55);-webkit-user-drag:none;user-select:none}
+.lb-cap{position:absolute;left:0;right:0;bottom:2.9rem;text-align:center;padding:0 4rem;font:300 1rem var(--serif);color:rgba(242,239,233,.75);pointer-events:none}
+.lb-close,.lb-nav{position:absolute;z-index:2;background:none;border:0;color:var(--fg);cursor:pointer;opacity:.6;transition:opacity .3s,transform .3s}
 .lb-close:hover,.lb-nav:hover{opacity:1}
 .lb-close{top:1.2rem;right:1.6rem;font-size:2.6rem;line-height:1}
 .lb-nav{top:50%;transform:translateY(-50%);font-size:4rem;padding:1rem}
 .lb-prev{left:.6rem}.lb-next{right:.6rem}
 .lb-prev:hover{transform:translate(-4px,-50%)}.lb-next:hover{transform:translate(4px,-50%)}
-.lb-count{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);font-size:.75rem;letter-spacing:.3em;color:var(--muted)}
+.lb-count{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);font-size:.75rem;letter-spacing:.3em;color:var(--muted)}
+@media(max-width:700px){.lb-nav{font-size:2.6rem;padding:.4rem}.lb-cap{padding:0 1rem;bottom:2.6rem}}
+@media(prefers-reduced-motion:reduce){.lb-img{animation:none!important}}

@@ -1,0 +1,23 @@
+.cr{position:fixed;inset:0;z-index:300;background:rgba(5,5,6,.92);display:grid;place-items:center;padding:1rem;overflow:auto}
+.cr[hidden]{display:none}
+.cr-box{width:min(960px,100%);background:#141417;border:1px solid rgba(242,239,233,.1);border-radius:12px;padding:1.2rem 1.4rem}
+.cr-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem}
+.cr-title{font:400 1.05rem var(--sans)}
+.cr-x{background:none;border:0;color:var(--fg);font-size:1.8rem;line-height:1;cursor:pointer;opacity:.7}
+.cr-hint{font-size:.8rem;color:var(--muted);margin-bottom:.8rem}
+.cr-presets{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
+.cr-presets button{background:#0d0d0f;color:var(--muted);border:1px solid rgba(242,239,233,.14);border-radius:100px;padding:.3rem .8rem;font:400 .75rem var(--sans);cursor:pointer}
+.cr-presets button.is-on{border-color:var(--accent);color:var(--accent)}
+.cr-stage{position:relative;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;background:#000;line-height:0}
+.cr-img{display:block;pointer-events:none}
+.cr-rect{position:absolute;border:2px solid var(--accent);cursor:move;touch-action:none;box-shadow:0 0 0 9999px rgba(0,0,0,.62);
+  background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)) 33.33% 0/1px 100% no-repeat,linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)) 66.66% 0/1px 100% no-repeat,
+  linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)) 0 33.33%/100% 1px no-repeat,linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)) 0 66.66%/100% 1px no-repeat}
+.cr-rect i{position:absolute;width:16px;height:16px;background:var(--accent);border-radius:3px;touch-action:none}
+.cr-rect i::after{content:"";position:absolute;inset:-12px}
+.cr-rect i[data-h=nw]{left:-9px;top:-9px;cursor:nwse-resize}.cr-rect i[data-h=ne]{right:-9px;top:-9px;cursor:nesw-resize}
+.cr-rect i[data-h=sw]{left:-9px;bottom:-9px;cursor:nesw-resize}.cr-rect i[data-h=se]{right:-9px;bottom:-9px;cursor:nwse-resize}
+.cr-foot{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin-top:1rem}
+.cr-zoom{display:flex;align-items:center;gap:.6rem;margin:0!important;text-transform:none!important;letter-spacing:0!important;font-size:.8rem!important}
+.cr-zoom input{width:140px;accent-color:var(--accent)}
+.cr-info{flex:1;font-size:.75rem;color:var(--muted);text-align:right;min-width:90px}

@@ -12,20 +12,24 @@
     </div>
     <label>Diseño de esta galería</label>
     <?= Module::render('components/style-picker', ['styles' => $styles, 'name' => 'style', 'selected' => $gallery['style']]) ?>
+    <?= Module::render('components/style-options', ['styles' => $styles, 'gallery' => $gallery]) ?>
+    <label style="margin-top:1.4rem">Efecto al ampliar una foto (lightbox)</label>
+    <?= Module::render('components/style-picker', ['styles' => $lightboxes, 'name' => 'lightbox', 'selected' => $gallery['lightbox'] ?? 'fade']) ?>
     <label class="ad-check" style="margin:1.2rem 0"><input type="checkbox" name="published" <?= $gallery['is_published'] ? 'checked' : '' ?>> Publicada en la web</label>
     <button class="ad-btn">Guardar</button>
 </form>
 
 <?= Module::render('components/uploader', ['galleryId' => $gid, 'aiConfigured' => $aiConfigured, 'aiAuto' => $aiAuto]) ?>
 
-<?php Module::use('components/sortable'); ?>
+<?php Module::use('components/sortable'); Module::use('components/style-options'); if ($canCrop) echo Module::render('components/cropper'); ?>
 <section class="ad-card">
     <h2>Fotos</h2>
+    <?php if ($canCrop): ?><p class="ad-hint" style="margin:-.6rem 0 1rem">✂ <b>La primera foto fija la proporción de la galería</b> (<?= $gallery['crop_ratio'] ? e(rtrim(rtrim(number_format((float) $gallery['crop_ratio'], 2), '0'), '.')) . ':1' : 'automática' ?>). Pulsa «Recortar» en cada foto para elegir qué zona se ve.</p><?php endif; ?>
     <?php if (count($photos) > 1): ?><p class="ad-hint" style="margin:-.6rem 0 1rem">Arrastra el icono ⠿ para cambiar el orden. Se guarda solo.</p><?php endif; ?>
     <?php if (!$photos): ?><p class="ad-hint">Todavía no hay fotos. Sube la primera arriba.</p><?php endif; ?>
-    <div class="pr-list" data-sortable data-reorder-url="/admin/galeria/<?= $gid ?>/orden">
-        <?php foreach ($photos as $p): ?>
-            <?= Module::render('components/photo-row', ['p' => $p, 'isCover' => (int) $gallery['cover_photo_id'] === (int) $p['id'], 'aiConfigured' => $aiConfigured]) ?>
+    <div class="pr-list" data-ratio="<?= e((string) ($gallery['crop_ratio'] ?? '')) ?>" data-sortable data-reorder-url="/admin/galeria/<?= $gid ?>/orden">
+        <?php foreach ($photos as $i => $p): ?>
+            <?= Module::render('components/photo-row', ['p' => $p, 'isCover' => (int) $gallery['cover_photo_id'] === (int) $p['id'], 'aiConfigured' => $aiConfigured, 'canCrop' => $canCrop, 'isFirst' => $i === 0]) ?>
         <?php endforeach; ?>
     </div>
 </section>

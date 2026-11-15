@@ -23,6 +23,12 @@
 11. **Cada foto se sube con nombre (título) y descripción.** La descripción puede generarse automáticamente con IA (opcional) cuando se deja vacía.
 12. **Sistema de IA con APIs comunes, incluido OpenRouter** (también OpenAI, Anthropic, Gemini y endpoint compatible OpenAI personalizado). La IA genera el **título con un estilo definido en las opciones de la web** (Admin → Ajustes). Cada proveedor vive en su propio archivo (`app/Services/Ai/Providers/`).
 13. **Despliegue en VPS**: la web vive en `/var/www/warpstudio.es`; Nginx apunta su `root` a `/var/www/warpstudio.es/public`. David usa Nginx puro (sin Virtualmin). Dar siempre UN solo comando, ordenado y sencillo.
+14. **Cada galería tiene su propio diseño visual** (selector en la gestión de la galería) y las galerías y la sección hero se pueden **ordenar** desde el panel.
+15. **Barra superior opcional** en la pantalla principal (ajuste de Sitio).
+16. **Identidad del sitio / webapp**: favicon, icono, logo, nombre y más opciones en Admin → Sitio. Al subir un icono se generan automáticamente los iconos adaptativos (iPhone, Android, PC). Excepción documentada a la regla 9: los iconos (PNG, por requisito de plataforma) y el logo; las fotos siguen siendo WebP 75%.
+17. **Galería "slider" horizontal**: todas las fotos con la misma proporción, definida por la primera; en el resto el usuario elige el recorte con esa proporción. Opción para ajustar la separación entre fotos y que no se corte ninguna a ningún ancho de pantalla.
+18. **Lightbox con efecto configurable por cada galería** (fade, slide, flip, curtain, zoom; cada efecto en `modules/lightboxes/<nombre>/`). La foto se ajusta al tamaño y proporciones de la pantalla activa.
+19. **Subida global por arrastre**: arrastrar una foto a cualquier zona de la web la sube, mostrando título, descripción y galería (igual que la subida normal, siempre vía `ImageProcessor`).
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```

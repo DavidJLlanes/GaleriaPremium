@@ -43,7 +43,8 @@ final class GalleryController
         if (!$g) Response::json(['ok' => false, 'error' => 'Galería no encontrada.'], 404);
         $ids = array_filter(explode(',', (string) ($_POST['ids'] ?? '')), 'strlen');
         Photo::reorder((int) $g['id'], $ids);
-        Response::json(['ok' => true]);
+        Gallery::syncCrops((int) $g['id']);   // la primera foto define la proporción
+        Response::json(['ok' => true, 'ratio' => (float) (Gallery::find((int) $g['id'])['crop_ratio'] ?? 0)]);
     }
 
     public function show(array $p): void
@@ -57,6 +58,9 @@ final class GalleryController
             'styles'       => Module::all('galleries'),
             'aiConfigured' => AiService::isConfigured(),
             'aiAuto'       => AiService::settings()['auto'],
+            'canCrop'      => Gallery::usesCrop($g),
+            'lightboxes'   => Module::all('lightboxes'),
+            'options'      => Gallery::options($g),
         ], ['title' => $g['title'], 'nav' => 'galerias'], 'layouts/admin');
     }
 
@@ -67,6 +71,10 @@ final class GalleryController
         $title = trim((string) ($_POST['title'] ?? ''));
         if (!Gallery::find($id) || $title === '') { Flash::set('Datos no válidos.', 'error'); Response::redirect("/admin/galeria/$id"); }
         Gallery::update($id, $title, trim((string) ($_POST['description'] ?? '')), $this->style(), isset($_POST['published']));
+        Gallery::saveOptions($id, $this->options());
+        $fx = (string) ($_POST['lightbox'] ?? 'fade');
+        Gallery::setLightbox($id, Module::exists("lightboxes/$fx") ? $fx : 'fade');
+        Gallery::syncCrops($id);
         Flash::set('Galería guardada.');
         Response::redirect("/admin/galeria/$id");
     }
@@ -93,10 +101,29 @@ final class GalleryController
                 (string) ($_POST['description'] ?? ''),
                 ($_POST['ai'] ?? '0') === '1',
             );
+            Gallery::syncCrops($gid);
             Response::json(['ok' => true, 'photo' => $photo]);
         } catch (\RuntimeException $e) {
             Response::json(['ok' => false, 'error' => $e->getMessage()], 422);
         }
+    }
+
+    /** Opciones de cada diseño enviadas como opt[<diseño>][<clave>]; se validan contra el module.php de cada uno. */
+    private function options(): array
+    {
+        $out = [];
+        foreach (Module::all('galleries') as $style => $meta) {
+            foreach ($meta['options'] ?? [] as $key => $o) {
+                $raw = $_POST['opt'][$style][$key] ?? null;
+                $out[$style][$key] = match ($o['type']) {
+                    'bool'   => $raw ? 1 : 0,
+                    'number' => max($o['min'] ?? 0, min($o['max'] ?? 999, (int) $raw)),
+                    'enum'   => array_key_exists((string) $raw, $o['choices']) ? (string) $raw : $o['default'],
+                    default  => $o['default'],
+                };
+            }
+        }
+        return $out;
     }
 
     private function style(): string

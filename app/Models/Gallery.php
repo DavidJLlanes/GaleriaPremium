@@ -41,6 +41,60 @@ final class Gallery
         );
     }
 
+    public static function setLightbox(int $id, string $fx): void
+    {
+        Database::pdo()->prepare('UPDATE galleries SET lightbox = ? WHERE id = ?')->execute([$fx, $id]);
+    }
+
+    /** Opciones propias del diseño elegido (JSON en galleries.options) con los valores por defecto del módulo. */
+    public static function options(array $g): array
+    {
+        $saved = json_decode((string) ($g['options'] ?? '{}'), true) ?: [];
+        $out = [];
+        foreach ((\App\Core\Module::meta('galleries/' . $g['style'])['options'] ?? []) as $k => $o) {
+            $v = $saved[$g['style']][$k] ?? $o['default'];
+            $out[$k] = $v;
+        }
+        return $out;
+    }
+
+    public static function saveOptions(int $id, array $all): void
+    {
+        Database::pdo()->prepare('UPDATE galleries SET options = ? WHERE id = ?')->execute([json_encode($all, JSON_UNESCAPED_UNICODE), $id]);
+    }
+
+    /** ¿El diseño de esta galería usa recortes con proporción común? (module.php: 'crop' => true) */
+    public static function usesCrop(array $g): bool
+    {
+        return !empty(\App\Core\Module::meta('galleries/' . $g['style'])['crop']);
+    }
+
+    /**
+     * Mantiene coherentes los recortes: la PRIMERA foto define la proporción y el resto se ajusta a ella
+     * (las que no tengan recorte, o lo tengan con otra proporción, se centran automáticamente).
+     */
+    public static function syncCrops(int $id): void
+    {
+        $g = self::find($id);
+        if (!$g || !self::usesCrop($g)) return;
+        $photos = Photo::forGallery($id);
+        if (!$photos) { Database::pdo()->prepare('UPDATE galleries SET crop_ratio = NULL WHERE id = ?')->execute([$id]); return; }
+
+        $first = $photos[0]; $fw = max(1, (int) $first['width']); $fh = max(1, (int) $first['height']);
+        $fc = \App\Services\Crop::of($first);
+        if ($fc) { $ratio = \App\Services\Crop::ratio($fc, $fw, $fh); }
+        else {
+            $ratio = max(.5, min(2.0, $fw / $fh));
+            Photo::setCrop((int) $first['id'], \App\Services\Crop::fit($ratio, $fw, $fh));
+        }
+        foreach (array_slice($photos, 1) as $p) {
+            $iw = max(1, (int) $p['width']); $ih = max(1, (int) $p['height']);
+            $c = \App\Services\Crop::of($p);
+            if (!$c || abs(\App\Services\Crop::ratio($c, $iw, $ih) / $ratio - 1) > .01) Photo::setCrop((int) $p['id'], \App\Services\Crop::fit($ratio, $iw, $ih, $c));
+        }
+        Database::pdo()->prepare('UPDATE galleries SET crop_ratio = ? WHERE id = ?')->execute([$ratio, $id]);
+    }
+
     /** Guarda el orden de las galerías (ids en el orden deseado). */
     public static function reorder(array $ids): void
     {

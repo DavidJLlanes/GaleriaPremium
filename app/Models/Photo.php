@@ -27,6 +27,12 @@ final class Photo
         } catch (\Throwable $e) { $pdo->rollBack(); throw $e; }
     }
 
+    public static function setCrop(int $id, ?array $c): void
+    {
+        Database::pdo()->prepare('UPDATE photos SET crop_x = ?, crop_y = ?, crop_w = ?, crop_h = ? WHERE id = ?')
+            ->execute($c ? [$c['x'], $c['y'], $c['w'], $c['h'], $id] : [null, null, null, null, $id]);
+    }
+
     /** Fotos por id respetando el orden dado (ids inexistentes se ignoran). */
     public static function findMany(array $ids): array
     {

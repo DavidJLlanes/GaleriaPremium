@@ -17,6 +17,25 @@ final class PhotoController
         return $photo;
     }
 
+    /** Guarda el recorte de una foto. La primera de la galería define la proporción; las demás se fuerzan a ella. */
+    public function crop(array $p): void
+    {
+        $photo = $this->load($p);
+        $gid = (int) $photo['gallery_id']; $iw = max(1, (int) $photo['width']); $ih = max(1, (int) $photo['height']);
+        $c = \App\Services\Crop::sanitize($_POST);
+        if (!$c) Response::json(['ok' => false, 'error' => 'Recorte no válido'], 422);
+
+        $first = Photo::forGallery($gid)[0] ?? null;
+        $isFirst = $first && (int) $first['id'] === (int) $photo['id'];
+        if (!$isFirst) {
+            $ratio = (float) (Gallery::find($gid)['crop_ratio'] ?? 0);
+            if ($ratio > 0) $c = \App\Services\Crop::lock($c, $ratio, $iw, $ih);
+        }
+        Photo::setCrop((int) $photo['id'], $c);
+        Gallery::syncCrops($gid);
+        Response::json(['ok' => true, 'first' => $isFirst, 'ratio' => (float) (Gallery::find($gid)['crop_ratio'] ?? 0), 'crop' => $c]);
+    }
+
     public function update(array $p): void
     {
         $photo = $this->load($p);
@@ -50,6 +69,7 @@ final class PhotoController
     {
         $photo = $this->load($p);
         Photo::delete((int) $photo['id']);
+        Gallery::syncCrops((int) $photo['gallery_id']);
         Response::json(['ok' => true]);
     }
 }

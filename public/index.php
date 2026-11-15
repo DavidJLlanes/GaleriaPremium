@@ -33,6 +33,7 @@ $router->post('/admin/galeria/{id}/subir',   [$ag, 'upload']);
 $router->post('/admin/galeria/{id}/orden',   [$ag, 'reorder']);
 $router->post('/admin/foto/{id}/editar',     [$ph, 'update']);
 $router->post('/admin/foto/{id}/ia',         [$ph, 'ai']);
+$router->post('/admin/foto/{id}/recorte',    [$ph, 'crop']);
 $router->post('/admin/foto/{id}/portada',    [$ph, 'cover']);
 $router->post('/admin/foto/{id}/borrar',     [$ph, 'delete']);
 $router->get('/admin/ajustes',               [$st, 'show']);

@@ -1,0 +1,6 @@
+/* Lightbox · Zoom desde la miniatura (la apertura/cierre los anima script.js; aquí el cambio entre fotos) */
+.lb[data-fx=zoom]{--lb-in:550;--lb-out:260}
+.lb[data-fx=zoom] .lb-img.is-in{animation:lbzm-in .55s var(--ease) both}
+.lb[data-fx=zoom] .lb-img.is-out{animation:lbzm-out .26s ease forwards}
+@keyframes lbzm-in{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:none}}
+@keyframes lbzm-out{to{opacity:0;transform:scale(.92)}}

@@ -1,0 +1,14 @@
+/* Lightbox · Giro 3D */
+.lb[data-fx=flip]{--lb-in:650;--lb-out:380}
+.lb[data-fx=flip] .lb-fig{perspective:1600px}
+.lb[data-fx=flip] .lb-img{backface-visibility:hidden}
+.lb[data-fx=flip] .lb-img.is-in{animation:lbfl-in-r .65s var(--ease) both}
+.lb[data-fx=flip][data-dir=prev] .lb-img.is-in{animation-name:lbfl-in-l}
+.lb[data-fx=flip][data-dir=open] .lb-img.is-in{animation-name:lbfl-open}
+.lb[data-fx=flip] .lb-img.is-out{animation:lbfl-out-l .38s ease-in forwards}
+.lb[data-fx=flip][data-dir=prev] .lb-img.is-out{animation-name:lbfl-out-r}
+@keyframes lbfl-in-r{from{opacity:0;transform:rotateY(80deg) scale(.9)}to{opacity:1;transform:none}}
+@keyframes lbfl-in-l{from{opacity:0;transform:rotateY(-80deg) scale(.9)}to{opacity:1;transform:none}}
+@keyframes lbfl-open{from{opacity:0;transform:rotateX(-35deg) translateY(10vh) scale(.9)}to{opacity:1;transform:none}}
+@keyframes lbfl-out-l{to{opacity:0;transform:rotateY(-80deg) scale(.9)}}
+@keyframes lbfl-out-r{to{opacity:0;transform:rotateY(80deg) scale(.9)}}
