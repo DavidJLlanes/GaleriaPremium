@@ -27,6 +27,25 @@ final class Photo
         } catch (\Throwable $e) { $pdo->rollBack(); throw $e; }
     }
 
+    /** Fotos por id respetando el orden dado (ids inexistentes se ignoran). */
+    public static function findMany(array $ids): array
+    {
+        $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
+        if (!$ids) return [];
+        $rows = Database::all('SELECT * FROM photos WHERE id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')', $ids);
+        $by = []; foreach ($rows as $r) $by[(int) $r['id']] = $r;
+        return array_values(array_filter(array_map(static fn ($i) => $by[$i] ?? null, $ids)));
+    }
+
+    /** Todas las fotos con el nombre de su galería (selector de portada). */
+    public static function allWithGallery(): array
+    {
+        return Database::all(
+            'SELECT p.*, g.title AS gallery_title FROM photos p JOIN galleries g ON g.id = p.gallery_id
+             ORDER BY g.sort_order, g.id, p.sort_order, p.id'
+        );
+    }
+
     public static function find(int $id): ?array
     {
         return Database::one('SELECT * FROM photos WHERE id = ?', [$id]);

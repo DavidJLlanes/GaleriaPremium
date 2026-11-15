@@ -28,6 +28,14 @@ final class GalleryController
         Response::redirect("/admin/galeria/$id");
     }
 
+    /** Reordena las galerías (arrastrando en el panel). */
+    public function reorderAll(array $p = []): void
+    {
+        Auth::guard(true); Csrf::verify();
+        Gallery::reorder(array_filter(explode(',', (string) ($_POST['ids'] ?? '')), 'strlen'));
+        Response::json(['ok' => true]);
+    }
+
     public function reorder(array $p): void
     {
         Auth::guard(true); Csrf::verify();

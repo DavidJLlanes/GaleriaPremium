@@ -21,6 +21,8 @@ final class GalleryController
             'style'   => $style,
         ], [
             'title' => $gallery['title'] . ' — ' . Config::get('app.name'),
+            'description' => $gallery['description'] ?: null,
+            'ogImage' => ($ph = Photo::forGallery((int) $gallery['id'])) ? $ph[0]['filename'] : null,
         ]);
     }
 }

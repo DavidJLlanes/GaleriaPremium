@@ -3,21 +3,29 @@ declare(strict_types=1);
 
 require __DIR__ . '/../app/bootstrap.php';
 
-use App\Controllers\{HomeController, GalleryController};
-use App\Controllers\Admin\{AuthController, GalleryController as AdminGallery, PhotoController, SettingsController};
+use App\Controllers\{HomeController, GalleryController, BrandController};
+use App\Controllers\Admin\{AuthController, GalleryController as AdminGallery, PhotoController, SettingsController, SiteController, HeroController};
 use App\Core\Router;
 
+\App\Services\Site::boot();   // nombre y eslogan guardados en Admin → Sitio
 $router = new Router();
 $router->get('/', [new HomeController(), 'index']);
 $router->get('/galeria/{slug}', [new GalleryController(), 'show']);
+$router->get('/manifest.webmanifest', [new BrandController(), 'manifest']);
+$router->get('/browserconfig.xml', [new BrandController(), 'browserconfig']);
 
 // ---- Panel de administración ----
-$auth = new AuthController(); $ag = new AdminGallery(); $ph = new PhotoController(); $st = new SettingsController();
+$auth = new AuthController(); $ag = new AdminGallery(); $ph = new PhotoController(); $st = new SettingsController(); $site = new SiteController(); $hero = new HeroController();
 $router->get('/admin',                       [$ag, 'index']);
 $router->get('/admin/login',                 [$auth, 'form']);
 $router->post('/admin/login',                [$auth, 'login']);
 $router->post('/admin/logout',               [$auth, 'logout']);
 $router->post('/admin/galerias',             [$ag, 'create']);
+$router->post('/admin/galerias/orden',       [$ag, 'reorderAll']);
+$router->get('/admin/sitio',                 [$site, 'show']);
+$router->post('/admin/sitio',                [$site, 'save']);
+$router->get('/admin/portada',               [$hero, 'show']);
+$router->post('/admin/portada',              [$hero, 'save']);
 $router->get('/admin/galeria/{id}',          [$ag, 'show']);
 $router->post('/admin/galeria/{id}/editar',  [$ag, 'update']);
 $router->post('/admin/galeria/{id}/borrar',  [$ag, 'delete']);

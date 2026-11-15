@@ -1,0 +1,11 @@
+.sp{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+:where(.ad) .sp-opt{display:block;margin:0;text-transform:none;letter-spacing:0;cursor:pointer}
+.sp-opt input{position:absolute;opacity:0;pointer-events:none}
+.sp-card{display:grid;gap:.35rem;height:100%;padding:.8rem;background:#0d0d0f;border:1px solid rgba(242,239,233,.1);border-radius:8px;color:var(--muted);transition:border-color .25s,background .25s,color .25s}
+.sp-card svg{width:100%;height:auto;color:rgba(242,239,233,.35);margin-bottom:.2rem}
+.sp-card b{font:500 .85rem var(--sans);color:var(--fg)}
+.sp-card small{font-size:.72rem;line-height:1.45}
+.sp-opt:hover .sp-card{border-color:rgba(216,179,106,.4)}
+.sp-opt input:checked+.sp-card{border-color:var(--accent);background:rgba(216,179,106,.08)}
+.sp-opt input:checked+.sp-card svg{color:var(--accent)}
+.sp-opt input:focus-visible+.sp-card{outline:2px solid var(--accent);outline-offset:2px}

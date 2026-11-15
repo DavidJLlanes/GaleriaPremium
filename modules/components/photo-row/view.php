@@ -1,6 +1,6 @@
 <?php use App\Models\Photo; ?>
 <article class="pr" data-id="<?= (int) $p['id'] ?>">
-    <span class="pr-handle" title="Arrastra para reordenar" aria-label="Reordenar">⠿</span>
+    <span class="srt-handle" title="Arrastra para reordenar" aria-label="Reordenar">⠿</span>
     <img src="<?= e(Photo::thumbUrl($p['filename'])) ?>" alt="" loading="lazy">
     <div class="pr-fields">
         <div class="pr-line"><input type="text" class="t" value="<?= e($p['title']) ?>" aria-label="Nombre">

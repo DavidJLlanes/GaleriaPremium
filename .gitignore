@@ -7,3 +7,7 @@
 .DS_Store
 *.log
 /public/assets/m/
+/public/uploads/brand/*
+!/public/uploads/brand/.gitkeep
+/public/favicon.ico
+/public/apple-touch-icon.png

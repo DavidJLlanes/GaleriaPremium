@@ -41,6 +41,17 @@ final class Gallery
         );
     }
 
+    /** Guarda el orden de las galerías (ids en el orden deseado). */
+    public static function reorder(array $ids): void
+    {
+        $pdo = Database::pdo(); $pdo->beginTransaction();
+        try {
+            $st = $pdo->prepare('UPDATE galleries SET sort_order = ? WHERE id = ?');
+            foreach (array_values(array_unique(array_map('intval', $ids))) as $pos => $id) $st->execute([$pos, $id]);
+            $pdo->commit();
+        } catch (\Throwable $e) { $pdo->rollBack(); throw $e; }
+    }
+
     public static function slugify(string $text): string
     {
         $t = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $text) ?: $text;

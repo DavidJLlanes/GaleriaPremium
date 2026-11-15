@@ -4,3 +4,6 @@
 .hdr-brand{font:500 1.15rem var(--serif);letter-spacing:.18em;text-transform:uppercase}
 .hdr-nav a{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
 .hdr-nav a:hover{color:var(--fg)}
+.hdr-brand{display:inline-flex;align-items:center;gap:.7rem}
+.hdr-logo{height:1.9rem;width:auto;max-width:11rem;object-fit:contain}
+.no-header .hero{padding-top:0}

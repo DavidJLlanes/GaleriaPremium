@@ -8,9 +8,9 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
 <meta name="robots" content="noindex,nofollow">
 <meta name="csrf" content="<?= e(Csrf::token()) ?>">
 <title><?= e($title ?? 'Admin') ?> · <?= e(Config::get('app.name')) ?></title>
-<link rel="icon" href="data:,">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <!--assets:css-->
+<?= App\Core\Module::render('components/head-meta', ['title' => $title ?? 'Admin', 'description' => 'Panel de administración']) ?>
 </head>
 <body class="ad <?= $bare ? 'ad-bare' : '' ?>">
 <?php if (!$bare): ?>
@@ -18,7 +18,9 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
     <a class="ad-logo" href="/admin"><?= e(Config::get('app.name')) ?> <small>Admin</small></a>
     <nav class="ad-nav">
         <a href="/admin" class="<?= $nav === 'galerias' ? 'is-on' : '' ?>">Galerías</a>
-        <a href="/admin/ajustes" class="<?= $nav === 'ajustes' ? 'is-on' : '' ?>">Ajustes</a>
+        <a href="/admin/portada" class="<?= $nav === 'portada' ? 'is-on' : '' ?>">Portada</a>
+        <a href="/admin/sitio" class="<?= $nav === 'sitio' ? 'is-on' : '' ?>">Sitio</a>
+        <a href="/admin/ajustes" class="<?= $nav === 'ajustes' ? 'is-on' : '' ?>">IA</a>
         <a href="/" target="_blank" rel="noopener">Ver web ↗</a>
     </nav>
     <form method="post" action="/admin/logout" class="ad-logout">

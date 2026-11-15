@@ -1,9 +1,9 @@
-/* Reordenar filas arrastrando el tirador .pr-handle (lo pinta photo-row, lo estiliza este módulo). */
-.pr{position:relative}
-.pr-handle{position:absolute;z-index:3;left:.4rem;top:.4rem;width:2rem;height:2rem;display:grid;place-items:center;border-radius:6px;
+/* Reordenar arrastrando: contenedor [data-sortable], elementos [data-id], tirador .srt-handle */
+[data-sortable]>[data-id]{position:relative}
+.srt-handle{position:absolute;z-index:3;left:.4rem;top:.4rem;width:2rem;height:2rem;display:grid;place-items:center;border-radius:6px;
   background:rgba(10,10,11,.75);color:var(--fg);font-size:1.1rem;line-height:1;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
   border:1px solid rgba(242,239,233,.15);backdrop-filter:blur(6px)}
-.pr-handle:hover{border-color:var(--accent);color:var(--accent)}
-.pr.is-dragging{opacity:.55;border-color:var(--accent);box-shadow:0 14px 40px rgba(0,0,0,.5);z-index:10}
-.pr.is-dragging .pr-handle{cursor:grabbing}
-.pr-list.is-sorting{user-select:none;-webkit-user-select:none}
+.srt-handle:hover{border-color:var(--accent);color:var(--accent)}
+[data-sortable]>.is-dragging{opacity:.55;outline:1px solid var(--accent);box-shadow:0 14px 40px rgba(0,0,0,.5);z-index:10}
+.is-dragging .srt-handle{cursor:grabbing}
+[data-sortable].is-sorting{user-select:none;-webkit-user-select:none}

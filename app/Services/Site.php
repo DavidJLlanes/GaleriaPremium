@@ -1,0 +1,114 @@
+<?php
+declare(strict_types=1);
+namespace App\Services;
+
+use App\Core\{Config, Database};
+use App\Models\Setting;
+
+/**
+ * Ajustes de identidad y comportamiento de la web (nombre, marca, colores, webapp, redes...).
+ * Se guardan en la tabla settings con el prefijo "site_". Para añadir una opción: una línea en FIELDS.
+ */
+final class Site
+{
+    public const LANGS = ['es' => 'Español', 'en' => 'English', 'ca' => 'Català', 'gl' => 'Galego', 'eu' => 'Euskara', 'fr' => 'Français', 'pt' => 'Português', 'de' => 'Deutsch', 'it' => 'Italiano'];
+
+    /** clave => [tipo, valor por defecto, opciones]. Tipos: text, url, color, bool, enum. */
+    public const FIELDS = [
+        'name'         => ['text',  ''],
+        'short_name'   => ['text',  ''],
+        'tagline'      => ['text',  ''],
+        'description'  => ['text',  ''],
+        'lang'         => ['enum',  'es', ['es', 'en', 'ca', 'gl', 'eu', 'fr', 'pt', 'de', 'it']],
+        'accent'       => ['color', '#d8b36a'],
+        'theme'        => ['color', '#0a0a0b'],
+        'bg'           => ['color', '#0a0a0b'],
+        'brand_mode'   => ['enum',  'text', ['text', 'logo', 'both']],
+        'header_home'  => ['bool',  '1'],
+        'header_pages' => ['bool',  '1'],
+        'footer_text'  => ['text',  ''],
+        'footer_admin' => ['bool',  '1'],
+        'display'      => ['enum',  'standalone', ['standalone', 'fullscreen', 'minimal-ui', 'browser']],
+        'noindex'      => ['bool',  '0'],
+        'email'        => ['text',  ''],
+        'instagram'    => ['url',   ''],
+        'x'            => ['url',   ''],
+        'facebook'     => ['url',   ''],
+        'threads'      => ['url',   ''],
+        'youtube'      => ['url',   ''],
+        'linkedin'     => ['url',   ''],
+        'tiktok'       => ['url',   ''],
+    ];
+    public const SOCIALS = ['instagram' => 'Instagram', 'x' => 'X', 'facebook' => 'Facebook', 'threads' => 'Threads', 'youtube' => 'YouTube', 'linkedin' => 'LinkedIn', 'tiktok' => 'TikTok'];
+
+    private static ?array $cache = null;
+
+    private static function load(): array
+    {
+        if (self::$cache === null) {
+            self::$cache = [];
+            foreach (Database::all("SELECT key, value FROM settings WHERE key LIKE 'site\\_%' ESCAPE '\\'") as $r) self::$cache[substr($r['key'], 5)] = $r['value'];
+        }
+        return self::$cache;
+    }
+
+    public static function get(string $key): string
+    {
+        $def = self::FIELDS[$key][1] ?? '';
+        if ($key === 'name')        $def = (string) Config::get('app.name', 'WarpStudio');
+        if ($key === 'tagline')     $def = (string) Config::get('app.tagline', '');
+        $v = self::load()[$key] ?? null;
+        if ($v === null) return $def;
+        if ($v === '' && in_array($key, ['name', 'lang', 'accent', 'theme', 'bg', 'display', 'brand_mode'], true)) return $def;
+        return $v;
+    }
+
+    public static function on(string $key): bool { return self::get($key) === '1'; }
+
+    public static function shortName(): string { return self::get('short_name') ?: mb_substr(self::get('name'), 0, 12); }
+
+    /** Valida y guarda $_POST según FIELDS. Los checkboxes ausentes se guardan como 0. */
+    public static function save(array $post): void
+    {
+        foreach (self::FIELDS as $k => $f) {
+            $type = $f[0]; $raw = $post["site_$k"] ?? null;
+            if ($type === 'bool') { $v = $raw ? '1' : '0'; }
+            else {
+                $v = trim((string) $raw);
+                if ($type === 'color' && !preg_match('/^#[0-9a-fA-F]{6}$/', $v)) $v = $f[1];
+                if ($type === 'enum' && !in_array($v, $f[2], true)) $v = $f[1];
+                if ($type === 'url' && $v !== '' && !preg_match('#^https?://#i', $v)) $v = 'https://' . ltrim($v, '/');
+                if ($type === 'url' && $v !== '' && !filter_var($v, FILTER_VALIDATE_URL)) $v = '';
+                if ($type === 'text') $v = mb_substr($v, 0, 300);
+            }
+            Setting::set("site_$k", $v);
+        }
+        self::$cache = null;
+    }
+
+    /** Aplica nombre y eslogan guardados al resto de la aplicación (que lee Config::get('app.name')). */
+    public static function boot(): void
+    {
+        try {
+            Config::set('app.name', self::get('name'));
+            if (self::get('tagline') !== '') Config::set('app.tagline', self::get('tagline'));
+        } catch (\Throwable) { /* BD aún no creada (instalación) */ }
+    }
+
+    // ---- Marca (archivos en uploads/brand) ----
+    public static function brandFile(string $name): string { return rtrim((string) Config::get('uploads.dir'), '/') . '/brand/' . $name; }
+    public static function hasBrand(string $name): bool { return is_file(self::brandFile($name)); }
+
+    public static function brandUrl(string $name): ?string
+    {
+        if (!self::hasBrand($name)) return null;
+        return Config::get('uploads.url') . '/brand/' . $name . '?v=' . (int) @filemtime(self::brandFile($name));
+    }
+
+    public static function absolute(string $path): string
+    {
+        $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https';
+        $host  = preg_replace('/[^a-zA-Z0-9.:\\-]/', '', (string) ($_SERVER['HTTP_HOST'] ?? 'localhost'));
+        return ($https ? 'https://' : 'http://') . $host . $path;
+    }
+}
