@@ -65,6 +65,38 @@ final class PhotoController
         Response::json(['ok' => true]);
     }
 
+    /** @return int[] ids numéricos recibidos como ids[] */
+    private function ids(): array
+    {
+        return array_values(array_unique(array_filter(array_map('intval', (array) ($_POST['ids'] ?? [])))));
+    }
+
+    /** Borrado masivo de fotos. */
+    public function bulkDelete(): void
+    {
+        Auth::guard(true); Csrf::verify();
+        $photos = Photo::findMany($this->ids());
+        if (!$photos) Response::json(['ok' => false, 'error' => 'No hay fotos seleccionadas'], 422);
+        $galleries = [];
+        foreach ($photos as $ph) { $galleries[(int) $ph['gallery_id']] = true; Photo::delete((int) $ph['id']); }
+        foreach (array_keys($galleries) as $g) Gallery::syncCrops($g);
+        Response::json(['ok' => true, 'count' => count($photos)]);
+    }
+
+    /** Mueve varias fotos a otra galería. */
+    public function move(): void
+    {
+        Auth::guard(true); Csrf::verify();
+        $to = (int) ($_POST['gallery'] ?? 0);
+        if (!Gallery::find($to)) Response::json(['ok' => false, 'error' => 'La galería de destino no existe'], 422);
+        $ids = $this->ids();
+        if (!$ids) Response::json(['ok' => false, 'error' => 'No hay fotos seleccionadas'], 422);
+        $from = Photo::move($ids, $to);
+        foreach ($from as $g) Gallery::syncCrops($g);
+        Gallery::syncCrops($to);
+        Response::json(['ok' => true, 'moved' => $from ? count($ids) : 0]);
+    }
+
     public function delete(array $p): void
     {
         $photo = $this->load($p);

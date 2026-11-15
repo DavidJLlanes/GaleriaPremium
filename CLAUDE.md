@@ -29,6 +29,7 @@
 17. **Galería "slider" horizontal**: todas las fotos con la misma proporción, definida por la primera; en el resto el usuario elige el recorte con esa proporción. Opción para ajustar la separación entre fotos y que no se corte ninguna a ningún ancho de pantalla.
 18. **Lightbox con efecto configurable por cada galería** (fade, slide, flip, curtain, zoom; cada efecto en `modules/lightboxes/<nombre>/`). La foto se ajusta al tamaño y proporciones de la pantalla activa.
 19. **Subida global por arrastre**: arrastrar una foto a cualquier zona de la web la sube, mostrando título, descripción y galería (igual que la subida normal, siempre vía `ImageProcessor`).
+20. **Gestión masiva en el panel**: borrado masivo de fotos y de galerías, y mover fotos entre galerías (selección múltiple con casillas; componente `components/bulk`).
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```

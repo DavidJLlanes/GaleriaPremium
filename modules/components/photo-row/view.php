@@ -1,6 +1,7 @@
 <?php use App\Models\Photo; use App\Services\Crop;
 $crop = !empty($canCrop) ? Crop::of($p) : null; ?>
 <article class="pr" data-id="<?= (int) $p['id'] ?>" data-src="<?= e(Photo::url($p['filename'])) ?>" data-iw="<?= (int) $p['width'] ?>" data-ih="<?= (int) $p['height'] ?>" data-crop="<?= $crop ? e(json_encode($crop)) : '' ?>">
+    <span class="bk-box" role="checkbox" aria-checked="false" tabindex="0" title="Seleccionar">✓</span>
     <span class="srt-handle" title="Arrastra para reordenar" aria-label="Reordenar">⠿</span>
     <?php if ($crop): ?>
         <div class="pr-th" style="aspect-ratio:<?= round(Crop::ratio($crop, max(1, (int) $p['width']), max(1, (int) $p['height'])), 4) ?>">

@@ -16,9 +16,10 @@
 </form>
 
 <?php if (count($galleries) > 1): ?><p class="ad-hint" style="margin-bottom:.8rem">Arrastra el icono ⠿ para cambiar el orden de las galerías en la web. Se guarda solo.</p><?php endif; ?>
-<div class="adg" data-sortable data-reorder-url="/admin/galerias/orden">
+<div class="adg" data-bulk data-sortable data-reorder-url="/admin/galerias/orden">
     <?php foreach ($galleries as $g): ?>
         <a class="adg-card" data-id="<?= (int) $g['id'] ?>" href="/admin/galeria/<?= (int) $g['id'] ?>">
+            <span class="bk-box" role="checkbox" aria-checked="false" tabindex="0" title="Seleccionar">✓</span>
             <span class="srt-handle" title="Arrastra para reordenar" aria-label="Reordenar">⠿</span>
             <div class="adg-img"><?php if ($g['cover']): ?><img src="<?= e(Photo::thumbUrl($g['cover'])) ?>" alt="" loading="lazy"><?php endif; ?></div>
             <div class="adg-info">
@@ -29,3 +30,4 @@
         </a>
     <?php endforeach; ?>
 </div>
+<?php if ($galleries) echo Module::render('components/bulk', ['kind' => 'galleries', 'listSel' => '.adg']); ?>

@@ -87,6 +87,17 @@ final class GalleryController
         Response::redirect('/admin');
     }
 
+    /** Borrado masivo de galerías (con todas sus fotos). */
+    public function bulkDelete(): void
+    {
+        Auth::guard(true); Csrf::verify();
+        $ids = array_values(array_unique(array_filter(array_map('intval', (array) ($_POST['ids'] ?? [])))));
+        $n = 0;
+        foreach ($ids as $id) if (Gallery::find($id)) { Gallery::delete($id); $n++; }
+        if (!$n) Response::json(['ok' => false, 'error' => 'No hay galerías seleccionadas'], 422);
+        Response::json(['ok' => true, 'count' => $n]);
+    }
+
     /** AJAX: una foto por petición (permite barra de progreso y subidas grandes). */
     public function upload(array $p): void
     {

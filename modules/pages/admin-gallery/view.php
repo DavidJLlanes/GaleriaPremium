@@ -25,14 +25,15 @@
 <section class="ad-card">
     <h2>Fotos</h2>
     <?php if ($canCrop): ?><p class="ad-hint" style="margin:-.6rem 0 1rem">✂ <b>La primera foto fija la proporción de la galería</b> (<?= $gallery['crop_ratio'] ? e(rtrim(rtrim(number_format((float) $gallery['crop_ratio'], 2), '0'), '.')) . ':1' : 'automática' ?>). Pulsa «Recortar» en cada foto para elegir qué zona se ve.</p><?php endif; ?>
-    <?php if (count($photos) > 1): ?><p class="ad-hint" style="margin:-.6rem 0 1rem">Arrastra el icono ⠿ para cambiar el orden. Se guarda solo.</p><?php endif; ?>
+    <?php if (count($photos) > 1): ?><p class="ad-hint" style="margin:-.6rem 0 1rem">Arrastra el icono ⠿ para cambiar el orden (se guarda solo). Marca la casilla ✓ de varias fotos para <b>moverlas a otra galería</b> o borrarlas a la vez.</p><?php endif; ?>
     <?php if (!$photos): ?><p class="ad-hint">Todavía no hay fotos. Sube la primera arriba.</p><?php endif; ?>
-    <div class="pr-list" data-ratio="<?= e((string) ($gallery['crop_ratio'] ?? '')) ?>" data-sortable data-reorder-url="/admin/galeria/<?= $gid ?>/orden">
+    <div class="pr-list" data-bulk data-ratio="<?= e((string) ($gallery['crop_ratio'] ?? '')) ?>" data-sortable data-reorder-url="/admin/galeria/<?= $gid ?>/orden">
         <?php foreach ($photos as $i => $p): ?>
             <?= Module::render('components/photo-row', ['p' => $p, 'isCover' => (int) $gallery['cover_photo_id'] === (int) $p['id'], 'aiConfigured' => $aiConfigured, 'canCrop' => $canCrop, 'isFirst' => $i === 0]) ?>
         <?php endforeach; ?>
     </div>
 </section>
+<?php if ($photos) echo Module::render('components/bulk', ['kind' => 'photos', 'listSel' => '.pr-list', 'galleries' => array_values(array_filter(\App\Models\Gallery::all(), fn ($g) => (int) $g['id'] !== $gid))]); ?>
 
 <form method="post" action="/admin/galeria/<?= $gid ?>/borrar" onsubmit="return confirm('¿Eliminar la galería y todas sus fotos? No se puede deshacer.')">
     <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">

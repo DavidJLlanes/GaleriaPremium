@@ -12,3 +12,6 @@
 .pr-th{position:relative;width:120px;max-height:180px;overflow:hidden;border-radius:5px;align-self:start;background:#111}
 .pr-th img{position:absolute;max-width:none;height:auto}
 @media(max-width:640px){.pr-th{width:80px}}
+.pr .bk-box{left:calc(.8rem + 120px - 2.2rem);top:1.1rem}
+@media(max-width:640px){.pr .bk-box{left:calc(.8rem + 80px - 2.2rem)}}
+.pr{position:relative}

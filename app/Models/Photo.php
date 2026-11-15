@@ -81,6 +81,30 @@ final class Photo
         Database::pdo()->prepare('UPDATE photos SET title = ?, caption = ? WHERE id = ?')->execute([$title, $caption, $id]);
     }
 
+    /**
+     * Mueve fotos a otra galería (al final, conservando el orden dado). Devuelve los ids de las galerías de origen.
+     * Los recortes se descartan: dependen de la proporción de cada galería y los recalcula Gallery::syncCrops().
+     */
+    public static function move(array $ids, int $toGallery): array
+    {
+        $photos = array_filter(self::findMany($ids), fn ($p) => (int) $p['gallery_id'] !== $toGallery);
+        if (!$photos) return [];
+        $pdo = Database::pdo(); $from = [];
+        $order = (int) Database::one('SELECT COALESCE(MAX(sort_order), -1) + 1 AS n FROM photos WHERE gallery_id = ?', [$toGallery])['n'];
+        $pdo->beginTransaction();
+        try {
+            $up = $pdo->prepare('UPDATE photos SET gallery_id = ?, sort_order = ?, crop_x = NULL, crop_y = NULL, crop_w = NULL, crop_h = NULL WHERE id = ?');
+            $cv = $pdo->prepare('UPDATE galleries SET cover_photo_id = NULL WHERE id = ? AND cover_photo_id = ?');
+            foreach ($photos as $p) {
+                $from[(int) $p['gallery_id']] = true;
+                $cv->execute([(int) $p['gallery_id'], (int) $p['id']]);
+                $up->execute([$toGallery, $order++, (int) $p['id']]);
+            }
+            $pdo->commit();
+        } catch (\Throwable $e) { $pdo->rollBack(); throw $e; }
+        return array_keys($from);
+    }
+
     /** Borra la fila y los archivos (original + miniatura). */
     public static function delete(int $id): void
     {
