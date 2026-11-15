@@ -13,12 +13,14 @@ $config = [
     'uploads' => [
         'dir'       => __DIR__ . '/../public/uploads',
         'url'       => '/uploads',
-        'thumb_w'   => 900,
+        'thumb_w'   => 800,
         'max_bytes' => 40 * 1024 * 1024,
     ],
-    // Estilos de galería disponibles (clave => etiqueta). Vista en app/Views/gallery/{clave}.php
-    'gallery_styles' => [
-        'masonry' => 'Mosaico (masonry)',
+    // REGLA DEL PROYECTO: todas las fotos se guardan en WebP calidad 75
+    'image' => [
+        'format'  => 'webp',
+        'quality' => 75,
+        'max_edge' => 2400,
     ],
 ];
 

@@ -20,6 +20,11 @@ final class Gallery
         );
     }
 
+    public static function find(int $id): ?array
+    {
+        return Database::one('SELECT * FROM galleries WHERE id = ?', [$id]);
+    }
+
     public static function findBySlug(string $slug): ?array
     {
         return Database::one('SELECT * FROM galleries WHERE slug = ? AND is_published = 1', [$slug]);

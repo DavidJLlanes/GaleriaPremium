@@ -1,0 +1,5 @@
+.gh{padding:9rem var(--pad) 3rem;max-width:1100px}
+.gh-back{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.gh-back:hover{color:var(--accent)}
+.gh h1{font:300 clamp(2.4rem,7vw,6rem)/1 var(--serif);margin:1.2rem 0 1rem;letter-spacing:-.02em}
+.gh p{color:var(--muted);max-width:56ch}

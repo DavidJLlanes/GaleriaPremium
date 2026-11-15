@@ -1,0 +1,3 @@
+.hs-img{width:100%;height:116%;object-fit:cover;transform:translate3d(0,var(--py,0),0) scale(1.06);
+  animation:hs-zoom 26s var(--ease) infinite alternate;will-change:transform}
+@keyframes hs-zoom{to{transform:translate3d(0,var(--py,0),0) scale(1.16)}}

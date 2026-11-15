@@ -14,6 +14,11 @@ final class Photo
         );
     }
 
+    public static function find(int $id): ?array
+    {
+        return Database::one('SELECT * FROM photos WHERE id = ?', [$id]);
+    }
+
     public static function url(string $filename): string
     {
         return Config::get('uploads.url') . '/originals/' . rawurlencode($filename);

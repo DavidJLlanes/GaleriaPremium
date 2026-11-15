@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Controllers;
 
-use App\Core\{Config, View};
+use App\Core\{Config, Module, Page};
 use App\Models\{Gallery, Photo};
 
 final class GalleryController
@@ -10,19 +10,17 @@ final class GalleryController
     public function show(array $params): void
     {
         $gallery = Gallery::findBySlug($params['slug'] ?? '');
-        if (!$gallery) {
-            http_response_code(404);
-            View::render('404', ['title' => 'No encontrada']);
-            return;
-        }
-        $styles = Config::get('gallery_styles', []);
-        $style  = isset($styles[$gallery['style']]) ? $gallery['style'] : 'masonry';
+        if (!$gallery) { Page::notFound(); return; }
 
-        View::render('gallery', [
-            'title'   => $gallery['title'] . ' — ' . Config::get('app.name'),
+        // El estilo es un módulo: modules/galleries/<estilo>/
+        $style = Module::exists('galleries/' . $gallery['style']) ? $gallery['style'] : 'masonry';
+
+        Page::render('pages/gallery', [
             'gallery' => $gallery,
             'photos'  => Photo::forGallery((int) $gallery['id']),
             'style'   => $style,
+        ], [
+            'title' => $gallery['title'] . ' — ' . Config::get('app.name'),
         ]);
     }
 }

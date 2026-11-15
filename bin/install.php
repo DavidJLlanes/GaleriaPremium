@@ -1,71 +1,59 @@
 <?php
 declare(strict_types=1);
 /**
- * Instalador: crea la base de datos SQLite y, con --demo, datos de ejemplo.
- *   php bin/install.php          -> solo esquema
- *   php bin/install.php --demo   -> esquema + galerías demo generadas con GD
+ * Instalador (idempotente).
+ *   php bin/install.php                 -> crea/actualiza el esquema
+ *   php bin/install.php --demo          -> + datos demo (solo si no hay galerías)
+ *   php bin/install.php --demo --reset  -> BORRA galerías, fotos y ajustes y recarga la demo
  */
 require __DIR__ . '/../app/bootstrap.php';
 
 use App\Core\{Config, Database};
+use App\Models\Setting;
+use App\Services\ImageProcessor;
 
 $pdo = Database::pdo();
 $pdo->exec(file_get_contents(ROOT . '/database/schema.sql'));
-echo "✔ Base de datos lista\n";
+echo "✔ Esquema listo\n";
 
 if (!in_array('--demo', $argv, true)) exit(0);
 
+$dir = rtrim(Config::get('uploads.dir'), '/');
+@mkdir("$dir/originals", 0775, true);
+@mkdir("$dir/thumbs", 0775, true);
+
+if (in_array('--reset', $argv, true)) {
+    $pdo->exec('DELETE FROM photos; DELETE FROM galleries; DELETE FROM settings; DELETE FROM sqlite_sequence');
+    foreach (['originals', 'thumbs'] as $d) foreach (glob("$dir/$d/*") ?: [] as $f) if (is_file($f) && basename($f) !== '.gitkeep') unlink($f);
+    echo "✔ Datos anteriores eliminados\n";
+}
 if ((int) $pdo->query('SELECT COUNT(*) FROM galleries')->fetchColumn() > 0) {
-    echo "• Ya hay galerías; no se añaden datos demo.\n"; exit(0);
+    echo "• Ya hay galerías: no se añade la demo (usa --reset para recargarla).\n"; exit(0);
 }
 
-/** Genera una imagen abstracta suave (manchas de color) y su miniatura. */
-function makeImage(int $w, int $h, array $palette, int $seed, string $path, string $thumb, int $thumbW): void
-{
-    mt_srand($seed);
-    $sw = 48; $sh = max(8, (int) round(48 * $h / $w));
-    $small = imagecreatetruecolor($sw, $sh);
-    $blobs = [];
-    for ($i = 0; $i < 5; $i++) {
-        $blobs[] = [mt_rand(0, $sw), mt_rand(0, $sh), $palette[array_rand($palette)], mt_rand(14, 34)];
-    }
-    for ($y = 0; $y < $sh; $y++) for ($x = 0; $x < $sw; $x++) {
-        $r = $g = $b = 0; $tw = 0.0001;
-        foreach ($blobs as [$bx, $by, $c, $rad]) {
-            $d = hypot($x - $bx, $y - $by);
-            $wt = exp(-($d * $d) / (2 * $rad * $rad * 0.35));
-            $r += $c[0] * $wt; $g += $c[1] * $wt; $b += $c[2] * $wt; $tw += $wt;
-        }
-        $vig = 1 - 0.35 * hypot($x / $sw - .5, $y / $sh - .5);
-        imagesetpixel($small, $x, $y, imagecolorallocate($small,
-            (int) min(255, $r / $tw * $vig), (int) min(255, $g / $tw * $vig), (int) min(255, $b / $tw * $vig)));
-    }
-    $big = imagescale($small, $w, $h, IMG_BICUBIC);
-    imagefilter($big, IMG_FILTER_GAUSSIAN_BLUR);
-    imagejpeg($big, $path, 88);
-    $t = imagescale($big, $thumbW, -1, IMG_BICUBIC);
-    imagejpeg($t, $thumb, 82);
-}
-
-$dir = Config::get('uploads.dir');
-$tw  = (int) Config::get('uploads.thumb_w');
-$demo = [
-    ['aurora', 'Aurora', 'Luz verde y violeta sobre el horizonte frío.', [[20,200,150],[110,60,220],[10,30,70],[60,220,200]]],
-    ['ocaso',  'Ocaso',  'Las últimas horas del día en tonos ardientes.', [[255,120,60],[200,40,90],[40,10,60],[255,200,100]]],
-    ['abismo', 'Abismo', 'Profundidades azules, silencio y contraste.',  [[10,60,140],[0,20,50],[30,140,200],[5,5,25]]],
-];
-$sizes = [[1400,1900],[1900,1300],[1500,1500],[1300,1950],[2000,1250],[1600,1600]];
-
+$demo = require ROOT . '/database/demo/demo.php';
 $insG = $pdo->prepare('INSERT INTO galleries (slug,title,description,style,sort_order) VALUES (?,?,?,?,?)');
 $insP = $pdo->prepare('INSERT INTO photos (gallery_id,filename,title,width,height,sort_order) VALUES (?,?,?,?,?,?)');
+$photoIds = []; $galleryIds = [];
 
-foreach ($demo as $gi => [$slug, $title, $desc, $palette]) {
-    $insG->execute([$slug, $title, $desc, 'masonry', $gi]);
+foreach ($demo['galleries'] as $gi => $g) {
+    $insG->execute([$g['slug'], $g['title'], $g['description'], $g['style'], $gi]);
     $gid = (int) $pdo->lastInsertId();
-    foreach ($sizes as $i => [$w, $h]) {
-        $name = sprintf('%s-%02d.jpg', $slug, $i + 1);
-        makeImage($w, $h, $palette, $gi * 100 + $i, "$dir/originals/$name", "$dir/thumbs/$name", $tw);
-        $insP->execute([$gid, $name, "$title " . ($i + 1), $w, $h, $i]);
+    $galleryIds[$g['slug']] = $gid;
+    $i = 0;
+    foreach ($g['photos'] as $name => $title) {
+        $src = ROOT . "/database/demo/photos/$name.webp";
+        copy($src, "$dir/originals/$name.webp");                 // ya está en WebP 75%
+        ImageProcessor::thumbnail($src, "$dir/thumbs/$name.webp"); // miniatura WebP 75%
+        [$w, $h] = getimagesize($src);
+        $insP->execute([$gid, "$name.webp", $title, $w, $h, $i++]);
+        $photoIds[$name] = (int) $pdo->lastInsertId();
     }
-    echo "✔ Galería demo: $title\n";
+    echo "✔ Galería: {$g['title']} ({$g['style']})\n";
 }
+
+$hero = $demo['hero'];
+Setting::set('hero_type', $hero['type']);
+if ($hero['type'] === 'single') Setting::set('hero_photo_id', (string) $photoIds[$hero['photo']]);
+else Setting::set('hero_gallery_id', (string) $galleryIds[$hero['gallery']]);
+echo "✔ Hero: {$hero['type']}\n";

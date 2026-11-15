@@ -1,0 +1,3 @@
+.reveal{opacity:0;transform:translateY(36px) scale(.985);transition:opacity 1s var(--ease) var(--d,0ms),transform 1.1s var(--ease) var(--d,0ms)}
+.reveal.is-in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}

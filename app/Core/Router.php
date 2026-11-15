@@ -22,7 +22,6 @@ final class Router
                 return;
             }
         }
-        http_response_code(404);
-        View::render('404', ['title' => 'No encontrada']);
+        Page::notFound();
     }
 }

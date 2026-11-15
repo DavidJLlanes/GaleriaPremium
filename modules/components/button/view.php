@@ -1,0 +1,1 @@
+<a class="btn" href="<?= e($href ?? '#') ?>"><?= e($label ?? '') ?></a>

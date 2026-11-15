@@ -22,3 +22,8 @@ CREATE TABLE IF NOT EXISTS photos (
     created_at  TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_photos_gallery ON photos(gallery_id, sort_order);
+
+CREATE TABLE IF NOT EXISTS settings (
+    key   TEXT PRIMARY KEY,
+    value TEXT NOT NULL DEFAULT ''
+);

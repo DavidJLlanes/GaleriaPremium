@@ -2,24 +2,21 @@
 
 Galería fotográfica premium, modular. PHP 8.3 · SQLite · HTML5/CSS/JS vanilla.
 
-## Estructura
+## Estructura (módulos aislados)
+Reglas del proyecto en [`CLAUDE.md`](CLAUDE.md).
 ```
-public/        ← document root (index.php, assets, uploads)
-app/Core/      Config, Database, Router, View
-app/Models/    Gallery, Photo
-app/Controllers/
-app/Views/     layout, home, gallery, gallery/{estilo}.php
-config/        config.php (+ config.local.php ignorado por git)
-database/      schema.sql
-bin/install.php  esquema (+ --demo)
-deploy/        nginx.conf.example, deploy.sh
+public/        document root (index.php, assets publicados, uploads)
+app/           núcleo: Core (Module, Assets, Page, Router...), Models, Controllers, Services
+modules/       TODO lo visual, un módulo = una carpeta con view.php / style.css / script.js
+  layouts/ pages/ sections/ components/ heroes/ galleries/ plugins/
+config/ database/ bin/ deploy/
 ```
-Añadir un estilo de galería = crear `app/Views/gallery/<estilo>.php` y registrarlo en `config['gallery_styles']`.
+Estilos de galería: masonry · justified · grid · filmstrip. Heroes: `single` (foto) · `gallery` (pase de fotos).
 
 ## Desarrollo local
 ```
-php bin/install.php --demo
-php -S 127.0.0.1:8000 -t public public/router.php
+php bin/install.php --demo   # (--reset recarga la demo)
+php -S 127.0.0.1:8000 -t public public/router.php   # sirve los assets de /modules directamente
 ```
 
 ## Hoja de ruta

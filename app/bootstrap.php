@@ -9,6 +9,8 @@ spl_autoload_register(static function (string $class): void {
     if (is_file($file)) require $file;
 });
 
+require __DIR__ . '/helpers.php';
+
 \App\Core\Config::load(require ROOT . '/config/config.php');
 
 if (\App\Core\Config::get('app.debug')) {
