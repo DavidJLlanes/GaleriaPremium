@@ -20,6 +20,7 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
         <a href="/admin" class="<?= $nav === 'galerias' ? 'is-on' : '' ?>">Galerías</a>
         <a href="/admin/fotos" class="<?= $nav === 'fotos' ? 'is-on' : '' ?>">Fotos</a>
         <a href="/admin/portada" class="<?= $nav === 'portada' ? 'is-on' : '' ?>">Portada</a>
+        <a href="/admin/tarjetas" class="<?= $nav === 'tarjetas' ? 'is-on' : '' ?>">Tarjetas</a>
         <a href="/admin/sitio" class="<?= $nav === 'sitio' ? 'is-on' : '' ?>">Sitio</a>
         <a href="/admin/ajustes" class="<?= $nav === 'ajustes' ? 'is-on' : '' ?>">IA</a>
         <a href="/" target="_blank" rel="noopener">Ver web ↗</a>

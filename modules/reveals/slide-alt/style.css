@@ -1,0 +1,4 @@
+.coll.rv-on .rv-slide-alt{transition:opacity 1.1s var(--rv-e) var(--rv-d,0ms),transform 1.5s var(--rv-e) var(--rv-d,0ms)}
+.coll.rv-on .rv-slide-alt:not(.is-in){opacity:0;transform:translate3d(-90px,20px,0)}
+.coll.rv-on .ccell:nth-child(even) .rv-slide-alt:not(.is-in){transform:translate3d(90px,20px,0)}
+@media(prefers-reduced-motion:reduce){.coll.rv-on .rv-slide-alt{transition:none}.coll.rv-on .rv-slide-alt:not(.is-in){opacity:1;transform:none;filter:none;clip-path:none}.coll.rv-on .rv-slide-alt:not(.is-in) .ccard-media img{transform:none}}

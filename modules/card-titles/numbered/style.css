@@ -1,0 +1,5 @@
+.ct-numbered{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(1.2rem,2.4vw,2rem)}
+.ct-numbered b{font:var(--st-title,normal) 300 clamp(3.6rem,7vw,5.8rem)/.9 var(--f-title);color:transparent;-webkit-text-stroke:1px rgba(242,239,233,.7);transition:color .8s var(--ease),-webkit-text-stroke-color .8s}
+.ccard:hover .ct-numbered b{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+.ct-numbered h2{font:var(--st-title,normal) var(--w-title,300) clamp(1.6rem,2.6vw,2.2rem)/1.1 var(--f-title);margin:0 0 .35rem}
+.ct-numbered small{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}

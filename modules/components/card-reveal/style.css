@@ -1,0 +1,10 @@
+/* Base común de los efectos de aparición de las tarjetas (cada efecto vive en modules/reveals/<nombre>) */
+.coll{--rv-e:cubic-bezier(.16,1,.3,1);overflow-x:clip}
+.coll.rv-on .ccard:not(.is-in){will-change:transform,opacity}
+/* Terminada la entrada, la tarjeta recupera sus transiciones normales (hover) sin retrasos ni capas extra */
+.coll .ccard.is-done{transition:none!important;will-change:auto}
+.coll .ccard.is-done .ccard-media img{transition:transform 1.4s var(--ease),filter .8s!important}
+/* Parallax suave: la foto va un poco más grande y se desplaza con el scroll (propiedad `translate`, independiente del zoom del hover) */
+.coll[data-parallax="1"] .ccard-media img{transform:scale(1.14);will-change:translate}
+.coll[data-parallax="1"] .ccard:hover .ccard-media img{transform:scale(1.2)}
+@media(prefers-reduced-motion:reduce){.coll[data-parallax="1"] .ccard-media img{transform:none;translate:none!important}}

@@ -30,6 +30,8 @@ $router->get('/admin/sitio',                 [$site, 'show']);
 $router->post('/admin/sitio',                [$site, 'save']);
 $router->post('/admin/fuentes/subir',        [$fonts = new App\Controllers\Admin\FontController(), 'upload']);
 $router->post('/admin/fuentes/borrar',       [$fonts, 'delete']);
+$router->get('/admin/tarjetas',               [$cards = new App\Controllers\Admin\CardsController(), 'show']);
+$router->post('/admin/tarjetas',              [$cards, 'save']);
 $router->get('/admin/portada',               [$hero, 'show']);
 $router->post('/admin/portada',              [$hero, 'save']);
 $router->post('/admin/portada/video',        [new App\Controllers\Admin\HeroVideoController(), 'upload']);

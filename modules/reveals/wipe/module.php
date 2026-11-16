@@ -1,0 +1,1 @@
+<?php return ['label' => 'Barrido', 'desc' => 'Un barrido lateral descubre la tarjeta, con la foto deslizándose.', 'icon' => '<rect x="4" y="6" width="26" height="28"/><rect x="34" y="6" width="14" height="28"/><rect x="50" y="6" width="10" height="28" fill-opacity=".25"/>'];

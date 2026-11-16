@@ -1,0 +1,3 @@
+.coll.rv-on .rv-blur{transition:opacity 1.2s var(--rv-e) var(--rv-d,0ms),filter 1.6s var(--rv-e) var(--rv-d,0ms),transform 1.6s var(--rv-e) var(--rv-d,0ms)}
+.coll.rv-on .rv-blur:not(.is-in){opacity:0;filter:blur(18px);transform:translate3d(0,26px,0) scale(.965)}
+@media(prefers-reduced-motion:reduce){.coll.rv-on .rv-blur{transition:none}.coll.rv-on .rv-blur:not(.is-in){opacity:1;transform:none;filter:none;clip-path:none}.coll.rv-on .rv-blur:not(.is-in) .ccard-media img{transform:none}}

@@ -37,6 +37,8 @@
 
 25. **Botón de la portada** (`components/hero-button`, usado por todos los estilos de hero): 7 diseños (contorno, relleno claro, dorado, cristal, rectangular fino, subrayado, texto con flecha), tamaño (1–5) y separación del título (px), con vista previa en vivo en Admin → Portada (`App\Services\HeroButton`, ajustes `hero_btn_style|size|down`). Su tipografía/grosor/cursiva es el rol `herobtn` de Sitio → Tipografías (sin elegir, igual que «Botones»). Los heroes usan siempre `components/hero-button` (clase `.hb`), nunca `components/button` (ese es para el resto de la web).
 
+26. **Tarjetas de la portada** (Admin → Tarjetas, `App\Services\Cards`, ajustes `cards_reveal|parallax|titles|title_style`): las tarjetas de galería aparecen al hacer scroll con un efecto elegible (8: desenfoque, cortina, subir, desde los lados, giro 3D, barrido, zoom, ninguno), cada uno en `modules/reveals/<nombre>/` y orquestado por `components/card-reveal` (IntersectionObserver sobre `.ccell`, cascada, easing único `--rv-e`, parallax suave opcional con inercia, respeta `prefers-reduced-motion`). Los **títulos** pueden mostrarse u ocultarse y tienen 6 diseños en `modules/card-titles/<nombre>/` (clásico, centrado, subrayado, numerado, bajo la foto y **pluma de luz**, que reutiliza el motor compartido `components/light-pen`, el mismo del hero `luz-titulo`; no duplicar ese motor). Ajustes propios de cada diseño vía `options` en su `module.php` (`App\Services\ModuleOptions`, `components/option-fields`). Tipografía: rol `title`.
+
 ## Arquitectura (cómo cumplir la regla 8)
 ```
 modules/<tipo>/<nombre>/{view.php, style.css, script.js, module.php}

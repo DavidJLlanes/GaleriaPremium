@@ -1,0 +1,1 @@
+<?php return ['label' => 'Subir y aparecer', 'desc' => 'Cada tarjeta sube suavemente mientras aparece, una tras otra.', 'icon' => '<rect x="4" y="12" width="26" height="24"/><rect x="34" y="6" width="26" height="30" fill-opacity=".5"/><path d="M47 3v0" />'];

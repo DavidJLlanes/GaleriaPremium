@@ -1,0 +1,1 @@
+<?php return ['label' => 'Del desenfoque a nítido', 'desc' => 'Aparece desenfocada y se enfoca despacio. Muy cinematográfico.', 'icon' => '<rect x="4" y="6" width="26" height="28" fill-opacity=".35"/><rect x="34" y="6" width="26" height="28"/>'];

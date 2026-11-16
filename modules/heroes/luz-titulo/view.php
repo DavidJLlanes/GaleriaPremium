@@ -1,4 +1,4 @@
-<?php use App\Core\Module; Module::use('components/stroke-order');
+<?php use App\Core\Module; Module::use('components/stroke-order'); Module::use('components/light-pen');
 $o = $opts ?? []; ?>
 <section class="hx-light" data-hero data-speed="<?= (int) ($o['speed'] ?? 5) ?>" data-repeat="<?= ($o['repeat'] ?? '0') === '1' ? '1' : '0' ?>" style="--hxz-c:<?= e($o['color'] ?? '#ffb45a') ?>">
     <p class="hxz-eyebrow"><?= e($copy['eyebrow'] ?? '') ?></p>

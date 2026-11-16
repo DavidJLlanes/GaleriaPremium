@@ -1,0 +1,1 @@
+<?php return ['label' => 'Zoom', 'desc' => 'La tarjeta crece desde dentro mientras la foto se asienta.', 'icon' => '<rect x="8" y="10" width="18" height="20" fill-opacity=".5"/><rect x="34" y="6" width="26" height="28"/>'];

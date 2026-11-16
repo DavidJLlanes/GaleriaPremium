@@ -1,0 +1,1 @@
+<?php return ['label' => 'Giro 3D', 'desc' => 'Se levanta girando en perspectiva, como una carta.', 'icon' => '<path d="M6 12l22-4v26l-22 2z"/><rect x="34" y="6" width="26" height="28" fill-opacity=".5"/>'];

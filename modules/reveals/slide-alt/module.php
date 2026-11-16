@@ -1,0 +1,1 @@
+<?php return ['label' => 'Desde los lados', 'desc' => 'Las tarjetas entran alternando izquierda y derecha.', 'icon' => '<rect x="2" y="6" width="26" height="12" fill-opacity=".5"/><rect x="36" y="22" width="26" height="12"/>'];

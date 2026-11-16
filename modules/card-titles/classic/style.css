@@ -1,0 +1,6 @@
+.ct-classic{position:absolute;z-index:2;inset:auto 0 0 0;padding:clamp(1.2rem,2.4vw,2rem)}
+.ct-classic-count{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.ct-classic h2{font:var(--st-title,normal) var(--w-title,300) clamp(1.8rem,3vw,2.6rem)/1.1 var(--f-title);margin:.4rem 0}
+.ct-classic p{font-family:var(--f-body);color:var(--muted);font-size:.9rem;max-width:34ch;margin:0;transform:translateY(8px);opacity:0;transition:all .7s var(--ease)}
+.ccard:hover .ct-classic p{opacity:1;transform:none}
+@media(hover:none){.ct-classic p{opacity:1;transform:none}}

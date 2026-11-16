@@ -1,0 +1,3 @@
+.coll.rv-on .rv-fade-up{transition:opacity 1.2s var(--rv-e) var(--rv-d,0ms),transform 1.5s var(--rv-e) var(--rv-d,0ms)}
+.coll.rv-on .rv-fade-up:not(.is-in){opacity:0;transform:translate3d(0,64px,0)}
+@media(prefers-reduced-motion:reduce){.coll.rv-on .rv-fade-up{transition:none}.coll.rv-on .rv-fade-up:not(.is-in){opacity:1;transform:none;filter:none;clip-path:none}.coll.rv-on .rv-fade-up:not(.is-in) .ccard-media img{transform:none}}
