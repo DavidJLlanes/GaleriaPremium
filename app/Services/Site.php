@@ -26,6 +26,10 @@ final class Site
         'brand_mode'   => ['enum',  'text', ['text', 'logo', 'both']],
         'header_home'  => ['bool',  '1'],
         'header_pages' => ['bool',  '1'],
+        // Colores de la barra superior (cada uno solo se aplica si su casilla está activada)
+        'hdr_name_on'  => ['bool',  '0'], 'hdr_name_color' => ['color', '#f2efe9'],
+        'hdr_menu_on'  => ['bool',  '0'], 'hdr_menu_color' => ['color', '#f2efe9'],
+        'hdr_logo_on'  => ['bool',  '0'], 'hdr_logo_color' => ['color', '#f2efe9'],
         'display'      => ['enum',  'standalone', ['standalone', 'fullscreen', 'minimal-ui', 'browser']],
         'noindex'      => ['bool',  '0'],
         'email'        => ['text',  ''],

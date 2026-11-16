@@ -16,3 +16,9 @@
 }
 /* Sobre la foto de la portada (aún sin hacer scroll) el menú se lee mejor */
 .hdr:not(.is-scrolled) .hdr-brand{text-shadow:0 1px 12px rgba(0,0,0,.6)}
+
+/* Colores propios de la barra (Sitio → Barra superior) */
+.hdr-brand{color:var(--hdr-name,inherit)}
+.hdr .mnb{color:var(--hdr-menu,var(--fg))}
+.hdr-tint{display:inline-flex;flex:0 1 auto;min-width:0;-webkit-mask:center/contain no-repeat;mask:center/contain no-repeat}
+.hdr-tint .hdr-logo{opacity:0}

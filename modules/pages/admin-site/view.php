@@ -83,6 +83,16 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
         <h2>Barra superior</h2>
         <label class="ad-check st-line"><input type="checkbox" name="site_header_home" <?= $chk('header_home') ?>><span>Mostrar la barra superior en la <b>portada</b></span></label>
         <label class="ad-check st-line"><input type="checkbox" name="site_header_pages" <?= $chk('header_pages') ?>><span>Mostrar la barra superior en las <b>demás páginas</b> (galerías)</span></label>
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;font-weight:500">Colores de la barra</h3>
+        <div class="ad-row">
+            <?php foreach (['name' => 'Nombre de la web', 'menu' => 'Botón del menú («hamburguesa»)', 'logo' => 'Teñir el logo de un color'] as $hk => $hl): ?>
+            <div>
+                <label class="ad-check"><input type="checkbox" name="site_hdr_<?= $hk ?>_on" <?= $chk("hdr_{$hk}_on") ?>><span><?= e($hl) ?>: color propio</span></label>
+                <input type="color" name="site_hdr_<?= $hk ?>_color" value="<?= e(preg_match('/^#[0-9a-fA-F]{6}$/', $f["hdr_{$hk}_color"]) ? $f["hdr_{$hk}_color"] : '#f2efe9') ?>" style="margin-top:.5rem">
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <p class="ad-hint">El tinte pinta la silueta del logo con el color elegido: funciona con logos de fondo transparente (PNG/WebP). Con un logo de fondo opaco saldría un rectángulo de color.</p>
         <p class="ad-hint">El pie de página (diseño, llegada, textos y firma) se configura en <a href="/admin/pie">Pie</a>.</p>
     </section>
 

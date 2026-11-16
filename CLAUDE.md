@@ -55,6 +55,8 @@
 
 34. **«Color de acento» en todo selector de color del panel**: `components/color-accent` (cargado en `layouts/admin`) añade junto a cada `<input type="color">` un botón que pone el acento de la web (el que se esté editando en Sitio, o el guardado). Es automático: basta con usar `<input type="color">`; solo el propio selector del acento (`site_accent`, o cualquiera con `data-no-accent`) no lo lleva.
 
+35. **Colores de la barra superior** (Admin → Sitio → Barra superior, ajustes `site_hdr_<name|menu|logo>_on|color`): color propio del nombre de la web, del botón del menú y **tinte del logo** (la silueta del logo hace de máscara CSS sobre el color; requiere logo con fondo transparente). `components/header` los emite como `--hdr-name` / `--hdr-menu`.
+
 ## Arquitectura (cómo cumplir la regla 8)
 ```
 modules/<tipo>/<nombre>/{view.php, style.css, script.js, module.php}
