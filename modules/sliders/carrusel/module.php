@@ -1,0 +1,1 @@
+<?php return ['label' => 'Carrusel', 'desc' => 'Varias fotos a la vez con un asomo de la siguiente; se desliza de una en una.', 'icon' => '<rect x="2" y="8" width="17" height="24"/><rect x="23" y="8" width="17" height="24"/><rect x="44" y="8" width="17" height="24" fill-opacity=".4"/>', 'fx' => false, 'dots' => true];

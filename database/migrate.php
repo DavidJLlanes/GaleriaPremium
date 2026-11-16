@@ -15,6 +15,7 @@ return static function (\PDO $pdo): void {
         ['photos',    'exif',       'TEXT'],   // datos de cámara en JSON (solo fotos subidas con EXIF; sin GPS)
         ['galleries', 'crop_ratio', 'REAL'],
         ['galleries', 'options',    "TEXT NOT NULL DEFAULT '{}'"],
+        ['galleries', 'kind',       "TEXT NOT NULL DEFAULT 'gallery'"],   // 'gallery' | 'slider' (los sliders son filas con sus fotos, ratio fijo y opciones en `options`)
         ['galleries', 'featured',   'INTEGER NOT NULL DEFAULT 0'],   // destacada (badge + marco de acento)
         ['galleries', 'lightbox',   "TEXT NOT NULL DEFAULT 'fade'"],
     ];

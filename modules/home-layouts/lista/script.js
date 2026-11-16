@@ -1,6 +1,6 @@
 /* Portada «Índice editorial»: filas que aparecen en cascada y portada flotante que sigue al cursor con inercia. */
 (() => {
-  const root = document.querySelector('.hll'); if (!root) return;
+  document.querySelectorAll('.hll').forEach((root) => {   // varias secciones en la portada si hay sliders entre medias
   const rows = [...root.querySelectorAll('.hll-row')], calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!calm && 'IntersectionObserver' in window) {
     root.classList.add('is-js');
@@ -25,4 +25,5 @@
   });
   list.addEventListener('pointerleave', () => { on = false; fl.classList.remove('is-on'); fl.style.scale = ''; });
   addEventListener('scroll', () => { if (on && !list.matches(':hover')) { on = false; fl.classList.remove('is-on'); } }, { passive: true });
+});
 })();

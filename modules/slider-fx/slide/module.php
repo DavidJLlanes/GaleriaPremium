@@ -1,0 +1,1 @@
+<?php return ['label' => 'Deslizar', 'desc' => 'Las fotos se desplazan en horizontal.', 'icon' => '<rect x="4" y="8" width="26" height="24" fill-opacity=".5"/><rect x="34" y="8" width="26" height="24"/><path d="M30 20h4" stroke="currentColor"/>'];

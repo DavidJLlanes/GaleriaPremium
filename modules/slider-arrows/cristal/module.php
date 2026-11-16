@@ -1,0 +1,1 @@
+<?php return ['label' => 'Cristal', 'desc' => 'Cuadrados de cristal esmerilado con esquinas suaves.', 'icon' => '<rect x="6" y="12" width="16" height="16" rx="4" fill="currentColor" fill-opacity=".4"/><rect x="42" y="12" width="16" height="16" rx="4" fill="currentColor" fill-opacity=".4"/>'];

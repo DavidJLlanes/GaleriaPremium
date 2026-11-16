@@ -25,7 +25,7 @@ final class PhotoController
         $c = \App\Services\Crop::sanitize($_POST);
         if (!$c) Response::json(['ok' => false, 'error' => 'Recorte no válido'], 422);
 
-        $first = Photo::forGallery($gid)[0] ?? null;
+        $first = Gallery::referencePhoto($gid);
         $isFirst = $first && (int) $first['id'] === (int) $photo['id'];
         if (!$isFirst) {
             $ratio = (float) (Gallery::find($gid)['crop_ratio'] ?? 0);

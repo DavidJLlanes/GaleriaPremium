@@ -1,0 +1,1 @@
+<?php return ['label' => 'Cinematográfico', 'desc' => 'Foto grande con zoom lento, el nombre sobreimpreso y sin bordes.', 'icon' => '<rect x="2" y="6" width="60" height="28"/><rect x="6" y="26" width="22" height="2" fill="#000" fill-opacity=".6"/>', 'fx' => true, 'dots' => true];

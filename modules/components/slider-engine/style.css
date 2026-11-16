@@ -1,0 +1,28 @@
+/* Base común de los sliders. Cada diseño (modules/sliders/*) añade su composición; las transiciones son modules/slider-fx/*. */
+.sl{--sl-t:1000ms;--sl-e:cubic-bezier(.65,0,.35,1);position:relative;outline:0}
+.sl:focus-visible .sl-stage{box-shadow:0 0 0 2px var(--accent)}
+.sl-title{margin:0 0 1.2rem;text-align:center;font:var(--st-title,normal) var(--w-title,400) clamp(1.5rem,3.4vw,2.4rem)/1.15 var(--f-title);letter-spacing:.01em}
+.sl-stage{position:relative;overflow:hidden;aspect-ratio:var(--r,1.5);touch-action:pan-y;border-radius:var(--sl-rad,6px);background:#0d0d0f;-webkit-user-select:none;user-select:none}
+.sl-slide{display:block;color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.sl-crop{position:absolute;inset:0;overflow:hidden;display:block}
+.sl-crop img{position:absolute;max-width:none;display:block}
+.sl-crop img.is-cover{inset:0;width:100%;height:100%;object-fit:cover}
+.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:2.6rem 1.4rem 1.1rem;background:linear-gradient(transparent,rgba(0,0,0,.62));color:#f4f1ea;font:var(--st-caption,normal) var(--w-caption,400) .86rem/1.3 var(--f-caption);letter-spacing:.06em;pointer-events:none}
+/* modo «stack»: las fotos van apiladas y cambian con la transición elegida */
+.sl[data-mode="stack"] .sl-slide{position:absolute;inset:0;opacity:0;visibility:hidden;z-index:0}
+.sl[data-mode="stack"] .sl-slide.is-active{visibility:visible;opacity:1;z-index:2}
+.sl[data-mode="stack"] .sl-slide.is-leaving{visibility:visible;z-index:1}
+.sl[data-mode="stack"] .sl-slide.is-enter{visibility:visible;z-index:2;transition:none!important}
+/* flechas y puntos: posición por defecto (superpuestos); el estilo visual lo da cada módulo slider-arrows / slider-dots */
+.sl-arrows{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(.5rem,1.6vw,1.2rem);pointer-events:none;z-index:5}
+.sl-arrows button{pointer-events:auto;cursor:pointer}
+.sl-arrows button:disabled{opacity:.25;cursor:default}
+.sl-dots{position:absolute;left:0;right:0;bottom:clamp(.6rem,1.6vw,1.1rem);display:flex;justify-content:center;align-items:center;gap:.5rem;z-index:5;pointer-events:none}
+.sl-dots>*{pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.sl{--sl-t:1ms}}
+
+/* Sección de un slider en la portada (entre las galerías) */
+.sl-sec{position:relative;padding:clamp(2.2rem,6vw,5rem) 0;--pad:clamp(1rem,4vw,3rem)}
+.sl-sec>.gbd{top:clamp(.6rem,2vw,1.4rem);left:var(--pad)}
+.sl-sec.is-feat .sl-stage::after,.sl-sec.is-feat .sl-view::after{content:"";position:absolute;inset:0;border:1.5px solid var(--accent);box-shadow:0 22px 60px -24px color-mix(in srgb,var(--accent) 60%,transparent);pointer-events:none;z-index:9;border-radius:inherit}
+.sl-sec .sl-title{margin:0 0 1.2rem;font:var(--st-title,normal) var(--w-title,400) clamp(1.5rem,3.4vw,2.6rem)/1.1 var(--f-title);text-align:center}

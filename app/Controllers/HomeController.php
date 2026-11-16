@@ -13,7 +13,7 @@ final class HomeController
         $galleries = Gallery::published();
         $hero = $this->hero($galleries);
 
-        Page::render('pages/home', ['hero' => $hero, 'galleries' => $galleries], [
+        Page::render('pages/home', ['hero' => $hero, 'galleries' => $galleries, 'items' => Gallery::homeItems()], [
             'title'     => Config::get('app.name') . ' — ' . Config::get('app.tagline'),
             'bodyClass' => 'is-home',
             'isHome'    => true,

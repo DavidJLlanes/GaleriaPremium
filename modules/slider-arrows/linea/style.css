@@ -1,0 +1,5 @@
+.sl-arrows--linea .sl-ar{display:grid;place-items:center;width:4.2rem;height:3rem;padding:0;border:0;background:none;color:#f4f1ea;filter:drop-shadow(0 2px 8px rgba(0,0,0,.55));transition:color .4s,transform .8s cubic-bezier(.16,1,.3,1)}
+.sl-arrows--linea .sl-ar svg{width:100%;height:auto}
+.sl-arrows--linea .sl-ar:hover{color:var(--accent)}
+.sl-arrows--linea .sl-ar--prev:hover{transform:translateX(-8px)}.sl-arrows--linea .sl-ar--next:hover{transform:translateX(8px)}
+@media(max-width:640px){.sl-arrows--linea .sl-ar{width:3rem}}

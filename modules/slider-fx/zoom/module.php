@@ -1,0 +1,1 @@
+<?php return ['label' => 'Zoom', 'desc' => 'La nueva foto llega acercándose, la anterior se aleja.', 'icon' => '<rect x="18" y="10" width="28" height="20"/><rect x="8" y="4" width="48" height="32" fill="none" stroke="currentColor" stroke-opacity=".5"/>'];

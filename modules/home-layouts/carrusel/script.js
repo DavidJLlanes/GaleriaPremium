@@ -1,6 +1,6 @@
 /* Portada «Carrusel»: scroll horizontal nativo (táctil, trackpad, teclado) + arrastre con ratón e inercia, progreso, contador y flechas. */
 (() => {
-  const root = document.querySelector('.hlc'); if (!root) return;
+  document.querySelectorAll('.hlc').forEach((root) => {   // varias secciones en la portada si hay sliders entre medias
   const tr = root.querySelector('.hlc-track'), bar = root.querySelector('.hlc-bar'), num = root.querySelector('.hlc-count b');
   const cells = [...tr.querySelectorAll('.ccell')], btns = [...root.querySelectorAll('.hlc-b')];
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -42,4 +42,5 @@
   tr.addEventListener('click', (e) => { if (moved > 5) { e.preventDefault(); e.stopPropagation(); moved = 0; } }, true);
   tr.addEventListener('dragstart', (e) => e.preventDefault());
   addEventListener('resize', paint); paint();
+});
 })();

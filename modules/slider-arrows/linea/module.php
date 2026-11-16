@@ -1,0 +1,1 @@
+<?php return ['label' => 'Línea', 'desc' => 'Flechas largas y finas, muy editoriales.', 'icon' => '<path d="M8 20h18M8 20l4-3M8 20l4 3M56 20H38m18 0-4-3m4 3-4 3" fill="none" stroke="currentColor"/>'];

@@ -28,3 +28,4 @@
   .lbx .lb-count{top:1.4rem;left:1.2rem}
 }
 @media(prefers-reduced-motion:reduce){.lbx.is-animating .lb-img{transition:none}.lbx-glow{transition:none}}
+.lbx-strip[hidden]{display:none}

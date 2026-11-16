@@ -1,0 +1,7 @@
+.sl--miniaturas{width:min(1240px,100%);margin:0 auto;padding:0 var(--pad)}
+.sl--miniaturas .sl-thumbs{position:relative;display:flex;gap:.6rem;margin-top:.8rem;overflow-x:auto;scrollbar-width:none;padding:.3rem .2rem}
+.sl--miniaturas .sl-thumbs::-webkit-scrollbar{display:none}
+.sl--miniaturas .sl-th{flex:none;width:clamp(4rem,9vw,6.4rem);aspect-ratio:var(--r);padding:0;border:0;border-radius:4px;overflow:hidden;cursor:pointer;opacity:.5;outline:2px solid transparent;outline-offset:2px;transition:opacity .5s,outline-color .5s,transform .7s cubic-bezier(.16,1,.3,1)}
+.sl--miniaturas .sl-th img{width:100%;height:100%;object-fit:cover;display:block}
+.sl--miniaturas .sl-th:hover{opacity:.85}
+.sl--miniaturas .sl-th.is-on{opacity:1;outline-color:var(--accent);transform:translateY(-2px)}

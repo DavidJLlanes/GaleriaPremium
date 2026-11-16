@@ -19,6 +19,7 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
     <a class="ad-logo" href="/admin"><?= e(Config::get('app.name')) ?> <small>Admin</small></a>
     <nav class="ad-nav" aria-label="Administración">
         <a href="/admin" title="Crear y ordenar galerías" class="<?= $nav === 'galerias' ? 'is-on' : '' ?>">Galerías</a>
+        <a href="/admin/sliders" title="Pases de fotos entre las galerías" class="<?= $nav === 'sliders' ? 'is-on' : '' ?>">Sliders</a>
         <a href="/admin/fotos" title="Todas las fotos de todas las galerías" class="<?= $nav === 'fotos' ? 'is-on' : '' ?>">Fotos</a>
         <i class="ad-sep" aria-hidden="true"></i>
         <a href="/admin/entrada" title="1. Pantalla de entrada (solo en la portada)" class="<?= $nav === 'entrada' ? 'is-on' : '' ?>">Entrada</a>

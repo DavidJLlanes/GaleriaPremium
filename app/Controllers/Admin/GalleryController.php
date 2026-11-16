@@ -13,7 +13,7 @@ final class GalleryController
     {
         Auth::guard();
         Page::render('pages/admin-dashboard', [
-            'galleries' => Gallery::all(),
+            'galleries' => Gallery::allMixed(),
             'styles'    => Module::all('galleries'),
         ], ['title' => 'Galerías', 'nav' => 'galerias'], 'layouts/admin');
     }
@@ -42,7 +42,7 @@ final class GalleryController
         Auth::guard(true); Csrf::verify();
         $g = Gallery::find((int) $p['id']);
         if (!$g) Response::json(['ok' => false, 'error' => 'Galería no encontrada.'], 404);
-        $on = ($_POST['flag'] ?? '') === 'pin' ? \App\Services\Pinned::toggle('g', (int) $g['id']) : Gallery::toggleFeatured((int) $g['id']);
+        $on = ($_POST['flag'] ?? '') === 'pin' ? \App\Services\Pinned::toggle(\App\Services\Pinned::typeOf($g), (int) $g['id']) : Gallery::toggleFeatured((int) $g['id']);
         Response::json(['ok' => true, 'on' => $on]);
     }
 

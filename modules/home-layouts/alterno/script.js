@@ -1,6 +1,6 @@
 /* Portada «Editorial alterno»: aparición de cada fila al entrar en pantalla y parallax suave (con inercia) de las fotos. */
 (() => {
-  const root = document.querySelector('.hla'); if (!root) return;
+  document.querySelectorAll('.hla').forEach((root) => {   // varias secciones en la portada si hay sliders entre medias
   const rows = [...root.querySelectorAll('.hla-row')], calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (calm || !('IntersectionObserver' in window)) return;
   root.classList.add('is-js');
@@ -23,4 +23,5 @@
   const vis = new IntersectionObserver((es) => es.forEach(e => { const it = items.find(x => x.box === e.target); if (it) it.on = e.isIntersecting; kick(); }), { rootMargin: '20% 0px' });
   items.forEach(x => vis.observe(x.box));
   addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick);
+});
 })();

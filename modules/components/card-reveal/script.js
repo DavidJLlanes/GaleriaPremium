@@ -1,7 +1,7 @@
 /* Tarjetas de la página principal: aparición al hacer scroll (efecto elegido en Admin → Tarjetas) y parallax suave de las fotos.
  * Solo se animan transform / opacity / clip-path / filter (en la GPU). Las tarjetas que entran a la vez lo hacen en cascada. */
 (() => {
-  const sec = document.querySelector('.coll[data-rv]'); if (!sec) return;
+  document.querySelectorAll('.coll[data-rv]').forEach((sec) => {
   const cells = [...sec.querySelectorAll('.ccell')], cards = cells.map(c => c.querySelector('.ccard'));
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fx = sec.dataset.rv !== 'none';
@@ -42,4 +42,5 @@
   };
   const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
   addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick); kick();
+});
 })();

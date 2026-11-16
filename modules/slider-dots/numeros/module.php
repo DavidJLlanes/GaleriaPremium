@@ -1,0 +1,1 @@
+<?php return ['label' => 'Números', 'desc' => 'Contador «01 / 06» con una línea fina.', 'icon' => '<text x="32" y="25" text-anchor="middle" font-size="12" font-family="sans-serif" fill="currentColor">01/06</text>'];

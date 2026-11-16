@@ -1,0 +1,1 @@
+<?php return ['label' => 'Progreso', 'desc' => 'Barras que se rellenan con el tiempo hasta la siguiente foto.', 'icon' => '<rect x="10" y="19" width="14" height="3"/><rect x="28" y="19" width="14" height="3" fill-opacity=".4"/><rect x="46" y="19" width="8" height="3" fill-opacity=".4"/>'];

@@ -9,7 +9,7 @@
     if (!lb || !api) return;
     const info = raw ? JSON.parse(raw.textContent || '{}') : {};
     const img = lb.querySelector('.lb-img'), fig = lb.querySelector('.lb-fig'), bg = lb.querySelector('.lb-bg');
-    const links = [...document.querySelector('[data-lightbox]').querySelectorAll('a[href]')];
+    let links = api.items.slice();
     const key = (a) => decodeURIComponent(a.getAttribute('href').split('/').pop().split('?')[0]);
     lb.classList.add('lbx');
 
@@ -19,13 +19,20 @@
     const desc = Object.assign(document.createElement('p'), { className: 'lbx-desc' }), exif = Object.assign(document.createElement('p'), { className: 'lbx-exif' });
     box.append(desc, exif); lb.append(box);
     const strip = Object.assign(document.createElement('div'), { className: 'lbx-strip' });
-    const ths = links.map((a, i) => {
-      const b = Object.assign(document.createElement('button'), { type: 'button', className: 'lbx-th' }); b.setAttribute('aria-label', a.dataset.title || 'Foto ' + (i + 1));
-      const im = Object.assign(document.createElement('img'), { src: info[key(a)]?.t || a.href, alt: '', loading: 'lazy', draggable: false }); b.append(im);
-      b.addEventListener('click', (e) => { e.stopPropagation(); api.go(i); }); strip.append(b); return b;
-    });
+    let ths = [];
+    const buildStrip = () => {   // (re)crea las miniaturas; se repite si se abre la foto de OTRO contenedor (varios sliders en la portada)
+      strip.textContent = '';
+      ths = links.map((a, i) => {
+        const b = Object.assign(document.createElement('button'), { type: 'button', className: 'lbx-th' }); b.setAttribute('aria-label', a.dataset.title || 'Foto ' + (i + 1));
+        const im = Object.assign(document.createElement('img'), { src: info[key(a)]?.t || a.href, alt: '', loading: 'lazy', draggable: false }); b.append(im);
+        b.addEventListener('click', (e) => { e.stopPropagation(); api.go(i); }); strip.append(b); return b;
+      });
+      strip.hidden = links.length < 2;
+    };
+    buildStrip();
+    addEventListener('lb:source', (e) => { links = e.detail.links.slice(); buildStrip(); });
     const hint = Object.assign(document.createElement('div'), { className: 'lbx-zoomhint', textContent: 'Doble clic para ampliar' });
-    if (links.length > 1) lb.append(strip); lb.append(hint);
+    lb.append(strip); lb.append(hint);
     const desktop = () => innerWidth >= 700;
     box.prepend(lb.querySelector('.lb-cap'));      // el pie de foto pasa al bloque inferior (título, descripción y datos van apilados)
     // Reparte el alto: arriba contador/cierre, abajo pie + datos (+ miniaturas en escritorio); la foto se ajusta al hueco que queda

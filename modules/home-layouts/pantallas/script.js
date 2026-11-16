@@ -1,6 +1,6 @@
 /* Portada «Pantallas apiladas»: cada panel es sticky; mientras el siguiente lo cubre, se aleja y se oscurece (--p de 0 a 1). */
 (() => {
-  const root = document.querySelector('.hlp'); if (!root) return;
+  document.querySelectorAll('.hlp').forEach((root) => {   // varias secciones en la portada si hay sliders entre medias
   const ps = [...root.querySelectorAll('.hlp-p')], calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (calm || !('IntersectionObserver' in window)) { ps.forEach(p => p.classList.add('is-in')); return; }
   root.classList.add('is-js');
@@ -14,4 +14,5 @@
   const kick = () => { if (live && !raf) raf = requestAnimationFrame(paint); };
   new IntersectionObserver((es) => { live = es[0].isIntersecting; kick(); }).observe(root);
   addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick);
+});
 })();

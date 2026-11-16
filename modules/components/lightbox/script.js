@@ -2,11 +2,12 @@
    El efecto (data-fx) se define en CSS por módulo (modules/lightboxes/*); el de zoom añade JS vía window.LightboxFx. */
 (() => {
   const lb = document.getElementById('lightbox');
-  const box = document.querySelector('[data-lightbox]');
-  if (!lb || !box) return;
+  const boxes = [...document.querySelectorAll('[data-lightbox]')];   // puede haber varios en la portada (un slider cada uno): al pulsar una foto se usa SU contenedor
+  if (!lb || !boxes.length) return;
 
-  const items = [...box.querySelectorAll('a[href]')];
-  if (!items.length) return;
+  let items = [...boxes[0].querySelectorAll('a[href]')];
+  if (!items.length && boxes.length === 1) return;
+  const fx0 = lb.dataset.fx;
   const img = lb.querySelector('.lb-img'), cap = lb.querySelector('.lb-cap'), count = lb.querySelector('.lb-count'), bg = lb.querySelector('.lb-bg');
   const fx = () => (window.LightboxFx || {})[lb.dataset.fx] || {};
   const ms = (v, d) => { const n = parseFloat(getComputedStyle(lb).getPropertyValue(v)); return isNaN(n) ? d : n; };
@@ -64,7 +65,14 @@
     dispatchEvent(new Event('lb:close'));
   };
 
-  items.forEach((a, i) => a.addEventListener('click', e => { e.preventDefault(); open(i); }));
+  boxes.forEach(box => {
+    const list = [...box.querySelectorAll('a[href]')];
+    list.forEach((a, i) => a.addEventListener('click', e => {
+      e.preventDefault(); if (busy) return;
+      if (items !== list) { items = list; lb.dataset.fx = box.dataset.lbfx || fx0; dispatchEvent(new CustomEvent('lb:source', { detail: { links: list } })); }
+      open(i);
+    }));
+  });
   lb.querySelector('.lb-close').onclick = close;
   lb.querySelector('.lb-prev').onclick = () => swap(idx - 1, -1);
   lb.querySelector('.lb-next').onclick = () => swap(idx + 1, 1);
@@ -85,5 +93,5 @@
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) swap(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
     x0 = null;
   });
-  window.LightboxApi = { go: (i) => { if (i !== idx) swap(i, i > idx ? 1 : -1); }, close, get index() { return idx; }, get count() { return items.length; }, get open() { return !lb.hidden; } };
+  window.LightboxApi = { get items() { return items; }, go: (i) => { if (i !== idx) swap(i, i > idx ? 1 : -1); }, close, get index() { return idx; }, get count() { return items.length; }, get open() { return !lb.hidden; } };
 })();

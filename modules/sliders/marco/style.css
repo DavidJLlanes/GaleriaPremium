@@ -1,0 +1,5 @@
+.sl--marco{width:min(1100px,100%);margin:0 auto;padding:0 var(--pad)}
+.sl--marco .sl-frame{position:relative;padding:clamp(12px,3vw,38px);background:linear-gradient(180deg,#17171a,#101012);border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);border-radius:4px;box-shadow:0 40px 90px -50px rgba(0,0,0,.9),inset 0 0 0 clamp(5px,1vw,10px) #0c0c0e}
+.sl--marco .sl-stage{border-radius:0;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.sl--marco .sl-arrows{inset:clamp(12px,3vw,38px) 0 auto;bottom:auto;height:auto;top:clamp(12px,3vw,38px);bottom:clamp(12px,3vw,38px);padding:0 calc(clamp(12px,3vw,38px) + .6rem)}
+.sl--marco .sl-dots{position:static;margin-top:clamp(.8rem,2vw,1.4rem);padding-top:.2rem}

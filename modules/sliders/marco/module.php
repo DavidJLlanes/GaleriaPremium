@@ -1,0 +1,1 @@
+<?php return ['label' => 'Marco', 'desc' => 'La foto dentro de un marco tipo passe-partout, con los controles debajo.', 'icon' => '<rect x="6" y="3" width="52" height="34" fill="none" stroke="currentColor"/><rect x="12" y="9" width="40" height="22"/>', 'fx' => true, 'dots' => true];

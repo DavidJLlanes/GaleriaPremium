@@ -1,0 +1,4 @@
+.sl-arrows--fino .sl-ar{display:grid;place-items:center;width:3rem;height:4rem;padding:0;border:0;background:none;color:#f4f1ea;filter:drop-shadow(0 2px 8px rgba(0,0,0,.55));transition:color .4s,transform .7s cubic-bezier(.16,1,.3,1)}
+.sl-arrows--fino .sl-ar svg{width:1.9rem;height:1.9rem}
+.sl-arrows--fino .sl-ar:hover{color:var(--accent)}
+.sl-arrows--fino .sl-ar--prev:hover{transform:translateX(-4px)}.sl-arrows--fino .sl-ar--next:hover{transform:translateX(4px)}

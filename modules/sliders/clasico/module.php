@@ -1,0 +1,1 @@
+<?php return ['label' => 'Clásico', 'desc' => 'Una foto cada vez, centrada, con flechas y puntos superpuestos.', 'icon' => '<rect x="8" y="6" width="48" height="28" rx="2"/><circle cx="29" cy="37" r="1.3"/><circle cx="35" cy="37" r="1.3" fill-opacity=".4"/>', 'fx' => true, 'dots' => true];

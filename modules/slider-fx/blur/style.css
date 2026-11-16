@@ -1,0 +1,3 @@
+.sl[data-fx="blur"] .sl-slide{transition:opacity var(--sl-t) var(--sl-e),filter var(--sl-t) var(--sl-e),transform calc(var(--sl-t) * 1.2) cubic-bezier(.16,1,.3,1)}
+.sl[data-fx="blur"] .sl-slide.is-enter{opacity:0;filter:blur(28px);transform:scale(1.06)}
+.sl[data-fx="blur"] .sl-slide.is-leaving{opacity:0;filter:blur(18px)}

@@ -1,0 +1,1 @@
+<?php return ['label' => 'Centrado 3D', 'desc' => 'La foto activa en el centro y las vecinas, más pequeñas y en perspectiva.', 'icon' => '<rect x="22" y="6" width="20" height="28"/><rect x="4" y="11" width="14" height="18" fill-opacity=".45"/><rect x="46" y="11" width="14" height="18" fill-opacity=".45"/>', 'fx' => false, 'dots' => true];

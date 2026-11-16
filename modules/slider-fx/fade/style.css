@@ -1,0 +1,3 @@
+.sl[data-fx="fade"] .sl-slide{transition:opacity var(--sl-t) var(--sl-e)}
+.sl[data-fx="fade"] .sl-slide.is-enter{opacity:0}
+.sl[data-fx="fade"] .sl-slide.is-leaving{opacity:0}

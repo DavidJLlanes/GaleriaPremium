@@ -1,0 +1,6 @@
+.sl[data-fx="flip"] .sl-stage{perspective:1800px}
+.sl[data-fx="flip"] .sl-slide{transition:transform var(--sl-t) cubic-bezier(.65,0,.35,1),opacity calc(var(--sl-t) * .5) ease;backface-visibility:hidden}
+.sl[data-fx="flip"][data-dir="next"] .sl-slide.is-enter{transform:rotateY(-80deg) translateZ(-120px);opacity:0}
+.sl[data-fx="flip"][data-dir="prev"] .sl-slide.is-enter{transform:rotateY(80deg) translateZ(-120px);opacity:0}
+.sl[data-fx="flip"][data-dir="next"] .sl-slide.is-leaving{transform:rotateY(80deg) translateZ(-120px);opacity:0}
+.sl[data-fx="flip"][data-dir="prev"] .sl-slide.is-leaving{transform:rotateY(-80deg) translateZ(-120px);opacity:0}

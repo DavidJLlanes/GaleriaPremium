@@ -1,0 +1,8 @@
+.sl-dots--progreso .sl-dotbox{display:flex;gap:.45rem}
+.sl-dots--progreso .sl-dot{position:relative;width:clamp(1.6rem,4vw,2.6rem);height:3px;padding:0;border:0;border-radius:2px;background:rgba(244,241,234,.3);overflow:hidden;cursor:pointer}
+.sl-dots--progreso .sl-dot::before{content:"";position:absolute;inset:-.7rem 0}
+.sl-dots--progreso .sl-dot::after{content:"";position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left}
+.sl-dots--progreso .sl-dot.is-on::after{animation:slProg var(--sl-int,5s) linear forwards}
+.sl[data-playing="0"] .sl-dots--progreso .sl-dot.is-on::after{animation:none;transform:scaleX(1)}
+@keyframes slProg{to{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.sl-dots--progreso .sl-dot.is-on::after{animation:none;transform:scaleX(1)}}

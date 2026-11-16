@@ -8,7 +8,7 @@
 <?php if (count($galleries) > 1): ?><p class="ad-hint" style="margin-bottom:.8rem">Arrastra el icono ⠿ para cambiar el orden (se guarda solo). El chincheta <b>fija</b> una galería como la primera (solo una) y la estrella la marca como <b>destacada</b>.</p><?php endif; ?>
 <div class="adg" data-bulk data-sortable data-reorder-url="/admin/galerias/orden">
     <?php foreach ($galleries as $g): ?>
-        <a class="adg-card<?= $g['pinned'] ? ' is-pinned' : '' ?><?= $g['featured'] ? ' is-featured' : '' ?>" data-id="<?= (int) $g['id'] ?>"<?= $g['pinned'] ? ' data-fixed="1"' : '' ?> href="/admin/galeria/<?= (int) $g['id'] ?>">
+        <a class="adg-card<?= $g['pinned'] ? ' is-pinned' : '' ?><?= $g['featured'] ? ' is-featured' : '' ?>" data-id="<?= (int) $g['id'] ?>"<?= $g['pinned'] ? ' data-fixed="1"' : '' ?> href="/admin/<?= $g['kind'] === 'slider' ? 'slider' : 'galeria' ?>/<?= (int) $g['id'] ?>">
             <span class="bk-box" role="checkbox" aria-checked="false" tabindex="0" title="Seleccionar">✓</span>
             <?php if (!$g['pinned']): ?><span class="srt-handle" title="Arrastra para reordenar" aria-label="Reordenar">⠿</span><?php endif; ?>
             <span class="adg-flags">
@@ -18,7 +18,7 @@
             <div class="adg-img"><?php if ($g['cover']): ?><img src="<?= e(Photo::thumbUrl($g['cover'])) ?>" alt="" loading="lazy"><?php endif; ?></div>
             <div class="adg-info">
                 <strong><?= e($g['title']) ?></strong>
-                <span><?= (int) $g['photo_count'] ?> fotos · <?= e($styles[$g['style']]['label'] ?? $g['style']) ?></span>
+                <span><?= (int) $g['photo_count'] ?> fotos · <?= $g['kind'] === 'slider' ? 'Slider' : e($styles[$g['style']]['label'] ?? $g['style']) ?></span>
                 <span class="ad-badge <?= $g['is_published'] ? '' : 'is-off' ?>"><?= $g['is_published'] ? 'Publicada' : 'Oculta' ?></span>
                 <?php if ($g['pinned']): ?><span class="ad-badge">Fijada</span><?php endif; ?><?php if ($g['featured']): ?><span class="ad-badge">Destacada</span><?php endif; ?>
             </div>

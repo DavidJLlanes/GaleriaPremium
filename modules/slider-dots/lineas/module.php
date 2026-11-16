@@ -1,0 +1,1 @@
+<?php return ['label' => 'Líneas', 'desc' => 'Rayas finas, como los segmentos de una historia.', 'icon' => '<rect x="10" y="19" width="12" height="2"/><rect x="26" y="19" width="12" height="2" fill-opacity=".4"/><rect x="42" y="19" width="12" height="2" fill-opacity=".4"/>'];

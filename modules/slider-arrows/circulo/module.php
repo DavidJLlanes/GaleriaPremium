@@ -1,0 +1,1 @@
+<?php return ['label' => 'Círculo', 'desc' => 'Botones redondos con filete de acento al pasar el cursor.', 'icon' => '<circle cx="14" cy="20" r="8" fill="none" stroke="currentColor"/><circle cx="50" cy="20" r="8" fill="none" stroke="currentColor"/>'];

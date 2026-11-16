@@ -1,0 +1,1 @@
+<?php return ['label' => 'Slider: motor', 'desc' => 'Interacción común de todos los sliders: pase automático (se pausa fuera de pantalla, al pasar el cursor y con «reducir movimiento»), flechas, puntos, deslizar con el dedo, teclado y modo «stack» con las transiciones de slider-fx. Los diseños con otra mecánica registran su modo en window.SliderModes.'];

@@ -1,0 +1,5 @@
+.sl-dots--numeros .sl-dotbox{display:none}
+.sl-dots--numeros{gap:.8rem;font:var(--st-menu,normal) var(--w-menu,500) .74rem/1 var(--f-menu);letter-spacing:.3em;color:#f4f1ea;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.sl-dots--numeros [data-sl-cur]{color:var(--accent)}
+.sl-dots--numeros::before{content:"";order:1;width:2.2rem;height:1px;background:rgba(244,241,234,.5)}
+.sl-dots--numeros .sl-num-a{order:0}.sl-dots--numeros .sl-num-b{order:2}

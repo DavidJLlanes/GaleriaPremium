@@ -1,0 +1,1 @@
+<?php return ['label' => 'Slider: flechas y puntos', 'desc' => 'Pinta las flechas y los puntos guía elegidos para un slider (cada estilo es un módulo en slider-arrows / slider-dots). Datos: $cfg, $n, $arrows (bool), $dots (bool).'];

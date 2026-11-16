@@ -1,0 +1,1 @@
+<?php return ['label' => 'Cortina', 'desc' => 'Una cortina descubre la nueva foto.', 'icon' => '<rect x="6" y="8" width="52" height="24" fill-opacity=".35"/><rect x="6" y="8" width="30" height="24"/>'];

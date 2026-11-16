@@ -1,0 +1,1 @@
+<?php return ['label' => 'Puntos', 'desc' => 'Puntos pequeños; el activo se ensancha y toma el acento.', 'icon' => '<circle cx="20" cy="20" r="2.5"/><rect x="28" y="17.5" width="10" height="5" rx="2.5"/><circle cx="46" cy="20" r="2.5"/>'];

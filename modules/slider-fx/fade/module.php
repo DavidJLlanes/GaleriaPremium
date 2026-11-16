@@ -1,0 +1,1 @@
+<?php return ['label' => 'Desvanecer', 'desc' => 'Una foto se funde con la siguiente.', 'icon' => '<rect x="6" y="8" width="30" height="24" fill-opacity=".35"/><rect x="26" y="8" width="30" height="24" fill-opacity=".7"/>'];

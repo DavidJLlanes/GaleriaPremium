@@ -16,6 +16,14 @@ final class Pinned
         Setting::set('pinned_item', $type . ':' . $id); return true;
     }
     public static function clear(string $type, int $id): void { if (self::is($type, $id)) Setting::set('pinned_item', ''); }
+    public static function typeOf(array $row): string { return ($row['kind'] ?? 'gallery') === 'slider' ? 's' : 'g'; }
+    /** Como apply() pero con galerías y sliders mezclados (el tipo sale de `kind`). */
+    public static function applyMixed(array $rows): array
+    {
+        $first = []; $rest = [];
+        foreach ($rows as $r) { $r['pinned'] = self::is(self::typeOf($r), (int) $r['id']) ? 1 : 0; $r['pinned'] ? $first[] = $r : $rest[] = $r; }
+        return array_merge($first, $rest);
+    }
     /** Marca `pinned` en cada fila y la mueve al principio (el resto conserva su orden). */
     public static function apply(array $rows, string $type): array
     {

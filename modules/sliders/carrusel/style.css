@@ -1,0 +1,11 @@
+/* Varias fotos visibles; --vis = cuántas caben (con un asomo de la siguiente). Todas con la proporción fija del slider. */
+.sl--carrusel{--gap:clamp(8px,1.4vw,20px);--vis:1.15;padding:0 var(--pad);width:100%}
+@media(min-width:640px){.sl--carrusel{--vis:2.15}}
+@media(min-width:1000px){.sl--carrusel{--vis:3.15}}
+@media(min-width:1500px){.sl--carrusel{--vis:4.15}}
+.sl--carrusel .sl-view{position:relative;overflow:hidden;touch-action:pan-y;border-radius:var(--sl-rad,6px)}
+.sl--carrusel .sl-track{display:flex;gap:var(--gap);will-change:transform;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.sl--carrusel .sl-slide{position:relative;flex:0 0 calc((100% - (var(--vis) - 1) * var(--gap)) / var(--vis));aspect-ratio:var(--r);overflow:hidden;border-radius:var(--sl-rad,6px);background:#0d0d0f}
+.sl--carrusel .sl-arrows{inset:0}
+.sl--carrusel .sl-dots{position:static;margin-top:1rem}
+@media(prefers-reduced-motion:reduce){.sl--carrusel .sl-track{transition:none}}

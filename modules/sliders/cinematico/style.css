@@ -1,0 +1,8 @@
+.sl--cinematico{padding:0}
+.sl--cinematico .sl-title{padding:0 var(--pad)}
+.sl--cinematico .sl-stage{width:min(100%,calc(88vh * var(--r)));margin:0 auto;border-radius:0}
+.sl--cinematico .sl-slide.is-active .sl-crop{animation:slKb calc(var(--sl-int,5s) + 2.4s) ease-out forwards}
+@keyframes slKb{from{transform:scale(1)}to{transform:scale(1.07)}}
+.sl--cinematico .sl-cap{padding:5rem clamp(1.2rem,4vw,3.2rem) 3.6rem;font:var(--st-title,normal) var(--w-title,400) clamp(1.2rem,3vw,2.2rem)/1.15 var(--f-title);letter-spacing:.01em;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.sl--cinematico .sl-dots{justify-content:flex-start;padding:0 clamp(1.2rem,4vw,3.2rem);bottom:clamp(1rem,2.4vw,1.8rem)}
+@media(prefers-reduced-motion:reduce){.sl--cinematico .sl-slide.is-active .sl-crop{animation:none}}

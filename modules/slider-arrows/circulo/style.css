@@ -1,0 +1,5 @@
+.sl-arrows--circulo .sl-ar{display:grid;place-items:center;width:2.9rem;height:2.9rem;padding:0;border-radius:50%;border:1px solid rgba(244,241,234,.55);background:rgba(10,10,11,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#f4f1ea;transition:background .5s,border-color .5s,color .5s,transform .7s cubic-bezier(.16,1,.3,1)}
+.sl-arrows--circulo .sl-ar svg{width:1.2rem;height:1.2rem}
+.sl-arrows--circulo .sl-ar:hover{background:var(--accent);border-color:var(--accent);color:#111}
+.sl-arrows--circulo .sl-ar--prev:hover{transform:translateX(-3px)}.sl-arrows--circulo .sl-ar--next:hover{transform:translateX(3px)}
+@media(max-width:640px){.sl-arrows--circulo .sl-ar{width:2.3rem;height:2.3rem}}

@@ -1,0 +1,6 @@
+.sl[data-fx="wipe"] .sl-slide{transition:clip-path var(--sl-t) cubic-bezier(.65,0,.35,1),transform var(--sl-t) cubic-bezier(.65,0,.35,1)}
+.sl[data-fx="wipe"] .sl-slide.is-active{clip-path:inset(0 0 0 0)}
+.sl[data-fx="wipe"][data-dir="next"] .sl-slide.is-enter{clip-path:inset(0 0 0 100%)}
+.sl[data-fx="wipe"][data-dir="prev"] .sl-slide.is-enter{clip-path:inset(0 100% 0 0)}
+.sl[data-fx="wipe"][data-dir="next"] .sl-slide.is-leaving{transform:translateX(-12%)}
+.sl[data-fx="wipe"][data-dir="prev"] .sl-slide.is-leaving{transform:translateX(12%)}
