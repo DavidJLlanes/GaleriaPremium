@@ -23,7 +23,6 @@ final class Site
         'tagline'      => ['text',  ''],
         'description'  => ['text',  ''],
         'og_text'      => ['text',  ''],
-        'og_text'      => ['text',  ''],
         'lang'         => ['enum',  'es', ['es', 'en', 'ca', 'gl', 'eu', 'fr', 'pt', 'de', 'it']],
         'accent'       => ['color', '#d8b36a'],
         'theme'        => ['color', '#0a0a0b'],
