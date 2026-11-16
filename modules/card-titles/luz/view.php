@@ -2,8 +2,8 @@
 use App\Core\Module; Module::use('components/stroke-order'); Module::use('components/light-pen');
 $o = $opts ?? []; ?>
 <div class="ct-luz" data-speed="<?= (int) ($o['speed'] ?? 5) ?>" style="--ctl-c:<?= e($o['color'] ?? '#ffb45a') ?>">
-    <span class="ct-luz-count"><?= (int) $g['photo_count'] ?> fotos</span>
     <h2 class="ct-luz-title"><?= e($g['title']) ?></h2>
     <canvas class="ct-luz-canvas" aria-hidden="true"></canvas>
+    <span class="ct-luz-count"><?= (int) $g['photo_count'] ?> fotos</span>
 </div>
 <noscript><style>.ct-luz-title{opacity:1!important}</style></noscript>
