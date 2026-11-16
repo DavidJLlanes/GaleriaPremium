@@ -1,0 +1,5 @@
+.hxv{position:absolute;inset:0;overflow:hidden;background:#000}
+.hxv-poster,.hxv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hxv-video{opacity:0;transition:opacity 1.4s ease}
+.hxv-video.is-playing{opacity:1}
+.hxv-veil{position:absolute;inset:0;background:rgba(0,0,0,var(--ov,.35));pointer-events:none}

@@ -16,6 +16,8 @@
     if (isSingle() && ids.length > 1) { ids = ids.slice(0, 1); draw(); }
     hint.textContent = isSingle() ? '(una sola foto)' : '(arrastra ⠿ para ordenar)';
     document.getElementById('heroPhotosCard').hidden = mode() === 'none';
+    const ph = document.getElementById('heroPhotoHint'), hint2 = JSON.parse(form.dataset.hints || '{}')[form.dataset.type] || '';
+    ph.hidden = !hint2; ph.textContent = hint2;
     document.getElementById('heroSpeed').hidden = !withInterval.includes(form.dataset.type);
     form.querySelectorAll('[data-hero-opts]').forEach(c => { c.hidden = c.dataset.heroOpts !== form.dataset.type; });
   };
@@ -38,4 +40,22 @@
   sel.addEventListener('sortable:end', e => { ids = e.detail.ids; draw(); });
 
   syncMode(); draw();
+})();
+
+/* Vídeo de fondo (hero «video»): sube el archivo y guarda su nombre en el campo oculto; se aplica con «Guardar portada». */
+(() => {
+  const box = document.querySelector('[data-video-box]'); if (!box) return;
+  const input = box.querySelector('[data-video-input]'), file = box.querySelector('[data-video-file]'), prev = box.querySelector('.hv-prev');
+  const state = box.querySelector('.hv-state'), up = box.querySelector('[data-video-up]'), del = box.querySelector('[data-video-del]');
+  up.addEventListener('click', async () => {
+    const f = file.files[0]; if (!f) return Admin.toast('Elige primero un vídeo (.mp4 o .webm).', 'error');
+    const fd = new FormData(); fd.append('video', f); up.disabled = true; up.textContent = 'Subiendo…'; state.textContent = 'Subiendo el vídeo, espera un momento…';
+    try {
+      const j = await Admin.post('/admin/portada/video', fd);
+      input.value = j.file; prev.src = j.url; prev.hidden = false; del.hidden = false;
+      state.textContent = `Vídeo subido (${(j.size / 1048576).toFixed(1)} MB). Pulsa «Guardar portada» para aplicarlo.`; Admin.toast('Vídeo subido.');
+    } catch (e) { state.textContent = 'No se pudo subir.'; Admin.toast(e.message, 'error'); }
+    up.disabled = false; up.textContent = 'Subir vídeo';
+  });
+  del.addEventListener('click', () => { input.value = ''; prev.removeAttribute('src'); prev.hidden = true; del.hidden = true; state.textContent = 'Vídeo quitado. Pulsa «Guardar portada» para aplicarlo.'; });
 })();

@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Core\{Module, Page, Response};
 use App\Models\{Gallery, Photo, Setting};
-use App\Services\{Auth, Csrf, Flash, HeroOptions};
+use App\Services\{Auth, Csrf, Flash, HeroOptions, HeroVideo};
 
 /** Admin → Portada: tipo de hero, fotos (y su orden), textos, velocidad y ajustes propios de cada diseño. */
 final class HeroController
@@ -49,6 +49,8 @@ final class HeroController
         Setting::set('hero_interval', (string) max(2, min(30, (float) str_replace(',', '.', (string) ($_POST['hero_interval'] ?? '6.5')))));
 
         foreach (array_keys(Module::all('heroes')) as $h) HeroOptions::save($h, (array) ($_POST['hero_opt'][$h] ?? []));
+
+        HeroVideo::prune(HeroOptions::values('video')['file'] ?? '');
 
         Flash::set('Portada guardada.');
         Response::redirect('/admin/portada');

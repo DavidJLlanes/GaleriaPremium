@@ -32,6 +32,7 @@ $router->post('/admin/fuentes/subir',        [$fonts = new App\Controllers\Admin
 $router->post('/admin/fuentes/borrar',       [$fonts, 'delete']);
 $router->get('/admin/portada',               [$hero, 'show']);
 $router->post('/admin/portada',              [$hero, 'save']);
+$router->post('/admin/portada/video',        [new App\Controllers\Admin\HeroVideoController(), 'upload']);
 $router->get('/admin/galeria/{id}',          [$ag, 'show']);
 $router->post('/admin/galeria/{id}/editar',  [$ag, 'update']);
 $router->post('/admin/galeria/{id}/borrar',  [$ag, 'delete']);

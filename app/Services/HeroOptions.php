@@ -40,6 +40,7 @@ final class HeroOptions
             'color'  => preg_match('/^#[0-9a-fA-F]{6}$/', $v) ? $v : $def,
             'range'  => (string) max((float) $o['min'], min((float) $o['max'], is_numeric($v) ? (float) $v : (float) $def)),
             'select' => isset($o['choices'][$v]) ? $v : $def,
+            'video'  => HeroVideo::exists($v) ? $v : '',
             default  => mb_substr($v, 0, 80),
         };
     }

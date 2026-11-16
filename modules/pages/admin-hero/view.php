@@ -4,8 +4,8 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
 <h1>Portada</h1>
 <p class="ad-sub">La sección grande con la que empieza tu web: tipo, fotos (y su orden) y textos.</p>
 
-<?php $modes = array_map(fn ($m) => $m['photos'] ?? 'many', $heroes); $withInterval = array_keys(array_filter($heroes, fn ($m) => !empty($m['interval']))); ?>
-<form method="post" action="/admin/portada" id="heroForm" data-type="<?= e($type) ?>" data-modes="<?= e(json_encode($modes)) ?>" data-intervals="<?= e(json_encode($withInterval)) ?>">
+<?php $modes = array_map(fn ($m) => $m['photos'] ?? 'many', $heroes); $withInterval = array_keys(array_filter($heroes, fn ($m) => !empty($m['interval']))); $hints = array_filter(array_map(fn ($m) => $m['photo_hint'] ?? '', $heroes)); ?>
+<form method="post" action="/admin/portada" id="heroForm" data-type="<?= e($type) ?>" data-modes="<?= e(json_encode($modes)) ?>" data-intervals="<?= e(json_encode($withInterval)) ?>" data-hints="<?= e(json_encode($hints, JSON_UNESCAPED_UNICODE)) ?>">
     <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
     <input type="hidden" name="hero_photo_ids" id="heroIds" value="<?= e($ids) ?>">
 
@@ -16,6 +16,7 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
 
     <section class="ad-card" id="heroPhotosCard">
         <h2>Fotos de la portada</h2>
+        <p class="ad-hint" id="heroPhotoHint" hidden></p>
         <div class="hr-source" id="heroSource">
             <label class="ad-check"><input type="radio" name="hero_source" value="gallery" <?= $source === 'gallery' ? 'checked' : '' ?>><span>Todas las fotos de una galería</span></label>
             <label class="ad-check"><input type="radio" name="hero_source" value="custom" <?= $source === 'custom' ? 'checked' : '' ?>><span>Mi selección (elijo y ordeno las fotos)</span></label>
@@ -72,7 +73,15 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
                             <label class="ad-check"><input type="checkbox" name="<?= e($nm) ?>" value="1" <?= $v === '1' ? 'checked' : '' ?>><span><?= e($o['label']) ?></span></label>
                         <?php else: ?>
                             <label><?= e($o['label']) ?></label>
-                            <?php if ($o['type'] === 'color'): ?><input type="color" name="<?= e($nm) ?>" value="<?= e($v) ?>">
+                            <?php if ($o['type'] === 'video'): ?>
+                                <div class="hv" data-video-box data-base="<?= e(\App\Services\HeroVideo::url('')) ?>">
+                                    <input type="hidden" name="<?= e($nm) ?>" value="<?= e($v) ?>" data-video-input>
+                                    <video class="hv-prev" muted loop playsinline controls preload="metadata" <?= $v ? 'src="' . e(\App\Services\HeroVideo::url($v)) . '"' : 'hidden' ?>></video>
+                                    <p class="ad-hint hv-state"><?= $v ? 'Vídeo subido. Pulsa «Guardar portada» para aplicar los cambios.' : 'Aún no hay vídeo: se verá solo la foto de respaldo.' ?></p>
+                                    <input type="file" accept="video/mp4,video/webm" data-video-file>
+                                    <div class="hv-btns"><button type="button" class="ad-btn is-small" data-video-up>Subir vídeo</button> <button type="button" class="ad-btn is-ghost is-small" data-video-del <?= $v ? '' : 'hidden' ?>>Quitar vídeo</button></div>
+                                </div>
+                            <?php elseif ($o['type'] === 'color'): ?><input type="color" name="<?= e($nm) ?>" value="<?= e($v) ?>">
                             <?php elseif ($o['type'] === 'range'): ?><input type="range" name="<?= e($nm) ?>" min="<?= e($o['min']) ?>" max="<?= e($o['max']) ?>" step="<?= e($o['step'] ?? 1) ?>" value="<?= e($v) ?>" oninput="this.nextElementSibling.textContent=this.value"><output class="ad-hint"><?= e($v) ?></output>
                             <?php elseif ($o['type'] === 'select'): ?><select name="<?= e($nm) ?>"><?php foreach ($o['choices'] as $cv => $cl): ?><option value="<?= e($cv) ?>" <?= (string) $cv === $v ? 'selected' : '' ?>><?= e($cl) ?></option><?php endforeach; ?></select>
                             <?php endif; ?>
