@@ -109,6 +109,6 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
         <label class="ad-check st-line" style="margin-top:1rem"><input type="checkbox" name="site_noindex" <?= $chk('noindex') ?>><span>Pedir a Google que <b>no</b> indexe la web (mientras la preparas)</span></label>
     </section>
 
-    <?= \\App\\Core\\Module::render('components/cropper') ?>
+    <?= \App\Core\Module::render('components/cropper') ?>
     <button class="ad-btn">Guardar sitio</button>
 </form>
