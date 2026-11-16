@@ -62,7 +62,7 @@
   // Vista previa del botón (diseño, tamaño y texto)
   const hb = document.querySelector('#hbPrev .hb');
   if (hb) {
-    const K = { 1: .8, 2: .9, 3: 1, 4: 1.2, 5: 1.45 }, NAMES = ['', 'Muy pequeño', 'Pequeño', 'Mediano', 'Grande', 'Muy grande'], DOWNS = ['', 'Pegado al título', 'Cerca', 'Normal', 'Lejos', 'Muy lejos'];
+    const K = { 1: .8, 2: .9, 3: 1, 4: 1.2, 5: 1.45 }, NAMES = ['', 'Muy pequeño', 'Pequeño', 'Mediano', 'Grande', 'Muy grande'], DOWNS = ['', 'Pegado al título', 'Cerca', 'Medio', 'Lejos', 'Justo sobre el indicador'];
     const sync = () => {
       const st = document.getElementById('hbs').value, z = +document.getElementById('hbz').value, d = document.getElementById('hbd').value;
       hb.className = 'hb hb--' + st; hb.style.setProperty('--hb-k', K[z] || 1);

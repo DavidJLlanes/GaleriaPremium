@@ -11,7 +11,7 @@ final class HeroButton
         'outline' => 'Contorno (pastilla)', 'solid' => 'Relleno claro', 'gold' => 'Dorado (color de acento)', 'glass' => 'Cristal',
         'square' => 'Rectangular fino', 'line' => 'Solo texto subrayado', 'arrow' => 'Texto con flecha',
     ];
-    public const DOWNS = [1 => 'Pegado al título', 2 => 'Cerca', 3 => 'Normal', 4 => 'Lejos', 5 => 'Muy lejos'];
+    public const DOWNS = [1 => 'Pegado al título', 2 => 'Cerca', 3 => 'Medio', 4 => 'Lejos', 5 => 'Justo sobre el indicador'];
     public const SIZES = [1 => 'Muy pequeño', 2 => 'Pequeño', 3 => 'Mediano', 4 => 'Grande', 5 => 'Muy grande'];
 
     public static function values(): array

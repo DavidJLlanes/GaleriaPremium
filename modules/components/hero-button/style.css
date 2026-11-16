@@ -1,11 +1,8 @@
-.hb{max-width:100%;text-align:center;--hb-c:var(--fg,#f2efe9);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.9em;margin-top:var(--hb-down,0);
+.hb{max-width:100%;text-align:center;--hb-c:var(--fg,#f2efe9);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.9em;margin-top:clamp(.8rem,2.5svh,1.6rem);translate:0 var(--hb-ty,0px);
   font:var(--st-herobtn,normal) var(--w-herobtn,400) calc(clamp(.7rem,.62rem + .45vw,.9rem)*var(--hb-e,var(--hb-k,1)))/1 var(--f-herobtn);letter-spacing:.22em;text-transform:uppercase;color:var(--hb-c);
-  padding:1.2em 2.8em;border:1px solid transparent;border-radius:100px;transition:color .5s var(--ease,ease),background .5s var(--ease,ease),border-color .5s var(--ease,ease),box-shadow .5s var(--ease,ease),transform .5s var(--ease,ease);-webkit-tap-highlight-color:transparent}
-.hb-d1{--hb-down:clamp(.2rem,1svh,.6rem)}
-.hb-d2{--hb-down:clamp(.8rem,3svh,1.8rem)}
-.hb-d3{--hb-down:clamp(1.4rem,5.5svh,3.4rem)}
-.hb-d4{--hb-down:clamp(2.2rem,8.5svh,5.5rem)}
-.hb-d5{--hb-down:clamp(3rem,12svh,8rem)}
+  padding:1.2em 2.8em;border:1px solid transparent;border-radius:100px;transition:translate .6s var(--ease,ease),color .5s var(--ease,ease),background .5s var(--ease,ease),border-color .5s var(--ease,ease),box-shadow .5s var(--ease,ease),transform .5s var(--ease,ease);-webkit-tap-highlight-color:transparent}
+/* La separación del título la calcula script.js: baja el botón una fracción del hueco que queda hasta el indicador de scroll (nivel 5 = justo encima).
+   Sin JS queda este margen base. */
 /* en el móvil los tamaños grandes se suavizan para que el texto nunca desborde la pantalla */
 @media(max-width:600px){.hb{--hb-e:calc(1 + (var(--hb-k,1) - 1)*.55);letter-spacing:.16em;padding:1.1em 2em}}
 .hb i{font-style:normal;transition:transform .5s var(--ease,ease)}
