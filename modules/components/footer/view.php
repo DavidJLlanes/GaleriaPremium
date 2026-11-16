@@ -7,6 +7,7 @@ $mail = Site::get('email'); ?>
     <nav class="ftr-links" aria-label="Enlaces del pie">
         <?php foreach ($links as $label => $url): ?><a href="<?= e($url) ?>" target="_blank" rel="noopener me"><?= e($label) ?></a><?php endforeach; ?>
         <?php if ($mail !== ''): ?><a href="mailto:<?= e($mail) ?>">Contacto</a><?php endif; ?>
+        <a href="#" class="ftr-top" data-magnet onclick="scrollTo({top:0,behavior:'smooth'});return false">Arriba ↑</a>
         <?php if (Site::on('footer_admin')): ?><a href="/admin" rel="nofollow">Admin</a><?php endif; ?>
     </nav>
 </footer>
