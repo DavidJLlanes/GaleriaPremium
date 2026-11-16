@@ -14,6 +14,6 @@
     <div class="fk-bar">
         <span class="ftr-i"><?= e($f['copy']) ?></span>
         <?= \App\Core\Module::render('components/footer-sig', ['f' => $f]) ?>
-        <?php if ($f['top'] || $f['admin']): ?><span class="ftr-links ftr-i"><?php if ($f['top']): ?><a href="#" class="ftr-top" data-magnet onclick="scrollTo({top:0,behavior:'smooth'});return false">Arriba ↑</a><?php endif; ?><?php if ($f['admin']): ?><a href="/admin" rel="nofollow">Admin</a><?php endif; ?></span><?php endif; ?>
+        <?php if ($f['top'] || $f['admin']): ?><span class="ftr-links ftr-i"><?php if ($f['top']): ?><a href="#" class="ftr-top" data-magnet>Arriba ↑</a><?php endif; ?><?php if ($f['admin']): ?><a href="/admin" rel="nofollow">Admin</a><?php endif; ?></span><?php endif; ?>
     </div>
 </div>

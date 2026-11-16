@@ -11,3 +11,10 @@
   const io = new IntersectionObserver((es) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); requestAnimationFrame(() => requestAnimationFrame(() => f.classList.add('is-in'))); } }, { rootMargin: '0px 0px -12% 0px' });
   io.observe(sent);
 })();
+
+// «Arriba ↑»: sube suavemente (sin «reducir movimiento»). Se usa window.scrollTo: dentro de un onclick en línea, `scrollTo` apuntaría al propio enlace.
+document.addEventListener('click', (e) => {
+  const a = e.target.closest && e.target.closest('.ftr-top'); if (!a) return;
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
