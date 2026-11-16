@@ -47,6 +47,20 @@ final class ImageProcessor
         return [imagesx($img), imagesy($img)];
     }
 
+
+    /** Guarda una imagen recortada en WebP con dimensiones exactas y calidad 75. $crop usa fracciones de la imagen. */
+    public static function cropTo(string $src, string $dst, array $crop, int $width = 1200, int $height = 630): void
+    {
+        $img = self::load($src); $iw = imagesx($img); $ih = imagesy($img);
+        $x = max(0, min($iw - 1, (int) round((float) ($crop['x'] ?? 0) * $iw)));
+        $y = max(0, min($ih - 1, (int) round((float) ($crop['y'] ?? 0) * $ih)));
+        $w = max(1, min($iw - $x, (int) round((float) ($crop['w'] ?? 1) * $iw)));
+        $h = max(1, min($ih - $y, (int) round((float) ($crop['h'] ?? 1) * $ih)));
+        $out = imagecreatetruecolor($width, $height);
+        imagecopyresampled($out, $img, 0, 0, $x, $y, $width, $height, $w, $h);
+        imagewebp($out, $dst, self::quality());
+    }
+
     /** Miniatura WebP de ancho $width. */
     public static function thumbnail(string $src, string $dst, ?int $width = null): void
     {
