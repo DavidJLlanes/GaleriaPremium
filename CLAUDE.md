@@ -50,4 +50,5 @@ app/Services/ImageProcessor.php   ÚNICO punto de conversión de fotos (WebP 75%
 - Los CSS/JS de un módulo solo afectan a ese módulo (clases con prefijo propio). Nada de CSS/JS global salvo `layouts/main`.
 - Toda subida o importación de fotos DEBE pasar por `ImageProcessor` (WebP 75%).
 - Tipografías: en el CSS de un módulo se usa `var(--f-brand|hero|title|menu|body|caption|button)`. Para añadir una fuente al catálogo: añadirla a `tools/fonts/list.json` y ejecutar `tools/fonts/build.mjs` (o subirla desde el panel). Peso y cursiva: `var(--w-<rol>,<peso por defecto>)` y `var(--st-<rol>,normal)`.
+- Seguridad: cabeceras (CSP, HSTS, Permissions-Policy…) y errores genéricos en `App\Core\Security` (se carga en `bootstrap.php`); todo POST del panel lleva `Auth::guard()` + `Csrf::verify()`; consultas siempre con `prepare`; todo texto en vistas con `e()`; ninguna subida se fía de la extensión (cabecera real) y las fotos pasan por `ImageProcessor` con límite de megapíxeles. No cargar recursos de terceros (la CSP los bloquea).
 - Tras cada cambio: commit + push a `main` y dar el comando de despliegue: `bash /var/www/luxaeterna.es/deploy/deploy.sh`.

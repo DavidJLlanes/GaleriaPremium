@@ -28,6 +28,10 @@ final class PhotoService
             throw new \RuntimeException('Formato no soportado (usa JPG, PNG, WebP o GIF)');
         }
 
+        // Una imagen pequeña en bytes puede tener decenas de miles de píxeles de lado y agotar la memoria al decodificarla
+        [$iw, $ih] = (array) @getimagesize($tmp) + [0, 0];
+        if ($iw < 1 || $ih < 1 || $iw * $ih > 80_000_000) throw new \RuntimeException('La imagen tiene demasiados píxeles (máximo 80 megapíxeles).');
+
         $title = trim($title); $description = trim($description);
         $original = pathinfo((string) ($file['name'] ?? ''), PATHINFO_FILENAME);
 

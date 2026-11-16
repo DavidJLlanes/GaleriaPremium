@@ -14,7 +14,8 @@ final class Auth
     {
         if (session_status() === PHP_SESSION_ACTIVE) return;
         session_name('wsid');
-        session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax', 'secure' => !empty($_SERVER['HTTPS'])]);
+        $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+        session_set_cookie_params(['lifetime' => 0, 'path' => '/', 'httponly' => true, 'samesite' => 'Strict', 'secure' => $https]);
         session_start();
     }
 
@@ -53,6 +54,7 @@ final class Auth
             return true;
         }
         Database::pdo()->prepare('INSERT INTO login_attempts (ip, at) VALUES (?, ?)')->execute([self::ip(), time()]);
+        Database::pdo()->prepare('DELETE FROM login_attempts WHERE at < ?')->execute([time() - 86400]);   // la tabla no crece sin fin
         return false;
     }
 

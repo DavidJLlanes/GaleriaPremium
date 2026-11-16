@@ -17,3 +17,4 @@ if (\App\Core\Config::get('app.debug')) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL);
 }
+\App\Core\Security::boot((bool) \App\Core\Config::get('app.debug'));

@@ -16,4 +16,7 @@ OWNER="${WEB_USER:-$(ps -eo user:32,comm | awk '$2 ~ /php-fpm/ && $1 != "root" {
 OWNER="${OWNER:-www-data}"
 chown -R "$OWNER":"$(id -gn "$OWNER")" storage public/uploads public/assets
 chmod -R u+rwX,g+rwX storage public/uploads
+# La base de datos y la configuración local (claves de IA) no deben ser legibles por otros usuarios del servidor
+chmod -R o-rwx storage
+[ -f config/config.local.php ] && chmod 640 config/config.local.php || true
 echo "✔ Desplegado $(git rev-parse --short HEAD) (propietario: $OWNER)"
