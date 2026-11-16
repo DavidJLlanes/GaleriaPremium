@@ -30,6 +30,7 @@
 18. **Lightbox con efecto configurable por cada galería** (fade, slide, flip, curtain, zoom; cada efecto en `modules/lightboxes/<nombre>/`). La foto se ajusta al tamaño y proporciones de la pantalla activa.
 19. **Subida global por arrastre**: arrastrar una foto a cualquier zona de la web la sube, mostrando título, descripción y galería (igual que la subida normal, siempre vía `ImageProcessor`).
 20. **Gestión masiva en el panel**: borrado masivo de fotos y de galerías, y mover fotos entre galerías (selección múltiple con casillas; componente `components/bulk`).
+21. **Panel «Fotos»**: sección de administración para gestionar todas las fotos de todas las galerías (filtro, búsqueda, mover y borrar en bloque).
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```

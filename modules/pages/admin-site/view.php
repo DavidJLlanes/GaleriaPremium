@@ -30,21 +30,21 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
                 <div class="st-prev is-wide"><?= $img($logo, 'Logo') ?></div>
                 <input type="file" name="logo" accept="image/png,image/jpeg,image/webp,image/gif">
                 <p class="ad-hint">PNG con fondo transparente recomendado. Se guarda en WebP sin pérdida.</p>
-                <?php if ($logo): ?><label class="ad-check"><input type="checkbox" name="clear_logo"> Quitar el logo</label><?php endif; ?>
+                <?php if ($logo): ?><label class="ad-check"><input type="checkbox" name="clear_logo"><span>Quitar el logo</span></label><?php endif; ?>
             </div>
             <div class="st-asset">
                 <label>Icono de la webapp</label>
                 <div class="st-prev"><?= $img($icon, 'Icono') ?></div>
                 <input type="file" name="icon" accept="image/png,image/jpeg,image/webp,image/gif">
                 <p class="ad-hint">Cuadrado, 512×512 px o más. Con él se crean solos todos los iconos (ver abajo).</p>
-                <?php if ($icon): ?><label class="ad-check"><input type="checkbox" name="clear_icon"> Quitar el icono</label><?php endif; ?>
+                <?php if ($icon): ?><label class="ad-check"><input type="checkbox" name="clear_icon"><span>Quitar el icono</span></label><?php endif; ?>
             </div>
             <div class="st-asset">
                 <label>Favicon (opcional)</label>
                 <div class="st-prev is-small"><?= $img($favicon, 'Favicon') ?></div>
                 <input type="file" name="favicon" accept="image/png,image/jpeg,image/webp,image/gif">
                 <p class="ad-hint">Si no subes uno, la pestaña del navegador usa el icono.</p>
-                <?php if ($hasFaviconSrc): ?><label class="ad-check"><input type="checkbox" name="clear_favicon"> Quitar mi favicon</label><?php endif; ?>
+                <?php if ($hasFaviconSrc): ?><label class="ad-check"><input type="checkbox" name="clear_favicon"><span>Quitar mi favicon</span></label><?php endif; ?>
             </div>
         </div>
         <div style="margin-top:1.2rem;max-width:360px"><label for="s_brand">Marca en la barra superior</label>
@@ -79,10 +79,10 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
 
     <section class="ad-card">
         <h2>Barra superior y pie</h2>
-        <label class="ad-check st-line"><input type="checkbox" name="site_header_home" <?= $chk('header_home') ?>> Mostrar la barra superior en la <b>portada</b></label>
-        <label class="ad-check st-line"><input type="checkbox" name="site_header_pages" <?= $chk('header_pages') ?>> Mostrar la barra superior en las <b>demás páginas</b> (galerías)</label>
+        <label class="ad-check st-line"><input type="checkbox" name="site_header_home" <?= $chk('header_home') ?>><span>Mostrar la barra superior en la <b>portada</b></span></label>
+        <label class="ad-check st-line"><input type="checkbox" name="site_header_pages" <?= $chk('header_pages') ?>><span>Mostrar la barra superior en las <b>demás páginas</b> (galerías)</span></label>
         <div style="margin:1rem 0"><label for="s_foot">Texto del pie (vacío = © año + nombre)</label><input id="s_foot" type="text" name="site_footer_text" value="<?= e($f['footer_text']) ?>" maxlength="200"></div>
-        <label class="ad-check st-line"><input type="checkbox" name="site_footer_admin" <?= $chk('footer_admin') ?>> Mostrar el enlace «Admin» en el pie</label>
+        <label class="ad-check st-line"><input type="checkbox" name="site_footer_admin" <?= $chk('footer_admin') ?>><span>Mostrar el enlace «Admin» en el pie</span></label>
     </section>
 
     <section class="ad-card">
@@ -109,7 +109,7 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
 
     <section class="ad-card">
         <h2>Buscadores</h2>
-        <label class="ad-check st-line"><input type="checkbox" name="site_noindex" <?= $chk('noindex') ?>> Pedir a Google que <b>no</b> indexe la web (mientras la preparas)</label>
+        <label class="ad-check st-line"><input type="checkbox" name="site_noindex" <?= $chk('noindex') ?>><span>Pedir a Google que <b>no</b> indexe la web (mientras la preparas)</span></label>
     </section>
 
     <button class="ad-btn">Guardar sitio</button>

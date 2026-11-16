@@ -16,8 +16,8 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
     <section class="ad-card">
         <h2>Fotos de la portada</h2>
         <div class="hr-source" id="heroSource">
-            <label class="ad-check"><input type="radio" name="hero_source" value="gallery" <?= $source === 'gallery' ? 'checked' : '' ?>> Todas las fotos de una galería</label>
-            <label class="ad-check"><input type="radio" name="hero_source" value="custom" <?= $source === 'custom' ? 'checked' : '' ?>> Mi selección (elijo y ordeno las fotos)</label>
+            <label class="ad-check"><input type="radio" name="hero_source" value="gallery" <?= $source === 'gallery' ? 'checked' : '' ?>><span>Todas las fotos de una galería</span></label>
+            <label class="ad-check"><input type="radio" name="hero_source" value="custom" <?= $source === 'custom' ? 'checked' : '' ?>><span>Mi selección (elijo y ordeno las fotos)</span></label>
         </div>
 
         <div class="hr-gallery" id="heroGallery">

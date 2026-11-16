@@ -11,7 +11,7 @@
     </div>
     <label>Diseño</label>
     <?= Module::render('components/style-picker', ['styles' => $styles, 'name' => 'style', 'selected' => 'masonry']) ?>
-    <label class="ad-check" style="margin-bottom:1.2rem"><input type="checkbox" name="published" checked> Publicada en la web</label>
+    <label class="ad-check" style="margin-bottom:1.2rem"><input type="checkbox" name="published" checked><span>Publicada en la web</span></label>
     <button class="ad-btn">Crear y subir fotos →</button>
 </form>
 

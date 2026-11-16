@@ -17,5 +17,15 @@
     return j;
   };
 
+  // Selector de archivos en español (el texto nativo depende del idioma del navegador)
+  document.querySelectorAll('input[type=file]:not([hidden])').forEach(inp => {
+    const wrap = document.createElement('div'); wrap.className = 'ad-file';
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'ad-btn is-ghost is-small'; btn.textContent = 'Elegir archivo';
+    const name = document.createElement('span'); name.textContent = 'Ningún archivo seleccionado';
+    inp.before(wrap); wrap.append(btn, name); inp.hidden = true;
+    btn.onclick = () => inp.click();
+    inp.addEventListener('change', () => { name.textContent = inp.files[0]?.name || 'Ningún archivo seleccionado'; });
+  });
+
   window.Admin = { csrf, toast, post };
 })();

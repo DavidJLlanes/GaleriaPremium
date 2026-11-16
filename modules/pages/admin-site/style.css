@@ -1,7 +1,7 @@
 .st-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .st-asset input[type=file]{width:100%;font-size:.8rem;color:var(--muted);margin-top:.6rem}
 .st-prev{display:grid;place-items:center;height:130px;border:1px dashed rgba(242,239,233,.2);border-radius:8px;background:#0d0d0f;overflow:hidden}
-.st-prev img{max-width:80%;max-height:80%;object-fit:contain}
+.st-prev img{width:auto;height:auto;max-width:80%;max-height:100px;object-fit:contain}
 .st-prev.is-wide img{max-width:90%}
 .st-prev.is-small img{width:32px;height:32px}
 .st-none{font-size:.75rem;color:var(--muted)}

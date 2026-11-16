@@ -1,0 +1,13 @@
+.ph-filter{display:flex;flex-wrap:wrap;gap:1rem;align-items:end}
+.ph-filter>div{flex:1 1 220px}.ph-filter .ad-btn{margin-bottom:.05rem}
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.9rem}
+.ph-card{position:relative;background:#141417;border:1px solid rgba(242,239,233,.07);border-radius:10px;overflow:hidden;transition:border-color .3s}
+.ph-card:hover{border-color:rgba(216,179,106,.4)}
+.ph-card .bk-box{right:.5rem;top:.5rem}
+.ph-link{display:block}
+.ph-link img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#0d0d0f}
+.ph-info{display:grid;gap:.15rem;padding:.7rem .8rem}
+.ph-info strong{font-weight:400;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph-info small{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph-pager{display:flex;justify-content:center;align-items:center;gap:1rem;margin:1.6rem 0 5rem;font-size:.85rem;color:var(--muted)}
+@media(max-width:520px){.ph-grid{grid-template-columns:repeat(2,1fr)}}

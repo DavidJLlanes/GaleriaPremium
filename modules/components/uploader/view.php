@@ -9,9 +9,7 @@
 
     <div class="up-bar" id="upBar" hidden>
         <label class="ad-check">
-            <input type="checkbox" id="upAi" <?= ($aiConfigured && $aiAuto) ? 'checked' : '' ?> <?= $aiConfigured ? '' : 'disabled' ?>>
-            Generar con IA el nombre y la descripción que deje vacíos
-        </label>
+            <input type="checkbox" id="upAi" <?= ($aiConfigured && $aiAuto) ? 'checked' : '' ?> <?= $aiConfigured ? '' : 'disabled' ?>><span>Generar con IA el nombre y la descripción que deje vacíos</span></label>
         <?php if (!$aiConfigured): ?><span class="ad-hint">La IA no está configurada. <a class="ad-link" href="/admin/ajustes">Configurarla</a></span><?php endif; ?>
         <div class="up-actions">
             <button type="button" class="ad-btn is-ghost" id="upClear">Vaciar</button>

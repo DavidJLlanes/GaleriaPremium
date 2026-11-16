@@ -15,7 +15,7 @@
     <?= Module::render('components/style-options', ['styles' => $styles, 'gallery' => $gallery]) ?>
     <label style="margin-top:1.4rem">Efecto al ampliar una foto (lightbox)</label>
     <?= Module::render('components/style-picker', ['styles' => $lightboxes, 'name' => 'lightbox', 'selected' => $gallery['lightbox'] ?? 'fade']) ?>
-    <label class="ad-check" style="margin:1.2rem 0"><input type="checkbox" name="published" <?= $gallery['is_published'] ? 'checked' : '' ?>> Publicada en la web</label>
+    <label class="ad-check" style="margin:1.2rem 0"><input type="checkbox" name="published" <?= $gallery['is_published'] ? 'checked' : '' ?>><span>Publicada en la web</span></label>
     <button class="ad-btn">Guardar</button>
 </form>
 

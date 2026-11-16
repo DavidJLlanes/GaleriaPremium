@@ -25,6 +25,7 @@ $router->post('/admin/galerias/orden',       [$ag, 'reorderAll']);
 $router->post('/admin/galerias/borrar',      [$ag, 'bulkDelete']);
 $router->post('/admin/fotos/borrar',         [$ph, 'bulkDelete']);
 $router->post('/admin/fotos/mover',          [$ph, 'move']);
+$router->get('/admin/fotos',                [new App\Controllers\Admin\PhotosController(), 'index']);
 $router->get('/admin/sitio',                 [$site, 'show']);
 $router->post('/admin/sitio',                [$site, 'save']);
 $router->get('/admin/portada',               [$hero, 'show']);

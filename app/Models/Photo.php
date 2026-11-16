@@ -52,6 +52,29 @@ final class Photo
         );
     }
 
+    /** Búsqueda en todas las galerías (panel «Fotos»): filtro por galería y texto en nombre/descripción. */
+    public static function search(?int $gallery, string $q, int $limit, int $offset): array
+    {
+        [$w, $args] = self::filter($gallery, $q);
+        return Database::all(
+            "SELECT p.*, g.title AS gallery_title FROM photos p JOIN galleries g ON g.id = p.gallery_id $w
+             ORDER BY g.sort_order, g.id, p.sort_order, p.id LIMIT $limit OFFSET $offset", $args);
+    }
+
+    public static function countSearch(?int $gallery, string $q): int
+    {
+        [$w, $args] = self::filter($gallery, $q);
+        return (int) Database::one("SELECT COUNT(*) AS n FROM photos p $w", $args)['n'];
+    }
+
+    private static function filter(?int $gallery, string $q): array
+    {
+        $w = []; $args = [];
+        if ($gallery) { $w[] = 'p.gallery_id = ?'; $args[] = $gallery; }
+        if ($q !== '') { $w[] = "(p.title LIKE ? ESCAPE '\\' OR p.caption LIKE ? ESCAPE '\\')"; $args[] = $args[] = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $q) . '%'; }
+        return [$w ? 'WHERE ' . implode(' AND ', $w) : '', $args];
+    }
+
     public static function find(int $id): ?array
     {
         return Database::one('SELECT * FROM photos WHERE id = ?', [$id]);
