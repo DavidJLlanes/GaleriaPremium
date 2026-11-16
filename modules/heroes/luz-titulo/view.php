@@ -7,3 +7,4 @@ $o = $opts ?? []; ?>
     <div class="hxz-cta"><?= Module::render('components/hero-button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?></div>
     <?= Module::render('components/scroll-hint') ?>
 </section>
+<noscript><style>.hxz-title{opacity:1!important}</style></noscript>

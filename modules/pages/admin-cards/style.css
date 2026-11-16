@@ -5,3 +5,4 @@
 .cd-prev .ct-classic h2{font-size:1.25rem}.cd-prev .ct-classic{padding:.9rem}
 #cdTitleBox{margin-top:1.2rem}#cdTitleBox.is-off{opacity:.35;pointer-events:none}
 [data-title-opts] output{margin-left:.6rem;color:var(--muted)}
+.cd-prev.is-reset .ccard,.cd-prev.is-reset .ccard *{transition:none!important}

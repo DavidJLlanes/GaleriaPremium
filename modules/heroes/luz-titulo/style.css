@@ -1,7 +1,8 @@
 .hx-light{position:relative;min-height:100svh;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6rem var(--pad) 5rem;overflow:hidden;text-align:center;
   background-image:radial-gradient(ellipse 60% 45% at 50% 52%,color-mix(in srgb,var(--hxz-c) 9%,transparent),transparent 70%)}
 .hxz-eyebrow{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.75rem;letter-spacing:.42em;text-transform:uppercase;color:var(--hxz-c);margin:0 0 1.6rem;opacity:0;animation:hxz-fade 1.6s ease .4s forwards}
-.hxz-title{font:var(--st-hero,normal) var(--w-hero,300) clamp(2.8rem,9vw,8rem)/1 var(--f-hero);max-width:14ch;margin:0 0 2.6rem;text-wrap:balance}
+.hxz-title{font:var(--st-hero,normal) var(--w-hero,300) clamp(2.8rem,9vw,8rem)/1 var(--f-hero);max-width:14ch;margin:0 0 2.6rem;text-wrap:balance;opacity:0}   /* oculto hasta que la pluma está lista: evita el destello del título normal */
+.hx-light.is-fallback .hxz-title{opacity:1}
 .hxz-title.hxz-brand{font-family:var(--f-brand);font-weight:var(--w-brand,400);font-style:var(--st-brand,normal)}
 .hxz-canvas{display:none;max-width:100%;height:auto;filter:drop-shadow(0 0 .35rem color-mix(in srgb,var(--hxz-c) 55%,transparent))}
 .hx-light.is-ready .hxz-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:-1px;white-space:nowrap}   /* se queda para lectores de pantalla y buscadores */

@@ -13,7 +13,9 @@
   const play = () => {
     const fx = form.querySelector('[name=cards_reveal]:checked')?.value || 'fade-up';
     cards.forEach(c => { c.className = c.className.replace(/\brv-[\w-]+|\bis-in\b|\bis-done\b/g, '').replace(/\s+/g, ' ').trim() + ' rv-' + fx; });
-    prev.classList.toggle('rv-on', fx !== 'none'); void prev.offsetWidth;
+    prev.classList.toggle('rv-on', fx !== 'none');
+    prev.classList.add('is-reset'); void prev.offsetWidth;      // estado inicial SIN transición (si no, la tarjeta «viaja» hacia él y el efecto se estropea)
+    prev.classList.remove('is-reset'); void prev.offsetWidth;
     requestAnimationFrame(() => requestAnimationFrame(() => cards.forEach(c => c.classList.add('is-in'))));
   };
   document.getElementById('cdPlay').addEventListener('click', play);

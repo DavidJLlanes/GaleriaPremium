@@ -6,3 +6,4 @@ $o = $opts ?? []; ?>
     <h2 class="ct-luz-title"><?= e($g['title']) ?></h2>
     <canvas class="ct-luz-canvas" aria-hidden="true"></canvas>
 </div>
+<noscript><style>.ct-luz-title{opacity:1!important}</style></noscript>

@@ -2,7 +2,8 @@
 (() => {
   const root = document.querySelector('.hx-light'); if (!root) return;
   const h1 = root.querySelector('.hxz-title'), cv = root.querySelector('.hxz-canvas');
-  const mount = () => window.LightPen && window.LightPen.mount({
+  const mount = () => { if (!(window.LightPen && run())) root.classList.add('is-fallback'); };
+  const run = () => window.LightPen.mount({
     box: root, text: h1, canvas: cv, speed: root.dataset.speed, loop: root.dataset.repeat === '1',
     colour: getComputedStyle(root).getPropertyValue('--hxz-c').trim() || '#ffb45a',
     size: () => Math.max(44, Math.min(innerWidth * .16, 140)),

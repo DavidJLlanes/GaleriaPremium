@@ -1,4 +1,4 @@
-.coll.rv-on .rv-wipe{transition:clip-path 1.5s var(--rv-e) var(--rv-d,0ms)}
+.coll.rv-on .rv-wipe{clip-path:inset(0 0 0 0);transition:clip-path 1.5s var(--rv-e) var(--rv-d,0ms)}
 .coll.rv-on .rv-wipe:not(.is-in){clip-path:inset(0 100% 0 0)}
 .coll.rv-on .rv-wipe .ccard-media img{transition:transform 2s var(--rv-e) var(--rv-d,0ms),filter .8s}
 .coll.rv-on .rv-wipe:not(.is-in) .ccard-media img{transform:translate3d(-12%,0,0) scale(1.2)}
