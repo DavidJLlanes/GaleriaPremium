@@ -1,0 +1,8 @@
+html.cur-hide-native,html.cur-hide-native *{cursor:none!important}
+.cur--halo{mix-blend-mode:screen}
+.cur--halo .cur-a{width:9rem;height:9rem;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--cur-c) 60%,transparent),color-mix(in srgb,var(--cur-c) 20%,transparent) 50%,transparent);transition:width .6s var(--ease),height .6s var(--ease),opacity .4s}
+.cur--halo .cur-b{width:.36rem;height:.36rem;border-radius:50%;background:#fff;box-shadow:0 0 .8rem .2rem var(--cur-c);transition:transform .3s var(--ease),opacity .3s}
+.cur--halo .cur-lbl{color:#fff;mix-blend-mode:normal;margin-top:2.4rem;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.cur--halo.is-link .cur-a{width:6rem;height:6rem}
+.cur--halo.is-photo .cur-a{width:15rem;height:15rem}
+.cur--halo.is-down .cur-b{transform:translate3d(var(--cx,-100px),var(--cy,-100px),0) translate(-50%,-50%) scale(1.8)}

@@ -1,0 +1,12 @@
+.cur--orbita .cur-a{width:2.6rem;height:2.6rem;border-radius:50%;transition:width .5s var(--ease),height .5s var(--ease),background .4s}
+.cur--orbita .cur-a::before{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px dashed var(--cur-c);animation:cur-orb 9s linear infinite;transition:border-color .4s}   /* gira el aro, no el contenedor (que se posiciona con transform) */
+.cur--orbita .cur-b{width:.3rem;height:.3rem;border-radius:50%;background:var(--cur-c);transition:opacity .3s}
+.cur--orbita .cur-lbl{color:#0a0a0b}
+.cur--orbita.is-link .cur-a{width:3.6rem;height:3.6rem}
+.cur--orbita.is-link .cur-a::before{animation-duration:3.5s}
+.cur--orbita.is-photo .cur-a{width:5.8rem;height:5.8rem;background:rgba(242,239,233,.92)}
+.cur--orbita.is-photo .cur-a::before{animation-duration:3s;border-color:transparent}
+.cur--orbita.is-photo .cur-b{opacity:0}
+.cur--orbita.is-down .cur-a{width:2rem;height:2rem}
+@keyframes cur-orb{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.cur--orbita .cur-a::before{animation:none}}

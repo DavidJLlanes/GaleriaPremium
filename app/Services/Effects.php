@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Services;
 
+use App\Core\Module;
 use App\Models\Setting;
 
 /**
@@ -14,8 +15,6 @@ final class Effects
     public const SPEC = [
         'smooth' => ['label' => 'Scroll con inercia', 'type' => 'select', 'default' => 'medium', 'choices' => ['off' => 'Desactivado', 'soft' => 'Suave', 'medium' => 'Medio', 'strong' => 'Intenso'],
             'hint' => 'La página se desliza con peso y se frena despacio. Solo con ratón o trackpad en ordenador; en el móvil se mantiene el scroll nativo.'],
-        'cursor' => ['label' => 'Cursor propio (solo ordenador)', 'type' => 'bool', 'default' => '1',
-            'hint' => 'Un aro fino sigue al ratón, crece sobre las fotos con una etiqueta y atrae suavemente a los botones.'],
         'cursor_label' => ['label' => 'Texto del cursor sobre las fotos', 'type' => 'text', 'default' => 'Ver'],
         'grain' => ['label' => 'Grano de película', 'type' => 'select', 'default' => 'subtle', 'choices' => ['off' => 'Sin grano', 'subtle' => 'Sutil', 'medium' => 'Medio'],
             'hint' => 'Una textura casi imperceptible sobre los fondos oscuros que evita el negro plano de pantalla.'],
@@ -27,15 +26,27 @@ final class Effects
             'hint' => 'Sonidos sintetizados, muy discretos. Desactivado por defecto.'],
     ];
 
+    public const CURSOR_DEFAULT = 'aro';
+    private const CURSOR_PREFIX = 'fx_cursor_opt';
+
     public static function values(): array
     {
         $out = [];
         foreach (self::SPEC as $k => $o) { $v = Setting::get("fx_$k", ''); $out[$k] = $v === '' ? (string) $o['default'] : $v; }
+        $c = Setting::get('fx_cursor', '');
+        $c = $c === '0' ? 'off' : ($c === '' || $c === '1' ? self::CURSOR_DEFAULT : $c);   // '1'/'0' = ajuste antiguo (sí/no)
+        $out['cursor'] = $c === 'off' || (preg_match('/^[a-z0-9-]+$/', $c) && Module::exists("cursors/$c")) ? $c : self::CURSOR_DEFAULT;
         return $out;
     }
 
-    public static function save(array $raw): void
+    /** Opciones propias del diseño de cursor elegido (color, longitud…). */
+    public static function cursorOptions(string $design): array { return $design === 'off' ? [] : ModuleOptions::values('cursors', $design, self::CURSOR_PREFIX); }
+
+    public static function save(array $raw, array $cursorOpts = []): void
     {
         foreach (self::SPEC as $k => $o) Setting::set("fx_$k", ModuleOptions::clean($o, $raw[$k] ?? null));
+        $c = (string) ($raw['cursor'] ?? '');
+        Setting::set('fx_cursor', $c === 'off' || (preg_match('/^[a-z0-9-]+$/', $c) && Module::exists("cursors/$c")) ? $c : self::CURSOR_DEFAULT);
+        foreach (array_keys(Module::all('cursors')) as $name) ModuleOptions::save('cursors', $name, self::CURSOR_PREFIX, (array) ($cursorOpts[$name] ?? []));
     }
 }

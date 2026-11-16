@@ -1,1 +1,1 @@
-<div class="cur" aria-hidden="true" hidden><span class="cur-ring"></span><span class="cur-dot"></span><span class="cur-lbl"><?= e($label) ?></span></div>
+<div data-native="<?= e($native) ?>" class="cur cur--<?= e($design) ?>" aria-hidden="true" hidden<?php foreach (($opts ?? []) as $k => $v) if ($k !== 'color') echo ' data-' . e($k) . '="' . e($v) . '"'; ?><?= $color !== '' ? ' style="--cur-c:' . e($color) . '"' : '' ?>><span class="cur-a"></span><span class="cur-b"></span><span class="cur-lbl"><?= e($label) ?></span></div>

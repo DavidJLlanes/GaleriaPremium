@@ -21,7 +21,7 @@
   addEventListener('pointermove', (e) => {
     if (e.pointerType === 'touch') return;
     x = e.clientX; y = e.clientY;
-    if (!shown) { shown = true; c.hidden = false; rx = x; ry = y; root.classList.add('cur-on'); }
+    if (!shown) { shown = true; c.hidden = false; rx = x; ry = y; root.classList.add('cur-on'); if (c.dataset.native === 'hide') root.classList.add('cur-hide-native'); }
     c.classList.remove('is-out');
     const t = e.target;
     const photo = t.closest?.(PHOTO), link = !photo && t.closest?.(LINK);

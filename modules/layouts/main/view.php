@@ -22,7 +22,10 @@ $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?
 <?= Module::render('components/footer') ?>
 <?= Module::render('components/drop-upload') ?>
 <?php if ($fx['smooth'] !== 'off') echo Module::render('components/smooth-scroll', ['level' => $fx['smooth']]);
-if ($fx['cursor'] === '1') echo Module::render('components/cursor', ['label' => $fx['cursor_label'] !== '' ? $fx['cursor_label'] : 'Ver']);
+if ($fx['cursor'] !== 'off') {
+    $co = Effects::cursorOptions($fx['cursor']); $nat = Module::meta('cursors/' . $fx['cursor'])['native'] ?? 'show'; Module::use('cursors/' . $fx['cursor']);
+    echo Module::render('components/cursor', ['design' => $fx['cursor'], 'native' => $nat, 'opts' => $co, 'color' => $co['color'] ?? '', 'label' => $fx['cursor_label'] !== '' ? $fx['cursor_label'] : 'Ver']);
+}
 if ($fx['grain'] !== 'off') echo Module::render('components/grain', ['level' => $fx['grain']]);
 if ($fx['sound'] === '1') echo Module::render('components/sound'); ?>
 <!--assets:js-->

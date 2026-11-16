@@ -1,0 +1,8 @@
+html.cur-hide-native,html.cur-hide-native *{cursor:none!important}
+.cur--punto{mix-blend-mode:difference}
+.cur--punto .cur-a{width:.9rem;height:.9rem;border-radius:50%;background:#fff;transition:width .5s var(--ease),height .5s var(--ease)}
+.cur--punto .cur-b{display:none}
+.cur--punto .cur-lbl{color:#000;mix-blend-mode:normal}
+.cur--punto.is-link .cur-a{width:2.6rem;height:2.6rem}
+.cur--punto.is-photo .cur-a{width:6rem;height:6rem}
+.cur--punto.is-down .cur-a{width:.6rem;height:.6rem}
