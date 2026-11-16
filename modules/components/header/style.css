@@ -7,3 +7,13 @@
 .hdr-brand{display:inline-flex;align-items:center;gap:.7rem}
 .hdr-logo{height:1.9rem;width:auto;max-width:11rem;object-fit:contain}
 .no-header .hero{padding-top:0}
+/* Marca siempre en UNA línea: si no cabe, el nombre se recorta con «…» y el logo se encoge */
+.hdr-brand{min-width:0;white-space:nowrap}
+.hdr-brand span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hdr-logo{flex:0 1 auto;min-width:0}
+.hdr-nav{flex:none;margin-left:1rem}
+@media(max-width:640px){
+  .hdr-brand{font-size:.95rem;letter-spacing:.12em;gap:.5rem}
+  .hdr-logo{height:1.6rem;max-width:6.5rem}
+  .hdr-nav a{font-size:.7rem;letter-spacing:.14em}
+}
