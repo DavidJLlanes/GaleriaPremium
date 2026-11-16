@@ -28,7 +28,8 @@ $self = Site::absolute(strtok($_SERVER['REQUEST_URI'] ?? '/', '?'));
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="<?= e($name) ?>">
 <meta property="og:title" content="<?= e($title ?? $name) ?>">
-<meta property="og:description" content="<?= e($desc) ?>">
+<meta property="og:description" content="<?= e($ogDesc) ?>">
+<meta name="twitter:description" content="<?= e($ogDesc) ?>">
 <meta property="og:url" content="<?= e($self) ?>">
 <?php if ($og): ?><meta property="og:image" content="<?= e($og) ?>"><meta name="twitter:card" content="summary_large_image"><?php endif; ?>
 <style>:root{--accent:<?= e(Site::get('accent')) ?>;--bg:<?= e(Site::get('bg')) ?>}</style>
