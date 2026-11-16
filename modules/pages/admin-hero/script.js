@@ -18,7 +18,6 @@
     document.getElementById('heroPhotosCard').hidden = mode() === 'none';
     const ph = document.getElementById('heroPhotoHint'), hint2 = JSON.parse(form.dataset.hints || '{}')[form.dataset.type] || '';
     ph.hidden = !hint2; ph.textContent = hint2;
-    document.getElementById('heroTitleField').hidden = JSON.parse(form.dataset.siteTitle || '[]').includes(form.dataset.type);
     document.getElementById('heroSpeed').hidden = !withInterval.includes(form.dataset.type);
     form.querySelectorAll('[data-hero-opts]').forEach(c => { c.hidden = c.dataset.heroOpts !== form.dataset.type; });
   };

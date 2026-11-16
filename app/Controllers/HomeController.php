@@ -48,8 +48,8 @@ final class HomeController
         return [
             'type' => $type, 'photos' => $photos,
             'copy' => [
-                'eyebrow' => Setting::get('hero_eyebrow', 'Portfolio fotográfico'),
-                'title'   => Setting::get('hero_title') ?: Config::get('app.tagline'),
+                'eyebrow' => (string) Config::get('app.tagline', ''),   // eslogan: Sitio → Identidad
+                'title'   => (string) Config::get('app.name'),           // nombre de la web: Sitio → Identidad
                 'cta'     => Setting::get('hero_cta', 'Explorar galerías'),
             ],
             'interval' => max(2, min(30, (float) (Setting::get('hero_interval') ?: 6.5))) * 1000,
