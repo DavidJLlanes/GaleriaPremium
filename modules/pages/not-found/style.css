@@ -1,2 +1,2 @@
 .nf{min-height:100svh;display:grid;place-content:center;justify-items:center;text-align:center;gap:1rem}
-.nf h1{font:300 8rem/1 var(--f-title);color:var(--accent)}
+.nf h1{font:var(--st-title,normal) var(--w-title,300) 8rem/1 var(--f-title);color:var(--accent)}

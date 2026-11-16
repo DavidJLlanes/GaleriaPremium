@@ -47,7 +47,7 @@ server {
     location ~ /\.(?!well-known) { deny all; }
 
     # Estáticos con caché larga (los CSS/JS llevan ?v=fecha, las fotos nombres únicos)
-    location ~* \.(css|js|webp|jpg|jpeg|png|gif|svg|ico|woff2)$ {
+    location ~* \.(css|js|webp|jpg|jpeg|png|gif|svg|ico|woff2|woff|ttf|otf)$ {
         expires 30d;
         access_log off;
         try_files $uri =404;

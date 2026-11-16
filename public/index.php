@@ -28,6 +28,8 @@ $router->post('/admin/fotos/mover',          [$ph, 'move']);
 $router->get('/admin/fotos',                [new App\Controllers\Admin\PhotosController(), 'index']);
 $router->get('/admin/sitio',                 [$site, 'show']);
 $router->post('/admin/sitio',                [$site, 'save']);
+$router->post('/admin/fuentes/subir',        [$fonts = new App\Controllers\Admin\FontController(), 'upload']);
+$router->post('/admin/fuentes/borrar',       [$fonts, 'delete']);
 $router->get('/admin/portada',               [$hero, 'show']);
 $router->post('/admin/portada',              [$hero, 'save']);
 $router->get('/admin/galeria/{id}',          [$ag, 'show']);

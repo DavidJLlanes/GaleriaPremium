@@ -32,6 +32,7 @@
 20. **Gestión masiva en el panel**: borrado masivo de fotos y de galerías, y mover fotos entre galerías (selección múltiple con casillas; componente `components/bulk`).
 21. **Panel «Fotos»**: sección de administración para gestionar todas las fotos de todas las galerías (filtro, búsqueda, mover y borrar en bloque).
 22. **Tipografías alojadas en local** (nada de Google Fonts/CDN): cada tipo de texto (nombre de la web, título de portada, títulos de galería, menú y etiquetas, texto normal, pies de foto, botones) tiene su tipografía, elegida en Admin → Sitio → Tipografías. Catálogo en `config/fonts.php` + `public/fonts/<id>/*.woff2` (subset latin); servicio `App\Services\Fonts`; los módulos usan las variables `--f-<rol>`, nunca un nombre de fuente fijo.
+23. **Catálogo ampliado y tipografía completa**: ~150 fuentes locales de todos los estilos (serif, sans, display, manuscritas elegantes, monoespaciadas), generadas con `tools/fonts/build.mjs` (no editar `config/fonts.php` a mano). Cada tipo de texto permite además **grosor** y **cursiva** (si la fuente la tiene): ajustes `site_fontw_<rol>` / `site_fonti_<rol>`, variables `--w-<rol>` / `--st-<rol>` (en los módulos: `font:var(--st-<rol>,normal) var(--w-<rol>,<peso>) <tamaño> var(--f-<rol>)`). **Fuentes propias** subibles desde el panel (.woff2/.woff/.ttf/.otf, `App\Services\FontLibrary`, en `public/uploads/fonts/`, gestionadas con `Admin\FontController`).
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```
@@ -45,5 +46,5 @@ app/Services/ImageProcessor.php   ÚNICO punto de conversión de fotos (WebP 75%
 - Nuevo hero → `modules/heroes/<nombre>/` (se elige con el ajuste `hero_type`).
 - Los CSS/JS de un módulo solo afectan a ese módulo (clases con prefijo propio). Nada de CSS/JS global salvo `layouts/main`.
 - Toda subida o importación de fotos DEBE pasar por `ImageProcessor` (WebP 75%).
-- Tipografías: en el CSS de un módulo se usa `var(--f-brand|hero|title|menu|body|caption|button)`. Para añadir una fuente: carpeta `public/fonts/<id>/` con su `.woff2` + una entrada en `config/fonts.php`.
+- Tipografías: en el CSS de un módulo se usa `var(--f-brand|hero|title|menu|body|caption|button)`. Para añadir una fuente al catálogo: añadirla a `tools/fonts/list.json` y ejecutar `tools/fonts/build.mjs` (o subirla desde el panel). Peso y cursiva: `var(--w-<rol>,<peso por defecto>)` y `var(--st-<rol>,normal)`.
 - Tras cada cambio: commit + push a `main` y dar el comando de despliegue: `bash /var/www/luxaeterna.es/deploy/deploy.sh`.

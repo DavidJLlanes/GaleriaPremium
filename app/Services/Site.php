@@ -13,7 +13,7 @@ final class Site
 {
     public const LANGS = ['es' => 'Español', 'en' => 'English', 'ca' => 'Català', 'gl' => 'Galego', 'eu' => 'Euskara', 'fr' => 'Français', 'pt' => 'Português', 'de' => 'Deutsch', 'it' => 'Italiano'];
 
-    /** clave => [tipo, valor por defecto, opciones]. Tipos: text, url, color, bool, enum. */
+    /** clave => [tipo, valor por defecto, opciones]. Tipos: text, url, color, bool, enum, font, weight. */
     public const FIELDS = [
         'name'         => ['text',  ''],
         'short_name'   => ['text',  ''],
@@ -46,6 +46,14 @@ final class Site
         'font_body'    => ['font',  ''],
         'font_caption' => ['font',  ''],
         'font_button'  => ['font',  ''],
+        // Grosor (100-900, '' = el del diseño) y cursiva por tipo de texto
+        'fontw_brand' => ['weight', ''], 'fonti_brand' => ['bool', '0'],
+        'fontw_hero' => ['weight', ''], 'fonti_hero' => ['bool', '0'],
+        'fontw_title' => ['weight', ''], 'fonti_title' => ['bool', '0'],
+        'fontw_menu' => ['weight', ''], 'fonti_menu' => ['bool', '0'],
+        'fontw_body' => ['weight', ''], 'fonti_body' => ['bool', '0'],
+        'fontw_caption' => ['weight', ''], 'fonti_caption' => ['bool', '0'],
+        'fontw_button' => ['weight', ''], 'fonti_button' => ['bool', '0'],
     ];
     public const SOCIALS = ['instagram' => 'Instagram', 'x' => 'X', 'facebook' => 'Facebook', 'threads' => 'Threads', 'youtube' => 'YouTube', 'linkedin' => 'LinkedIn', 'tiktok' => 'TikTok'];
 
@@ -86,6 +94,7 @@ final class Site
                 if ($type === 'color' && !preg_match('/^#[0-9a-fA-F]{6}$/', $v)) $v = $f[1];
                 if ($type === 'enum' && !in_array($v, $f[2], true)) $v = $f[1];
                 if ($type === 'font' && !isset(Fonts::catalog()[$v])) $v = '';
+                if ($type === 'weight') $v = isset(Fonts::WEIGHTS[(int) $v]) ? (string) (int) $v : '';
                 if ($type === 'url' && $v !== '' && !preg_match('#^https?://#i', $v)) $v = 'https://' . ltrim($v, '/');
                 if ($type === 'url' && $v !== '' && !filter_var($v, FILTER_VALIDATE_URL)) $v = '';
                 if ($type === 'text') $v = mb_substr($v, 0, 300);

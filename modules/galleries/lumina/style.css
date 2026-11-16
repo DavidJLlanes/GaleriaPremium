@@ -11,16 +11,16 @@
              linear-gradient(to right,rgba(5,5,6,.45),transparent 55%)}
 
 .gl-num{position:absolute;z-index:3;top:clamp(4.6rem,11vh,6rem);left:var(--pad);display:flex;align-items:center;gap:.8rem;
-  font:400 .78rem var(--f-menu);letter-spacing:.3em;color:var(--muted)}
-.gl-num b{font:300 clamp(2rem,4vw,3rem) var(--f-title);color:var(--fg);letter-spacing:.04em}
+  font:var(--st-menu,normal) var(--w-menu,400) .78rem var(--f-menu);letter-spacing:.3em;color:var(--muted)}
+.gl-num b{font:var(--st-title,normal) var(--w-title,300) clamp(2rem,4vw,3rem) var(--f-title);color:var(--fg);letter-spacing:.04em}
 .gl-num i{width:2.4rem;height:1px;background:rgba(242,239,233,.35)}
 
 .gl-copy{position:absolute;z-index:3;left:var(--pad);bottom:clamp(2rem,9vh,5rem);max-width:min(620px,calc(100% - 2 * var(--pad)))}
-.gl-title{font:300 clamp(2.2rem,6.4vw,5.6rem)/1.02 var(--f-title);letter-spacing:-.01em;margin-bottom:1rem;overflow-wrap:anywhere}
+.gl-title{font:var(--st-title,normal) var(--w-title,300) clamp(2.2rem,6.4vw,5.6rem)/1.02 var(--f-title);letter-spacing:-.01em;margin-bottom:1rem;overflow-wrap:anywhere}
 .gl-title span{display:inline-block;will-change:transform,opacity}
-.gl-desc{font:300 clamp(.95rem,1.3vw,1.1rem)/1.6 var(--f-body);color:rgba(242,239,233,.78);max-width:46ch;min-height:1.6em}
+.gl-desc{font:var(--st-body,normal) var(--w-body,300) clamp(.95rem,1.3vw,1.1rem)/1.6 var(--f-body);color:rgba(242,239,233,.78);max-width:46ch;min-height:1.6em}
 .gl-open{margin-top:1.4rem;background:none;border:0;border-bottom:1px solid var(--accent);color:var(--accent);padding:.3rem 0;
-  font:400 .68rem var(--f-button);letter-spacing:.28em;text-transform:uppercase;cursor:pointer;transition:letter-spacing .4s var(--ease),color .3s}
+  font:var(--st-button,normal) var(--w-button,400) .68rem var(--f-button);letter-spacing:.28em;text-transform:uppercase;cursor:pointer;transition:letter-spacing .4s var(--ease),color .3s}
 .gl-open:hover{letter-spacing:.38em;color:var(--fg)}
 
 .gl-nav{position:absolute;z-index:3;right:var(--pad);bottom:clamp(2rem,9vh,5rem);width:clamp(180px,20vw,260px);max-height:46vh;overflow:hidden;
@@ -29,7 +29,7 @@
 .gl-item:hover,.gl-item.is-on{color:var(--fg)}
 .gl-line{display:block;height:2px;background:rgba(242,239,233,.18);border-radius:2px;overflow:hidden}
 .gl-line i{display:block;height:100%;width:0;background:var(--accent)}
-.gl-name{font:400 .72rem var(--f-menu);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl-name{font:var(--st-menu,normal) var(--w-menu,400) .72rem var(--f-menu);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 @media(max-width:820px){
   .gl-nav{left:var(--pad);right:var(--pad);width:auto;bottom:1.2rem;max-height:none;display:flex;gap:.4rem;overflow:hidden;-webkit-mask-image:none;mask-image:none}

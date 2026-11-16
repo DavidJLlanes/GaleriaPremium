@@ -1,0 +1,894 @@
+[
+{
+"id": "fraunces",
+"cat": "serif"
+},
+{
+"id": "playfair-display",
+"cat": "serif"
+},
+{
+"id": "cormorant-garamond",
+"cat": "serif"
+},
+{
+"id": "cormorant",
+"cat": "serif"
+},
+{
+"id": "lora",
+"cat": "serif"
+},
+{
+"id": "libre-baskerville",
+"cat": "serif"
+},
+{
+"id": "dm-serif-display",
+"cat": "serif"
+},
+{
+"id": "dm-serif-text",
+"cat": "serif"
+},
+{
+"id": "cinzel",
+"cat": "serif"
+},
+{
+"id": "cinzel-decorative",
+"cat": "serif"
+},
+{
+"id": "eb-garamond",
+"cat": "serif"
+},
+{
+"id": "bodoni-moda",
+"cat": "serif"
+},
+{
+"id": "marcellus",
+"cat": "serif"
+},
+{
+"id": "italiana",
+"cat": "serif"
+},
+{
+"id": "crimson-pro",
+"cat": "serif"
+},
+{
+"id": "crimson-text",
+"cat": "serif"
+},
+{
+"id": "merriweather",
+"cat": "serif"
+},
+{
+"id": "pt-serif",
+"cat": "serif"
+},
+{
+"id": "source-serif-4",
+"cat": "serif"
+},
+{
+"id": "spectral",
+"cat": "serif"
+},
+{
+"id": "vollkorn",
+"cat": "serif"
+},
+{
+"id": "libre-caslon-text",
+"cat": "serif"
+},
+{
+"id": "old-standard-tt",
+"cat": "serif"
+},
+{
+"id": "gilda-display",
+"cat": "serif"
+},
+{
+"id": "prata",
+"cat": "serif"
+},
+{
+"id": "cardo",
+"cat": "serif"
+},
+{
+"id": "rufina",
+"cat": "serif"
+},
+{
+"id": "noto-serif-display",
+"cat": "serif"
+},
+{
+"id": "yeseva-one",
+"cat": "serif"
+},
+{
+"id": "young-serif",
+"cat": "serif"
+},
+{
+"id": "instrument-serif",
+"cat": "serif"
+},
+{
+"id": "newsreader",
+"cat": "serif"
+},
+{
+"id": "literata",
+"cat": "serif"
+},
+{
+"id": "bitter",
+"cat": "serif"
+},
+{
+"id": "alegreya",
+"cat": "serif"
+},
+{
+"id": "gloock",
+"cat": "serif"
+},
+{
+"id": "bellefair",
+"cat": "serif"
+},
+{
+"id": "forum",
+"cat": "serif"
+},
+{
+"id": "playfair",
+"cat": "serif"
+},
+{
+"id": "libre-bodoni",
+"cat": "serif"
+},
+{
+"id": "cormorant-infant",
+"cat": "serif"
+},
+{
+"id": "cormorant-upright",
+"cat": "serif"
+},
+{
+"id": "sorts-mill-goudy",
+"cat": "serif"
+},
+{
+"id": "gelasio",
+"cat": "serif"
+},
+{
+"id": "domine",
+"cat": "serif"
+},
+{
+"id": "abhaya-libre",
+"cat": "serif"
+},
+{
+"id": "della-respira",
+"cat": "serif"
+},
+{
+"id": "lustria",
+"cat": "serif"
+},
+{
+"id": "fanwood-text",
+"cat": "serif"
+},
+{
+"id": "castoro",
+"cat": "serif"
+},
+{
+"id": "junge",
+"cat": "serif"
+},
+{
+"id": "inter",
+"cat": "sans"
+},
+{
+"id": "montserrat",
+"cat": "sans"
+},
+{
+"id": "poppins",
+"cat": "sans"
+},
+{
+"id": "raleway",
+"cat": "sans"
+},
+{
+"id": "jost",
+"cat": "sans"
+},
+{
+"id": "manrope",
+"cat": "sans"
+},
+{
+"id": "dm-sans",
+"cat": "sans"
+},
+{
+"id": "work-sans",
+"cat": "sans"
+},
+{
+"id": "space-grotesk",
+"cat": "sans"
+},
+{
+"id": "outfit",
+"cat": "sans"
+},
+{
+"id": "syne",
+"cat": "sans"
+},
+{
+"id": "josefin-sans",
+"cat": "sans"
+},
+{
+"id": "lato",
+"cat": "sans"
+},
+{
+"id": "open-sans",
+"cat": "sans"
+},
+{
+"id": "nunito",
+"cat": "sans"
+},
+{
+"id": "nunito-sans",
+"cat": "sans"
+},
+{
+"id": "rubik",
+"cat": "sans"
+},
+{
+"id": "karla",
+"cat": "sans"
+},
+{
+"id": "mulish",
+"cat": "sans"
+},
+{
+"id": "quicksand",
+"cat": "sans"
+},
+{
+"id": "urbanist",
+"cat": "sans"
+},
+{
+"id": "plus-jakarta-sans",
+"cat": "sans"
+},
+{
+"id": "sora",
+"cat": "sans"
+},
+{
+"id": "lexend",
+"cat": "sans"
+},
+{
+"id": "figtree",
+"cat": "sans"
+},
+{
+"id": "red-hat-display",
+"cat": "sans"
+},
+{
+"id": "barlow",
+"cat": "sans"
+},
+{
+"id": "ibm-plex-sans",
+"cat": "sans"
+},
+{
+"id": "source-sans-3",
+"cat": "sans"
+},
+{
+"id": "fira-sans",
+"cat": "sans"
+},
+{
+"id": "cabin",
+"cat": "sans"
+},
+{
+"id": "questrial",
+"cat": "sans"
+},
+{
+"id": "tenor-sans",
+"cat": "sans"
+},
+{
+"id": "albert-sans",
+"cat": "sans"
+},
+{
+"id": "epilogue",
+"cat": "sans"
+},
+{
+"id": "be-vietnam-pro",
+"cat": "sans"
+},
+{
+"id": "archivo",
+"cat": "sans"
+},
+{
+"id": "public-sans",
+"cat": "sans"
+},
+{
+"id": "heebo",
+"cat": "sans"
+},
+{
+"id": "titillium-web",
+"cat": "sans"
+},
+{
+"id": "noto-sans",
+"cat": "sans"
+},
+{
+"id": "league-spartan",
+"cat": "sans"
+},
+{
+"id": "onest",
+"cat": "sans"
+},
+{
+"id": "instrument-sans",
+"cat": "sans"
+},
+{
+"id": "bricolage-grotesque",
+"cat": "sans"
+},
+{
+"id": "hanken-grotesk",
+"cat": "sans"
+},
+{
+"id": "schibsted-grotesk",
+"cat": "sans"
+},
+{
+"id": "didact-gothic",
+"cat": "sans"
+},
+{
+"id": "comfortaa",
+"cat": "sans"
+},
+{
+"id": "varela-round",
+"cat": "sans"
+},
+{
+"id": "kumbh-sans",
+"cat": "sans"
+},
+{
+"id": "red-hat-text",
+"cat": "sans"
+},
+{
+"id": "familjen-grotesk",
+"cat": "sans"
+},
+{
+"id": "gantari",
+"cat": "sans"
+},
+{
+"id": "afacad",
+"cat": "sans"
+},
+{
+"id": "geologica",
+"cat": "sans"
+},
+{
+"id": "bebas-neue",
+"cat": "display"
+},
+{
+"id": "oswald",
+"cat": "display"
+},
+{
+"id": "abril-fatface",
+"cat": "display"
+},
+{
+"id": "anton",
+"cat": "display"
+},
+{
+"id": "archivo-black",
+"cat": "display"
+},
+{
+"id": "righteous",
+"cat": "display"
+},
+{
+"id": "bungee",
+"cat": "display"
+},
+{
+"id": "lobster",
+"cat": "display"
+},
+{
+"id": "staatliches",
+"cat": "display"
+},
+{
+"id": "alfa-slab-one",
+"cat": "display"
+},
+{
+"id": "passion-one",
+"cat": "display"
+},
+{
+"id": "fjalla-one",
+"cat": "display"
+},
+{
+"id": "teko",
+"cat": "display"
+},
+{
+"id": "russo-one",
+"cat": "display"
+},
+{
+"id": "orbitron",
+"cat": "display"
+},
+{
+"id": "audiowide",
+"cat": "display"
+},
+{
+"id": "big-shoulders-display",
+"cat": "display"
+},
+{
+"id": "unbounded",
+"cat": "display"
+},
+{
+"id": "rozha-one",
+"cat": "display"
+},
+{
+"id": "chonburi",
+"cat": "display"
+},
+{
+"id": "limelight",
+"cat": "display"
+},
+{
+"id": "poiret-one",
+"cat": "display"
+},
+{
+"id": "fugaz-one",
+"cat": "display"
+},
+{
+"id": "ultra",
+"cat": "display"
+},
+{
+"id": "titan-one",
+"cat": "display"
+},
+{
+"id": "bowlby-one",
+"cat": "display"
+},
+{
+"id": "league-gothic",
+"cat": "display"
+},
+{
+"id": "six-caps",
+"cat": "display"
+},
+{
+"id": "antonio",
+"cat": "display"
+},
+{
+"id": "syncopate",
+"cat": "display"
+},
+{
+"id": "michroma",
+"cat": "display"
+},
+{
+"id": "monoton",
+"cat": "display"
+},
+{
+"id": "shrikhand",
+"cat": "display"
+},
+{
+"id": "lilita-one",
+"cat": "display"
+},
+{
+"id": "paytone-one",
+"cat": "display"
+},
+{
+"id": "bangers",
+"cat": "display"
+},
+{
+"id": "julius-sans-one",
+"cat": "display"
+},
+{
+"id": "poller-one",
+"cat": "display"
+},
+{
+"id": "federo",
+"cat": "display"
+},
+{
+"id": "fascinate",
+"cat": "display"
+},
+{
+"id": "gruppo",
+"cat": "display"
+},
+{
+"id": "megrim",
+"cat": "display"
+},
+{
+"id": "great-vibes",
+"cat": "script"
+},
+{
+"id": "dancing-script",
+"cat": "script"
+},
+{
+"id": "caveat",
+"cat": "script"
+},
+{
+"id": "pacifico",
+"cat": "script"
+},
+{
+"id": "sacramento",
+"cat": "script"
+},
+{
+"id": "allura",
+"cat": "script"
+},
+{
+"id": "alex-brush",
+"cat": "script"
+},
+{
+"id": "parisienne",
+"cat": "script"
+},
+{
+"id": "tangerine",
+"cat": "script"
+},
+{
+"id": "pinyon-script",
+"cat": "script"
+},
+{
+"id": "petit-formal-script",
+"cat": "script"
+},
+{
+"id": "italianno",
+"cat": "script"
+},
+{
+"id": "mrs-saint-delafield",
+"cat": "script"
+},
+{
+"id": "monsieur-la-doulaise",
+"cat": "script"
+},
+{
+"id": "herr-von-muellerhoff",
+"cat": "script"
+},
+{
+"id": "imperial-script",
+"cat": "script"
+},
+{
+"id": "ballet",
+"cat": "script"
+},
+{
+"id": "birthstone",
+"cat": "script"
+},
+{
+"id": "bilbo-swash-caps",
+"cat": "script"
+},
+{
+"id": "rouge-script",
+"cat": "script"
+},
+{
+"id": "euphoria-script",
+"cat": "script"
+},
+{
+"id": "arizonia",
+"cat": "script"
+},
+{
+"id": "clicker-script",
+"cat": "script"
+},
+{
+"id": "lovers-quarrel",
+"cat": "script"
+},
+{
+"id": "mr-de-haviland",
+"cat": "script"
+},
+{
+"id": "mea-culpa",
+"cat": "script"
+},
+{
+"id": "ephesis",
+"cat": "script"
+},
+{
+"id": "charm",
+"cat": "script"
+},
+{
+"id": "kaushan-script",
+"cat": "script"
+},
+{
+"id": "satisfy",
+"cat": "script"
+},
+{
+"id": "yellowtail",
+"cat": "script"
+},
+{
+"id": "cookie",
+"cat": "script"
+},
+{
+"id": "courgette",
+"cat": "script"
+},
+{
+"id": "marck-script",
+"cat": "script"
+},
+{
+"id": "playball",
+"cat": "script"
+},
+{
+"id": "norican",
+"cat": "script"
+},
+{
+"id": "niconne",
+"cat": "script"
+},
+{
+"id": "meddon",
+"cat": "script"
+},
+{
+"id": "qwigley",
+"cat": "script"
+},
+{
+"id": "rochester",
+"cat": "script"
+},
+{
+"id": "seaweed-script",
+"cat": "script"
+},
+{
+"id": "style-script",
+"cat": "script"
+},
+{
+"id": "vibur",
+"cat": "script"
+},
+{
+"id": "waterfall",
+"cat": "script"
+},
+{
+"id": "whisper",
+"cat": "script"
+},
+{
+"id": "windsong",
+"cat": "script"
+},
+{
+"id": "licorice",
+"cat": "script"
+},
+{
+"id": "island-moments",
+"cat": "script"
+},
+{
+"id": "grey-qo",
+"cat": "script"
+},
+{
+"id": "gwendolyn",
+"cat": "script"
+},
+{
+"id": "send-flowers",
+"cat": "script"
+},
+{
+"id": "bonheur-royale",
+"cat": "script"
+},
+{
+"id": "babylonica",
+"cat": "script"
+},
+{
+"id": "explora",
+"cat": "script"
+},
+{
+"id": "fleur-de-leah",
+"cat": "script"
+},
+{
+"id": "estonia",
+"cat": "script"
+},
+{
+"id": "carattere",
+"cat": "script"
+},
+{
+"id": "caramel",
+"cat": "script"
+},
+{
+"id": "comforter",
+"cat": "script"
+},
+{
+"id": "corinthia",
+"cat": "script"
+},
+{
+"id": "shadows-into-light",
+"cat": "script"
+},
+{
+"id": "homemade-apple",
+"cat": "script"
+},
+{
+"id": "reenie-beanie",
+"cat": "script"
+},
+{
+"id": "la-belle-aurore",
+"cat": "script"
+},
+{
+"id": "luxurious-script",
+"cat": "script"
+},
+{
+"id": "moon-dance",
+"cat": "script"
+},
+{
+"id": "space-mono",
+"cat": "mono"
+},
+{
+"id": "jetbrains-mono",
+"cat": "mono"
+},
+{
+"id": "ibm-plex-mono",
+"cat": "mono"
+},
+{
+"id": "dm-mono",
+"cat": "mono"
+},
+{
+"id": "fira-code",
+"cat": "mono"
+},
+{
+"id": "source-code-pro",
+"cat": "mono"
+},
+{
+"id": "roboto-mono",
+"cat": "mono"
+},
+{
+"id": "inconsolata",
+"cat": "mono"
+}
+]

@@ -1,8 +1,8 @@
 .hdr{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:space-between;align-items:center;
   padding:1.4rem var(--pad);transition:background .5s var(--ease),backdrop-filter .5s,padding .5s var(--ease)}
 .hdr.is-scrolled{background:rgba(10,10,11,.72);backdrop-filter:blur(14px);padding-block:.9rem}
-.hdr-brand{font:500 1.15rem var(--f-brand);letter-spacing:.18em;text-transform:uppercase}
-.hdr-nav a{font-family:var(--f-menu);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.hdr-brand{font:var(--st-brand,normal) var(--w-brand,500) 1.15rem var(--f-brand);letter-spacing:.18em;text-transform:uppercase}
+.hdr-nav a{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
 .hdr-nav a:hover{color:var(--fg)}
 .hdr-brand{display:inline-flex;align-items:center;gap:.7rem}
 .hdr-logo{height:1.9rem;width:auto;max-width:11rem;object-fit:contain}
