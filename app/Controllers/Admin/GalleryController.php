@@ -62,6 +62,7 @@ final class GalleryController
         Auth::guard();
         $g = Gallery::find((int) $p['id']);
         if (!$g) Response::redirect('/admin');
+        if ($g['kind'] === 'slider') Response::redirect('/admin/slider/' . (int) $g['id']);   // los sliders tienen su propia pantalla
         Page::render('pages/admin-gallery', [
             'gallery'      => $g,
             'photos'       => Photo::forGallery((int) $g['id']),
