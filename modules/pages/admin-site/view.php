@@ -36,6 +36,14 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
                 <?php if ($icon): ?><label class="ad-check"><input type="checkbox" name="clear_icon"><span>Quitar el icono</span></label><?php endif; ?>
             </div>
             <div class="st-asset">
+                <label>Imagen Open Graph</label>
+                <div class="st-prev st-og-prev"><span class="st-none">Imagen 1200 × 630</span></div>
+                <input type="file" name="og_image" id="ogFile" accept="image/png,image/jpeg,image/webp">
+                <input type="hidden" name="og_crop" id="ogCrop">
+                <p class="ad-hint">Recorte fijo 1,91:1. Se guarda como WebP 1200 × 630 al 75 %.</p>
+                <?php if ($ogImage): ?><label class="ad-check"><input type="checkbox" name="clear_og"><span>Quitar imagen</span></label><?php endif; ?>
+            </div>
+            <div class="st-asset">
                 <label>Favicon (opcional)</label>
                 <div class="st-prev is-small"><?= $img($favicon, 'Favicon') ?></div>
                 <input type="file" name="favicon" accept="image/png,image/jpeg,image/webp,image/gif">
@@ -96,9 +104,11 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
 
     <section class="ad-card">
         <h2>Buscadores</h2>
+        <div><label for="s_og_text">Texto al compartir (Open Graph)</label><textarea id="s_og_text" name="site_og_text" maxlength="200" rows="2"><?= e($f['og_text']) ?></textarea><p class="ad-hint">Hasta 200 caracteres.</p></div>
         <div><label for="s_desc">Descripción (Google y redes sociales)</label><textarea id="s_desc" name="site_description" rows="2" maxlength="300"><?= e($f['description']) ?></textarea></div>
         <label class="ad-check st-line" style="margin-top:1rem"><input type="checkbox" name="site_noindex" <?= $chk('noindex') ?>><span>Pedir a Google que <b>no</b> indexe la web (mientras la preparas)</span></label>
     </section>
 
+    <?= \\App\\Core\\Module::render('components/cropper') ?>
     <button class="ad-btn">Guardar sitio</button>
 </form>
