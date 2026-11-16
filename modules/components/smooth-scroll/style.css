@@ -1,0 +1,2 @@
+/* Con inercia activa, el desplazamiento nativo suave del navegador se apaga (si no, cada paso se animaría dos veces) */
+html.ss-on{scroll-behavior:auto!important}

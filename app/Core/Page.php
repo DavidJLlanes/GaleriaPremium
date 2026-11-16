@@ -14,7 +14,7 @@ final class Page
         Module::use($layout);        // el layout antes que la página (el JS del admin define window.Admin)
         $content = Module::render($page, $data);
         $html = Assets::inject(Module::render($layout, $meta + ['content' => $content]));
-        echo $layout === 'layouts/main' ? \App\Services\Lqip::inject($html) : $html;
+        echo $layout === 'layouts/main' && \App\Services\Effects::values()['lqip'] === '1' ? \App\Services\Lqip::inject($html) : $html;
     }
 
     public static function notFound(): void

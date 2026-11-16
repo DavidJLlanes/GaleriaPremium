@@ -32,6 +32,8 @@ $router->post('/admin/fuentes/subir',        [$fonts = new App\Controllers\Admin
 $router->post('/admin/fuentes/borrar',       [$fonts, 'delete']);
 $router->get('/admin/tarjetas',               [$cards = new App\Controllers\Admin\CardsController(), 'show']);
 $router->post('/admin/tarjetas',              [$cards, 'save']);
+$router->get('/admin/efectos',                [$fx = new App\Controllers\Admin\EffectsController(), 'show']);
+$router->post('/admin/efectos',               [$fx, 'save']);
 $router->get('/admin/menu',                   [$menu = new App\Controllers\Admin\MenuController(), 'show']);
 $router->post('/admin/menu',                  [$menu, 'save']);
 $router->get('/admin/portada',               [$hero, 'show']);

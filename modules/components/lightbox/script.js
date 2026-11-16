@@ -37,6 +37,7 @@
     await setContent(i);
     lb.dataset.dir = 'open'; lb.hidden = false; document.body.style.overflow = 'hidden';
     lb.classList.remove('is-closing'); void lb.offsetWidth; lb.classList.add('is-open');
+    dispatchEvent(new CustomEvent('lb:open', { detail: { index: i } }));
     const f = fx();
     if (f.open) await f.open({ lb, img, from: thumb(i) });
     else { img.classList.add('is-in'); await wait(ms('--lb-in', 450)); img.classList.remove('is-in'); }
@@ -48,6 +49,7 @@
     lb.dataset.dir = dir > 0 ? 'next' : 'prev';
     img.classList.add('is-out'); await wait(ms('--lb-out', 250));
     idx = (to + items.length) % items.length; await setContent(idx);
+    dispatchEvent(new CustomEvent('lb:change', { detail: { index: idx } }));
     img.classList.remove('is-out'); img.classList.add('is-in'); await wait(ms('--lb-in', 450)); img.classList.remove('is-in');
     busy = false;
   };

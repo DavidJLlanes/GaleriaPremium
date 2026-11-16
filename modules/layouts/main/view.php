@@ -1,6 +1,8 @@
-<?php use App\Core\{Config, Module}; use App\Models\Gallery; use App\Services\{Site, SiteMenu};
+<?php use App\Core\{Config, Module}; use App\Models\Gallery; use App\Services\{Effects, Site, SiteMenu};
 $showHeader = Site::on(!empty($isHome) ? 'header_home' : 'header_pages') || SiteMenu::previewing();
-Module::use('components/photo-load');
+$fx = Effects::values();
+if ($fx['lqip'] === '1') Module::use('components/photo-load');
+if ($fx['transition'] === '1') Module::use('components/page-transition');
 $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?>
 <!doctype html>
 <html lang="<?= e(Site::get('lang')) ?>">
@@ -19,6 +21,10 @@ $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?
 <main><?= $content ?></main>
 <?= Module::render('components/footer') ?>
 <?= Module::render('components/drop-upload') ?>
+<?php if ($fx['smooth'] !== 'off') echo Module::render('components/smooth-scroll', ['level' => $fx['smooth']]);
+if ($fx['cursor'] === '1') echo Module::render('components/cursor', ['label' => $fx['cursor_label'] !== '' ? $fx['cursor_label'] : 'Ver']);
+if ($fx['grain'] !== 'off') echo Module::render('components/grain', ['level' => $fx['grain']]);
+if ($fx['sound'] === '1') echo Module::render('components/sound'); ?>
 <!--assets:js-->
 </body>
 </html>

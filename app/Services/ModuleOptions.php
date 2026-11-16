@@ -30,7 +30,7 @@ final class ModuleOptions
         foreach (self::spec($kind, $name) as $k => $o) Setting::set("{$prefix}_{$name}_$k", self::clean($o, $raw[$k] ?? null));
     }
 
-    private static function clean(array $o, mixed $v): string
+    public static function clean(array $o, mixed $v): string
     {
         $def = (string) ($o['default'] ?? '');
         $v = is_scalar($v) ? trim((string) $v) : '';

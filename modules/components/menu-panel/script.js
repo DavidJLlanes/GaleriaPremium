@@ -7,6 +7,7 @@
     if (on === open) return; open = on;
     btn.setAttribute('aria-expanded', on ? 'true' : 'false');
     panel.classList.toggle('is-open', on); root.classList.toggle('mn-lock', on);
+    dispatchEvent(new Event(on ? 'mn:open' : 'mn:close'));
     if (on) { panel.removeAttribute('inert'); setTimeout(() => { const a = items()[0]; if (a && open) a.focus({ preventScroll: true }); }, 350); }
     else { panel.setAttribute('inert', ''); if (panel.contains(document.activeElement)) btn.focus({ preventScroll: true }); }
   };

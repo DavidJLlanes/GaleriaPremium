@@ -1,0 +1,15 @@
+.cur{position:fixed;left:0;top:0;z-index:2147483000;pointer-events:none;mix-blend-mode:normal}
+.cur[hidden]{display:none}
+.cur-ring,.cur-dot,.cur-lbl{position:absolute;left:0;top:0;transform:translate3d(var(--cx,-100px),var(--cy,-100px),0) translate(-50%,-50%);will-change:transform}
+.cur-ring{width:2.3rem;height:2.3rem;border:1px solid rgba(242,239,233,.7);border-radius:50%;transition:width .45s var(--ease),height .45s var(--ease),background .4s,border-color .4s,opacity .3s;transform:translate3d(var(--rx,-100px),var(--ry,-100px),0) translate(-50%,-50%)}
+.cur-dot{width:.32rem;height:.32rem;border-radius:50%;background:var(--accent);transition:opacity .3s,transform .3s}
+.cur-lbl{font:var(--st-menu,normal) var(--w-menu,500) .66rem var(--f-menu);letter-spacing:.22em;text-transform:uppercase;color:#0a0a0b;opacity:0;transform:translate3d(var(--rx,-100px),var(--ry,-100px),0) translate(-50%,-50%) scale(.8);transition:opacity .3s,scale .4s var(--ease);white-space:nowrap}
+.cur.is-link .cur-ring{width:3.4rem;height:3.4rem;border-color:var(--accent)}
+.cur.is-photo .cur-ring{width:5.6rem;height:5.6rem;background:rgba(242,239,233,.9);border-color:transparent;backdrop-filter:blur(4px)}
+.cur.is-photo .cur-lbl{opacity:1}
+.cur.is-photo .cur-dot{opacity:0}
+.cur.is-down .cur-ring{width:1.8rem;height:1.8rem}
+.cur.is-out .cur-ring,.cur.is-out .cur-dot{opacity:0}
+/* Con cursor propio se oculta la flecha del sistema solo sobre las fotos, donde el aro la sustituye */
+html.cur-on .cur-hide{cursor:none}
+@media(hover:none),(pointer:coarse){.cur{display:none}}

@@ -8,6 +8,7 @@
                 <label><?= e($o['label']) ?></label>
                 <?php if ($o['type'] === 'color'): ?><input type="color" name="<?= e($nm) ?>" value="<?= e($v) ?>">
                 <?php elseif ($o['type'] === 'range'): ?><input type="range" name="<?= e($nm) ?>" min="<?= e($o['min']) ?>" max="<?= e($o['max']) ?>" step="<?= e($o['step'] ?? 1) ?>" value="<?= e($v) ?>" oninput="this.nextElementSibling.textContent=this.value"><output><?= e($v) ?></output>
+                <?php elseif ($o['type'] === 'text'): ?><input type="text" name="<?= e($nm) ?>" value="<?= e($v) ?>" maxlength="80">
                 <?php elseif ($o['type'] === 'select'): ?><select name="<?= e($nm) ?>"><?php foreach ($o['choices'] as $cv => $cl): ?><option value="<?= e($cv) ?>" <?= (string) $cv === $v ? 'selected' : '' ?>><?= e($cl) ?></option><?php endforeach; ?></select>
                 <?php endif; ?>
             <?php endif; ?>
