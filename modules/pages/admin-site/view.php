@@ -80,11 +80,10 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
     <?= \App\Core\Module::render('components/font-picker') ?>
 
     <section class="ad-card">
-        <h2>Barra superior y pie</h2>
+        <h2>Barra superior</h2>
         <label class="ad-check st-line"><input type="checkbox" name="site_header_home" <?= $chk('header_home') ?>><span>Mostrar la barra superior en la <b>portada</b></span></label>
         <label class="ad-check st-line"><input type="checkbox" name="site_header_pages" <?= $chk('header_pages') ?>><span>Mostrar la barra superior en las <b>demás páginas</b> (galerías)</span></label>
-        <div style="margin:1rem 0"><label for="s_foot">Texto del pie (vacío = © año + nombre)</label><input id="s_foot" type="text" name="site_footer_text" value="<?= e($f['footer_text']) ?>" maxlength="200"></div>
-        <label class="ad-check st-line"><input type="checkbox" name="site_footer_admin" <?= $chk('footer_admin') ?>><span>Mostrar el enlace «Admin» en el pie</span></label>
+        <p class="ad-hint">El pie de página (diseño, llegada, textos y firma) se configura en <a href="/admin/pie">Pie</a>.</p>
     </section>
 
     <section class="ad-card">

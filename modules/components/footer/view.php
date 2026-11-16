@@ -1,13 +1,7 @@
-<?php use App\Core\Config; use App\Services\Site;
-$links = []; foreach (Site::SOCIALS as $k => $label) if (Site::get($k) !== '') $links[$label] = Site::get($k);
-$mail = Site::get('email'); ?>
-<footer class="ftr">
-    <span><?= Site::get('footer_text') !== '' ? e(Site::get('footer_text')) : '© ' . date('Y') . ' ' . e(Config::get('app.name')) ?></span>
-    <span class="ftr-tag"><?= e(Config::get('app.tagline')) ?></span>
-    <nav class="ftr-links" aria-label="Enlaces del pie">
-        <?php foreach ($links as $label => $url): ?><a href="<?= e($url) ?>" target="_blank" rel="noopener me"><?= e($label) ?></a><?php endforeach; ?>
-        <?php if ($mail !== ''): ?><a href="mailto:<?= e($mail) ?>">Contacto</a><?php endif; ?>
-        <a href="#" class="ftr-top" data-magnet onclick="scrollTo({top:0,behavior:'smooth'});return false">Arriba ↑</a>
-        <?php if (Site::on('footer_admin')): ?><a href="/admin" rel="nofollow">Admin</a><?php endif; ?>
-    </nav>
+<?php /* Datos: $v = Footer::values(). */
+use App\Core\Module; use App\Services\Footer;
+$f = Footer::data($v); $rm = Module::meta('footer-reveals/' . $v['reveal']); Module::use('footer-reveals/' . $v['reveal']);
+$vars = ''; foreach ($v['ropts'] as $k => $val) $vars .= '--fr-' . preg_replace('/[^a-z0-9-]/', '', strtolower((string) $k)) . ':' . preg_replace('/[^a-z0-9#.%-]/i', '', (string) $val) . ';'; ?>
+<footer class="ftr ftr--<?= e($v['tone']) ?> fd-<?= e($v['design']) ?> fr-<?= e($v['reveal']) ?>" data-fr="<?= e($v['reveal']) ?>" data-armed="<?= !empty($rm['armed']) ? '1' : '0' ?>" style="<?= e($vars) ?>">
+    <?= Module::render('footers/' . $v['design'], ['f' => $f, 'opts' => $v['opts']]) ?>
 </footer>

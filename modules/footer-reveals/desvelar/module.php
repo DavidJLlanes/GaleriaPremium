@@ -1,0 +1,1 @@
+<?php return ['label' => 'Desvelar', 'desc' => 'El pie está fijo detrás de la web: al llegar al final, la página sube y lo deja a la vista. Si el pie es más alto que la pantalla, se muestra normal.', 'armed' => false, 'icon' => '<rect x="8" y="22" width="48" height="10" opacity=".5"/><rect x="8" y="6" width="48" height="14"/>'];

@@ -1,0 +1,4 @@
+/* La clase ftr-rv la pone el script en <body> solo si el pie cabe en la pantalla */
+body.ftr-rv>main{position:relative;z-index:1;background:var(--bg);margin-bottom:var(--ftr-h,0px)}
+body.ftr-rv .ftr.fr-desvelar{position:fixed;left:0;right:0;bottom:0;z-index:0;background:var(--fb,transparent)}
+body.ftr-rv .ftr.fr-desvelar.ftr--web{background:var(--bg)}

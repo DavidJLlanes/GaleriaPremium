@@ -1,0 +1,2 @@
+<?php return ['label' => 'Columnas', 'desc' => 'Cuatro columnas: marca y eslogan, galerías, redes y contacto; abajo, copyright y firma.',
+  'icon' => '<rect x="8" y="8" width="10" height="2"/><rect x="8" y="13" width="10" height="1" opacity=".4"/><rect x="22" y="8" width="10" height="2"/><rect x="22" y="13" width="10" height="1" opacity=".4"/><rect x="36" y="8" width="10" height="2"/><rect x="50" y="8" width="6" height="2"/><rect x="8" y="28" width="48" height=".8" opacity=".3"/>']; 

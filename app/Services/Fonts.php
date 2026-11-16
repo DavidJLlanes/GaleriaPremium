@@ -20,6 +20,7 @@ final class Fonts
         'body'    => ['Texto normal',          'Descripciones, párrafos y pie de página.',          'inter',    'Hojas, paseos y luz cálida de noviembre en el parque.'],
         'caption' => ['Pies de foto',          'El nombre de cada foto y su pie al ampliarla.',     'fraunces', 'Paseo de plátanos'],
         'button'  => ['Botones',               'Botones de la web pública.',                        'inter',    'Explorar galerías'],
+        'footer'  => ['Pie de página',         'Textos del pie: copyright, eslogan, enlaces y firma.', 'inter', 'Hecho con luz en León'],
         'intro'   => ['Pantalla de entrada',   'El texto de la pantalla de entrada breve (Admin → Entrada).', 'fraunces', 'Lux Aeterna'],
         'herobtn' => ['Botón de la portada',   'El botón «Explorar galerías» de la portada. Sin elegir, usa la de «Botones».', 'inter', 'Explorar galerías'],
     ];

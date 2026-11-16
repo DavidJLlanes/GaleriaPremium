@@ -1,0 +1,2 @@
+<?php return ['label' => 'Cascada', 'desc' => 'Cada elemento del pie entra uno tras otro, con un pequeño retraso.', 'armed' => true, 'icon' => '<rect x="10" y="8" width="30" height="4"/><rect x="10" y="15" width="22" height="4" opacity=".7"/><rect x="10" y="22" width="14" height="4" opacity=".45"/>',
+  'options' => ['gap' => ['label' => 'Retraso entre elementos (ms)', 'type' => 'range', 'min' => 30, 'max' => 250, 'step' => 10, 'default' => 90]]];

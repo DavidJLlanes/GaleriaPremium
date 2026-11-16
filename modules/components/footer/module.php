@@ -1,0 +1,1 @@
+<?php return ['label' => 'Pie de página', 'desc' => 'Contenedor del pie: fondo, tipografía y orquestación de la «llegada». El diseño está en modules/footers/ y el efecto en modules/footer-reveals/.'];

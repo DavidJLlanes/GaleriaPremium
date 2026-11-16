@@ -47,12 +47,14 @@
 
 30. **Pantalla de entrada breve** (Admin → Entrada, `App\Services\Intro`, ajustes `intro_*`): solo en la portada, orquestada por `components/intro` y con 6 diseños en `modules/intros/<nombre>/` (luz —reutiliza `components/light-pen—, fundido, letras, cortina, contador, línea; ajustes propios vía `options`, prefijo `intro_opt`). Texto, subtítulo, duración, frecuencia (sesión/día/siempre), salida, colores y saltar con clic/tecla configurables; tipografía = rol `intro` (Sitio → Tipografías) + `menu` para el texto pequeño. Vista previa en el panel con `/?intro_preview=1&in[...]` (solo con sesión de administrador). El diseño no debe producir destello de la web: `layouts/main` decide en `<head>` (`intro-on` / `no-intro`).
 
-31. **404 e identidad**: la página 404 (`pages/not-found`) lleva el nombre de la web y enlaces a galerías; el pie (`components/footer`) incluye año, eslogan, redes, Contacto y «Arriba». Estáticos con caché larga `immutable` y gzip en `deploy/nginx.conf.example`.
+31. **404 e identidad**: la página 404 (`pages/not-found`) lleva el nombre de la web y enlaces a galerías; el pie se describe en la regla 32. Estáticos con caché larga `immutable` y gzip en `deploy/nginx.conf.example`.
+
+32. **Pie de página totalmente personalizable** (Admin → Pie, `App\Services\Footer`, ajustes `footer_*`; el texto y el enlace «Admin» que antes estaban en Sitio viven ahora aquí): tres piezas intercambiables, cada una en su carpeta: **diseño** `modules/footers/<nombre>/` (linea, centrado, columnas, gigante, llamada; su `view.php` recibe `$f` —`Footer::data()`— y `$opts`; los elementos que deben animarse en cascada llevan la clase `ftr-i`), **llegada / visualización** `modules/footer-reveals/<nombre>/` (ninguna, subir, cascada, cortina, difuminado, desvelar; su `module.php` declara `armed` —si `components/footer` debe «armarla» con `is-armed`/`is-in` al entrar el pie en pantalla— y sus `options` llegan al CSS como `--fr-<clave>`) y **contenido** (copyright con `{year}`, fondo web/oscuro/claro/acento, eslogan, redes, Contacto, lista de galerías, «Arriba», Admin y **firma** con texto, enlace y estilo). Piezas comunes: `components/footer-links` y `components/footer-sig`. Tipografía: rol `footer` (+ `brand` para el nombre grande). Vista previa en el panel: la web en un iframe con `?footer_preview=1&ft[...]` (solo con sesión de administrador). Todo respeta `prefers-reduced-motion`.
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```
 modules/<tipo>/<nombre>/{view.php, style.css, script.js, module.php}
-  tipos: layouts · pages · sections · components · heroes · galleries · plugins · cursors · intros · reveals · card-titles · menu-icons · menu-reveals · menu-styles · lightboxes
+  tipos: layouts · pages · sections · components · heroes · galleries · plugins · cursors · intros · reveals · card-titles · menu-icons · menu-reveals · menu-styles · lightboxes · footers · footer-reveals
 app/Core/Module.php   render()/use(): al usar un módulo se registran SOLO sus CSS/JS
 app/Core/Assets.php   emite <link>/<script> de los módulos usados en la página
 app/Services/ImageProcessor.php   ÚNICO punto de conversión de fotos (WebP 75%)

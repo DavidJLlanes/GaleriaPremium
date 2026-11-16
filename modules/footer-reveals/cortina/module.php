@@ -1,0 +1,1 @@
+<?php return ['label' => 'Cortina', 'desc' => 'El pie se descubre de arriba abajo, como una persiana.', 'armed' => true, 'icon' => '<rect x="10" y="8" width="44" height="24" opacity=".25"/><rect x="10" y="8" width="44" height="12"/>'];

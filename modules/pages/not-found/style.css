@@ -6,6 +6,6 @@
 .nf-msg{font:var(--st-body,normal) var(--w-body,300) 1.1rem/1.5 var(--f-body);color:var(--muted);margin:0 0 .6rem}
 .nf-list{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.4rem;margin-top:2.4rem;font:var(--st-menu,normal) var(--w-menu,400) .78rem/1 var(--f-menu);letter-spacing:.14em;text-transform:uppercase}
 .nf-list span{color:var(--muted);width:100%;opacity:.7}
-.nf-list a{color:var(--text);transition:color .25s}.nf-list a:hover{color:var(--accent)}
+.nf-list a{color:var(--fg);transition:color .25s}.nf-list a:hover{color:var(--accent)}
 @keyframes nf-in{from{opacity:0;transform:translateY(.2em);letter-spacing:.2em}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.nf-num{animation:none}}

@@ -1,9 +1,15 @@
-.ftr{font-family:var(--f-body);font-weight:var(--w-body,inherit);font-style:var(--st-body,normal);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding:2rem var(--pad);
-  border-top:1px solid rgba(242,239,233,.08);color:var(--muted);font-size:.78rem;letter-spacing:.1em}
-
-.ftr{align-items:center}
-.ftr-links{display:flex;gap:1.2rem}
-.ftr-links a{color:var(--muted);transition:color .25s}
-.ftr-links a:hover{color:var(--accent)}
-@media(max-width:640px){.ftr{flex-direction:column;align-items:flex-start}}
+/* Base del pie: tipografía (rol «footer»), fondo por tono y elementos comunes. Cada diseño añade lo suyo (modules/footers/). */
+.ftr{--fb:transparent;--ff:var(--muted);--fh:var(--accent);--fl:rgba(242,239,233,.08);position:relative;background:var(--fb);color:var(--ff);
+  font:var(--st-footer,normal) var(--w-footer,400) .78rem/1.6 var(--f-footer);letter-spacing:.08em;border-top:1px solid var(--fl);padding:2.4rem var(--pad)}
+.ftr--dark{--fb:#050506;--ff:#a9a6a0}
+.ftr--light{--fb:#f2efe9;--ff:#4b4944;--fh:#111;--fl:rgba(0,0,0,.12)}
+.ftr--accent{--fb:var(--accent);--ff:#16140f;--fh:#000;--fl:rgba(0,0,0,.18)}
+.ftr a{color:inherit;transition:color .25s}
+.ftr a:hover,.ftr a:focus-visible{color:var(--fh)}
+.ftr-links{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}
+.ftr-sig{display:inline-block;font-size:.72rem}
+.ftr-sig--caps{text-transform:uppercase;letter-spacing:.28em;font-size:.66rem}
+.ftr-sig--italic{font-style:italic}
+.ftr-sig--accent{color:var(--accent)}
+.ftr--accent .ftr-sig--accent{color:inherit;font-weight:600}
 .ftr-top{cursor:pointer}

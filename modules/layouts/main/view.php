@@ -1,4 +1,4 @@
-<?php use App\Core\{Config, Module}; use App\Models\Gallery; use App\Services\{Effects, Intro, Site, SiteMenu};
+<?php use App\Core\{Config, Module}; use App\Models\Gallery; use App\Services\{Effects, Footer, Intro, Site, SiteMenu};
 $showHeader = Site::on(!empty($isHome) ? 'header_home' : 'header_pages') || SiteMenu::previewing();
 $fx = Effects::values();
 if ($fx['lqip'] === '1') Module::use('components/photo-load');
@@ -22,7 +22,7 @@ $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?
 <?php if ($showHeader) echo Module::render('components/header', ['galleries' => $galleries, 'm' => $m]); ?>
 <?php if ($showHeader && $galleries) echo Module::render('components/menu-panel', ['galleries' => $galleries, 'm' => $m]); ?>
 <main><?= $content ?></main>
-<?= Module::render('components/footer') ?>
+<?php $fv = Footer::values(); if ($fv['enabled'] === '1') echo Module::render('components/footer', ['v' => $fv]); ?>
 <?= Module::render('components/drop-upload') ?>
 <?php if ($fx['smooth'] !== 'off') echo Module::render('components/smooth-scroll', ['level' => $fx['smooth']]);
 if ($fx['cursor'] !== 'off') {

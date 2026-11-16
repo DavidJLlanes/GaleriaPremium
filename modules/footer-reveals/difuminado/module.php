@@ -1,0 +1,1 @@
+<?php return ['label' => 'Difuminado', 'desc' => 'Aparece desenfocado y ligeramente reducido, y se enfoca al llegar.', 'armed' => true, 'icon' => '<rect x="12" y="12" width="40" height="16" opacity=".5" rx="3"/><rect x="16" y="16" width="32" height="8" rx="2"/>'];

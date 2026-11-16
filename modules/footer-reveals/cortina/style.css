@@ -1,0 +1,2 @@
+.ftr.is-armed.fr-cortina{clip-path:inset(0 0 100% 0)}
+.ftr.is-armed.fr-cortina.is-in{clip-path:inset(0 0 0 0);transition:clip-path 1.5s cubic-bezier(.65,0,.35,1)}

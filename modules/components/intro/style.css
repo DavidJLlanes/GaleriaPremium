@@ -11,3 +11,6 @@ html.intro-on,html.intro-on body{overflow:hidden}
 .intro.is-out.exit-zoom .intro-stage{transform:scale(1.18)}
 .intro.is-out{pointer-events:none}
 @media(prefers-reduced-motion:reduce){.intro-stage,.intro.is-out{transition-duration:.01s!important}}
+
+/* Mientras la entrada está activa, las animaciones de entrada de la web esperan: empiezan al abrirse, sin verse a medias detrás */
+html.intro-on main *,html.intro-on main *::before,html.intro-on main *::after{animation-play-state:paused!important}

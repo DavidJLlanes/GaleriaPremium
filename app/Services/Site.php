@@ -26,8 +26,6 @@ final class Site
         'brand_mode'   => ['enum',  'text', ['text', 'logo', 'both']],
         'header_home'  => ['bool',  '1'],
         'header_pages' => ['bool',  '1'],
-        'footer_text'  => ['text',  ''],
-        'footer_admin' => ['bool',  '1'],
         'display'      => ['enum',  'standalone', ['standalone', 'fullscreen', 'minimal-ui', 'browser']],
         'noindex'      => ['bool',  '0'],
         'email'        => ['text',  ''],
@@ -48,6 +46,7 @@ final class Site
         'font_button'  => ['font',  ''],
         'font_herobtn' => ['font',  ''],
         'font_intro'   => ['font',  ''],
+        'font_footer'  => ['font',  ''],
         // Grosor (100-900, '' = el del diseño) y cursiva por tipo de texto
         'fontw_brand' => ['weight', ''], 'fonti_brand' => ['bool', '0'],
         'fontw_hero' => ['weight', ''], 'fonti_hero' => ['bool', '0'],
@@ -58,6 +57,7 @@ final class Site
         'fontw_button' => ['weight', ''], 'fonti_button' => ['bool', '0'],
         'fontw_herobtn' => ['weight', ''], 'fonti_herobtn' => ['bool', '0'],
         'fontw_intro' => ['weight', ''], 'fonti_intro' => ['bool', '0'],
+        'fontw_footer' => ['weight', ''], 'fonti_footer' => ['bool', '0'],
     ];
     public const SOCIALS = ['instagram' => 'Instagram', 'x' => 'X', 'facebook' => 'Facebook', 'threads' => 'Threads', 'youtube' => 'YouTube', 'linkedin' => 'LinkedIn', 'tiktok' => 'TikTok'];
 

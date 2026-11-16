@@ -1,0 +1,2 @@
+<?php return ['label' => 'Subir', 'desc' => 'El pie sube suavemente y se aclara al llegar a él.', 'armed' => true, 'icon' => '<rect x="10" y="22" width="44" height="8" opacity=".6"/><path d="M32 18v-8m-4 4l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+  'options' => ['dist' => ['label' => 'Recorrido (px)', 'type' => 'range', 'min' => 10, 'max' => 120, 'step' => 5, 'default' => 40]]];

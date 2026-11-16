@@ -1,0 +1,7 @@
+.fc{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;padding:1.4rem 0}
+.fc-name{font:var(--st-brand,normal) var(--w-brand,400) clamp(1.3rem,3vw,2rem)/1 var(--f-brand);letter-spacing:.2em;text-transform:uppercase;color:var(--fg);margin:0}
+.ftr--light .fc-name{color:#111}.ftr--accent .fc-name{color:#000}
+.fc-tag{margin:0;opacity:.8}
+.fc .ftr-links{justify-content:center;margin:.6rem 0}
+.fc-copy{margin:0}
+.fc--line .fc-copy{padding-top:1.2rem;border-top:1px solid var(--fl);width:min(360px,70%)}

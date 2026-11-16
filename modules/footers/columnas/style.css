@@ -1,0 +1,10 @@
+.fk-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:2.4rem 3rem;padding-bottom:2.4rem}
+.fk-name{font:var(--st-brand,normal) var(--w-brand,400) 1.5rem/1.1 var(--f-brand);letter-spacing:.14em;text-transform:uppercase;color:var(--fg);margin:0 0 .8rem}
+.ftr--light .fk-name{color:#111}.ftr--accent .fk-name{color:#000}
+.fk-tag{margin:0;max-width:32ch;opacity:.8}
+.fk h3{font-size:.68rem;font-weight:inherit;letter-spacing:.32em;text-transform:uppercase;margin:0 0 1rem;opacity:.6}
+.fk ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.fk-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.6rem;padding-top:1.4rem;border-top:1px solid var(--fl)}
+.fk-bar>span:first-child{margin-right:auto}
+@media(max-width:820px){.fk-grid{grid-template-columns:1fr 1fr}.fk-brand{grid-column:1/-1}}
+@media(max-width:480px){.fk-grid{grid-template-columns:1fr}}

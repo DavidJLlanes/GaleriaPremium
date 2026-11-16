@@ -1,0 +1,2 @@
+.ftr.is-armed.fr-subir{opacity:0;transform:translateY(calc(var(--fr-dist,40) * 1px))}
+.ftr.is-armed.fr-subir.is-in{opacity:1;transform:none;transition:opacity 1.2s ease,transform 1.4s cubic-bezier(.16,1,.3,1)}
