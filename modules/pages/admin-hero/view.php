@@ -62,10 +62,10 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
         <div class="ad-row">
             <div><label for="hbz">Tamaño: <b id="hbzv"><?= e(HeroButton::SIZES[$btn['size']]) ?></b></label>
                 <input id="hbz" type="range" name="hero_btn_size" min="1" max="5" step="1" value="<?= (int) $btn['size'] ?>"></div>
-            <div><label for="hbd">Separación del título: <b id="hbdv"><?= (int) $btn['down'] ?> px</b></label>
-                <input id="hbd" type="range" name="hero_btn_down" min="0" max="240" step="4" value="<?= (int) $btn['down'] ?>"></div>
+            <div><label for="hbd">Separación del título: <b id="hbdv"><?= e(HeroButton::DOWNS[$btn['down']]) ?></b></label>
+                <input id="hbd" type="range" name="hero_btn_down" min="1" max="5" step="1" value="<?= (int) $btn['down'] ?>"></div>
         </div>
-        <p class="ad-hint">Tipografía, grosor y cursiva del botón: <a href="/admin/sitio">Sitio → Tipografías → «Botón de la portada»</a>. El título (nombre de la web) y el texto pequeño (eslogan) se cambian en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
+        <p class="ad-hint">Tamaño y separación se adaptan solos al móvil y al escritorio. Tipografía, grosor y cursiva del botón: <a href="/admin/sitio">Sitio → Tipografías → «Botón de la portada»</a>. El título (nombre de la web) y el texto pequeño (eslogan) se cambian en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
     </section>
 
     <section class="ad-card" id="heroSpeed" hidden>

@@ -62,13 +62,13 @@
   // Vista previa del botón (diseño, tamaño y texto)
   const hb = document.querySelector('#hbPrev .hb');
   if (hb) {
-    const K = { 1: .8, 2: .9, 3: 1, 4: 1.2, 5: 1.45 }, NAMES = ['', 'Muy pequeño', 'Pequeño', 'Mediano', 'Grande', 'Muy grande'];
+    const K = { 1: .8, 2: .9, 3: 1, 4: 1.2, 5: 1.45 }, NAMES = ['', 'Muy pequeño', 'Pequeño', 'Mediano', 'Grande', 'Muy grande'], DOWNS = ['', 'Pegado al título', 'Cerca', 'Normal', 'Lejos', 'Muy lejos'];
     const sync = () => {
       const st = document.getElementById('hbs').value, z = +document.getElementById('hbz').value, d = document.getElementById('hbd').value;
       hb.className = 'hb hb--' + st; hb.style.setProperty('--hb-k', K[z] || 1);
       hb.innerHTML = '<span></span>' + (st === 'arrow' ? '<i aria-hidden="true">→</i>' : '');
       hb.firstChild.textContent = document.getElementById('hc').value || 'Explorar galerías';
-      document.getElementById('hbzv').textContent = NAMES[z]; document.getElementById('hbdv').textContent = d + ' px';
+      document.getElementById('hbzv').textContent = NAMES[z]; document.getElementById('hbdv').textContent = DOWNS[+d];
     };
     ['hbs', 'hbz', 'hbd', 'hc'].forEach(id => document.getElementById(id).addEventListener('input', sync));
   }

@@ -1,8 +1,8 @@
 <?php use App\Models\Photo; use App\Services\Crop;
 $o = $options ?? []; $ratio = (float) ($gallery['crop_ratio'] ?? 0) ?: 1.5;
 $hh = ['s' => 52, 'm' => 66, 'l' => 80][$o['size'] ?? 'm'] ?? 66; $n = count($photos); ?>
-<section class="gs" data-ratio="<?= round($ratio, 5) ?>" data-fit="<?= (int) ($o['fit'] ?? 1) ?>" data-gap="<?= (int) ($o['gap'] ?? 16) ?>" data-h="<?= $hh ?>"
-         style="--r:<?= round($ratio, 5) ?>;--gap:<?= (int) ($o['gap'] ?? 16) ?>px;--hh:<?= $hh ?>vh">
+<section class="gs" data-ratio="<?= round($ratio, 5) ?>" data-fit="<?= (int) ($o['fit'] ?? 1) ?>" data-spacing="<?= e($o['spacing'] ?? 'm') ?>" data-h="<?= $hh ?>"
+         style="--r:<?= round($ratio, 5) ?>;--gap:<?= ["none" => "0px", "s" => "clamp(6px,.7vw,12px)", "m" => "clamp(8px,1.1vw,22px)", "l" => "clamp(12px,1.8vw,36px)"][$o['spacing'] ?? 'm'] ?? "clamp(8px,1.1vw,22px)" ?>;--hh:<?= $hh ?>vh">
     <div class="gs-view" data-lightbox>
         <div class="gs-track">
             <?php foreach ($photos as $i => $p):

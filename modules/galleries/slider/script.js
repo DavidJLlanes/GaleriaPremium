@@ -4,14 +4,17 @@
   const root = document.querySelector('.gs'); if (!root) return;
   const view = root.querySelector('.gs-view'), track = root.querySelector('.gs-track');
   const slides = [...track.children], N = slides.length;
-  const R = parseFloat(root.dataset.ratio) || 1.5, fit = root.dataset.fit === '1', base = parseFloat(root.dataset.gap) || 0, hh = parseFloat(root.dataset.h) || 66;
+  const R = parseFloat(root.dataset.ratio) || 1.5, fit = root.dataset.fit === '1', hh = parseFloat(root.dataset.h) || 66;
   const prev = root.querySelector('.gs-prev'), next = root.querySelector('.gs-next'), dots = root.querySelector('.gs-dots');
-  let sw = 0, g = base, n = 1, pos = 0, maxPos = 0, vw = 0;
+  // Separación: proporcional al ancho de la pantalla, con mínimo y máximo (móvil y escritorio quedan equilibrados)
+  const GAPS = { none: [0, 0, 0], s: [6, .7, 12], m: [8, 1.1, 22], l: [12, 1.8, 36] }, lv = GAPS[root.dataset.spacing] || GAPS.m;
+  let base = 0, sw = 0, g = 0, n = 1, pos = 0, maxPos = 0, vw = 0;
 
   const layout = () => {
     const cs = getComputedStyle(root), W = root.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
     sw = Math.min(innerHeight * hh / 100 * R, W, 900);
     sw = Math.max(sw, Math.min(160, W));
+    base = Math.round(Math.min(lv[2], Math.max(lv[0], innerWidth * lv[1] / 100))); if (!lv[2]) base = 0;
     g = base; vw = W;
     if (fit) {
       n = Math.max(1, Math.floor((W + base) / (sw + base)));

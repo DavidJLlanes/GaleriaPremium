@@ -5,7 +5,7 @@
     'crop'  => true,      // este diseño usa recortes con proporción común (Admin → Recortar)
     'options' => [
         'fit'      => ['type' => 'bool',   'default' => 1,   'label' => 'Ajustar la separación entre fotos al ancho de la pantalla (nunca se ve una foto cortada)'],
-        'gap'      => ['type' => 'number', 'default' => 16,  'min' => 0, 'max' => 80, 'label' => 'Separación base entre fotos (px)'],
+        'spacing'  => ['type' => 'enum',   'default' => 'm', 'choices' => ['none' => 'Sin separación', 's' => 'Pequeña', 'm' => 'Media', 'l' => 'Grande'], 'label' => 'Separación entre fotos (se adapta sola al móvil y al escritorio)'],
         'size'     => ['type' => 'enum',   'default' => 'm', 'choices' => ['s' => 'Pequeñas', 'm' => 'Medianas', 'l' => 'Grandes'], 'label' => 'Tamaño de las fotos'],
         'captions' => ['type' => 'bool',   'default' => 1,   'label' => 'Mostrar el nombre bajo cada foto'],
     ],
