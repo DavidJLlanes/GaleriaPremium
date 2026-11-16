@@ -5,5 +5,8 @@
 .ftr--light .fg-word{color:#111}.ftr--accent .fg-word{color:#000}
 .fg--outline .fg-word{color:transparent;-webkit-text-stroke:1px currentColor;-webkit-text-stroke-color:var(--ff)}
 .fg-tag{text-align:center;margin:1rem 0 0;opacity:.8}
-.fg-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.6rem;margin-top:2rem;padding-top:1.2rem;border-top:1px solid var(--fl)}
-.fg-bar>span:first-child{margin-right:auto}
+/* Parte baja centrada y apilada: copyright · redes · menú desplegable · (firma) · «Arriba» */
+.fg-bar{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem;margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--fl)}
+.fg-copy{margin:0}
+.fg-bar .soc{justify-content:center}
+.fg-bar .ft{margin-top:.4rem}

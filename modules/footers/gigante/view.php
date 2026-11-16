@@ -6,8 +6,10 @@ $st = ($fid !== '' ? 'font-family:' . Fonts::family($fid) . ';' : '') . (($opts[
     <p class="fg-word ftr-i" style="<?= $st ?>" aria-label="<?= e($f['name']) ?>"><span aria-hidden="true"><?= e($f['name']) ?></span></p>
     <?php if ($f['tag'] !== ''): ?><p class="fg-tag ftr-i"><?= e($f['tag']) ?></p><?php endif; ?>
     <div class="fg-bar">
-        <span class="ftr-i"><?= e($f['copy']) ?></span>
-        <?= Module::render('components/footer-links', ['f' => $f]) ?>
+        <p class="fg-copy ftr-i"><?= e($f['copy']) ?></p>
+        <?php if ($f['links']): ?><div class="ftr-i"><?= Module::render('components/social-icons', ['items' => $f['links']]) ?></div><?php endif; ?>
+        <?= Module::render('components/footer-menu', ['f' => $f]) ?>
         <?= Module::render('components/footer-sig', ['f' => $f]) ?>
+        <?php if ($f['top']) echo Module::render('components/footer-top'); ?>
     </div>
 </div>
