@@ -9,6 +9,6 @@
 .st-gen ul{list-style:none;display:flex;flex-wrap:wrap;gap:1.4rem;margin-bottom:.6rem}
 .st-gen li{display:flex;align-items:center;gap:.7rem;font-size:.72rem;color:var(--muted);line-height:1.4}
 .st-gen li img{width:44px;height:44px;border-radius:10px;object-fit:contain;background:#0d0d0f}
-.st-colors input[type=color]{width:100%;height:46px;padding:2px;background:#0d0d0f;border:1px solid rgba(242,239,233,.14);border-radius:6px;cursor:pointer}
+.st-colors input[type=color]{width:170px;height:46px;padding:2px;background:#0d0d0f;border:1px solid rgba(242,239,233,.14);border-radius:6px;cursor:pointer}
 .st-line{margin-bottom:.7rem}
 #siteForm>button{margin-bottom:3rem}

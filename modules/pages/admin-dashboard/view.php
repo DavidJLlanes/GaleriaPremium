@@ -1,20 +1,10 @@
 <?php use App\Core\Module; use App\Models\Photo; use App\Services\Csrf; Module::use('components/sortable'); ?>
 <h1>Galerías</h1>
-<p class="ad-sub">Crea galerías y gestiona sus fotos.</p>
+<p class="ad-sub">Tus galerías, en el orden en que salen en la web. Pulsa una para gestionar sus fotos y su diseño.</p>
 
-<form class="ad-card" method="post" action="/admin/galerias">
-    <h2>Nueva galería</h2>
-    <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
-    <div class="ad-row">
-        <div><label>Nombre</label><input type="text" name="title" required placeholder="Ej.: Otoño en León"></div>
-        <div><label>Descripción (opcional)</label><textarea name="description" rows="1"></textarea></div>
-    </div>
-    <label>Diseño</label>
-    <?= Module::render('components/style-picker', ['styles' => $styles, 'name' => 'style', 'selected' => 'masonry']) ?>
-    <label class="ad-check" style="margin-bottom:1.2rem"><input type="checkbox" name="published" checked><span>Publicada en la web</span></label>
-    <button class="ad-btn">Crear y subir fotos →</button>
-</form>
 
+
+<h2 class="ad-listh">Tus galerías <span class="ad-badge"><?= count($galleries) ?></span></h2>
 <?php if (count($galleries) > 1): ?><p class="ad-hint" style="margin-bottom:.8rem">Arrastra el icono ⠿ para cambiar el orden de las galerías en la web. Se guarda solo.</p><?php endif; ?>
 <div class="adg" data-bulk data-sortable data-reorder-url="/admin/galerias/orden">
     <?php foreach ($galleries as $g): ?>
@@ -31,3 +21,18 @@
     <?php endforeach; ?>
 </div>
 <?php if ($galleries) echo Module::render('components/bulk', ['kind' => 'galleries', 'listSel' => '.adg']); ?>
+
+<details class="ad-card ad-new" <?= $galleries ? '' : 'open' ?>>
+    <summary>+ Nueva galería</summary>
+    <form method="post" action="/admin/galerias" class="ad-newbody">
+        <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
+        <div class="ad-row">
+            <div><label>Nombre</label><input type="text" name="title" required placeholder="Ej.: Otoño en León"></div>
+            <div><label>Descripción (opcional)</label><textarea name="description" rows="1"></textarea></div>
+        </div>
+        <label>Diseño</label>
+        <?= Module::render('components/style-picker', ['styles' => $styles, 'name' => 'style', 'selected' => 'masonry']) ?>
+        <label class="ad-check" style="margin:1.2rem 0"><input type="checkbox" name="published" checked><span>Publicada en la web</span></label>
+        <button class="ad-btn">Crear y subir fotos →</button>
+    </form>
+</details>

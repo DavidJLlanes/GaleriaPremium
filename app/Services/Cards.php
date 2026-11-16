@@ -16,6 +16,19 @@ final class Cards
     public const PREFIX = 'card_title_opt';
     public const LAYOUT_DEFAULT = 'rejilla';
     public const LAYOUT_PREFIX = 'cards_layout_opt';
+    /** Orden de los diseños en el panel (el primero es el de por defecto). */
+    public const LAYOUT_ORDER = ['rejilla', 'carrusel', 'lista', 'alterno', 'pantallas', 'acordeon'];
+    public const REVEAL_ORDER = ['fade-up', 'blur', 'curtain', 'wipe', 'slide-alt', 'tilt', 'zoom', 'none'];
+    public const TITLE_ORDER = ['classic', 'centered', 'underline', 'numbered', 'caption', 'luz'];
+
+    /** Reordena un listado de módulos según $order (los que no estén en la lista, al final). */
+    public static function sorted(array $all, array $order): array
+    {
+        $out = [];
+        foreach ($order as $k) if (isset($all[$k])) $out[$k] = $all[$k];
+        return $out + $all;
+    }
+
     /** Proporciones de la foto de la tarjeta (valor CSS aspect-ratio => etiqueta). */
     public const RATIOS = ['4/5' => 'Vertical 4:5 (por defecto)', '3/4' => 'Vertical 3:4', '2/3' => 'Vertical 2:3', '1/1' => 'Cuadrada 1:1', '4/3' => 'Horizontal 4:3', '3/2' => 'Horizontal 3:2', '16/9' => 'Panorámica 16:9'];
 

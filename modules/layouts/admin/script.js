@@ -29,3 +29,8 @@
 
   window.Admin = { csrf, toast, post };
 })();
+// En pantallas estrechas la navegación se desplaza: deja a la vista la sección activa
+(() => {
+  const nav = document.querySelector('.ad-nav'), on = nav && nav.querySelector('.is-on');
+  if (on && nav.scrollWidth > nav.clientWidth) nav.scrollLeft = on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2;
+})();

@@ -17,18 +17,20 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
 <?php if (!$bare): ?>
 <header class="ad-top">
     <a class="ad-logo" href="/admin"><?= e(Config::get('app.name')) ?> <small>Admin</small></a>
-    <nav class="ad-nav">
-        <a href="/admin" class="<?= $nav === 'galerias' ? 'is-on' : '' ?>">Galerías</a>
-        <a href="/admin/fotos" class="<?= $nav === 'fotos' ? 'is-on' : '' ?>">Fotos</a>
-        <a href="/admin/portada" class="<?= $nav === 'portada' ? 'is-on' : '' ?>">Portada</a>
-        <a href="/admin/efectos" class="<?= $nav === 'efectos' ? 'is-on' : '' ?>">Efectos</a>
-        <a href="/admin/pie" class="<?= $nav === 'pie' ? 'is-on' : '' ?>">Pie</a>
-        <a href="/admin/entrada" class="<?= $nav === 'entrada' ? 'is-on' : '' ?>">Entrada</a>
-        <a href="/admin/menu" class="<?= $nav === 'menu' ? 'is-on' : '' ?>">Menú</a>
-        <a href="/admin/tarjetas" class="<?= $nav === 'tarjetas' ? 'is-on' : '' ?>">Tarjetas</a>
-        <a href="/admin/sitio" class="<?= $nav === 'sitio' ? 'is-on' : '' ?>">Sitio</a>
-        <a href="/admin/ajustes" class="<?= $nav === 'ajustes' ? 'is-on' : '' ?>">IA</a>
-        <a href="/" target="_blank" rel="noopener">Ver web ↗</a>
+    <nav class="ad-nav" aria-label="Administración">
+        <a href="/admin" title="Crear y ordenar galerías" class="<?= $nav === 'galerias' ? 'is-on' : '' ?>">Galerías</a>
+        <a href="/admin/fotos" title="Todas las fotos de todas las galerías" class="<?= $nav === 'fotos' ? 'is-on' : '' ?>">Fotos</a>
+        <i class="ad-sep" aria-hidden="true"></i>
+        <a href="/admin/entrada" title="1. Pantalla de entrada (solo en la portada)" class="<?= $nav === 'entrada' ? 'is-on' : '' ?>">Entrada</a>
+        <a href="/admin/menu" title="2. Barra superior y menú de galerías" class="<?= $nav === 'menu' ? 'is-on' : '' ?>">Barra y menú</a>
+        <a href="/admin/portada" title="3. Sección grande con la que empieza la web" class="<?= $nav === 'portada' ? 'is-on' : '' ?>">Portada</a>
+        <a href="/admin/tarjetas" title="4. Galerías en la página principal" class="<?= $nav === 'tarjetas' ? 'is-on' : '' ?>">Tarjetas</a>
+        <a href="/admin/pie" title="5. Pie de página" class="<?= $nav === 'pie' ? 'is-on' : '' ?>">Pie</a>
+        <i class="ad-sep" aria-hidden="true"></i>
+        <a href="/admin/sitio" title="Identidad, marca, colores, tipografías, webapp y buscadores" class="<?= $nav === 'sitio' ? 'is-on' : '' ?>">Sitio</a>
+        <a href="/admin/efectos" title="Cursor, scroll, transiciones, grano y sonido" class="<?= $nav === 'efectos' ? 'is-on' : '' ?>">Efectos</a>
+        <a href="/admin/ajustes" title="Inteligencia artificial para nombres y descripciones" class="<?= $nav === 'ajustes' ? 'is-on' : '' ?>">IA</a>
+        <a href="/" target="_blank" rel="noopener" class="ad-nav-web">Ver web ↗</a>
     </nav>
     <form method="post" action="/admin/logout" class="ad-logout">
         <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">

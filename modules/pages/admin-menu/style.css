@@ -1,2 +1,8 @@
 .mn-prev{display:block;width:100%;height:clamp(420px,62vh,640px);border:1px solid rgba(242,239,233,.12);border-radius:12px;background:#0a0a0b}
 .mn-prevcard .ad-hint{margin-top:.8rem}
+
+.mn-bar{display:grid;gap:.7rem;margin-bottom:1.2rem}
+.mn-brand{max-width:360px;margin-bottom:1.4rem}
+.ad-card h3{font:500 .95rem var(--sans);margin:0 0 .8rem}
+.mn-col{display:grid;gap:.5rem;align-content:start;justify-items:start}
+.mn-col label:first-child{margin:0}

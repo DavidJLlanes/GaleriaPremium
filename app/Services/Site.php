@@ -13,6 +13,9 @@ final class Site
 {
     public const LANGS = ['es' => 'Español', 'en' => 'English', 'ca' => 'Català', 'gl' => 'Galego', 'eu' => 'Euskara', 'fr' => 'Français', 'pt' => 'Português', 'de' => 'Deutsch', 'it' => 'Italiano'];
 
+    /** Ajustes de la barra superior: se editan en Admin → Barra y menú (el resto, en Admin → Sitio). */
+    public const BAR_KEYS = ['header_home', 'header_pages', 'brand_mode', 'hdr_name_on', 'hdr_name_color', 'hdr_menu_on', 'hdr_menu_color', 'hdr_logo_on', 'hdr_logo_color'];
+
     /** clave => [tipo, valor por defecto, opciones]. Tipos: text, url, color, bool, enum, font, weight. */
     public const FIELDS = [
         'name'         => ['text',  ''],
@@ -91,10 +94,11 @@ final class Site
 
     public static function shortName(): string { return self::get('short_name') ?: mb_substr(self::get('name'), 0, 12); }
 
-    /** Valida y guarda $_POST según FIELDS. Los checkboxes ausentes se guardan como 0. */
-    public static function save(array $post): void
+    /** Valida y guarda $_POST según FIELDS. Los checkboxes ausentes se guardan como 0. $bar = false: todo menos la barra superior (Sitio); true: solo la barra superior (Barra y menú). */
+    public static function save(array $post, bool $bar = false): void
     {
         foreach (self::FIELDS as $k => $f) {
+            if (in_array($k, self::BAR_KEYS, true) !== $bar) continue;
             $type = $f[0]; $raw = $post["site_$k"] ?? null;
             if ($type === 'bool') { $v = $raw ? '1' : '0'; }
             else {

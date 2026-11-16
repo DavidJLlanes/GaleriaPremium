@@ -32,7 +32,7 @@ $fv = fn(array $keys) => array_intersect_key(Footer::SPEC, array_flip($keys)); ?
         </section>
     <?php endforeach; ?>
 
-    <section class="ad-card"><h2>Aspecto</h2><?= Module::render('components/option-fields', ['spec' => $fv(['tone']), 'values' => $v, 'name' => 'ft']) ?></section>
+    <section class="ad-card"><h2>Fondo del pie</h2><?= Module::render('components/option-fields', ['spec' => $fv(['tone']), 'values' => $v, 'name' => 'ft']) ?></section>
     <?php foreach ($groups as $title => [$keys, $cls]): ?>
         <section class="ad-card <?= e($cls) ?>"><h2><?= e($title) ?></h2><?= Module::render('components/option-fields', ['spec' => $fv($keys), 'values' => $v, 'name' => 'ft']) ?></section>
     <?php endforeach; ?>

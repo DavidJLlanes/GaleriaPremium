@@ -6,7 +6,7 @@ use App\Core\Module;
 use App\Models\Setting;
 
 /**
- * Menú de galerías de la barra superior (Admin → Menú). Tres piezas intercambiables, cada una en su carpeta de módulos:
+ * Menú de galerías de la barra superior (Admin → Barra y menú). Tres piezas intercambiables, cada una en su carpeta de módulos:
  *   icono («hamburguesa»)  → modules/menu-icons/<nombre>
  *   efecto de despliegue   → modules/menu-reveals/<nombre>
  *   diseño del menú        → modules/menu-styles/<nombre>

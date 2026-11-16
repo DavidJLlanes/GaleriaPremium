@@ -2,7 +2,7 @@
 $chk = static fn (string $k) => $f[$k] === '1' ? 'checked' : '';
 $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt="' . e($alt) . '">' : '<span class="st-none">Sin subir</span>'; ?>
 <h1>Sitio</h1>
-<p class="ad-sub">Identidad, marca, colores, webapp y redes de toda la web.</p>
+<p class="ad-sub">Lo que afecta a toda la web: identidad, marca, colores, tipografías, webapp, redes y buscadores. La barra superior está en <a href="/admin/menu">Barra y menú</a>; el pie, en <a href="/admin/pie">Pie</a>.</p>
 
 <form method="post" action="/admin/sitio" enctype="multipart/form-data" id="siteForm">
     <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
@@ -11,15 +11,11 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
         <h2>Identidad</h2>
         <div class="ad-row">
             <div><label for="s_name">Nombre de la web</label><input id="s_name" type="text" name="site_name" value="<?= e($f['name']) ?>" maxlength="80"></div>
-            <div><label for="s_short">Nombre corto (icono del móvil)</label><input id="s_short" type="text" name="site_short_name" value="<?= e($f['short_name']) ?>" maxlength="14" placeholder="<?= e(\App\Services\Site::shortName()) ?>">
-                <p class="ad-hint">Máx. 12–14 letras: es el texto bajo el icono al instalar la webapp.</p></div>
-        </div>
-        <div class="ad-row">
             <div><label for="s_tag">Eslogan</label><input id="s_tag" type="text" name="site_tagline" value="<?= e($f['tagline']) ?>"></div>
             <div><label for="s_lang">Idioma de la web</label>
                 <select id="s_lang" name="site_lang"><?php foreach ($langs as $c => $l): ?><option value="<?= e($c) ?>" <?= $f['lang'] === $c ? 'selected' : '' ?>><?= e($l) ?></option><?php endforeach; ?></select></div>
         </div>
-        <div><label for="s_desc">Descripción (Google y redes sociales)</label><textarea id="s_desc" name="site_description" rows="2" maxlength="300"><?= e($f['description']) ?></textarea></div>
+        <p class="ad-hint">El nombre y el eslogan se usan en la portada, la barra superior, el pie y las pestañas del navegador.</p>
     </section>
 
     <section class="ad-card">
@@ -47,13 +43,6 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
                 <?php if ($hasFaviconSrc): ?><label class="ad-check"><input type="checkbox" name="clear_favicon"><span>Quitar mi favicon</span></label><?php endif; ?>
             </div>
         </div>
-        <div style="margin-top:1.2rem;max-width:360px"><label for="s_brand">Marca en la barra superior</label>
-            <select id="s_brand" name="site_brand_mode">
-                <option value="text" <?= $f['brand_mode'] === 'text' ? 'selected' : '' ?>>Solo el nombre</option>
-                <option value="logo" <?= $f['brand_mode'] === 'logo' ? 'selected' : '' ?>>Solo el logo</option>
-                <option value="both" <?= $f['brand_mode'] === 'both' ? 'selected' : '' ?>>Logo + nombre</option>
-            </select></div>
-
         <?php if ($icon): ?>
             <div class="st-gen">
                 <p class="ad-hint" style="margin-bottom:.8rem">Iconos generados automáticamente:</p>
@@ -80,32 +69,19 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
     <?= \App\Core\Module::render('components/font-picker') ?>
 
     <section class="ad-card">
-        <h2>Barra superior</h2>
-        <label class="ad-check st-line"><input type="checkbox" name="site_header_home" <?= $chk('header_home') ?>><span>Mostrar la barra superior en la <b>portada</b></span></label>
-        <label class="ad-check st-line"><input type="checkbox" name="site_header_pages" <?= $chk('header_pages') ?>><span>Mostrar la barra superior en las <b>demás páginas</b> (galerías)</span></label>
-        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;font-weight:500">Colores de la barra</h3>
-        <div class="ad-row">
-            <?php foreach (['name' => 'Nombre de la web', 'menu' => 'Botón del menú («hamburguesa»)', 'logo' => 'Teñir el logo de un color'] as $hk => $hl): ?>
-            <div>
-                <label class="ad-check"><input type="checkbox" name="site_hdr_<?= $hk ?>_on" <?= $chk("hdr_{$hk}_on") ?>><span><?= e($hl) ?>: color propio</span></label>
-                <input type="color" name="site_hdr_<?= $hk ?>_color" value="<?= e(preg_match('/^#[0-9a-fA-F]{6}$/', $f["hdr_{$hk}_color"]) ? $f["hdr_{$hk}_color"] : '#f2efe9') ?>" style="margin-top:.5rem">
-            </div>
-            <?php endforeach; ?>
-        </div>
-        <p class="ad-hint">El tinte pinta la silueta del logo con el color elegido: funciona con logos de fondo transparente (PNG/WebP). Con un logo de fondo opaco saldría un rectángulo de color.</p>
-        <p class="ad-hint">El pie de página (diseño, llegada, textos y firma) se configura en <a href="/admin/pie">Pie</a>.</p>
-    </section>
-
-    <section class="ad-card">
         <h2>Webapp</h2>
-        <div style="max-width:420px"><label for="s_disp">Modo al instalarla</label>
+        <div class="ad-row">
+            <div><label for="s_short">Nombre corto (icono del móvil)</label><input id="s_short" type="text" name="site_short_name" value="<?= e($f['short_name']) ?>" maxlength="14" placeholder="<?= e(\App\Services\Site::shortName()) ?>">
+                <p class="ad-hint">Máx. 12–14 letras: es el texto bajo el icono al instalar la webapp.</p></div>
+            <div><label for="s_disp">Modo al instalarla</label>
             <select id="s_disp" name="site_display">
                 <option value="standalone" <?= $f['display'] === 'standalone' ? 'selected' : '' ?>>App (sin barra del navegador)</option>
                 <option value="fullscreen" <?= $f['display'] === 'fullscreen' ? 'selected' : '' ?>>Pantalla completa total</option>
                 <option value="minimal-ui" <?= $f['display'] === 'minimal-ui' ? 'selected' : '' ?>>App con controles mínimos</option>
                 <option value="browser" <?= $f['display'] === 'browser' ? 'selected' : '' ?>>Pestaña normal del navegador</option>
             </select></div>
-        <p class="ad-hint" style="margin-top:.6rem">Para instalarla: en el móvil «Añadir a pantalla de inicio»; en Chrome/Edge de PC, el icono de instalar en la barra de direcciones.</p>
+        </div>
+        <p class="ad-hint">Para instalarla: en el móvil «Añadir a pantalla de inicio»; en Chrome/Edge de PC, el icono de instalar en la barra de direcciones.</p>
     </section>
 
     <section class="ad-card">
@@ -120,7 +96,8 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
 
     <section class="ad-card">
         <h2>Buscadores</h2>
-        <label class="ad-check st-line"><input type="checkbox" name="site_noindex" <?= $chk('noindex') ?>><span>Pedir a Google que <b>no</b> indexe la web (mientras la preparas)</span></label>
+        <div><label for="s_desc">Descripción (Google y redes sociales)</label><textarea id="s_desc" name="site_description" rows="2" maxlength="300"><?= e($f['description']) ?></textarea></div>
+        <label class="ad-check st-line" style="margin-top:1rem"><input type="checkbox" name="site_noindex" <?= $chk('noindex') ?>><span>Pedir a Google que <b>no</b> indexe la web (mientras la preparas)</span></label>
     </section>
 
     <button class="ad-btn">Guardar sitio</button>

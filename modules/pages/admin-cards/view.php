@@ -2,7 +2,7 @@
 Module::use('components/card-reveal');  Module::use('components/collection-card'); foreach (array_keys($reveals) as $r) Module::use("reveals/$r"); Module::use('card-titles/classic');
 $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' => '', 'cover' => null, 'cover_w' => 4, 'cover_h' => 5, 'photo_count' => 12]; ?>
 <h1>Tarjetas</h1>
-<p class="ad-sub">Cómo se ven las galerías en la página principal: cómo aparecen al hacer scroll y cómo se muestra el título de cada una.</p>
+<p class="ad-sub">Las galerías de la página principal, de arriba abajo: el diseño de la sección, cómo aparecen al hacer scroll, el aspecto de cada tarjeta, sus títulos y sus textos pequeños.</p>
 
 <form method="post" action="/admin/tarjetas" id="cardsForm" data-title="<?= e($c['style']) ?>">
     <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
@@ -39,6 +39,31 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
         </div>
     </section>
 
+    <section class="ad-card cd-look">
+        <h2>Aspecto de la tarjeta</h2>
+        <p class="ad-hint" style="margin-bottom:1rem">Valen para los diseños que usan tarjeta (Rejilla y Carrusel). Se ven al momento en la vista previa de arriba.</p>
+        <div class="ad-row">
+            <div>
+                <label for="cdRatio">Proporción de la foto</label>
+                <select id="cdRatio" name="cards_ratio">
+                    <?php foreach (App\Services\Cards::RATIOS as $rv => $rl): ?><option value="<?= e($rv) ?>" <?= $c['ratio'] === $rv ? 'selected' : '' ?>><?= e($rl) ?></option><?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="cdRadius">Redondeo de esquinas: <b id="cdRadiusVal"><?= (int) $c['radius'] ?></b> px</label>
+                <input id="cdRadius" type="range" name="cards_radius" min="0" max="48" step="1" value="<?= (int) $c['radius'] ?>">
+            </div>
+        </div>
+        <div class="ad-row" style="margin-top:1rem">
+            <div>
+                <label for="cdVeil">Velo bajo el título: <b id="cdVeilVal"><?= (int) $c['veil'] ?></b> %</label>
+                <input id="cdVeil" type="range" name="cards_veil" min="0" max="100" step="5" value="<?= (int) $c['veil'] ?>">
+            </div>
+            <div><label for="cdVeilColor">Color del velo</label><input id="cdVeilColor" type="color" name="cards_veil_color" value="<?= e($c['veil_color']) ?>"></div>
+        </div>
+        <p class="ad-hint">El velo es el degradado que oscurece la parte baja de la foto para que se lea el título. Solo se ve cuando el título va sobre la foto.</p>
+    </section>
+
     <section class="ad-card">
         <h2>Títulos de las galerías</h2>
         <label class="ad-check"><input type="checkbox" name="cards_titles" id="cdTitles" value="1" <?= $c['titles'] ? 'checked' : '' ?>><span>Mostrar el título de cada galería en su tarjeta</span></label>
@@ -46,6 +71,13 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
             <?= Module::render('components/style-picker', ['styles' => $titles, 'name' => 'cards_title_style', 'selected' => $c['style']]) ?>
         </div>
     </section>
+
+    <?php foreach ($titles as $tid => $tm): if (empty($tm['options'])) continue; ?>
+        <section class="ad-card" data-title-opts="<?= e($tid) ?>" hidden>
+            <h2>Ajustes: título «<?= e($tm['label']) ?>»</h2>
+            <?= Module::render('components/option-fields', ['spec' => $tm['options'], 'values' => $tid === $c['style'] ? $c['style_opts'] : \App\Services\ModuleOptions::values('card-titles', $tid, \App\Services\Cards::PREFIX), 'name' => "title_opt[$tid]"]) ?>
+        </section>
+    <?php endforeach; ?>
 
     <section class="ad-card cd-type">
         <h2>Tipografía, tamaño y color de los títulos</h2>
@@ -81,31 +113,6 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
         <p class="ad-hint">Valen para todos los diseños de título. En el diseño «Luz» el color de la pluma se elige en sus propios ajustes.</p>
     </section>
 
-    <section class="ad-card cd-look">
-        <h2>Aspecto de la tarjeta</h2>
-        <p class="ad-hint" style="margin-bottom:1rem">Valen para los diseños que usan tarjeta (Rejilla y Carrusel). Se ven al momento en la vista previa de arriba.</p>
-        <div class="ad-row">
-            <div>
-                <label for="cdRatio">Proporción de la foto</label>
-                <select id="cdRatio" name="cards_ratio">
-                    <?php foreach (App\Services\Cards::RATIOS as $rv => $rl): ?><option value="<?= e($rv) ?>" <?= $c['ratio'] === $rv ? 'selected' : '' ?>><?= e($rl) ?></option><?php endforeach; ?>
-                </select>
-            </div>
-            <div>
-                <label for="cdRadius">Redondeo de esquinas: <b id="cdRadiusVal"><?= (int) $c['radius'] ?></b> px</label>
-                <input id="cdRadius" type="range" name="cards_radius" min="0" max="48" step="1" value="<?= (int) $c['radius'] ?>">
-            </div>
-        </div>
-        <div class="ad-row" style="margin-top:1rem">
-            <div>
-                <label for="cdVeil">Velo bajo el título: <b id="cdVeilVal"><?= (int) $c['veil'] ?></b> %</label>
-                <input id="cdVeil" type="range" name="cards_veil" min="0" max="100" step="5" value="<?= (int) $c['veil'] ?>">
-            </div>
-            <div><label for="cdVeilColor">Color del velo</label><input id="cdVeilColor" type="color" name="cards_veil_color" value="<?= e($c['veil_color']) ?>"></div>
-        </div>
-        <p class="ad-hint">El velo es el degradado que oscurece la parte baja de la foto para que se lea el título. Solo se ve cuando el título va sobre la foto.</p>
-    </section>
-
     <section class="ad-card cd-type">
         <h2>Textos secundarios de la tarjeta</h2>
         <p class="ad-hint" style="margin-bottom:1rem">El contador («12 fotos») y las etiquetas pequeñas que acompañan al título.</p>
@@ -138,13 +145,6 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
             <div><label for="cdSubColor">Color</label><input id="cdSubColor" type="color" name="cards_sub_color" value="<?= e($c['sub_color']) ?>"></div>
         </div>
     </section>
-
-    <?php foreach ($titles as $tid => $tm): if (empty($tm['options'])) continue; ?>
-        <section class="ad-card" data-title-opts="<?= e($tid) ?>" hidden>
-            <h2>Ajustes: título «<?= e($tm['label']) ?>»</h2>
-            <?= Module::render('components/option-fields', ['spec' => $tm['options'], 'values' => $tid === $c['style'] ? $c['style_opts'] : \App\Services\ModuleOptions::values('card-titles', $tid, \App\Services\Cards::PREFIX), 'name' => "title_opt[$tid]"]) ?>
-        </section>
-    <?php endforeach; ?>
 
     <button class="ad-btn">Guardar tarjetas</button>
     <a class="ad-btn is-ghost" href="/#galerias" target="_blank" rel="noopener" style="margin-left:.5rem">Ver la web ↗</a>
