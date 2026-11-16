@@ -1,5 +1,5 @@
 <?php use App\Core\Module; ?>
-<div class="fg <?= ($opts['outline'] ?? '0') === '1' ? 'fg--outline' : '' ?>">
+<div class="fg <?= ($opts['outline'] ?? '0') === '1' ? 'fg--outline' : '' ?> <?= ($opts['caps'] ?? '1') === '1' ? 'fg--caps' : '' ?>">
     <p class="fg-word ftr-i" aria-label="<?= e($f['name']) ?>"><span aria-hidden="true"><?= e($f['name']) ?></span></p>
     <?php if ($f['tag'] !== ''): ?><p class="fg-tag ftr-i"><?= e($f['tag']) ?></p><?php endif; ?>
     <div class="fg-bar">

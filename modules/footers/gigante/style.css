@@ -1,5 +1,7 @@
 .fg{container-type:inline-size}
-.fg-word{margin:0;line-height:.85;white-space:nowrap;overflow:hidden;font:var(--st-brand,normal) var(--w-brand,400) 12cqi/.9 var(--f-brand);letter-spacing:-.01em;text-transform:uppercase;color:var(--fg);text-align:center}
+.fg-word{margin:0;padding:.12em 0;line-height:1.25;white-space:nowrap;font:var(--st-brand,normal) var(--w-brand,400) var(--fg-size,12cqi)/1.25 var(--f-brand);color:var(--fg);text-align:center}
+.fg-word span{display:inline-block}
+.fg--caps .fg-word{text-transform:uppercase}
 .ftr--light .fg-word{color:#111}.ftr--accent .fg-word{color:#000}
 .fg--outline .fg-word{color:transparent;-webkit-text-stroke:1px currentColor;-webkit-text-stroke-color:var(--ff)}
 .fg-tag{text-align:center;margin:1rem 0 0;opacity:.8}
