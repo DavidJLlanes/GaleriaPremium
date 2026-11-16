@@ -13,7 +13,7 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
         <label class="ad-check cd-px"><input type="checkbox" name="cards_parallax" value="1" <?= $c['parallax'] ? 'checked' : '' ?>><span>Parallax suave: la foto se desplaza ligeramente con el scroll, con inercia</span></label>
         <div class="cd-play">
             <button type="button" class="ad-btn is-ghost is-small" id="cdPlay">▶ Probar el efecto</button>
-            <div class="coll rv-on cd-prev" id="cdPrev" aria-hidden="true">
+            <div class="coll rv-on cd-prev" id="cdPrev" aria-hidden="true" style="<?= e(App\Services\Cards::vars($c)) ?>">
                 <?php for ($i = 0; $i < 2; $i++): ?>
                 <a class="ccard rv-<?= e($c['reveal']) ?> is-in ccard--over" href="#" tabindex="-1" style="<?= $i ? '--rv-d:140ms' : '' ?>">
                     <div class="ccard-media">
@@ -34,13 +34,46 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
         </div>
     </section>
 
+    <section class="ad-card cd-type">
+        <h2>Tipografía, tamaño y color de los títulos</h2>
+        <style><?php foreach (App\Services\Fonts::catalog() as $fid => $_) echo App\Services\Fonts::face($fid); ?></style>
+        <div class="ad-row">
+            <div>
+                <label for="cdFont">Tipografía</label>
+                <select id="cdFont" name="cards_title_font">
+                    <option value="" <?= $c['font'] === '' ? 'selected' : '' ?>>La de Sitio → Tipografías («Títulos de galerías»)</option>
+                    <?php $byCat = []; foreach (App\Services\Fonts::catalog() as $fid => $fm) $byCat[$fm['cat'] ?? 'custom'][$fid] = $fm;
+                    foreach (App\Services\Fonts::CATS as $cat => $catLabel): if (empty($byCat[$cat])) continue; ?>
+                        <optgroup label="<?= e($catLabel) ?>"><?php foreach ($byCat[$cat] as $fid => $fm): ?><option value="<?= e($fid) ?>" data-fam="<?= e(App\Services\Fonts::family($fid)) ?>" <?= $c['font'] === $fid ? 'selected' : '' ?>><?= e($fm['label']) ?></option><?php endforeach; ?></optgroup>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="cdWeight">Grosor</label>
+                <select id="cdWeight" name="cards_title_weight">
+                    <option value="0" <?= !$c['weight'] ? 'selected' : '' ?>>El del diseño</option>
+                    <?php foreach (App\Services\Fonts::WEIGHTS as $w => $wl): ?><option value="<?= $w ?>" <?= $c['weight'] === $w ? 'selected' : '' ?>><?= e($wl) ?> (<?= $w ?>)</option><?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="cdSize">Tamaño: <b id="cdSizeVal"><?= (int) $c['size'] ?></b> %</label>
+                <input id="cdSize" type="range" name="cards_title_size" min="50" max="180" step="5" value="<?= (int) $c['size'] ?>">
+            </div>
+        </div>
+        <div class="ad-row" style="margin-top:1rem">
+            <label class="ad-check"><input type="checkbox" name="cards_title_italic" id="cdItalic" value="1" <?= $c['italic'] ? 'checked' : '' ?>><span>Cursiva (si la fuente la tiene)</span></label>
+            <label class="ad-check"><input type="checkbox" name="cards_title_color_on" id="cdColorOn" value="1" <?= $c['color_on'] ? 'checked' : '' ?>><span>Usar un color propio</span></label>
+            <div><label for="cdColor">Color del título</label><input id="cdColor" type="color" name="cards_title_color" value="<?= e($c['color']) ?>"></div>
+        </div>
+        <p class="ad-hint">Valen para todos los diseños de título. En el diseño «Luz» el color de la pluma se elige en sus propios ajustes.</p>
+    </section>
+
     <?php foreach ($titles as $tid => $tm): if (empty($tm['options'])) continue; ?>
         <section class="ad-card" data-title-opts="<?= e($tid) ?>" hidden>
             <h2>Ajustes: título «<?= e($tm['label']) ?>»</h2>
             <?= Module::render('components/option-fields', ['spec' => $tm['options'], 'values' => $tid === $c['style'] ? $c['style_opts'] : \App\Services\ModuleOptions::values('card-titles', $tid, \App\Services\Cards::PREFIX), 'name' => "title_opt[$tid]"]) ?>
         </section>
     <?php endforeach; ?>
-    <p class="ad-hint">La tipografía, el grosor y la cursiva de los títulos se eligen en <a href="/admin/sitio">Sitio → Tipografías → «Títulos de galerías»</a>.</p>
 
     <button class="ad-btn">Guardar tarjetas</button>
     <a class="ad-btn is-ghost" href="/#galerias" target="_blank" rel="noopener" style="margin-left:.5rem">Ver la web ↗</a>

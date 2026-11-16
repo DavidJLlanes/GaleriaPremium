@@ -8,6 +8,17 @@
   };
   form.addEventListener('change', syncTitle); syncTitle();
 
+  // Tipografía, tamaño y color de los títulos: la vista previa se actualiza al momento (mismas variables CSS que la web)
+  const pv = document.getElementById('cdPrev'), g = (id) => document.getElementById(id);
+  const type = () => {
+    const opt = g('cdFont').selectedOptions[0], w = +g('cdWeight').value;
+    const set = (k, v) => v ? pv.style.setProperty(k, v) : pv.style.removeProperty(k);
+    set('--f-title', opt && opt.dataset.fam); set('--w-title', w ? String(w) : ''); set('--st-title', g('cdItalic').checked ? 'italic' : '');
+    pv.style.setProperty('--ct-s', String(g('cdSize').value / 100)); g('cdSizeVal').textContent = g('cdSize').value;
+    set('--ct-c', g('cdColorOn').checked ? g('cdColor').value : '');
+  };
+  ['cdFont', 'cdWeight', 'cdSize', 'cdItalic', 'cdColorOn', 'cdColor'].forEach(id => g(id).addEventListener('input', type)); type();
+
   // Vista previa del efecto: se vuelve al estado inicial y se reproduce
   const prev = document.getElementById('cdPrev'), cards = [...prev.querySelectorAll('.ccard')];
   const play = () => {

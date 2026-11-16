@@ -1,6 +1,6 @@
 .ct-luz{position:absolute;z-index:2;inset:auto 0 0 0;padding:clamp(1.2rem,2.4vw,2rem);text-align:center;display:flex;flex-direction:column;align-items:center;gap:.5rem}
 .ct-luz-count{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ctl-c)}
-.ct-luz-title{font:var(--st-title,normal) var(--w-title,300) clamp(1.9rem,3.2vw,2.8rem)/1.1 var(--f-title);margin:0;width:100%;text-wrap:balance;opacity:0}   /* oculto hasta que la pluma está lista: evita el destello del título normal */
+.ct-luz-title{color:var(--ct-c,inherit);font:var(--st-title,normal) var(--w-title,300) calc(clamp(1.9rem,3.2vw,2.8rem) * var(--ct-s,1))/1.1 var(--f-title);margin:0;width:100%;text-wrap:balance;opacity:0}   /* oculto hasta que la pluma está lista: evita el destello del título normal */
 .ct-luz.is-fallback .ct-luz-title{opacity:1}
 .ct-luz-canvas{display:none;max-width:100%;height:auto;filter:drop-shadow(0 0 .3rem color-mix(in srgb,var(--ctl-c) 55%,transparent))}
 .ct-luz.is-ready .ct-luz-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:-1px;white-space:nowrap}   /* se queda para lectores de pantalla y buscadores */
