@@ -16,7 +16,7 @@
   // Escala la foto para llenar el área útil de la pantalla actual (hasta 3× su tamaño) sin deformarla
   const fit = () => {
     const nw = +img.dataset.nw, nh = +img.dataset.nh; if (!nw) return;
-    const aw = innerWidth * .96, ah = innerHeight - (innerWidth < 700 ? 118 : 100);
+    const aw = innerWidth * .96, ah = innerHeight - (innerWidth < 700 ? 118 : 100) - (+lb.dataset.extra || 0);   // data-extra: espacio extra que reservan los complementos (miniaturas, datos…)
     const s = Math.min(aw / nw, ah / nh, 3);
     img.style.width = Math.round(nw * s) + 'px'; img.style.height = Math.round(nh * s) + 'px';
   };
@@ -61,6 +61,7 @@
     await Promise.all([p, wait(ms('--lb-close', 380))]);
     lb.hidden = true; lb.classList.remove('is-closing'); img.getAnimations?.().forEach(a => a.cancel());
     document.body.style.overflow = ''; busy = false;
+    dispatchEvent(new Event('lb:close'));
   };
 
   items.forEach((a, i) => a.addEventListener('click', e => { e.preventDefault(); open(i); }));
@@ -75,12 +76,14 @@
     if (e.key === 'ArrowLeft') swap(idx - 1, -1);
   });
   addEventListener('resize', fit);
-  let x0 = null;
-  lb.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
+  // Gesto de deslizar para cambiar de foto: solo horizontal, con un dedo y sin zoom (el zoom/arrastre lo gestiona components/lightbox-extras)
+  let x0 = null, y0 = null;
+  lb.addEventListener('touchstart', e => { if (e.touches.length > 1 || lb.dataset.zoom === '1') { x0 = null; return; } x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
   lb.addEventListener('touchend', e => {
-    if (x0 === null) return;
-    const dx = e.changedTouches[0].clientX - x0;
-    if (Math.abs(dx) > 50) swap(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+    if (x0 === null || lb.dataset.zoom === '1') return;
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) swap(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
     x0 = null;
   });
+  window.LightboxApi = { go: (i) => { if (i !== idx) swap(i, i > idx ? 1 : -1); }, close, get index() { return idx; }, get count() { return items.length; }, get open() { return !lb.hidden; } };
 })();

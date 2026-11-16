@@ -34,6 +34,7 @@
   }, { passive: true });
   document.addEventListener('pointerleave', () => c.classList.add('is-out'));
   addEventListener('blur', () => c.classList.add('is-out'));
+  addEventListener('lb:open', () => c.classList.remove('is-photo', 'is-link'));   // al abrir el lightbox el cursor deja el estado «foto»
   addEventListener('pointerdown', () => c.classList.add('is-down'));
   addEventListener('pointerup', () => c.classList.remove('is-down'));
 })();

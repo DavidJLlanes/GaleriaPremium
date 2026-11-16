@@ -1,0 +1,1 @@
+<?php return ['label' => 'Complementos del lightbox', 'desc' => 'Zoom (doble toque, pellizco, rueda) y arrastre, deslizar hacia abajo para cerrar, tira de miniaturas, datos de cámara y resplandor del color de la foto.'];
