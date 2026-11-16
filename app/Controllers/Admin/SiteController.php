@@ -45,8 +45,8 @@ final class SiteController
             if ($og['error'] !== UPLOAD_ERR_OK || $og['size'] > 40 * 1024 * 1024) $errors[] = 'Imagen Open Graph: archivo no válido o superior a 40 MB.';
             else {
                 $crop = json_decode((string) ($_POST['og_crop'] ?? ''), true);
-                if (!is_array($crop)) $errors[] = 'Imagen Open Graph: elige el recorte antes de guardar.';
-                else try { ImageProcessor::cropTo($og['tmp_name'], Site::brandFile('og.webp'), $crop, 1200, 630); }
+                if (!is_array($crop)) $crop = ['x' => 0, 'y' => 0, 'w' => 1, 'h' => 1];   // sin recorte elegido: centrado, con la proporción fija
+                try { ImageProcessor::cropTo($og['tmp_name'], Site::brandFile('og.webp'), $crop, 1200, 630); }
                 catch (\Throwable $e) { $errors[] = 'Imagen Open Graph: ' . $e->getMessage(); }
             }
         }

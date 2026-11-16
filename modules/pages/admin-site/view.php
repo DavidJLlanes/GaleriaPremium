@@ -37,10 +37,10 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
             </div>
             <div class="st-asset">
                 <label>Imagen Open Graph</label>
-                <div class="st-prev st-og-prev"><span class="st-none">Imagen 1200 × 630</span></div>
+                <div class="st-prev st-og-prev is-wide"><?= $ogImage ? '<img src="' . e($ogImage) . '" alt="Imagen Open Graph">' : '<span class="st-none">Imagen 1200 × 630</span>' ?></div>
                 <input type="file" name="og_image" id="ogFile" accept="image/png,image/jpeg,image/webp">
                 <input type="hidden" name="og_crop" id="ogCrop">
-                <p class="ad-hint">Recorte fijo 1,91:1. Se guarda como WebP 1200 × 630 al 75 %.</p>
+                <p class="ad-hint">Al elegir la imagen se abre el recorte, siempre con la proporción fija 1,91:1. Se guarda como WebP 1200 × 630 al 75 %. Es la que se ve al compartir la web en redes y mensajería.</p>
                 <?php if ($ogImage): ?><label class="ad-check"><input type="checkbox" name="clear_og"><span>Quitar imagen</span></label><?php endif; ?>
             </div>
             <div class="st-asset">

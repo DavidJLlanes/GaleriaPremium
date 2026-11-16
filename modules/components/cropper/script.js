@@ -1,11 +1,11 @@
 /* Editor de recorte: window.Cropper.open({ src, iw, ih, crop, ratio, title, hint, onSave }).
-   crop = {x,y,w,h} en fracciones de la foto original. ratio = proporción fija (ancho/alto en píxeles) o null = libre. */
+   crop = {x,y,w,h} en fracciones de la foto original. ratio = proporción (ancho/alto en píxeles) o null = libre; fixed = true la bloquea del todo (sin presets ni «Libre»); onCancel se llama al cerrar sin guardar. */
 (() => {
   const el = document.getElementById('cropper'); if (!el) return;
   const $ = (s) => el.querySelector(s);
   const stage = $('.cr-stage'), img = $('.cr-img'), rect = $('.cr-rect'), info = $('.cr-info'), zoom = $('.cr-zoom input');
   const presets = $('.cr-presets'), saveBtn = $('.cr-save');
-  let st, lock, iw, ih, dw, dh, onSave, mode = null, drag = null;
+  let st, lock, fixed = false, iw, ih, dw, dh, onSave, onCancel, saved = false, mode = null, drag = null;
 
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const ratioOf = (c) => (c.w * iw) / (c.h * ih);
@@ -23,16 +23,16 @@
     if (lock) zoom.value = Math.round(st.w / fit(lock).w * 100);
   };
 
-  const close = () => { el.hidden = true; document.body.style.overflow = ''; };
+  const close = () => { el.hidden = true; document.body.style.overflow = ''; if (!saved) onCancel?.(); };
 
   const open = (o) => {
-    iw = o.iw; ih = o.ih; lock = o.ratio || null; onSave = o.onSave;
+    iw = o.iw; ih = o.ih; lock = o.ratio || null; fixed = !!o.fixed; onSave = o.onSave; onCancel = o.onCancel; saved = false;
     $('.cr-title').textContent = o.title || 'Recortar'; $('.cr-hint').textContent = o.hint || '';
-    presets.hidden = !!lock; presets.querySelectorAll('button').forEach(b => b.classList.toggle('is-on', b.dataset.r === 'free'));
+    presets.hidden = !!lock || fixed; presets.querySelectorAll('button').forEach(b => b.classList.toggle('is-on', b.dataset.r === 'free'));
     zoom.parentElement.hidden = !lock;
     el.hidden = false; document.body.style.overflow = 'hidden';
     img.onload = () => {
-      const k = Math.min(Math.min(innerWidth * .86, 900) / iw, (innerHeight * .56) / ih);
+      const k = Math.min(Math.min(innerWidth - 80, 900) / iw, (innerHeight * .56) / ih);
       dw = Math.round(iw * k); dh = Math.round(ih * k); img.style.width = dw + 'px'; img.style.height = dh + 'px';
       stage.style.width = dw + 'px'; stage.style.height = dh + 'px';
       st = o.crop ? { ...o.crop } : (lock ? fit(lock) : { x: .05, y: .05, w: .9, h: .9 });
@@ -77,7 +77,7 @@
     st = { w, h, x: clamp(cx - w / 2, 0, 1 - w), y: clamp(cy - h / 2, 0, 1 - h) }; draw();
   });
   presets.addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
+    const b = e.target.closest('button'); if (!b || fixed) return;
     presets.querySelectorAll('button').forEach(x => x.classList.toggle('is-on', x === b));
     if (b.dataset.r === 'free') { lock = null; return; }
     lock = parseFloat(b.dataset.r); st = fit(lock, st); draw();
@@ -88,7 +88,7 @@
   addEventListener('keydown', e => { if (!el.hidden && e.key === 'Escape') close(); });
   saveBtn.onclick = async () => {
     saveBtn.disabled = true;
-    try { await onSave?.({ ...st }); close(); } catch (err) { window.Admin?.toast(err.message, 'error'); } finally { saveBtn.disabled = false; }
+    try { await onSave?.({ ...st }); saved = true; close(); } catch (err) { window.Admin?.toast(err.message, 'error'); } finally { saveBtn.disabled = false; }
   };
 
   window.Cropper = { open };

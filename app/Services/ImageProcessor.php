@@ -15,10 +15,15 @@ final class ImageProcessor
     /** Carga cualquier imagen soportada por GD aplicando la orientación EXIF. */
     private static function load(string $path): \GdImage
     {
+        $info = @getimagesize($path);
+        if (!$info) throw new \RuntimeException('Imagen no válida.');
+        if ($info[0] * $info[1] > 120_000_000) throw new \RuntimeException('Imagen demasiado grande (máx. 120 megapíxeles).');
+        @ini_set('memory_limit', '1024M');
         $img = @imagecreatefromstring((string) file_get_contents($path));
-        if (!$img) throw new \RuntimeException("Imagen no válida: $path");
+        if (!$img) throw new \RuntimeException('Imagen no válida.');
 
-        if (function_exists('exif_read_data') && in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), ['jpg', 'jpeg'], true)) {
+        // La orientación EXIF se lee por el tipo real (los temporales de PHP no tienen extensión): fotos de móvil girados
+        if (function_exists('exif_read_data') && $info[2] === IMAGETYPE_JPEG) {
             $o = @exif_read_data($path)['Orientation'] ?? 1;
             $img = match ((int) $o) {
                 3 => imagerotate($img, 180, 0) ?: $img,
@@ -56,6 +61,10 @@ final class ImageProcessor
         $y = max(0, min($ih - 1, (int) round((float) ($crop['y'] ?? 0) * $ih)));
         $w = max(1, min($iw - $x, (int) round((float) ($crop['w'] ?? 1) * $iw)));
         $h = max(1, min($ih - $y, (int) round((float) ($crop['h'] ?? 1) * $ih)));
+        // La proporción es siempre la de salida (recorte fijo): si el recorte recibido no la tiene, se ajusta desde su centro
+        $R = $width / $height;
+        if ($w / $h > $R) { $nw = max(1, (int) round($h * $R)); $x += intdiv($w - $nw, 2); $w = $nw; }
+        else { $nh = max(1, (int) round($w / $R)); $y += intdiv($h - $nh, 2); $h = $nh; }
         $out = imagecreatetruecolor($width, $height);
         imagecopyresampled($out, $img, 0, 0, $x, $y, $width, $height, $w, $h);
         imagewebp($out, $dst, self::quality());
