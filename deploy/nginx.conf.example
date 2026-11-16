@@ -1,28 +1,30 @@
-# Configuración de Nginx para warpstudio.es (root = carpeta public/, solo se ejecuta index.php)
-server {
-    listen 80;
-    listen [::]:80;
-    server_name warpstudio.es www.warpstudio.es;
-    return 301 https://$server_name$request_uri;
-}
+# Configuración de Nginx para __DOMAIN__ (root = carpeta public/, solo se ejecuta index.php)
+#SSL#server {
+#SSL#    listen 80;
+#SSL#    listen [::]:80;
+#SSL#    server_name __DOMAIN__ www.__DOMAIN__;
+#SSL#    return 301 https://$server_name$request_uri;
+#SSL#}
 
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name warpstudio.es www.warpstudio.es;
+#SSL#    listen 443 ssl http2;
+#SSL#    listen [::]:443 ssl http2;
+#NOSSL#    listen 80;
+#NOSSL#    listen [::]:80;
+    server_name __DOMAIN__ www.__DOMAIN__;
 
-    root /var/www/warpstudio.es/public;
+    root /var/www/__DOMAIN__/public;
     index index.php;
     charset utf-8;
     client_max_body_size 64m;            # subida de fotos
 
-    ssl_certificate /etc/letsencrypt/live/warpstudio.es/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/warpstudio.es/privkey.pem;
-    include /etc/letsencrypt/options-ssl-nginx.conf;
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+#SSL#    ssl_certificate /etc/letsencrypt/live/__DOMAIN__/fullchain.pem;
+#SSL#    ssl_certificate_key /etc/letsencrypt/live/__DOMAIN__/privkey.pem;
+#SSL#    include /etc/letsencrypt/options-ssl-nginx.conf;
+#SSL#    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
-    access_log /var/www/warpstudio.es/log/access.log;
-    error_log  /var/www/warpstudio.es/log/error.log;
+    access_log /var/www/__DOMAIN__/log/access.log;
+    error_log  /var/www/__DOMAIN__/log/error.log;
 
     add_header X-Content-Type-Options nosniff always;
     add_header X-Frame-Options SAMEORIGIN always;

@@ -7,13 +7,13 @@
 - Galería fotográfica premium, modular y escalable. Stack: PHP 8.3, HTML5, JavaScript, CSS y SQLite (si hace falta BD).
 - Debe destacar sobre todo por su **espectacularidad**: moderna y espectacular.
 - Repositorio: https://github.com/DavidJLlanes/GaleriaPremium (rama `main`).
-- Producción: VPS en `/var/www/warpstudio.es` (Nginx, `root` = `/var/www/warpstudio.es/public`).
+- Producción (dominio **luxaeterna.es**; antes estuvo en warpstudio.es): VPS en `/var/www/luxaeterna.es` (Nginx, `root` = `/var/www/luxaeterna.es/public`).
 
 ## Peticiones obligatorias
 1. Construir el proyecto poco a poco, con una estructura perfecta y muy profesional.
 2. Incluir un sistema de subida de fotos y varios estilos/diseños de galería.
 3. Ir guardando el proyecto en el repositorio de GitHub tras cada avance.
-4. **Después de CADA modificación, dar a David el comando de despliegue en su VPS** (`/var/www/warpstudio.es`).
+4. **Después de CADA modificación, dar a David el comando de despliegue en su VPS** (`/var/www/luxaeterna.es`).
 5. Las fotos adjuntas por David son ejemplos temporales (demo).
 6. Incluir diferentes diseños de galería.
 7. La sección hero puede ser una galería (pase de fotos) o una sola foto a pantalla completa.
@@ -22,7 +22,7 @@
 10. Anotar todas las peticiones de David en este archivo; y cada vez que diga "anota orden", añadirla aquí como regla obligatoria.
 11. **Cada foto se sube con nombre (título) y descripción.** La descripción puede generarse automáticamente con IA (opcional) cuando se deja vacía.
 12. **Sistema de IA con APIs comunes, incluido OpenRouter** (también OpenAI, Anthropic, Gemini y endpoint compatible OpenAI personalizado). La IA genera el **título con un estilo definido en las opciones de la web** (Admin → Ajustes). Cada proveedor vive en su propio archivo (`app/Services/Ai/Providers/`).
-13. **Despliegue en VPS**: la web vive en `/var/www/warpstudio.es`; Nginx apunta su `root` a `/var/www/warpstudio.es/public`. David usa Nginx puro (sin Virtualmin). Dar siempre UN solo comando, ordenado y sencillo.
+13. **Despliegue en VPS**: la web vive en `/var/www/luxaeterna.es`; Nginx apunta su `root` a `/var/www/luxaeterna.es/public`. David usa Nginx puro (sin Virtualmin). Dar siempre UN solo comando, ordenado y sencillo.
 14. **Cada galería tiene su propio diseño visual** (selector en la gestión de la galería) y las galerías y la sección hero se pueden **ordenar** desde el panel.
 15. **Barra superior opcional** en la pantalla principal (ajuste de Sitio).
 16. **Identidad del sitio / webapp**: favicon, icono, logo, nombre y más opciones en Admin → Sitio. Al subir un icono se generan automáticamente los iconos adaptativos (iPhone, Android, PC). Excepción documentada a la regla 9: los iconos (PNG, por requisito de plataforma) y el logo; las fotos siguen siendo WebP 75%.
@@ -43,4 +43,4 @@ app/Services/ImageProcessor.php   ÚNICO punto de conversión de fotos (WebP 75%
 - Nuevo hero → `modules/heroes/<nombre>/` (se elige con el ajuste `hero_type`).
 - Los CSS/JS de un módulo solo afectan a ese módulo (clases con prefijo propio). Nada de CSS/JS global salvo `layouts/main`.
 - Toda subida o importación de fotos DEBE pasar por `ImageProcessor` (WebP 75%).
-- Tras cada cambio: commit + push a `main` y dar el comando de despliegue: `bash /var/www/warpstudio.es/deploy/deploy.sh`.
+- Tras cada cambio: commit + push a `main` y dar el comando de despliegue: `bash /var/www/luxaeterna.es/deploy/deploy.sh`.
