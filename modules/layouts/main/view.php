@@ -3,7 +3,7 @@ $showHeader = Site::on(!empty($isHome) ? 'header_home' : 'header_pages') || Site
 $fx = Effects::values();
 if ($fx['lqip'] === '1') Module::use('components/photo-load');
 if ($fx['transition'] === '1') Module::use('components/page-transition');
-$iv = !empty($isHome) && ($tmp = Intro::values())['enabled'] === '1' ? $tmp : null;   // pantalla de entrada (solo portada)
+$iv = !empty($isHome) && !isset($_GET['cards_preview']) && !isset($_GET['footer_preview']) && !isset($_GET['menu_preview']) && ($tmp = Intro::values())['enabled'] === '1' ? $tmp : null;   // pantalla de entrada (solo portada)
 $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?>
 <!doctype html>
 <html lang="<?= e(Site::get('lang')) ?>">

@@ -8,6 +8,15 @@
   };
   form.addEventListener('change', syncTitle); syncTitle();
 
+  // Diseño de la sección: ajustes propios y vista previa (la web real en un iframe)
+  const frame = document.getElementById('cdFrame');
+  const syncLayout = (reload) => {
+    const l = form.querySelector('[name=cards_layout]:checked')?.value || 'rejilla';
+    form.querySelectorAll('[data-layout-opts]').forEach(c => { c.hidden = c.dataset.layoutOpts !== l; });
+    if (reload) frame.src = '/?cards_preview=1&cl=' + encodeURIComponent(l) + '#galerias';
+  };
+  form.querySelectorAll('[name=cards_layout]').forEach(r => r.addEventListener('change', () => syncLayout(true))); syncLayout(false);
+
   // Tipografía, tamaño y color de los títulos: la vista previa se actualiza al momento (mismas variables CSS que la web)
   const pv = document.getElementById('cdPrev'), g = (id) => document.getElementById(id);
   const type = () => {

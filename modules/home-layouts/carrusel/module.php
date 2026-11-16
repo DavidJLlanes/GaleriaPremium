@@ -1,0 +1,3 @@
+<?php return ['label' => 'Carrusel', 'desc' => 'Una fila horizontal que se arrastra con inercia; barra de progreso y contador. Usa las mismas tarjetas, títulos y aparición que la rejilla.', 'cards' => true,
+  'icon' => '<rect x="4" y="8" width="18" height="22" opacity=".5"/><rect x="24" y="8" width="18" height="22"/><rect x="44" y="8" width="18" height="22" opacity=".5"/><rect x="8" y="34" width="48" height="1" opacity=".3"/><rect x="8" y="34" width="18" height="1"/>',
+  'options' => ['size' => ['label' => 'Tamaño de las tarjetas', 'type' => 'select', 'default' => 'm', 'choices' => ['s' => 'Pequeñas', 'm' => 'Medianas', 'l' => 'Grandes']]]];

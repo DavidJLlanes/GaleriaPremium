@@ -2,7 +2,7 @@
    Usa los eventos pageswap/pagereveal (Chrome/Edge/Safari recientes); en otros navegadores no se ejecuta nada. */
 (() => {
   const slugOf = (u) => { try { const p = new URL(u, location.href).pathname; return p.startsWith('/galeria/') ? decodeURIComponent(p.slice(9)).replace(/\/$/, '') : null; } catch { return null; } };
-  const cardFor = (slug) => [...document.querySelectorAll('.ccard')].find(a => slugOf(a.href) === slug)?.querySelector('.ccard-media');
+  const cardFor = (slug) => { const a = [...document.querySelectorAll('.ccard,a[data-pt]')].find(a => slugOf(a.href) === slug); return a && (a.querySelector('.ccard-media,[data-pt-media]') || a); };   // cualquier diseño de portada: enlace con data-pt (+ data-pt-media)
   const mark = (el, vt) => { if (!el) return; el.style.viewTransitionName = 'pt-card'; vt.finished.finally(() => { el.style.viewTransitionName = ''; }); };
 
   addEventListener('pageswap', (e) => {             // página que se abandona

@@ -57,10 +57,12 @@
 
 35. **Colores de la barra superior** (Admin → Sitio → Barra superior, ajustes `site_hdr_<name|menu|logo>_on|color`): color propio del nombre de la web, del botón del menú y **tinte del logo** (la silueta del logo hace de máscara CSS sobre el color; requiere logo con fondo transparente). `components/header` los emite como `--hdr-name` / `--hdr-menu`.
 
+36. **Diseños de la sección de galerías de la portada** (Admin → Tarjetas → «Diseño de la sección», ajuste `cards_layout`, `App\Services\Cards`): cada uno en `modules/home-layouts/<nombre>/` (rejilla, carrusel con arrastre e inercia, índice editorial con portada flotante, pantallas apiladas, editorial alterno, acordeón). `sections/collections` solo envuelve (`.coll.coll--<nombre>`, variables de título) y delega; la vista recibe `$galleries, $c, $opts`. Un diseño con `'cards' => true` en su `module.php` usa `components/collection-card` (y por tanto los efectos de aparición y diseños de título de la regla 26); los demás traen su propia composición y animación (clase `is-js` + `is-in` puestas por su script: sin JS todo se ve), y deben respetar `--f-title/--w-title/--st-title`, `--ct-s`, `--ct-c` y `prefers-reduced-motion`. Para la transición de página, el enlace a la galería lleva `data-pt` y su foto `data-pt-media`. Ajustes propios vía `options` (prefijo `cards_layout_opt`). Vista previa: `/?cards_preview=1&cl=<nombre>` (solo administrador). Movimiento siempre lento y suave (curvas `cubic-bezier(.16,1,.3,1)` / `(.65,0,.35,1)`, solo transform/opacity/clip-path).
+
 ## Arquitectura (cómo cumplir la regla 8)
 ```
 modules/<tipo>/<nombre>/{view.php, style.css, script.js, module.php}
-  tipos: layouts · pages · sections · components · heroes · galleries · plugins · cursors · intros · reveals · card-titles · menu-icons · menu-reveals · menu-styles · lightboxes · footers · footer-reveals
+  tipos: layouts · pages · sections · components · heroes · galleries · plugins · cursors · intros · reveals · card-titles · menu-icons · menu-reveals · menu-styles · lightboxes · footers · footer-reveals · home-layouts
 app/Core/Module.php   render()/use(): al usar un módulo se registran SOLO sus CSS/JS
 app/Core/Assets.php   emite <link>/<script> de los módulos usados en la página
 app/Services/ImageProcessor.php   ÚNICO punto de conversión de fotos (WebP 75%)

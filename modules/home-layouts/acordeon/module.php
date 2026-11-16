@@ -1,0 +1,2 @@
+<?php return ['label' => 'Acordeón', 'desc' => 'Franjas verticales con cada portada; la que señalas se abre con suavidad y muestra su título mientras las demás se estrechan. En móvil, franjas apiladas que se abren al tocarlas.',
+  'icon' => '<rect x="6" y="5" width="6" height="30" opacity=".45"/><rect x="14" y="5" width="6" height="30" opacity=".45"/><rect x="22" y="5" width="26" height="30"/><rect x="50" y="5" width="6" height="30" opacity=".45"/>'];

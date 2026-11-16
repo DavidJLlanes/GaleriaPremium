@@ -1,0 +1,2 @@
+<?php return ['label' => 'Índice editorial', 'desc' => 'Lista de títulos grandes con número; al pasar el cursor, la portada de cada galería flota y sigue al puntero con inercia. En móvil, miniatura junto a cada título.',
+  'icon' => '<rect x="8" y="8" width="30" height="3"/><rect x="8" y="18" width="38" height="3" opacity=".5"/><rect x="8" y="28" width="26" height="3" opacity=".5"/><rect x="40" y="4" width="16" height="20" opacity=".8"/>'];

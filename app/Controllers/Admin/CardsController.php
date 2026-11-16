@@ -13,7 +13,7 @@ final class CardsController
     {
         Auth::guard();
         Page::render('pages/admin-cards', [
-            'c' => Cards::values(), 'reveals' => Module::all('reveals'), 'titles' => Module::all('card-titles'),
+            'c' => Cards::values(), 'reveals' => Module::all('reveals'), 'titles' => Module::all('card-titles'), 'layouts' => Module::all('home-layouts'),
             'sample' => Gallery::published()[0] ?? null,
         ], ['title' => 'Tarjetas', 'nav' => 'tarjetas'], 'layouts/admin');
     }

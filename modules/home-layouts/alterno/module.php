@@ -1,0 +1,2 @@
+<?php return ['label' => 'Editorial alterno', 'desc' => 'Una galería por fila, con la foto a un lado y el texto al otro, alternando. La foto se descubre como una cortina y se mueve con parallax suave.',
+  'icon' => '<rect x="6" y="5" width="26" height="14"/><rect x="36" y="9" width="18" height="2.5" opacity=".7"/><rect x="36" y="14" width="12" height="1.5" opacity=".4"/><rect x="32" y="22" width="26" height="14"/><rect x="8" y="26" width="18" height="2.5" opacity=".7"/><rect x="8" y="31" width="12" height="1.5" opacity=".4"/>'];

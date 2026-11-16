@@ -14,6 +14,17 @@ final class Cards
     public const REVEAL_DEFAULT = 'fade-up';
     public const TITLE_DEFAULT = 'classic';
     public const PREFIX = 'card_title_opt';
+    public const LAYOUT_DEFAULT = 'rejilla';
+    public const LAYOUT_PREFIX = 'cards_layout_opt';
+
+    /** Vista previa del panel: ?cards_preview=1&cl=<diseño> (solo con sesión de administrador). */
+    public static function previewing(): bool { return isset($_GET['cards_preview']) && Auth::check(); }
+
+    public static function layout(?string $v = null): string
+    {
+        $v ??= self::previewing() && is_string($_GET['cl'] ?? null) ? $_GET['cl'] : Setting::get('cards_layout', '');
+        return preg_match('/^[a-z0-9-]+$/', $v) && Module::exists("home-layouts/$v") ? $v : self::LAYOUT_DEFAULT;
+    }
 
     public static function values(): array
     {
@@ -21,7 +32,10 @@ final class Cards
         $st = Setting::get('cards_title_style');
         $fx = Module::exists("reveals/$fx") ? $fx : self::REVEAL_DEFAULT;
         $st = Module::exists("card-titles/$st") ? $st : self::TITLE_DEFAULT;
+        $ly = self::layout();
         return [
+            'layout'    => $ly,
+            'layout_opts' => ModuleOptions::values('home-layouts', $ly, self::LAYOUT_PREFIX),
             'reveal'    => $fx,
             'parallax'  => Setting::get('cards_parallax', '0') === '1',
             'titles'    => Setting::get('cards_titles', '1') !== '0',
@@ -54,6 +68,8 @@ final class Cards
     {
         $fx = (string) ($post['cards_reveal'] ?? ''); $st = (string) ($post['cards_title_style'] ?? '');
         Setting::set('cards_reveal', Module::exists("reveals/$fx") ? $fx : self::REVEAL_DEFAULT);
+        Setting::set('cards_layout', self::layout((string) ($post['cards_layout'] ?? '')));
+        foreach (array_keys(Module::all('home-layouts')) as $name) ModuleOptions::save('home-layouts', $name, self::LAYOUT_PREFIX, (array) ($post['layout_opt'][$name] ?? []));
         Setting::set('cards_parallax', !empty($post['cards_parallax']) ? '1' : '0');
         Setting::set('cards_titles', !empty($post['cards_titles']) ? '1' : '0');
         Setting::set('cards_title_style', Module::exists("card-titles/$st") ? $st : self::TITLE_DEFAULT);

@@ -8,6 +8,19 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
     <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
 
     <section class="ad-card">
+        <h2>Diseño de la sección de galerías</h2>
+        <?= Module::render('components/style-picker', ['styles' => $layouts, 'name' => 'cards_layout', 'selected' => $c['layout']]) ?>
+        <iframe class="cd-frame" id="cdFrame" title="Vista previa de la portada" loading="lazy" src="/?cards_preview=1&amp;cl=<?= e($c['layout']) ?>#galerias"></iframe>
+        <p class="ad-hint">Vista previa con tu web de verdad (se actualiza al elegir un diseño; los demás ajustes, al guardar). «Rejilla» y «Carrusel» usan las tarjetas con el efecto de aparición y el diseño de título de abajo; los demás tienen su propia composición y movimiento, y respetan la tipografía, el tamaño y el color de los títulos.</p>
+    </section>
+    <?php foreach ($layouts as $lid => $lm): if (empty($lm['options'])) continue; ?>
+        <section class="ad-card" data-layout-opts="<?= e($lid) ?>" hidden>
+            <h2>Ajustes del diseño «<?= e($lm['label']) ?>»</h2>
+            <?= Module::render('components/option-fields', ['spec' => $lm['options'], 'values' => $lid === $c['layout'] ? $c['layout_opts'] : \App\Services\ModuleOptions::values('home-layouts', $lid, \App\Services\Cards::LAYOUT_PREFIX), 'name' => "layout_opt[$lid]"]) ?>
+        </section>
+    <?php endforeach; ?>
+
+    <section class="ad-card">
         <h2>Aparición al hacer scroll</h2>
         <?= Module::render('components/style-picker', ['styles' => $reveals, 'name' => 'cards_reveal', 'selected' => $c['reveal']]) ?>
         <label class="ad-check cd-px"><input type="checkbox" name="cards_parallax" value="1" <?= $c['parallax'] ? 'checked' : '' ?>><span>Parallax suave: la foto se desplaza ligeramente con el scroll, con inercia</span></label>

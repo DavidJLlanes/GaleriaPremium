@@ -6,3 +6,5 @@
 #cdTitleBox{margin-top:1.2rem}#cdTitleBox.is-off{opacity:.35;pointer-events:none}
 [data-title-opts] output{margin-left:.6rem;color:var(--muted)}
 .cd-prev.is-reset .ccard,.cd-prev.is-reset .ccard *{transition:none!important}
+
+.cd-frame{display:block;width:100%;height:clamp(420px,64vh,680px);margin-top:1.2rem;border:1px solid rgba(242,239,233,.12);border-radius:12px;background:#0a0a0b}
