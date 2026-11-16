@@ -52,14 +52,20 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
     </section>
 
     <section class="ad-card">
-        <h2>Textos y velocidad</h2>
+        <h2>Textos de la portada</h2>
         <div class="ad-row">
-            <div><label for="he">Texto pequeño superior</label><input id="he" type="text" name="hero_eyebrow" value="<?= e($eyebrow) ?>" maxlength="80"></div>
+            <div><label for="he">Texto pequeño sobre el título</label><input id="he" type="text" name="hero_eyebrow" value="<?= e($eyebrow) ?>" maxlength="80"></div>
             <div id="heroTitleField"><label for="ht">Título grande (vacío = el eslogan del sitio)</label><input id="ht" type="text" name="hero_title" value="<?= e($title) ?>" maxlength="160"></div>
         </div>
         <div class="ad-row">
             <div><label for="hc">Texto del botón</label><input id="hc" type="text" name="hero_cta" value="<?= e($cta) ?>" maxlength="40"></div>
-            <div id="heroSpeed"><label for="hi">Segundos entre cambios</label><input id="hi" type="text" inputmode="decimal" name="hero_interval" value="<?= e($interval) ?>"></div>
+        </div>
+    </section>
+
+    <section class="ad-card" id="heroSpeed" hidden>
+        <h2>Pase de fotos</h2>
+        <div class="ad-row">
+            <div><label for="hi">Segundos entre cambios de foto</label><input id="hi" type="text" inputmode="decimal" name="hero_interval" value="<?= e($interval) ?>"></div>
         </div>
     </section>
 
