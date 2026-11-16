@@ -5,7 +5,7 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
 <p class="ad-sub">La sección grande con la que empieza tu web: tipo, fotos (y su orden) y textos.</p>
 
 <?php $modes = array_map(fn ($m) => $m['photos'] ?? 'many', $heroes); $withInterval = array_keys(array_filter($heroes, fn ($m) => !empty($m['interval']))); $hints = array_filter(array_map(fn ($m) => $m['photo_hint'] ?? '', $heroes)); ?>
-<form method="post" action="/admin/portada" id="heroForm" data-type="<?= e($type) ?>" data-modes="<?= e(json_encode($modes)) ?>" data-intervals="<?= e(json_encode($withInterval)) ?>" data-hints="<?= e(json_encode($hints, JSON_UNESCAPED_UNICODE)) ?>">
+<form method="post" action="/admin/portada" id="heroForm" data-type="<?= e($type) ?>" data-modes="<?= e(json_encode($modes)) ?>" data-intervals="<?= e(json_encode($withInterval)) ?>" data-site-title="<?= e(json_encode(array_keys(array_filter($heroes, fn ($m) => !empty($m['site_title']))))) ?>" data-hints="<?= e(json_encode($hints, JSON_UNESCAPED_UNICODE)) ?>">
     <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
     <input type="hidden" name="hero_photo_ids" id="heroIds" value="<?= e($ids) ?>">
 
@@ -55,7 +55,7 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
         <h2>Textos y velocidad</h2>
         <div class="ad-row">
             <div><label for="he">Texto pequeño superior</label><input id="he" type="text" name="hero_eyebrow" value="<?= e($eyebrow) ?>" maxlength="80"></div>
-            <div><label for="ht">Título grande (vacío = el eslogan del sitio)</label><input id="ht" type="text" name="hero_title" value="<?= e($title) ?>" maxlength="160"></div>
+            <div id="heroTitleField"><label for="ht">Título grande (vacío = el eslogan del sitio)</label><input id="ht" type="text" name="hero_title" value="<?= e($title) ?>" maxlength="160"></div>
         </div>
         <div class="ad-row">
             <div><label for="hc">Texto del botón</label><input id="hc" type="text" name="hero_cta" value="<?= e($cta) ?>" maxlength="40"></div>
