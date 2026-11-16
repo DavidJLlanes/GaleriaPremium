@@ -56,4 +56,32 @@ final class ImageProcessor
         imagepalettetotruecolor($img);
         imagewebp($img, $dst, self::quality());
     }
+
+    /** Miniatura minúscula (data URI WebP, calidad 75) para el efecto «desenfoque a nítido» mientras carga la foto real. */
+    public static function placeholder(string $src, int $width = 28): string
+    {
+        $img = self::load($src);
+        $img = imagescale($img, $width, -1, IMG_BILINEAR_FIXED) ?: $img;
+        imagepalettetotruecolor($img);
+        ob_start(); imagewebp($img, null, self::quality()); $bin = (string) ob_get_clean();
+        return 'data:image/webp;base64,' . base64_encode($bin);
+    }
+
+    /** Datos de cámara de la foto ORIGINAL subida (el WebP final no conserva EXIF). Nunca se guarda el GPS. */
+    public static function exif(string $path): array
+    {
+        if (!function_exists('exif_read_data')) return [];
+        $e = @exif_read_data($path, 'EXIF,IFD0', false);
+        if (!is_array($e)) return [];
+        $frac = static function ($v): ?float { if (is_numeric($v)) return (float) $v; if (is_string($v) && preg_match('~^(-?\d+(?:\.\d+)?)/(\d+(?:\.\d+)?)$~', $v, $m) && (float) $m[2] > 0) return (float) $m[1] / (float) $m[2]; return null; };
+        $out = [];
+        $make = trim((string) ($e['Make'] ?? '')); $model = trim((string) ($e['Model'] ?? ''));
+        if ($model !== '') $out['cam'] = ($make !== '' && stripos($model, $make) === false ? "$make " : '') . $model;
+        if (($t = $frac($e['ExposureTime'] ?? null)) && $t > 0) $out['exp'] = $t >= 1 ? rtrim(rtrim(number_format($t, 1), '0'), '.') . ' s' : '1/' . (int) round(1 / $t) . ' s';
+        if (($f = $frac($e['FNumber'] ?? null)) && $f > 0) $out['f'] = 'f/' . rtrim(rtrim(number_format($f, 1), '0'), '.');
+        if (!empty($e['ISOSpeedRatings'])) $out['iso'] = 'ISO ' . (is_array($e['ISOSpeedRatings']) ? $e['ISOSpeedRatings'][0] : $e['ISOSpeedRatings']);
+        if (($m = $frac($e['FocalLength'] ?? null)) && $m > 0) $out['mm'] = round($m) . ' mm';
+        $d = (string) ($e['DateTimeOriginal'] ?? ''); if (preg_match('~^(\d{4}):(\d{2}):(\d{2})~', $d, $m) && (int) $m[1] > 1990) $out['when'] = "$m[3]/$m[2]/$m[1]";
+        return $out;
+    }
 }

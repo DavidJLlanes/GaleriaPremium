@@ -1,5 +1,6 @@
 <?php use App\Core\{Config, Module}; use App\Models\Gallery; use App\Services\{Site, SiteMenu};
 $showHeader = Site::on(!empty($isHome) ? 'header_home' : 'header_pages') || SiteMenu::previewing();
+Module::use('components/photo-load');
 $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?>
 <!doctype html>
 <html lang="<?= e(Site::get('lang')) ?>">
@@ -8,6 +9,7 @@ $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title><?= e($title ?? Config::get('app.name')) ?></title>
 <!--assets:css-->
+<script>document.documentElement.classList.add('lq')</script>
 <?= Module::render('components/typography') ?>
 <?= Module::render('components/head-meta', get_defined_vars()) ?>
 </head>

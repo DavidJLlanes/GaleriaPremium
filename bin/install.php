@@ -16,6 +16,7 @@ $pdo = Database::pdo();
 $pdo->exec(file_get_contents(ROOT . '/database/schema.sql'));
 (require ROOT . '/database/migrate.php')($pdo);
 echo "✔ Esquema listo\n";
+App\Services\Lqip::backfill();
 
 if (!in_array('--demo', $argv, true)) exit(0);
 

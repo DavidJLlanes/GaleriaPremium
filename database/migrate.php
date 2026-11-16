@@ -11,6 +11,8 @@ return static function (\PDO $pdo): void {
         ['photos',    'crop_y',     'REAL'],
         ['photos',    'crop_w',     'REAL'],
         ['photos',    'crop_h',     'REAL'],
+        ['photos',    'lqip',       'TEXT'],   // miniatura minúscula (data URI WebP) para la carga con desenfoque a nítido
+        ['photos',    'exif',       'TEXT'],   // datos de cámara en JSON (solo fotos subidas con EXIF; sin GPS)
         ['galleries', 'crop_ratio', 'REAL'],
         ['galleries', 'options',    "TEXT NOT NULL DEFAULT '{}'"],
         ['galleries', 'lightbox',   "TEXT NOT NULL DEFAULT 'fade'"],

@@ -40,9 +40,11 @@ final class PhotoService
         $base = Gallery::slugify($title !== '' ? $title : $original) . '-' . bin2hex(random_bytes(3));
         $name = $base . '.webp';
 
+        $exif = ImageProcessor::exif($tmp);   // se lee del original: el WebP no conserva EXIF
         // REGLA: WebP calidad 75
         [$w, $h] = ImageProcessor::convert($tmp, "$dir/originals/$name");
         ImageProcessor::thumbnail("$dir/originals/$name", "$dir/thumbs/$name");
+        $lqip = ImageProcessor::placeholder("$dir/thumbs/$name");
 
         // IA solo para lo que falta (título y/o descripción vacíos)
         $ai = ['used' => false, 'error' => null];
@@ -62,7 +64,7 @@ final class PhotoService
         }
         if ($title === '') $title = ucfirst(trim(preg_replace('/[_\-]+/', ' ', $original))) ?: 'Sin título';
 
-        $id = Photo::create($galleryId, $name, $title, $description, $w, $h);
+        $id = Photo::create($galleryId, $name, $title, $description, $w, $h, $lqip, $exif ? json_encode($exif, JSON_UNESCAPED_UNICODE) : null);
         return (Photo::find($id) ?? []) + ['ai' => $ai];
     }
 

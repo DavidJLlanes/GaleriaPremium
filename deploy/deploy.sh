@@ -8,6 +8,7 @@ cd "$APP"
 git config --global --add safe.directory "$APP" 2>/dev/null || true
 git pull --ff-only origin main
 php bin/install.php          # crea/actualiza el esquema (idempotente)
+php bin/backfill.php         # datos derivados de las fotos existentes (idempotente)
 php bin/assets.php           # publica el CSS/JS de los módulos
 
 # Permisos: PHP debe poder escribir en la BD y en las fotos

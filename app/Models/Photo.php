@@ -90,12 +90,12 @@ final class Photo
         return Config::get('uploads.url') . '/thumbs/' . rawurlencode($filename);
     }
 
-    public static function create(int $galleryId, string $filename, string $title, string $caption, int $w, int $h): int
+    public static function create(int $galleryId, string $filename, string $title, string $caption, int $w, int $h, ?string $lqip = null, ?string $exif = null): int
     {
         $order = (int) Database::one('SELECT COALESCE(MAX(sort_order), -1) + 1 AS n FROM photos WHERE gallery_id = ?', [$galleryId])['n'];
         Database::pdo()->prepare(
-            'INSERT INTO photos (gallery_id, filename, title, caption, width, height, sort_order) VALUES (?,?,?,?,?,?,?)'
-        )->execute([$galleryId, $filename, $title, $caption, $w, $h, $order]);
+            'INSERT INTO photos (gallery_id, filename, title, caption, width, height, sort_order, lqip, exif) VALUES (?,?,?,?,?,?,?,?,?)'
+        )->execute([$galleryId, $filename, $title, $caption, $w, $h, $order, $lqip, $exif]);
         return (int) Database::pdo()->lastInsertId();
     }
 

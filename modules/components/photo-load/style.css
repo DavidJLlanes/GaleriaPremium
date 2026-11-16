@@ -1,0 +1,6 @@
+/* Foto con data-lq (la añade App\Services\Lqip): miniatura minúscula de fondo, desenfocada hasta que carga la foto real.
+   Solo actúa si el script (html.lq) está activo: sin JavaScript la foto se ve normal. */
+html.lq img[data-lq]:not(.is-loaded){filter:blur(16px)}
+html.lq img[data-lq].is-loaded:not(.lq-instant){animation:lq-in .8s cubic-bezier(.22,1,.36,1)}
+@keyframes lq-in{from{filter:blur(16px)}to{filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){html.lq img[data-lq]:not(.is-loaded){filter:none}html.lq img[data-lq].is-loaded{animation:none}}
