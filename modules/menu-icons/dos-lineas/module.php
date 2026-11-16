@@ -1,0 +1,1 @@
+<?php return ['label' => 'Dos líneas', 'desc' => 'Dos líneas de distinto largo; al pasar el cursor se igualan y al abrir forman una X.', 'icon' => '<rect x="18" y="13" width="28" height="3" rx="1.5"/><rect x="28" y="24" width="18" height="3" rx="1.5"/>'];

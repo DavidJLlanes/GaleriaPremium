@@ -1,0 +1,1 @@
+<?php return ['label' => 'Círculo', 'desc' => 'Un círculo crece desde el botón hasta cubrir la pantalla.', 'icon' => '<circle cx="54" cy="4" r="30" fill-opacity=".9"/><rect x="8" y="26" width="30" height="3" fill-opacity=".35"/><rect x="8" y="32" width="20" height="3" fill-opacity=".35"/>'];

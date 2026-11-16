@@ -1,0 +1,1 @@
+<?php return ['label' => 'Más', 'desc' => 'Un signo + fino que gira y se convierte en una X.', 'icon' => '<rect x="22" y="18.8" width="20" height="2.6" rx="1.3"/><rect x="30.7" y="10" width="2.6" height="20" rx="1.3"/>'];

@@ -1,0 +1,10 @@
+/* Base común del panel del menú. Cada efecto de despliegue (modules/menu-reveals/<nombre>) define la forma y la animación de .mnp-sheet y de los ítems;
+   cada diseño (modules/menu-styles/<nombre>) dibuja la lista. Contrato: los ítems llevan la clase .mnp-item y --i (posición); su transform es de los efectos. */
+.mnp{position:fixed;inset:0;z-index:40;overflow:hidden;visibility:hidden;pointer-events:none;color:var(--fg);--mn-e:cubic-bezier(.16,1,.3,1);--mn-bg:#0a0a0b;transition:visibility 0s linear var(--mn-t,.9s)}
+.mnp.is-open{visibility:visible;pointer-events:auto;transition-delay:0s}
+.mnp-back{position:absolute;inset:0}
+.mnp-sheet{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--mn-bg);scrollbar-width:none}
+.mnp-sheet::-webkit-scrollbar{display:none}
+.mnp-in{container-type:inline-size;min-height:100%;max-width:1100px;margin:0 auto;padding:clamp(5.5rem,14vh,7.5rem) var(--pad) 3rem;display:grid;align-content:center}
+html.mn-lock{overflow:hidden}
+@media(prefers-reduced-motion:reduce){.mnp,.mnp *,.mnp::before,.mnp::after{transition-duration:.01s!important;transition-delay:0s!important}}

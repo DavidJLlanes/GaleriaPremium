@@ -1,0 +1,7 @@
+.mnp.rv-desplegable{--mn-t:.6s}
+.mnp.rv-desplegable .mnp-sheet{inset:4.7rem var(--pad) auto auto;width:min(calc(100vw - 2 * var(--pad)),390px);max-height:calc(100svh - 6rem);border-radius:18px;background:rgba(18,18,20,.78);-webkit-backdrop-filter:blur(26px) saturate(1.3);backdrop-filter:blur(26px) saturate(1.3);border:1px solid rgba(242,239,233,.12);box-shadow:0 30px 80px rgba(0,0,0,.55);
+  transform-origin:100% 0;opacity:0;transform:translateY(-12px) scale(.93);filter:blur(8px);transition:opacity .45s,transform .6s var(--mn-e),filter .5s}
+.mnp.rv-desplegable.is-open .mnp-sheet{opacity:1;transform:none;filter:none}
+.mnp.rv-desplegable .mnp-in{padding:.9rem 1.1rem 1.1rem;min-height:0;display:block}
+.mnp.rv-desplegable .mnp-item{opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .3s}
+.mnp.rv-desplegable.is-open .mnp-item{opacity:1;transform:none;transition:opacity .6s,transform .8s var(--mn-e);transition-delay:calc(.12s + var(--i,0)*50ms)}

@@ -1,0 +1,5 @@
+.mnp.rv-niebla{--mn-t:.9s}
+.mnp.rv-niebla .mnp-sheet{background:rgba(8,8,9,.8);-webkit-backdrop-filter:blur(28px) saturate(1.2);backdrop-filter:blur(28px) saturate(1.2);opacity:0;transform:scale(1.07);filter:blur(12px);transition:opacity .8s,transform 1s var(--mn-e),filter .8s}
+.mnp.rv-niebla.is-open .mnp-sheet{opacity:1;transform:none;filter:none}
+.mnp.rv-niebla .mnp-item{opacity:0;transform:scale(1.08);filter:blur(10px);transition:opacity .35s,transform .4s,filter .4s}
+.mnp.rv-niebla.is-open .mnp-item{opacity:1;transform:none;filter:none;transition:opacity .9s,transform 1.2s var(--mn-e),filter 1s;transition-delay:calc(.25s + var(--i,0)*90ms)}

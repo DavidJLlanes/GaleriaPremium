@@ -1,0 +1,8 @@
+.mnp.rv-puertas{--mn-t:1.2s}
+.mnp.rv-puertas::before,.mnp.rv-puertas::after{content:"";position:absolute;top:0;bottom:0;width:50.5%;background:var(--mn-bg);z-index:0;transition:transform .9s var(--mn-e)}
+.mnp.rv-puertas::before{left:0;transform:translateX(-101%)}
+.mnp.rv-puertas::after{right:0;transform:translateX(101%)}
+.mnp.rv-puertas.is-open::before,.mnp.rv-puertas.is-open::after{transform:none}
+.mnp.rv-puertas .mnp-sheet{background:none;z-index:1}
+.mnp.rv-puertas .mnp-item{opacity:0;transform:scale(1.06);filter:blur(8px);transition:opacity .35s,transform .4s,filter .4s}
+.mnp.rv-puertas.is-open .mnp-item{opacity:1;transform:none;filter:none;transition:opacity .8s,transform 1.2s var(--mn-e),filter .9s;transition-delay:calc(.55s + var(--i,0)*80ms)}

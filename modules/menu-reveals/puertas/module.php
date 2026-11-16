@@ -1,0 +1,1 @@
+<?php return ['label' => 'Puertas', 'desc' => 'Dos mitades entran desde los lados y se cierran en el centro.', 'icon' => '<rect x="4" y="3" width="27" height="34"/><rect x="33" y="3" width="27" height="34"/>'];

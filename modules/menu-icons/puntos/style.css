@@ -1,0 +1,6 @@
+.mi-puntos{display:grid;grid-template-columns:repeat(3,.28rem);gap:.28rem;transition:transform .7s var(--ease)}
+.mi-puntos i{width:.28rem;height:.28rem;border-radius:50%;background:currentColor;transition:transform .45s var(--ease),opacity .3s}
+.mnb:hover .mi-puntos i{transform:scale(1.35)}
+.mnb[aria-expanded="true"] .mi-puntos i:nth-child(even){transform:scale(0);opacity:0}
+.mnb[aria-expanded="true"] .mi-puntos{transform:rotate(90deg)}
+.mnb[aria-expanded="true"]:hover .mi-puntos i:nth-child(odd){transform:scale(1.35)}

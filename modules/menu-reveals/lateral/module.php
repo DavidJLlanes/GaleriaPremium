@@ -1,0 +1,1 @@
+<?php return ['label' => 'Panel lateral', 'desc' => 'Un panel entra deslizando desde la derecha y oscurece la web.', 'icon' => '<rect x="4" y="3" width="26" height="34" fill-opacity=".25"/><rect x="34" y="3" width="26" height="34"/>'];

@@ -1,0 +1,1 @@
+<?php return ['label' => 'Desplegable', 'desc' => 'Una ventana de cristal se despliega bajo el botón, sin tapar la web.', 'icon' => '<rect x="4" y="3" width="56" height="5" fill-opacity=".35"/><rect x="30" y="12" width="30" height="24" rx="3"/>'];

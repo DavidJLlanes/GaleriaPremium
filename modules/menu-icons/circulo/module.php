@@ -1,0 +1,1 @@
+<?php return ['label' => 'Círculo', 'desc' => 'Dos líneas dentro de un aro que gira; al abrir se convierten en una X.', 'icon' => '<circle cx="32" cy="20" r="13" fill="none" stroke="currentColor" stroke-width="2.4"/><rect x="25" y="16" width="14" height="2.4" rx="1.2"/><rect x="25" y="22" width="14" height="2.4" rx="1.2"/>'];

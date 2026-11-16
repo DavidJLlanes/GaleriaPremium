@@ -1,0 +1,1 @@
+<?php return ['label' => 'Niebla', 'desc' => 'La web se desenfoca y el menú emerge suavemente, con zoom y fundido.', 'icon' => '<rect x="4" y="3" width="56" height="34" fill-opacity=".22"/><rect x="14" y="14" width="36" height="4" rx="2"/><rect x="20" y="22" width="24" height="4" rx="2" fill-opacity=".6"/>'];

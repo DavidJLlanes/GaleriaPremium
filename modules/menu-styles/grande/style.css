@@ -1,0 +1,9 @@
+.mg{list-style:none;display:grid;gap:.15rem;width:100%}
+.mg-a{display:flex;align-items:flex-start;gap:clamp(.6rem,2.4cqi,1.2rem);padding:.15rem 0;width:fit-content;max-width:100%}
+.mg-i{font:var(--st-menu,normal) var(--w-menu,400) .72rem var(--f-menu);letter-spacing:.2em;color:var(--accent);padding-top:.9em;font-variant-numeric:tabular-nums;transition:transform .6s var(--ease)}
+.mg-t{font:var(--st-title,normal) var(--w-title,300) clamp(2.2rem,11cqi,4.8rem)/1.08 var(--f-title);letter-spacing:-.01em;color:var(--fg);text-wrap:balance;transition:opacity .5s,transform .8s var(--ease),color .4s}
+.mg:has(.mg-a:hover) .mg-a:not(:hover) .mg-t,.mg:has(.mg-a:focus-visible) .mg-a:not(:focus-visible) .mg-t{opacity:.28}
+.mg-a:hover .mg-t,.mg-a:focus-visible .mg-t{transform:translateX(.6rem);color:var(--accent)}
+.mg-a:hover .mg-i,.mg-a:focus-visible .mg-i{transform:translateX(-.2rem)}
+.mg-a[aria-current] .mg-t{font-style:italic}
+.mg-a:focus-visible{outline:none}

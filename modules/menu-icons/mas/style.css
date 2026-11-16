@@ -1,0 +1,5 @@
+.mi-mas{position:relative;display:block;width:1.5rem;height:1.5rem;transition:transform .7s var(--ease)}
+.mi-mas i{position:absolute;left:0;top:calc(50% - 1px);width:100%;height:2px;border-radius:2px;background:currentColor}
+.mi-mas i:nth-child(2){transform:rotate(90deg)}
+.mnb:hover .mi-mas{transform:rotate(90deg)}
+.mnb[aria-expanded="true"] .mi-mas,.mnb[aria-expanded="true"]:hover .mi-mas{transform:rotate(135deg)}

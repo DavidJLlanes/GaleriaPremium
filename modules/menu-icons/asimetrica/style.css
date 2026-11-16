@@ -1,0 +1,8 @@
+.mi-asim{position:relative;display:block;width:1.7rem;height:1.15rem}
+.mi-asim i{position:absolute;left:0;height:2px;border-radius:2px;background:currentColor;transition:transform .55s var(--ease),top .55s var(--ease),width .45s var(--ease),opacity .25s}
+.mi-asim i:nth-child(1){top:0;width:100%}.mi-asim i:nth-child(2){top:calc(50% - 1px);width:58%}.mi-asim i:nth-child(3){top:calc(100% - 2px);width:80%}
+.mnb:hover .mi-asim i{width:100%}
+.mnb[aria-expanded="true"] .mi-asim i{width:100%}
+.mnb[aria-expanded="true"] .mi-asim i:nth-child(1){top:calc(50% - 1px);transform:rotate(45deg)}
+.mnb[aria-expanded="true"] .mi-asim i:nth-child(2){opacity:0}
+.mnb[aria-expanded="true"] .mi-asim i:nth-child(3){top:calc(50% - 1px);transform:rotate(-45deg)}

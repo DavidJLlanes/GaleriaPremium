@@ -1,0 +1,1 @@
+<?php return ['label' => 'Asimétrica', 'desc' => 'Tres líneas de largo distinto que se alinean al pasar el cursor; al abrir, una X.', 'icon' => '<rect x="18" y="10" width="28" height="3" rx="1.5"/><rect x="18" y="19" width="16" height="3" rx="1.5"/><rect x="18" y="28" width="22" height="3" rx="1.5"/>'];

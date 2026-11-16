@@ -1,0 +1,1 @@
+<?php return ['label' => 'Tarjetas', 'desc' => 'Una cuadrícula de portadas con el nombre encima, como un mini-índice visual.', 'icon' => '<rect x="6" y="5" width="25" height="14"/><rect x="33" y="5" width="25" height="14" fill-opacity=".5"/><rect x="6" y="22" width="25" height="14" fill-opacity=".5"/><rect x="33" y="22" width="25" height="14" fill-opacity=".3"/>'];

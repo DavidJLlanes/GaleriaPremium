@@ -1,0 +1,1 @@
+<?php return ['label' => 'Cortina', 'desc' => 'Una cortina oscura baja desde arriba y las galerías aparecen una a una.', 'icon' => '<rect x="4" y="3" width="56" height="20"/><rect x="4" y="26" width="56" height="3" fill-opacity=".35"/><rect x="4" y="32" width="40" height="3" fill-opacity=".35"/>'];

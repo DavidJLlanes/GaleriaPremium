@@ -1,0 +1,1 @@
+<?php return ['label' => 'Tres líneas', 'desc' => 'La hamburguesa clásica; las líneas giran y forman una X.', 'icon' => '<rect x="20" y="10" width="24" height="3" rx="1.5"/><rect x="20" y="19" width="24" height="3" rx="1.5"/><rect x="20" y="28" width="24" height="3" rx="1.5"/>'];

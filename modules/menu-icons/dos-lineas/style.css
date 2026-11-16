@@ -1,0 +1,7 @@
+.mi-dos{position:relative;display:block;width:1.7rem;height:1rem}
+.mi-dos i{position:absolute;right:0;height:2px;border-radius:2px;background:currentColor;transition:transform .55s var(--ease),top .55s var(--ease),width .45s var(--ease)}
+.mi-dos i:nth-child(1){top:.15rem;width:100%}.mi-dos i:nth-child(2){top:calc(100% - .15rem - 2px);width:60%}
+.mnb:hover .mi-dos i:nth-child(2){width:100%}
+.mnb[aria-expanded="true"] .mi-dos i{top:calc(50% - 1px);width:100%}
+.mnb[aria-expanded="true"] .mi-dos i:nth-child(1){transform:rotate(45deg)}
+.mnb[aria-expanded="true"] .mi-dos i:nth-child(2){transform:rotate(-45deg)}
