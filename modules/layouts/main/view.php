@@ -1,8 +1,9 @@
-<?php use App\Core\{Config, Module}; use App\Models\Gallery; use App\Services\{Effects, Site, SiteMenu};
+<?php use App\Core\{Config, Module}; use App\Models\Gallery; use App\Services\{Effects, Intro, Site, SiteMenu};
 $showHeader = Site::on(!empty($isHome) ? 'header_home' : 'header_pages') || SiteMenu::previewing();
 $fx = Effects::values();
 if ($fx['lqip'] === '1') Module::use('components/photo-load');
 if ($fx['transition'] === '1') Module::use('components/page-transition');
+$iv = !empty($isHome) && ($tmp = Intro::values())['enabled'] === '1' ? $tmp : null;   // pantalla de entrada (solo portada)
 $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?>
 <!doctype html>
 <html lang="<?= e(Site::get('lang')) ?>">
@@ -12,10 +13,12 @@ $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?
 <title><?= e($title ?? Config::get('app.name')) ?></title>
 <!--assets:css-->
 <script>document.documentElement.classList.add('lq')</script>
+<?php if ($iv): ?><script>(function(){var d=document.documentElement,f=<?= json_encode($iv['freq']) ?>;try{if(f==='session'&&sessionStorage.getItem('intro_seen'))return d.classList.add('no-intro');if(f==='day'){var t=+localStorage.getItem('intro_seen_d');if(t&&Date.now()-t<864e5)return d.classList.add('no-intro')}}catch(e){}d.classList.add('intro-on')})()</script><?php endif; ?>
 <?= Module::render('components/typography') ?>
 <?= Module::render('components/head-meta', get_defined_vars()) ?>
 </head>
 <body class="<?= e(($bodyClass ?? '') . ($showHeader ? '' : ' no-header')) ?>">
+<?php if ($iv) echo Module::render('components/intro', ['i' => $iv]); ?>
 <?php if ($showHeader) echo Module::render('components/header', ['galleries' => $galleries, 'm' => $m]); ?>
 <?php if ($showHeader && $galleries) echo Module::render('components/menu-panel', ['galleries' => $galleries, 'm' => $m]); ?>
 <main><?= $content ?></main>

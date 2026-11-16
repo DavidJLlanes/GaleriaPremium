@@ -1,0 +1,10 @@
+.inf{text-align:center;padding:0 var(--pad,1.5rem);max-width:1200px}
+.inf-title{font:var(--st-intro,normal) var(--w-intro,300) clamp(2.4rem,8vw,6.5rem)/1.05 var(--f-intro);margin:0;text-wrap:balance;color:var(--in-fg);opacity:0;letter-spacing:.28em}
+.inf-sub{font:var(--st-menu,normal) var(--w-menu,400) .72rem/1 var(--f-menu);letter-spacing:.42em;text-transform:uppercase;color:var(--in-ac);margin:1.8rem 0 0;opacity:0}
+.intro.is-run .inf-title{animation:inf-in 2.4s cubic-bezier(.16,1,.3,1) .15s forwards}
+.intro.is-run .inf--blur .inf-title{animation-name:inf-in-b}
+.intro.is-run .inf-sub{animation:inf-sub 1.6s ease 1.2s forwards}
+@keyframes inf-in{from{opacity:0;letter-spacing:.28em}to{opacity:1;letter-spacing:.02em}}
+@keyframes inf-in-b{from{opacity:0;letter-spacing:.28em;filter:blur(14px)}to{opacity:1;letter-spacing:.02em;filter:blur(0)}}
+@keyframes inf-sub{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.inf-title,.inf-sub{animation:none!important;opacity:1;letter-spacing:.02em}}

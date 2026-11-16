@@ -1,0 +1,12 @@
+.inn{text-align:center;padding:0 var(--pad,1.5rem);max-width:1200px;position:relative;width:100%}
+.inn-title{font:var(--st-intro,normal) var(--w-intro,300) clamp(2.4rem,8vw,6.5rem)/1.1 var(--f-intro);margin:0;color:var(--in-fg);text-wrap:balance;clip-path:inset(50% 0 50% 0)}
+.inn-line{display:block;position:absolute;left:50%;top:50%;width:0;height:1px;background:var(--in-ac);transform:translate(-50%,-.5px)}
+.inn--glow .inn-line{box-shadow:0 0 12px var(--in-ac)}
+.inn-sub{font:var(--st-menu,normal) var(--w-menu,400) .72rem/1 var(--f-menu);letter-spacing:.42em;text-transform:uppercase;color:var(--in-ac);margin:1.8rem 0 0;opacity:0}
+.intro.is-run .inn-line{animation:inn-line 1.5s cubic-bezier(.65,0,.35,1) .1s forwards}
+.intro.is-run .inn-title{animation:inn-open 1.4s cubic-bezier(.65,0,.35,1) 1.2s forwards}
+.intro.is-run .inn-sub{animation:inn-sub 1.2s ease 2.2s forwards}
+@keyframes inn-line{0%{width:0}60%{width:min(70vw,640px)}100%{width:min(70vw,640px);opacity:.35}}
+@keyframes inn-open{to{clip-path:inset(0 0 0 0)}}
+@keyframes inn-sub{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.inn-title{animation:none!important;clip-path:none}.inn-sub{animation:none!important;opacity:1}.inn-line{display:none}}
