@@ -1,0 +1,6 @@
+/* Iconos de redes: solo icono (el nombre va en aria-label/title). Heredan el color del pie y se iluminan al pasar. */
+.soc{display:flex;flex-wrap:wrap;gap:.35rem .5rem;list-style:none;margin:0;padding:0}
+.soc-a{display:inline-grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid transparent;color:inherit;transition:color .3s,border-color .3s,transform .5s cubic-bezier(.16,1,.3,1)}
+.soc-a:hover,.soc-a:focus-visible{border-color:currentColor;transform:translateY(-2px)}
+.soc-svg{width:1.2rem;height:1.2rem;display:block}
+@media (prefers-reduced-motion:reduce){.soc-a{transition:color .3s,border-color .3s}.soc-a:hover,.soc-a:focus-visible{transform:none}}

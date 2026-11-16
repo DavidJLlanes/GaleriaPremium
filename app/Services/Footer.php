@@ -67,8 +67,7 @@ final class Footer
     /** Datos ya preparados para las vistas de los diseños. */
     public static function data(array $v): array
     {
-        $links = [];
-        if ($v['social'] === '1') foreach (Site::SOCIALS as $k => $label) if (Site::get($k) !== '') $links[$label] = Site::get($k);
+        $links = $v['social'] === '1' ? Site::socials() : [];
         $mail = $v['contact'] === '1' ? Site::get('email') : '';
         $copy = $v['text'] !== '' ? str_replace('{year}', date('Y'), $v['text']) : '© ' . date('Y') . ' ' . \App\Core\Config::get('app.name');
         $url = trim($v['sig_url']);

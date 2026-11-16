@@ -37,13 +37,13 @@ final class Site
         'display'      => ['enum',  'standalone', ['standalone', 'fullscreen', 'minimal-ui', 'browser']],
         'noindex'      => ['bool',  '0'],
         'email'        => ['text',  ''],
-        'instagram'    => ['url',   ''],
-        'x'            => ['url',   ''],
-        'facebook'     => ['url',   ''],
-        'threads'      => ['url',   ''],
-        'youtube'      => ['url',   ''],
-        'linkedin'     => ['url',   ''],
-        'tiktok'       => ['url',   ''],
+        'instagram'    => ['handle',   ''],
+        'x'            => ['handle',   ''],
+        'facebook'     => ['handle',   ''],
+        'threads'      => ['handle',   ''],
+        'youtube'      => ['handle',   ''],
+        'linkedin'     => ['handle',   ''],
+        'tiktok'       => ['handle',   ''],
         // Tipografía por tipo de texto ('' = la de por defecto). Ver App\Services\Fonts::ROLES
         'font_brand'   => ['font',  ''],
         'font_hero'    => ['font',  ''],
@@ -68,6 +68,18 @@ final class Site
         'fontw_footer' => ['weight', ''], 'fonti_footer' => ['bool', '0'],
     ];
     public const SOCIALS = ['instagram' => 'Instagram', 'x' => 'X', 'facebook' => 'Facebook', 'threads' => 'Threads', 'youtube' => 'YouTube', 'linkedin' => 'LinkedIn', 'tiktok' => 'TikTok'];
+
+    /** Dirección de cada red a partir del usuario (sin @). */
+    public const SOCIAL_URL = [
+        'instagram' => 'https://www.instagram.com/%s', 'x' => 'https://x.com/%s', 'facebook' => 'https://www.facebook.com/%s',
+        'threads' => 'https://www.threads.net/@%s', 'youtube' => 'https://www.youtube.com/@%s', 'linkedin' => 'https://www.linkedin.com/in/%s',
+        'tiktok' => 'https://www.tiktok.com/@%s',
+    ];
+    /** Lo que se muestra delante del usuario en el formulario (la web completa el resto). */
+    public const SOCIAL_PREFIX = [
+        'instagram' => 'instagram.com/', 'x' => 'x.com/', 'facebook' => 'facebook.com/', 'threads' => 'threads.net/@',
+        'youtube' => 'youtube.com/@', 'linkedin' => 'linkedin.com/in/', 'tiktok' => 'tiktok.com/@',
+    ];
 
     private static ?array $cache = null;
 
@@ -95,6 +107,40 @@ final class Site
 
     public static function shortName(): string { return self::get('short_name') ?: mb_substr(self::get('name'), 0, 12); }
 
+    /** Deja solo el usuario: quita la @, y si se pega una dirección completa extrae el usuario de ella. */
+    public static function cleanHandle(string $key, string $v): string
+    {
+        $v = trim($v);
+        if (preg_match('#^(https?://|www\.)#i', $v) || preg_match('#^[a-z0-9.-]+\.[a-z]{2,}/#i', $v)) {
+            $path = (string) parse_url(preg_match('#^https?://#i', $v) ? $v : 'https://' . $v, PHP_URL_PATH);
+            $parts = array_values(array_filter(explode('/', $path), 'strlen'));
+            if ($key === 'linkedin' && isset($parts[1]) && in_array($parts[0], ['in', 'company', 'school'], true)) $v = ($parts[0] === 'in' ? '' : $parts[0] . '/') . $parts[1];
+            else $v = $parts[0] ?? '';
+        }
+        $v = ltrim($v, '@ ');
+        $allowed = $key === 'linkedin' ? '/[^A-Za-z0-9._\-\/%]/' : '/[^A-Za-z0-9._\-]/';
+        return mb_substr(preg_replace($allowed, '', $v), 0, 80);
+    }
+
+    /** Usuario de una red tal como está guardado (acepta también valores antiguos con la dirección completa). */
+    public static function socialHandle(string $key): string { return self::cleanHandle($key, self::get($key)); }
+
+    /** Dirección completa de una red ('' si no hay usuario). */
+    public static function socialUrl(string $key): string
+    {
+        $h = self::socialHandle($key); if ($h === '' || !isset(self::SOCIAL_URL[$key])) return '';
+        if ($key === 'linkedin' && str_contains($h, '/')) return 'https://www.linkedin.com/' . $h;
+        return sprintf(self::SOCIAL_URL[$key], $h);
+    }
+
+    /** Redes con usuario: [['key','label','url']] en el orden de SOCIALS. */
+    public static function socials(): array
+    {
+        $out = [];
+        foreach (self::SOCIALS as $k => $label) if (($u = self::socialUrl($k)) !== '') $out[] = ['key' => $k, 'label' => $label, 'url' => $u];
+        return $out;
+    }
+
     /** Valida y guarda $_POST según FIELDS. Los checkboxes ausentes se guardan como 0. $bar = false: todo menos la barra superior (Sitio); true: solo la barra superior (Barra y menú). */
     public static function save(array $post, bool $bar = false): void
     {
@@ -110,6 +156,7 @@ final class Site
                 if ($type === 'weight') $v = isset(Fonts::WEIGHTS[(int) $v]) ? (string) (int) $v : '';
                 if ($type === 'url' && $v !== '' && !preg_match('#^https?://#i', $v)) $v = 'https://' . ltrim($v, '/');
                 if ($type === 'url' && $v !== '' && !filter_var($v, FILTER_VALIDATE_URL)) $v = '';
+                if ($type === 'handle') $v = self::cleanHandle($k, $v);
                 if ($type === 'text') $v = mb_substr($v, 0, $k === 'og_text' ? 200 : 300);
             }
             Setting::set("site_$k", $v);

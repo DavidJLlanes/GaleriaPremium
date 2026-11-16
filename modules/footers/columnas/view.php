@@ -5,7 +5,7 @@
             <div class="fk-c ftr-i"><h3>Galerías</h3><ul><?php foreach (array_slice($f['galleries'], 0, 6) as $g): ?><li><a href="/galeria/<?= e($g['slug']) ?>"><?= e($g['title']) ?></a></li><?php endforeach; ?></ul></div>
         <?php endif; ?>
         <?php if ($f['links']): ?>
-            <div class="fk-c ftr-i"><h3>Sígueme</h3><ul><?php foreach ($f['links'] as $label => $url): ?><li><a href="<?= e($url) ?>" target="_blank" rel="noopener me"><?= e($label) ?></a></li><?php endforeach; ?></ul></div>
+            <div class="fk-c ftr-i"><h3>Sígueme</h3><?= \App\Core\Module::render('components/social-icons', ['items' => $f['links'], 'class' => 'soc--col']) ?></div>
         <?php endif; ?>
         <?php if ($f['mail'] !== ''): ?>
             <div class="fk-c ftr-i"><h3>Contacto</h3><ul><li><a href="mailto:<?= e($f['mail']) ?>"><?= e($f['mail']) ?></a></li></ul></div>

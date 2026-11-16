@@ -94,12 +94,16 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
 
     <section class="ad-card">
         <h2>Redes y contacto</h2>
-        <div class="ad-row">
+        <p class="ad-hint" style="margin-bottom:1rem">Escribe solo tu <b>usuario</b>, sin la @ (si pegas la dirección completa, se queda con el usuario): la web completa el enlace. En la web aparecen únicamente los iconos de las redes que rellenes, cada uno con su enlace (se muestran en el <a href="/admin/pie">pie</a>).</p>
+        <div class="st-socs">
             <?php foreach ($socials as $k => $label): ?>
-                <div><label for="s_<?= e($k) ?>"><?= e($label) ?></label><input id="s_<?= e($k) ?>" type="text" inputmode="url" name="site_<?= e($k) ?>" value="<?= e($f[$k]) ?>" placeholder="https://"></div>
+                <div class="st-soc">
+                    <label for="s_<?= e($k) ?>"><span class="st-soc-i"><?= \App\Core\Module::render('components/social-icons', ['icon' => $k]) ?></span><?= e($label) ?></label>
+                    <div class="st-soc-in"><span class="st-soc-pre"><?= e(\App\Services\Site::SOCIAL_PREFIX[$k]) ?></span><input id="s_<?= e($k) ?>" type="text" name="site_<?= e($k) ?>" value="<?= e(\App\Services\Site::socialHandle($k)) ?>" placeholder="tuusuario" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="80"></div>
+                </div>
             <?php endforeach; ?>
-            <div><label for="s_mail">Email de contacto</label><input id="s_mail" type="text" name="site_email" value="<?= e($f['email']) ?>" placeholder="hola@tudominio.es"></div>
         </div>
+        <div class="st-mail"><label for="s_mail">Email de contacto</label><input id="s_mail" type="text" name="site_email" value="<?= e($f['email']) ?>" placeholder="hola@tudominio.es"></div>
     </section>
 
     <section class="ad-card">

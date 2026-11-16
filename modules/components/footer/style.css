@@ -6,7 +6,7 @@
 .ftr--accent{--fb:var(--accent);--ff:#16140f;--fh:#000;--fl:rgba(0,0,0,.18)}
 .ftr a{color:inherit;transition:color .25s}
 .ftr a:hover,.ftr a:focus-visible{color:var(--fh)}
-.ftr-links{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}
+.ftr-links{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.2rem}
 .ftr-sig{display:inline-block;font-size:.72rem}
 .ftr-sig--caps{text-transform:uppercase;letter-spacing:.28em;font-size:.66rem}
 .ftr-sig--italic{font-style:italic}
