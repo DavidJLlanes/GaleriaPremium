@@ -5,3 +5,7 @@
 .hg-dots{position:absolute;z-index:3;bottom:2.4rem;right:var(--pad);display:flex;gap:.5rem}
 .hg-dots i{display:block;width:26px;height:2px;background:rgba(242,239,233,.25);transition:background .6s}
 .hg-dots i.is-active{background:var(--accent)}
+@media(max-width:640px){
+  .hg-dots{right:auto;left:50%;transform:translateX(-50%);bottom:1.6rem}
+  .hg-hero .scrollhint{bottom:4rem}      /* el indicador de scroll queda encima de las rayas, centrado */
+}

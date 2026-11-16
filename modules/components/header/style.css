@@ -17,3 +17,6 @@
   .hdr-logo{height:1.6rem;max-width:6.5rem}
   .hdr-nav a{font-size:.7rem;letter-spacing:.14em}
 }
+/* Sobre la foto de la portada (aún sin hacer scroll) el menú se lee mejor */
+.hdr:not(.is-scrolled) .hdr-nav a{color:rgba(242,239,233,.9);text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.hdr:not(.is-scrolled) .hdr-brand{text-shadow:0 1px 12px rgba(0,0,0,.6)}
