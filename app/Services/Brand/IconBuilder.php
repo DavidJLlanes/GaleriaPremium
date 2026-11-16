@@ -20,7 +20,11 @@ final class IconBuilder
         return $d;
     }
 
-    /** Valida una imagen subida (jpeg/png/webp/gif) y la devuelve como GD. Lanza RuntimeException con mensaje legible. */
+    /** Lado máximo con el que se trabaja: lo que sea mayor se reduce nada más leerlo (los iconos salen de ahí; el mayor es de 1024 px). */
+    private const WORK_EDGE = 2048;
+    private const MAX_PIXELS = 120_000_000;     // por encima, GD no puede ni abrir la imagen con memoria razonable
+
+    /** Valida una imagen subida (jpeg/png/webp/gif) y la devuelve como GD, ya reducida si es grande. Lanza RuntimeException con mensaje legible. */
     public static function read(string $path, int $minSide = 0): \GdImage
     {
         $info = @getimagesize($path);
@@ -30,9 +34,26 @@ final class IconBuilder
         if ($minSide && min($info[0], $info[1]) < $minSide) {
             throw new \RuntimeException("La imagen es demasiado pequeña (mínimo {$minSide}×{$minSide} px; ideal 512×512 o más).");
         }
+        if ($info[0] * $info[1] > self::MAX_PIXELS) {
+            throw new \RuntimeException('La imagen es enorme (más de 120 megapíxeles). Redúcela un poco antes de subirla.');
+        }
+        @ini_set('memory_limit', '1024M');
         $img = @imagecreatefromstring((string) file_get_contents($path));
-        if (!$img) throw new \RuntimeException('No se pudo leer la imagen.');
-        return self::alpha($img);
+        if (!$img) throw new \RuntimeException('No se pudo leer la imagen (¿falta memoria en el servidor?).');
+        return self::alpha(self::shrink($img));
+    }
+
+    /** Reduce una imagen grande a WORK_EDGE px de lado largo (con suavizado) conservando la transparencia. */
+    private static function shrink(\GdImage $img): \GdImage
+    {
+        $w = imagesx($img); $h = imagesy($img); $m = max($w, $h);
+        if ($m <= self::WORK_EDGE) return $img;
+        $k = self::WORK_EDGE / $m; $nw = max(1, (int) round($w * $k)); $nh = max(1, (int) round($h * $k));
+        $out = imagecreatetruecolor($nw, $nh);
+        imagealphablending($out, false); imagesavealpha($out, true);
+        imagefill($out, 0, 0, imagecolorallocatealpha($out, 0, 0, 0, 127));
+        imagecopyresampled($out, $img, 0, 0, 0, 0, $nw, $nh, $w, $h);
+        return $out;
     }
 
     private static function alpha(\GdImage $img): \GdImage

@@ -36,7 +36,7 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
                 <label>Icono de la webapp</label>
                 <div class="st-prev"><?= $img($icon, 'Icono') ?></div>
                 <input type="file" name="icon" accept="image/png,image/jpeg,image/webp,image/gif">
-                <p class="ad-hint">Cuadrado, 512×512 px o más. Con él se crean solos todos los iconos (ver abajo).</p>
+                <p class="ad-hint">Cuadrado, 512×512 px o más (si es muy grande, se reduce solo). Con él se crean solos todos los iconos (ver abajo).</p>
                 <?php if ($icon): ?><label class="ad-check"><input type="checkbox" name="clear_icon"><span>Quitar el icono</span></label><?php endif; ?>
             </div>
             <div class="st-asset">

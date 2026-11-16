@@ -33,7 +33,7 @@ final class SiteController
             $f = $_FILES[$field] ?? null;
             if (!$f || ($f['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) continue;
             if ($f['error'] !== UPLOAD_ERR_OK) { $errors[] = ucfirst($field) . ': no se pudo subir el archivo (¿demasiado grande?).'; continue; }
-            if ($f['size'] > 15 * 1024 * 1024) { $errors[] = ucfirst($field) . ': el archivo supera 15 MB.'; continue; }
+            if ($f['size'] > 40 * 1024 * 1024) { $errors[] = ucfirst($field) . ': el archivo supera 40 MB.'; continue; }
             try { IconBuilder::$method($f['tmp_name']); }
             catch (\Throwable $e) { $errors[] = ucfirst($field) . ': ' . $e->getMessage(); }
         }
