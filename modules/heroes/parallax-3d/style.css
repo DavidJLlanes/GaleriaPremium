@@ -1,0 +1,14 @@
+.hxp{position:absolute;inset:0;perspective:1100px;overflow:hidden;background:#000}
+.hxp-back{position:absolute;inset:-8%;translate:calc(var(--mx,0)*-22px) calc(var(--my,0)*-16px)}
+.hxp-bg{width:100%;height:100%;object-fit:cover;filter:blur(18px) brightness(.5) saturate(1.2)}
+.hxp-card{position:absolute;margin:0;overflow:hidden;border-radius:6px;box-shadow:0 40px 90px -20px rgba(0,0,0,.9),0 0 0 1px rgba(242,239,233,.08);transform-style:preserve-3d;will-change:transform}
+.hxp-card img{width:100%;height:100%;object-fit:cover;display:block}
+.hxp-main{left:50%;top:50%;height:min(66svh,78vw / var(--ar));aspect-ratio:var(--ar);max-width:88vw;
+  transform:translate(-50%,-50%) translate3d(calc(var(--mx,0)*14px),calc(var(--my,0)*10px),40px) rotateY(calc(var(--mx,0)*9deg)) rotateX(calc(var(--my,0)*-7deg))}
+.hxp-small{right:9%;bottom:14%;width:min(16vw,170px);aspect-ratio:3/4;
+  transform:translate3d(calc(var(--mx,0)*-26px),calc(var(--my,0)*-20px),120px) rotateY(calc(var(--mx,0)*14deg))}
+.hx-parallax .hero-shade{background:radial-gradient(ellipse at center,rgba(10,10,11,.1),rgba(10,10,11,.55) 95%),linear-gradient(to top,rgba(10,10,11,.85),transparent 28%)}
+.hx-parallax .herocopy{translate:calc(var(--mx,0)*30px) calc(var(--my,0)*22px)}
+.hx-parallax .herocopy::before{background:radial-gradient(ellipse at center,rgba(10,10,11,.5),transparent 60%)}
+@media(max-width:700px){.hxp-small{display:none}.hxp-main{height:min(52svh,86vw / var(--ar))}}
+@media(prefers-reduced-motion:reduce){.hxp-back,.hxp-main,.hxp-small,.hx-parallax .herocopy{translate:none;transform:translate(-50%,-50%)}.hxp-small{transform:none}}

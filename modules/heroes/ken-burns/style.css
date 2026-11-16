@@ -1,0 +1,19 @@
+.hxk{position:absolute;inset:0;overflow:hidden}
+.hxk-slide{position:absolute;inset:0;opacity:0;transition:opacity 2s var(--ease)}
+.hxk-slide.is-active{opacity:1}
+.hxk-slide img{width:100%;height:100%;object-fit:cover;transform:scale(var(--s0)) translate(0,0)}
+.hxk-slide.is-active img{animation:hxk-pan var(--hxk-t,14s) linear forwards}
+@keyframes hxk-pan{from{transform:scale(var(--s0)) translate(0,0)}to{transform:scale(var(--s1)) translate(var(--dx),var(--dy))}}
+/* barrido de luz diagonal */
+.hxk-sweep{position:absolute;inset:-20%;pointer-events:none;mix-blend-mode:soft-light;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,226,170,.55) 50%,transparent 60%);transform:translateX(-120%);animation:hxk-sweep 9s ease-in-out 1.2s infinite}
+@keyframes hxk-sweep{0%{transform:translateX(-120%)}45%,100%{transform:translateX(120%)}}
+/* título letra a letra */
+.hx-kenburns .herocopy{animation:none}
+.hxk-w{display:inline-block;white-space:nowrap}
+.hxk-l{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.35em);animation:hxk-letter 1.1s var(--ease) forwards;animation-delay:calc(.5s + var(--i)*.05s)}
+@keyframes hxk-letter{to{opacity:1;filter:blur(0);transform:none}}
+.hx-kenburns .herocopy-eyebrow,.hx-kenburns .herocopy .btn{opacity:0;animation:hxk-fade 1.2s ease forwards;animation-delay:.2s}
+.hx-kenburns .herocopy .btn{animation-delay:calc(.9s + var(--n,20)*.05s)}
+@keyframes hxk-fade{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.hxk-slide img,.hxk-sweep{animation:none}.hxk-l,.hx-kenburns .herocopy-eyebrow,.hx-kenburns .herocopy .btn{animation:none;opacity:1;filter:none;transform:none}}

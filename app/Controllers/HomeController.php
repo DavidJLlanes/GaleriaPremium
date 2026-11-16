@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\{Config, Module, Page};
 use App\Models\{Gallery, Photo, Setting};
+use App\Services\HeroOptions;
 
 final class HomeController
 {
@@ -22,27 +23,27 @@ final class HomeController
 
     /**
      * Resuelve el hero según los ajustes (Admin → Portada):
-     *   hero_type   = single | gallery (cualquier carpeta modules/heroes/<tipo>/)
+     *   hero_type   = cualquier carpeta modules/heroes/<tipo>/ (su module.php dice si usa 0, 1 o varias fotos)
      *   hero_source = gallery (fotos de hero_gallery_id) | custom (hero_photo_ids, en el orden elegido)
      */
     private function hero(array $galleries): array
     {
         $type = Setting::get('hero_type', 'gallery');
         if (!Module::exists("heroes/$type")) $type = 'gallery';
+        $mode = Module::meta("heroes/$type")['photos'] ?? 'many';       // none | one | many (module.php del hero)
 
         $custom = array_filter(explode(',', Setting::get('hero_photo_ids')), 'strlen');
         if (!$custom && Setting::get('hero_photo_id') !== '') $custom = [Setting::get('hero_photo_id')];   // compatibilidad
-        $source = Setting::get('hero_source', $type === 'single' ? 'custom' : 'gallery');
+        $source = Setting::get('hero_source', $mode === 'one' ? 'custom' : 'gallery');
 
-        if ($source === 'custom' && $custom) {
-            $photos = Photo::findMany($custom);
-            if ($type === 'single') $photos = array_slice($photos, 0, 1);
-        } else {
+        if ($mode === 'none') $photos = [];
+        elseif ($source === 'custom' && $custom) $photos = Photo::findMany($custom);
+        else {
             $gid    = (int) Setting::get('hero_gallery_id', '0') ?: (int) ($galleries[0]['id'] ?? 0);
             $photos = $gid ? Photo::forGallery($gid) : [];
-            if ($type === 'single') $photos = array_slice($photos, 0, 1);
         }
-        if (!$photos) return ['type' => null, 'photos' => []];
+        if ($mode === 'one') $photos = array_slice($photos, 0, 1);
+        if (!$photos && $mode !== 'none') return ['type' => null, 'photos' => []];
 
         return [
             'type' => $type, 'photos' => $photos,
@@ -52,6 +53,8 @@ final class HomeController
                 'cta'     => Setting::get('hero_cta', 'Explorar galerías'),
             ],
             'interval' => max(2, min(30, (float) (Setting::get('hero_interval') ?: 6.5))) * 1000,
+            'opts'     => HeroOptions::values($type),
+            'stats'    => ['galleries' => count($galleries), 'photos' => array_sum(array_column($galleries, 'photo_count'))],
         ];
     }
 }

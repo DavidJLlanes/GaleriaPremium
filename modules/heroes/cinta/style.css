@@ -1,0 +1,13 @@
+.hxr{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(5rem,13svh,7.5rem) 0 clamp(3.4rem,9svh,5rem);overflow:hidden;background:#000}
+.hxr-row{height:clamp(100px,21svh,250px);overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)}
+.hxr-track{display:flex;gap:10px;height:100%;width:max-content;animation:hxr-run var(--t) linear infinite;will-change:transform}
+.hxr-row.is-rev .hxr-track{animation-direction:reverse;animation-duration:calc(var(--t)*1.25)}
+.hxr-track img{height:100%;width:auto;flex:none;object-fit:cover;border-radius:3px;filter:brightness(.82)}
+@keyframes hxr-run{to{transform:translateX(-50%)}}
+.hx-cinta .hero-shade{background:radial-gradient(ellipse 70% 38% at center,rgba(0,0,0,.55),transparent 80%)}
+.hx-cinta .herocopy h1{font-size:clamp(2.2rem,5.6vw,4.6rem);margin-bottom:1.3rem}
+.hx-cinta .herocopy-eyebrow{margin-bottom:.9rem}
+.hx-cinta .herocopy::before{display:none}
+.hx-cinta .scrollhint{display:none}
+@media(max-width:700px){.hxr-row{height:clamp(90px,21svh,170px)}.hx-cinta .herocopy h1{font-size:clamp(2rem,10vw,3.2rem)}}
+@media(prefers-reduced-motion:reduce){.hxr-track{animation:none}}

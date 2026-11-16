@@ -1,0 +1,23 @@
+.hxc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:hxc-zoom 24s var(--ease) infinite alternate;will-change:transform}
+@keyframes hxc-zoom{from{transform:scale(1.18)}to{transform:scale(1.06)}}
+.hxc-panel{position:absolute;z-index:6;background:#000;pointer-events:none;will-change:transform}
+.hxc-seam{position:absolute;z-index:7;pointer-events:none;background:var(--accent);box-shadow:0 0 22px 3px rgba(216,179,106,.55);opacity:0;animation:hxc-seam 2.5s ease both}
+/* corte vertical: dos hojas que se van a izquierda y derecha */
+.hxc-v .hxc-panel{top:0;bottom:0;width:50.2%}
+.hxc-v .hxc-a{left:0;animation:hxc-left 1.7s cubic-bezier(.77,0,.18,1) .85s forwards}
+.hxc-v .hxc-b{right:0;animation:hxc-right 1.7s cubic-bezier(.77,0,.18,1) .85s forwards}
+.hxc-v .hxc-seam{top:0;bottom:0;left:calc(50% - 1px);width:2px}
+/* corte horizontal: arriba y abajo */
+.hxc-h .hxc-panel{left:0;right:0;height:50.2%}
+.hxc-h .hxc-a{top:0;animation:hxc-up 1.7s cubic-bezier(.77,0,.18,1) .85s forwards}
+.hxc-h .hxc-b{bottom:0;animation:hxc-down 1.7s cubic-bezier(.77,0,.18,1) .85s forwards}
+.hxc-h .hxc-seam{left:0;right:0;top:calc(50% - 1px);height:2px}
+@keyframes hxc-left{to{transform:translateX(-101%)}}
+@keyframes hxc-right{to{transform:translateX(101%)}}
+@keyframes hxc-up{to{transform:translateY(-101%)}}
+@keyframes hxc-down{to{transform:translateY(101%)}}
+@keyframes hxc-seam{0%{opacity:0}25%{opacity:1}75%{opacity:1}100%{opacity:0}}
+.hx-cortina .herocopy{animation-delay:2.1s;animation-duration:1.8s}
+.hx-cortina .scrollhint{opacity:0;animation:hxc-fade 1s ease 3.2s forwards}
+@keyframes hxc-fade{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.hxc-panel,.hxc-seam{display:none}.hx-cortina .herocopy,.hx-cortina .scrollhint{animation:none;opacity:1}.hxc-img{animation:none}}

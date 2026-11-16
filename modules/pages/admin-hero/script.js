@@ -5,13 +5,19 @@
   const picks = [...form.querySelectorAll('.hr-p')];
   const thumb = Object.fromEntries(picks.map(b => [b.dataset.id, b.dataset.thumb]));
   let ids = hidden.value ? hidden.value.split(',') : [];
-  const isSingle = () => form.dataset.type === 'single';
+  const modes = JSON.parse(form.dataset.modes || '{}'), withInterval = JSON.parse(form.dataset.intervals || '[]');
+  const mode = () => modes[form.dataset.type] || 'many';          // none | one | many (lo declara el module.php de cada hero)
+  const isSingle = () => mode() === 'one';
 
   const syncMode = () => {
     form.dataset.type = form.querySelector('[name=hero_type]:checked')?.value || 'gallery';
+    form.toggleAttribute('data-one', isSingle());
     form.dataset.source = isSingle() ? 'custom' : (form.querySelector('[name=hero_source]:checked')?.value || 'gallery');
     if (isSingle() && ids.length > 1) { ids = ids.slice(0, 1); draw(); }
     hint.textContent = isSingle() ? '(una sola foto)' : '(arrastra ⠿ para ordenar)';
+    document.getElementById('heroPhotosCard').hidden = mode() === 'none';
+    document.getElementById('heroSpeed').hidden = !withInterval.includes(form.dataset.type);
+    form.querySelectorAll('[data-hero-opts]').forEach(c => { c.hidden = c.dataset.heroOpts !== form.dataset.type; });
   };
 
   const draw = () => {

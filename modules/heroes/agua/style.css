@@ -1,0 +1,8 @@
+.hxw{position:absolute;inset:0;overflow:hidden;background:#000;touch-action:pan-y}
+.hxw-img,.hxw-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hxw-img{object-fit:cover;filter:brightness(.82)}
+.hxw-canvas{opacity:0;transition:opacity 1.2s}
+.hxw.is-gl .hxw-canvas{opacity:1}
+.hxw.is-gl .hxw-img{visibility:hidden}
+.hx-agua .hero-shade{background:radial-gradient(ellipse at center,rgba(10,10,11,.1),rgba(10,10,11,.6) 92%),linear-gradient(to top,rgba(10,10,11,.88),transparent 24%)}
+.hx-agua .herocopy{pointer-events:none}.hx-agua .herocopy .btn{pointer-events:auto}

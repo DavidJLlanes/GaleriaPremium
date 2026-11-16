@@ -1,0 +1,16 @@
+.hx-light{position:relative;min-height:100svh;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6rem var(--pad) 5rem;overflow:hidden;text-align:center;
+  background-image:radial-gradient(ellipse 60% 45% at 50% 52%,color-mix(in srgb,var(--hxz-c) 9%,transparent),transparent 70%)}
+.hxz-eyebrow{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.75rem;letter-spacing:.42em;text-transform:uppercase;color:var(--hxz-c);margin:0 0 1.6rem;opacity:0;animation:hxz-fade 1.6s ease .4s forwards}
+.hxz-title{font:var(--st-hero,normal) var(--w-hero,300) clamp(2.8rem,9vw,8rem)/1 var(--f-hero);max-width:14ch;margin:0 0 2.6rem;text-wrap:balance}
+.hxz-svg{display:none;overflow:visible;max-width:100%}
+.hx-light.is-ready .hxz-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:-1px;white-space:nowrap}   /* se queda para lectores de pantalla y buscadores */
+.hx-light.is-ready .hxz-svg{display:block}
+.hxz-cta{opacity:0;transform:translateY(16px);transition:opacity 1.4s ease,transform 1.4s var(--ease);margin-top:2.4rem;pointer-events:none}
+.hx-light.is-done .hxz-cta,.hx-light:not(.is-ready) .hxz-cta{opacity:1;transform:none;pointer-events:auto}
+.hxz-glow{opacity:0}
+.hx-light.is-done .hxz-glow{animation:hxz-breath 5.5s ease-in-out infinite alternate}
+.hx-light .scrollhint{opacity:0;transition:opacity 1.5s}.hx-light.is-done .scrollhint{opacity:1}
+.hxz-out .hxz-svg{opacity:0;transition:opacity .9s}
+@keyframes hxz-fade{to{opacity:1}}
+@keyframes hxz-breath{from{opacity:.25}to{opacity:.7}}
+@media(prefers-reduced-motion:reduce){.hxz-eyebrow{animation:none;opacity:1}.hxz-glow{animation:none!important;opacity:.4}}

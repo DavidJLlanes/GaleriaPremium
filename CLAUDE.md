@@ -33,6 +33,7 @@
 21. **Panel «Fotos»**: sección de administración para gestionar todas las fotos de todas las galerías (filtro, búsqueda, mover y borrar en bloque).
 22. **Tipografías alojadas en local** (nada de Google Fonts/CDN): cada tipo de texto (nombre de la web, título de portada, títulos de galería, menú y etiquetas, texto normal, pies de foto, botones) tiene su tipografía, elegida en Admin → Sitio → Tipografías. Catálogo en `config/fonts.php` + `public/fonts/<id>/*.woff2` (subset latin); servicio `App\Services\Fonts`; los módulos usan las variables `--f-<rol>`, nunca un nombre de fuente fijo.
 23. **Catálogo ampliado y tipografía completa**: ~150 fuentes locales de todos los estilos (serif, sans, display, manuscritas elegantes, monoespaciadas), generadas con `tools/fonts/build.mjs` (no editar `config/fonts.php` a mano). Cada tipo de texto permite además **grosor** y **cursiva** (si la fuente la tiene): ajustes `site_fontw_<rol>` / `site_fonti_<rol>`, variables `--w-<rol>` / `--st-<rol>` (en los módulos: `font:var(--st-<rol>,normal) var(--w-<rol>,<peso>) <tamaño> var(--f-<rol>)`). **Fuentes propias** subibles desde el panel (.woff2/.woff/.ttf/.otf, `App\Services\FontLibrary`, en `public/uploads/fonts/`, gestionadas con `Admin\FontController`).
+24. **Muchos estilos de hero** (sección de portada), cada uno en `modules/heroes/<nombre>/` y elegible en Admin → Portada: cortina, parallax-3d, ken-burns (zoom cinematográfico), linterna, texto-mascara, mosaico, tarjetas, cinta, scroll-expansivo, split, editorial, marco-minimal, contador, agua (WebGL) y **luz-titulo** (fondo negro; una luz cálida dibuja el título letra a letra con la tipografía elegida; ajustes de color, velocidad y repetición). Pendiente: hero con vídeo de fondo.
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```
@@ -43,7 +44,7 @@ app/Core/Assets.php   emite <link>/<script> de los módulos usados en la página
 app/Services/ImageProcessor.php   ÚNICO punto de conversión de fotos (WebP 75%)
 ```
 - Nuevo diseño de galería → carpeta `modules/galleries/<nombre>/` (aparece solo; se elige en `galleries.style`).
-- Nuevo hero → `modules/heroes/<nombre>/` (se elige con el ajuste `hero_type`).
+- Nuevo hero → `modules/heroes/<nombre>/` (se elige con el ajuste `hero_type`). Su `module.php` declara: `label`, `desc`, `icon`, `photos` (`none`|`one`|`many`), `interval` (true si usa «segundos entre cambios») y `options` (ajustes propios: color/range/select/bool; se guardan como `hero_opt_<hero>_<clave>`, `App\Services\HeroOptions`, y llegan a la vista en `$opts`). La vista recibe `$photos, $copy, $interval, $opts, $stats, $galleries`.
 - Los CSS/JS de un módulo solo afectan a ese módulo (clases con prefijo propio). Nada de CSS/JS global salvo `layouts/main`.
 - Toda subida o importación de fotos DEBE pasar por `ImageProcessor` (WebP 75%).
 - Tipografías: en el CSS de un módulo se usa `var(--f-brand|hero|title|menu|body|caption|button)`. Para añadir una fuente al catálogo: añadirla a `tools/fonts/list.json` y ejecutar `tools/fonts/build.mjs` (o subirla desde el panel). Peso y cursiva: `var(--w-<rol>,<peso por defecto>)` y `var(--st-<rol>,normal)`.
