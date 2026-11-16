@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Core\{Page, Response};
 use App\Services\{Auth, Csrf, Flash, Site};
 use App\Services\Brand\IconBuilder;
+use App\Services\ImageProcessor;
 
 /** Admin → Sitio: nombre, marca (logo, icono, favicon), colores, webapp, redes y SEO. */
 final class SiteController
@@ -46,7 +47,7 @@ final class SiteController
                 $crop = json_decode((string) ($_POST['og_crop'] ?? ''), true);
                 if (!is_array($crop)) $errors[] = 'Imagen Open Graph: elige el recorte antes de guardar.';
                 else try { ImageProcessor::cropTo($og['tmp_name'], Site::brandFile('og.webp'), $crop, 1200, 630); }
-                catch (\\Throwable $e) { $errors[] = 'Imagen Open Graph: ' . $e->getMessage(); }
+                catch (\Throwable $e) { $errors[] = 'Imagen Open Graph: ' . $e->getMessage(); }
             }
         }
         // El color del tema también tiñe los iconos de iOS/Android: se regeneran siempre
