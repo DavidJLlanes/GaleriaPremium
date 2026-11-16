@@ -4,6 +4,6 @@ $o = $opts ?? []; ?>
     <p class="hxo-eyebrow"><?= e($copy['eyebrow'] ?? '') ?></p>
     <h1 class="hxo-title hxo-brand"><?= e(\App\Services\Site::get('name')) ?></h1>
     <svg class="hxo-svg" aria-hidden="true" focusable="false"></svg>
-    <div class="hxo-cta"><?= Module::render('components/button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?></div>
+    <div class="hxo-cta"><?= Module::render('components/hero-button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?></div>
     <?= Module::render('components/scroll-hint') ?>
 </section>

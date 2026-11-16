@@ -20,6 +20,7 @@ final class Fonts
         'body'    => ['Texto normal',          'Descripciones, párrafos y pie de página.',          'inter',    'Hojas, paseos y luz cálida de noviembre en el parque.'],
         'caption' => ['Pies de foto',          'El nombre de cada foto y su pie al ampliarla.',     'fraunces', 'Paseo de plátanos'],
         'button'  => ['Botones',               'Botones de la web pública.',                        'inter',    'Explorar galerías'],
+        'herobtn' => ['Botón de la portada',   'El botón «Explorar galerías» de la portada. Sin elegir, usa la de «Botones».', 'inter', 'Explorar galerías'],
     ];
     public const CATS = ['serif' => 'Serif (clásicas)', 'sans' => 'Sans-serif (modernas)', 'display' => 'Display (titulares)', 'script' => 'Manuscritas', 'mono' => 'Monoespaciadas', 'custom' => 'Mis fuentes (subidas)'];
     public const WEIGHTS = [100 => 'Fina', 200 => 'Extra ligera', 300 => 'Ligera', 400 => 'Normal', 500 => 'Media', 600 => 'Seminegrita', 700 => 'Negrita', 800 => 'Extranegrita', 900 => 'Negra'];
@@ -41,6 +42,7 @@ final class Fonts
         $def = self::ROLES[$role][2];
         if ($defaults) return $def;
         $id = Site::get("font_$role");
+        if ($id === '' && $role === 'herobtn') return self::of('button');   // sin elegir: igual que «Botones»
         return isset(self::catalog()[$id]) ? $id : $def;
     }
 
@@ -89,6 +91,7 @@ final class Fonts
     {
         if ($defaults) return null;
         $v = (int) Site::get("fontw_$role");
+        if ($v === 0 && $role === 'herobtn' && Site::get('font_herobtn') === '') return self::weight('button');
         if (!isset(self::WEIGHTS[$v])) return null;
         $best = null;
         foreach (self::weights(self::of($role)) as $w) if ($best === null || abs($w - $v) < abs($best - $v)) $best = $w;
@@ -97,6 +100,7 @@ final class Fonts
 
     public static function italic(string $role, bool $defaults = false): bool
     {
+        if (!$defaults && $role === 'herobtn' && Site::get('font_herobtn') === '') return self::italic('button');
         return !$defaults && Site::on("fonti_$role") && self::hasItalic(self::of($role));
     }
 

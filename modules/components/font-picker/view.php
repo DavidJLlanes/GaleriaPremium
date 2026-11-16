@@ -26,7 +26,7 @@ $opt = static function (array $groups, string $sel): string {
             <div class="fp-ctl">
                 <label for="fp_<?= e($role) ?>"><?= e($label) ?></label>
                 <select id="fp_<?= e($role) ?>" name="site_font_<?= e($role) ?>" class="fp-font">
-                    <option value="" <?= $saved === '' ? 'selected' : '' ?>>Por defecto (<?= e($cat[$def]['label']) ?>)</option>
+                    <option value="" <?= $saved === '' ? 'selected' : '' ?>><?= $role === 'herobtn' ? 'Igual que «Botones»' : 'Por defecto (' . e($cat[$def]['label']) . ')' ?></option>
                     <?= $opt($groups, $saved) ?>
                 </select>
                 <div class="fp-style">

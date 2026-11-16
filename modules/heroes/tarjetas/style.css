@@ -24,4 +24,4 @@
   .hx-tarjetas .hero-shade{background:linear-gradient(to top,rgba(10,10,11,.95),rgba(10,10,11,.2) 55%,transparent)}
 }
 @media(prefers-reduced-motion:reduce){.hxt-card,.hxt-bg img{transition:none}}
-.hx-tarjetas .hero-shade,.hx-tarjetas .herocopy{pointer-events:none}.hx-tarjetas .herocopy .btn{pointer-events:auto}
+.hx-tarjetas .hero-shade,.hx-tarjetas .herocopy{pointer-events:none}.hx-tarjetas .herocopy .hb{pointer-events:auto}

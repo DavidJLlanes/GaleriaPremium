@@ -4,6 +4,6 @@ $o = $opts ?? []; ?>
     <p class="hxz-eyebrow"><?= e($copy['eyebrow'] ?? '') ?></p>
     <h1 class="hxz-title hxz-brand"><?= e(\App\Services\Site::get('name')) ?></h1>
     <canvas class="hxz-canvas" aria-hidden="true"></canvas>
-    <div class="hxz-cta"><?= Module::render('components/button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?></div>
+    <div class="hxz-cta"><?= Module::render('components/hero-button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?></div>
     <?= Module::render('components/scroll-hint') ?>
 </section>

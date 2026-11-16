@@ -1,4 +1,4 @@
-<?php use App\Core\Module; use App\Models\Photo; use App\Services\Csrf; Module::use('components/sortable');
+<?php use App\Core\Module; use App\Models\Photo; use App\Services\{Csrf, HeroButton}; Module::use('components/sortable'); Module::use('components/hero-button');
 $ids = implode(',', array_map(fn ($p) => $p['id'], $selected)); $byGallery = [];
 foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
 <h1>Portada</h1>
@@ -53,10 +53,19 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
 
     <section class="ad-card">
         <h2>Botón de la portada</h2>
+        <div class="hb-prev" id="hbPrev"><?= Module::render('components/hero-button', ['href' => '#', 'label' => $cta ?: 'Explorar galerías', 'preview' => true]) ?></div>
         <div class="ad-row">
             <div><label for="hc">Texto del botón</label><input id="hc" type="text" name="hero_cta" value="<?= e($cta) ?>" maxlength="40"></div>
+            <div><label for="hbs">Diseño</label>
+                <select id="hbs" name="hero_btn_style"><?php foreach (HeroButton::STYLES as $k => $l): ?><option value="<?= e($k) ?>" <?= $btn['style'] === $k ? 'selected' : '' ?>><?= e($l) ?></option><?php endforeach; ?></select></div>
         </div>
-        <p class="ad-hint">El título de la portada es el nombre de la web y el texto pequeño es el eslogan: se cambian en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
+        <div class="ad-row">
+            <div><label for="hbz">Tamaño: <b id="hbzv"><?= e(HeroButton::SIZES[$btn['size']]) ?></b></label>
+                <input id="hbz" type="range" name="hero_btn_size" min="1" max="5" step="1" value="<?= (int) $btn['size'] ?>"></div>
+            <div><label for="hbd">Separación del título: <b id="hbdv"><?= (int) $btn['down'] ?> px</b></label>
+                <input id="hbd" type="range" name="hero_btn_down" min="0" max="240" step="4" value="<?= (int) $btn['down'] ?>"></div>
+        </div>
+        <p class="ad-hint">Tipografía, grosor y cursiva del botón: <a href="/admin/sitio">Sitio → Tipografías → «Botón de la portada»</a>. El título (nombre de la web) y el texto pequeño (eslogan) se cambian en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
     </section>
 
     <section class="ad-card" id="heroSpeed" hidden>

@@ -5,10 +5,10 @@
 .hxf-copy{position:relative;z-index:2;text-align:center;margin-top:clamp(1.6rem,4.5svh,2.6rem)}
 .hxf-eyebrow{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.7rem;letter-spacing:.42em;text-transform:uppercase;color:var(--accent);margin:0 0 .6rem;opacity:0;animation:hxf-up 1.4s var(--ease) 1.6s forwards}
 .hxf-copy h1{font:var(--st-hero,normal) var(--w-hero,300) clamp(2.6rem,7vw,6rem)/1.02 var(--f-hero);letter-spacing:-.01em;margin:0 auto 1.6rem;max-width:16ch;text-wrap:balance;text-shadow:0 2px 24px #000,0 0 3px rgba(0,0,0,.7);opacity:0;animation:hxf-up 1.6s var(--ease) 1.2s forwards}
-.hxf-copy .btn{opacity:0;animation:hxf-up 1.4s var(--ease) 2s forwards}
+.hxf-copy .hb{opacity:0;animation:hxf-up 1.4s var(--ease) 2s forwards}
 @keyframes hxf-img{to{opacity:1;filter:brightness(.92)}}
 @keyframes hxf-line{to{clip-path:inset(-2px)}}
 @keyframes hxf-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes hxf-breath{to{transform:scale(1.015)}}
 @media(max-height:620px){.hxf-fig{height:40svh}}
-@media(prefers-reduced-motion:reduce){.hxf-fig,.hxf-fig img,.hxf-eyebrow,.hxf-copy h1,.hxf-copy .btn{animation:none;opacity:1;filter:none}.hxf-fig::before{animation:none;clip-path:none}}
+@media(prefers-reduced-motion:reduce){.hxf-fig,.hxf-fig img,.hxf-eyebrow,.hxf-copy h1,.hxf-copy .hb{animation:none;opacity:1;filter:none}.hxf-fig::before{animation:none;clip-path:none}}

@@ -4,6 +4,6 @@
     <div class="hxf-copy">
         <p class="hxf-eyebrow"><?= e($copy['eyebrow'] ?? '') ?></p>
         <h1><?= e($copy['title'] ?? '') ?></h1>
-        <?= Module::render('components/button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?>
+        <?= Module::render('components/hero-button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?>
     </div>
 </section>

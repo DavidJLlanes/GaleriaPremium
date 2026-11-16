@@ -13,7 +13,7 @@
 .hxk-w{display:inline-block;white-space:nowrap}
 .hxk-l{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.35em);animation:hxk-letter 1.1s var(--ease) forwards;animation-delay:calc(.5s + var(--i)*.05s)}
 @keyframes hxk-letter{to{opacity:1;filter:blur(0);transform:none}}
-.hx-kenburns .herocopy-eyebrow,.hx-kenburns .herocopy .btn{opacity:0;animation:hxk-fade 1.2s ease forwards;animation-delay:.2s}
-.hx-kenburns .herocopy .btn{animation-delay:calc(.9s + var(--n,20)*.05s)}
+.hx-kenburns .herocopy-eyebrow,.hx-kenburns .herocopy .hb{opacity:0;animation:hxk-fade 1.2s ease forwards;animation-delay:.2s}
+.hx-kenburns .herocopy .hb{animation-delay:calc(.9s + var(--n,20)*.05s)}
 @keyframes hxk-fade{to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.hxk-slide img,.hxk-sweep{animation:none}.hxk-l,.hx-kenburns .herocopy-eyebrow,.hx-kenburns .herocopy .btn{animation:none;opacity:1;filter:none;transform:none}}
+@media(prefers-reduced-motion:reduce){.hxk-slide img,.hxk-sweep{animation:none}.hxk-l,.hx-kenburns .herocopy-eyebrow,.hx-kenburns .herocopy .hb{animation:none;opacity:1;filter:none;transform:none}}

@@ -1,7 +1,7 @@
 <?php use App\Core\Module; use App\Models\Photo;
 $duo = ($opts['layout'] ?? 'text') === 'duo' && count($photos) > 1;
 $copyHtml = '<div class="hxsp-copy"><p class="hxsp-eyebrow">' . e($copy['eyebrow'] ?? '') . '</p><h1>' . e($copy['title'] ?? '') . '</h1>'
-          . Module::render('components/button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) . '</div>';
+          . Module::render('components/hero-button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) . '</div>';
 ?>
 <section class="hx-split <?= $duo ? 'is-duo' : 'is-text' ?>" data-hero data-interval="<?= (int) ($interval ?? 6500) ?>">
 <?php if ($duo): ?>

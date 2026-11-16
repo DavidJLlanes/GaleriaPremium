@@ -1,0 +1,28 @@
+.hb{max-width:100%;text-align:center;--hb-c:var(--fg,#f2efe9);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.9em;margin-top:var(--hb-down,0);
+  font:var(--st-herobtn,normal) var(--w-herobtn,400) calc(.78rem*var(--hb-k,1))/1 var(--f-herobtn);letter-spacing:.22em;text-transform:uppercase;color:var(--hb-c);
+  padding:1.2em 2.8em;border:1px solid transparent;border-radius:100px;transition:color .5s var(--ease,ease),background .5s var(--ease,ease),border-color .5s var(--ease,ease),box-shadow .5s var(--ease,ease),transform .5s var(--ease,ease);-webkit-tap-highlight-color:transparent}
+.hb i{font-style:normal;transition:transform .5s var(--ease,ease)}
+.hb:hover i{transform:translateX(.45em)}
+/* contorno */
+.hb--outline{border-color:rgba(242,239,233,.45)}
+.hb--outline:hover{background:var(--hb-c);color:var(--bg,#0b0b0c);border-color:var(--hb-c)}
+/* relleno claro */
+.hb--solid{background:var(--hb-c);color:var(--bg,#0b0b0c)}
+.hb--solid:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+/* dorado (color de acento del sitio) */
+.hb--gold{background:var(--accent,#d8b36a);color:#17120a;font-weight:600}
+.hb--gold:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--accent,#d8b36a),0 16px 40px color-mix(in srgb,var(--accent,#d8b36a) 45%,transparent)}
+/* cristal */
+.hb--glass{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4)}
+.hb--glass:hover{background:rgba(255,255,255,.18)}
+/* rectangular fino */
+.hb--square{border-radius:0;border-color:rgba(242,239,233,.55);padding:1.1em 2.6em}
+.hb--square:hover{background:var(--hb-c);color:var(--bg,#0b0b0c)}
+/* solo texto subrayado */
+.hb--line{padding:.5em 0;border-radius:0}
+.hb--line::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform-origin:left;transition:transform .6s var(--ease,ease)}
+.hb--line:hover::after{transform:scaleX(.35)}
+/* texto + flecha */
+.hb--arrow{padding:.6em 0;border-radius:0}
+.hb--arrow::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:color-mix(in srgb,currentColor 35%,transparent)}
+@media(prefers-reduced-motion:reduce){.hb,.hb i,.hb::after{transition:none}}

@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Core\{Module, Page, Response};
 use App\Models\{Gallery, Photo, Setting};
-use App\Services\{Auth, Csrf, Flash, HeroOptions, HeroVideo};
+use App\Services\{Auth, Csrf, Flash, HeroButton, HeroOptions, HeroVideo};
 
 /** Admin → Portada: tipo de hero, fotos (y su orden), textos, velocidad y ajustes propios de cada diseño. */
 final class HeroController
@@ -23,6 +23,7 @@ final class HeroController
             'selected'  => Photo::findMany($ids),
             'photos'    => Photo::allWithGallery(),
             'cta'       => Setting::get('hero_cta', 'Explorar galerías'),
+            'btn'       => HeroButton::values(),
             'interval'  => Setting::get('hero_interval') ?: '6.5',
         ], ['title' => 'Portada', 'nav' => 'portada'], 'layouts/admin');
     }
@@ -41,6 +42,9 @@ final class HeroController
         Setting::set('hero_gallery_id', (string) (int) ($_POST['hero_gallery_id'] ?? 0));
         Setting::set('hero_photo_ids', implode(',', $ids));
         Setting::set('hero_photo_id', '');
+        $st = (string) ($_POST['hero_btn_style'] ?? ''); Setting::set('hero_btn_style', isset(HeroButton::STYLES[$st]) ? $st : 'outline');
+        Setting::set('hero_btn_size', (string) max(1, min(5, (int) ($_POST['hero_btn_size'] ?? 3))));
+        Setting::set('hero_btn_down', (string) max(0, min(240, (int) ($_POST['hero_btn_down'] ?? 56))));
         Setting::set('hero_cta', mb_substr(trim((string) ($_POST['hero_cta'] ?? '')), 0, 40));
         Setting::set('hero_interval', (string) max(2, min(30, (float) str_replace(',', '.', (string) ($_POST['hero_interval'] ?? '6.5')))));
 

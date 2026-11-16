@@ -5,4 +5,4 @@
 .hxw.is-gl .hxw-canvas{opacity:1}
 .hxw.is-gl .hxw-img{visibility:hidden}
 .hx-agua .hero-shade{background:radial-gradient(ellipse at center,rgba(10,10,11,.1),rgba(10,10,11,.6) 92%),linear-gradient(to top,rgba(10,10,11,.88),transparent 24%)}
-.hx-agua .herocopy{pointer-events:none}.hx-agua .herocopy .btn{pointer-events:auto}
+.hx-agua .herocopy{pointer-events:none}.hx-agua .herocopy .hb{pointer-events:auto}

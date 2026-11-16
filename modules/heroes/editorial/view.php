@@ -13,7 +13,7 @@ $total = static fn (int $n, string $one, string $many) => $n . ' ' . ($n === 1 ?
     <div class="hxe-copy">
         <p class="hxe-eyebrow"><?= e($copy['eyebrow'] ?? '') ?></p>
         <h1><?= e($copy['title'] ?? '') ?></h1>
-        <?= Module::render('components/button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?>
+        <?= Module::render('components/hero-button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?>
     </div>
     <span class="hxe-year">© <?= date('Y') ?></span>
 </section>

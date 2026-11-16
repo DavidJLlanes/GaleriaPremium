@@ -46,6 +46,7 @@ final class Site
         'font_body'    => ['font',  ''],
         'font_caption' => ['font',  ''],
         'font_button'  => ['font',  ''],
+        'font_herobtn' => ['font',  ''],
         // Grosor (100-900, '' = el del diseño) y cursiva por tipo de texto
         'fontw_brand' => ['weight', ''], 'fonti_brand' => ['bool', '0'],
         'fontw_hero' => ['weight', ''], 'fonti_hero' => ['bool', '0'],
@@ -54,6 +55,7 @@ final class Site
         'fontw_body' => ['weight', ''], 'fonti_body' => ['bool', '0'],
         'fontw_caption' => ['weight', ''], 'fonti_caption' => ['bool', '0'],
         'fontw_button' => ['weight', ''], 'fonti_button' => ['bool', '0'],
+        'fontw_herobtn' => ['weight', ''], 'fonti_herobtn' => ['bool', '0'],
     ];
     public const SOCIALS = ['instagram' => 'Instagram', 'x' => 'X', 'facebook' => 'Facebook', 'threads' => 'Threads', 'youtube' => 'YouTube', 'linkedin' => 'LinkedIn', 'tiktok' => 'TikTok'];
 

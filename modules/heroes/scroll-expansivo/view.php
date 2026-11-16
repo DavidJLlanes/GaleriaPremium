@@ -5,7 +5,7 @@
         <div class="hxs-copy">
             <p class="hxs-eyebrow"><?= e($copy['eyebrow'] ?? '') ?></p>
             <h1><?= e($copy['title'] ?? '') ?></h1>
-            <div class="hxs-cta"><?= Module::render('components/button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?></div>
+            <div class="hxs-cta"><?= Module::render('components/hero-button', ['href' => '#galerias', 'label' => $copy['cta'] ?? 'Explorar galerías']) ?></div>
         </div>
         <?= Module::render('components/scroll-hint') ?>
     </div>
