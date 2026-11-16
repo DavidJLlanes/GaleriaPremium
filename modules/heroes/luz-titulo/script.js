@@ -3,7 +3,9 @@
  * Las fuentes solo traen el contorno de cada letra, no el recorrido de la pluma. Por eso se calcula:
  *   1. Se pinta cada letra (con la tipografía, grosor y cursiva de «Título de la portada») en un lienzo pequeño.
  *   2. Esqueleto: adelgazamiento Zhang-Suen → la línea central del trazo. Distancia al borde → su grosor.
- *   3. El esqueleto se convierte en trazos ordenados como se escribiría (izquierda→derecha, arriba→abajo).
+ *   3. El esqueleto se ordena con el motor caligráfico (components/stroke-order): cada letra en el orden y sentido
+ *      en que se escribe a mano (la «a»: panza y luego palo; la «t»: palo y luego barra; tildes al final…);
+ *      en las caligráficas, cada letra de un trazo continuo, como la letra ligada.
  *   4. Una pluma recorre esos trazos con el grosor real y va descubriendo la letra; en la punta, un brillo cálido.
  * Funciona con cualquier fuente, también las subidas desde el panel. */
 (() => {
@@ -40,9 +42,6 @@
   };
 
   /* ---------- 2. Esqueleto de una letra ---------- */
-  const N8 = (w) => [1, w, -1, -w, w + 1, w - 1, -w - 1, -w + 1];
-  const DX = [1, 0, -1, 0, 1, -1, -1, 1], DY = [0, 1, 0, -1, 1, 1, -1, -1];
-
   const thin = (b, w, h) => {                                   // Zhang-Suen
     const del = []; let changed = true;
     while (changed) {
@@ -73,63 +72,28 @@
     return D;
   };
 
-  /** Trazos de una letra en coordenadas de pantalla: [{pts:[{x,y,r}], cum:[], len}] */
-  const strokesOf = (c, L) => {
+  /** Esqueleto de cada letra → trazos en coordenadas de pantalla, en orden de escritura: por letra, [{pts:[{x,y,r}], cum, len, lift}] */
+  const strokesOf = (L) => {
     const SK = Math.min(2, 100 / L.F), pad = L.F * .3;              // resolución de trabajo ≈ fuente de 100 px
-    const bx = c.x - c.m.actualBoundingBoxLeft - pad, by = c.y - c.m.actualBoundingBoxAscent - pad;
-    const w = Math.ceil((c.m.actualBoundingBoxLeft + c.m.actualBoundingBoxRight + 2 * pad) * SK) + 2;
-    const h = Math.ceil((c.m.actualBoundingBoxAscent + c.m.actualBoundingBoxDescent + 2 * pad) * SK) + 2;
-    const g = mk(w, h).getContext('2d', { willReadFrequently: true });
-    g.setTransform(SK, 0, 0, SK, -bx * SK, -by * SK); g.font = L.font; g.fillText(c.ch, c.x, c.y);
-    const px = g.getImageData(0, 0, w, h).data, b = new Uint8Array(w * h);
-    for (let i = 0; i < b.length; i++) b[i] = px[i * 4 + 3] > 110 ? 1 : 0;
-    const D = distance(b, w, h); thin(b, w, h);
-
-    const N = N8(w), vis = new Uint8Array(w * h), pix = [];
-    for (let i = 0; i < b.length; i++) if (b[i]) pix.push(i);
-    const deg = (i) => { let d = 0; for (const o of N) d += b[i + o]; return d; };
-    const ends = pix.filter(i => deg(i) <= 1);
-    const key = (i) => (i % w) + (i / w | 0) * .35;
-
-    const walk = (start) => {
-      const pts = [start]; vis[start] = 1;
-      for (const o of N) if (b[start + o] && vis[start + o]) { pts.unshift(start + o); break; }   // se une a lo ya trazado
-      let cur = start, dx = 0, dy = 0;
-      for (;;) {
-        let best = -1, bk = 0, bs = -1e9;
-        for (let k = 0; k < 8; k++) {
-          const n = cur + N[k]; if (!b[n] || vis[n]) continue;
-          const s = (DX[k] * dx + DY[k] * dy) / Math.hypot(DX[k], DY[k]) + (k < 4 ? .1 : 0);
-          if (s > bs) { bs = s; best = n; bk = k; }
-        }
-        if (best < 0) {
-          const recent = pts.slice(-4);
-          for (const o of N) { const n = cur + o; if (b[n] && vis[n] && !recent.includes(n)) { pts.push(n); break; } }
-          return pts;
-        }
-        vis[best] = 1; pts.push(best); dx = dx * .5 + DX[bk]; dy = dy * .5 + DY[bk]; cur = best;
-      }
-    };
-
-    const raw = [];
-    for (;;) {
-      let s = -1, sk = 1e9;
-      for (const i of ends) if (!vis[i] && key(i) < sk) { sk = key(i); s = i; }
-      if (s < 0) for (const i of pix) if (!vis[i] && key(i) < sk) { sk = key(i); s = i; }   // bucles (o, 0…)
-      if (s < 0) break;
-      raw.push(walk(s));
-    }
-
-    const out = raw.map(path => {
-      let pts = path.map(i => ({ x: bx + ((i % w) + .5) / SK, y: by + ((i / w | 0) + .5) / SK, r: (D[i] / 3 + .8) / SK }));
+    const glyphs = L.chars.map(c => {
+      const bx = c.x - c.m.actualBoundingBoxLeft - pad, by = c.y - c.m.actualBoundingBoxAscent - pad;
+      const w = Math.ceil((c.m.actualBoundingBoxLeft + c.m.actualBoundingBoxRight + 2 * pad) * SK) + 2;
+      const h = Math.ceil((c.m.actualBoundingBoxAscent + c.m.actualBoundingBoxDescent + 2 * pad) * SK) + 2;
+      const g = mk(w, h).getContext('2d', { willReadFrequently: true });
+      g.setTransform(SK, 0, 0, SK, -bx * SK, -by * SK); g.font = L.font; g.fillText(c.ch, c.x, c.y);
+      const px = g.getImageData(0, 0, w, h).data, b = new Uint8Array(w * h);
+      for (let i = 0; i < b.length; i++) b[i] = px[i * 4 + 3] > 110 ? 1 : 0;
+      const D = distance(b, w, h); thin(b, w, h);
+      return { ch: c.ch, b, w, h, D, bx, by };
+    });
+    const plans = window.StrokeOrder ? window.StrokeOrder.plan(glyphs) : glyphs.map(() => []);   // components/stroke-order
+    return plans.map((runs, gi) => { const { w, D, bx, by } = glyphs[gi]; return runs.map(r => {
+      let pts = r.px.map(i => ({ x: bx + ((i % w) + .5) / SK, y: by + ((i / w | 0) + .5) / SK, r: (D[i] / 3 + .8) / SK }));
       for (let pass = 0; pass < 2 && pts.length > 2; pass++)                                 // suaviza el escalonado
         pts = pts.map((p, k) => (k === 0 || k === pts.length - 1) ? p : { x: (pts[k - 1].x + 2 * p.x + pts[k + 1].x) / 4, y: (pts[k - 1].y + 2 * p.y + pts[k + 1].y) / 4, r: p.r });
-      const a = pts[0], z = pts[pts.length - 1], ddx = z.x - a.x, ddy = z.y - a.y;
-      if (Math.hypot(ddx, ddy) > L.F * .05 && (Math.abs(ddx) > Math.abs(ddy) ? ddx < 0 : ddy < 0)) pts.reverse();   // como se escribe
       const cum = [0]; for (let k = 1; k < pts.length; k++) cum.push(cum[k - 1] + Math.hypot(pts[k].x - pts[k - 1].x, pts[k].y - pts[k - 1].y));
-      return { pts, cum, len: cum[cum.length - 1] };
-    });
-    return out.sort((p, q) => (p.pts[0].x + p.pts[0].y * .35) - (q.pts[0].x + q.pts[0].y * .35));
+      return { pts, cum, len: cum[cum.length - 1], lift: r.lift };
+    }); });
   };
 
   /* ---------- 3. Animación ---------- */
@@ -152,9 +116,8 @@
 
     // Línea de tiempo: una sola pluma, trazo tras trazo (con una pequeña pausa al levantarla).
     const v = L.F * (2.6 + speed * 1.15), strokes = []; let t = .35;
-    L.chars.forEach((c, ci) => {
-      const list = strokesOf(c, L);
-      list.forEach((st, k) => { st.t0 = t; st.dur = Math.max(.05, st.len / v); st.char = ci; st.last = k === list.length - 1; t += st.dur + (k === list.length - 1 ? .09 : .05); });
+    strokesOf(L).forEach((list, ci) => {
+      list.forEach((st, k) => { if (st.lift) t += k ? .07 : .1; st.t0 = t; st.dur = Math.max(.04, st.len / v); st.char = ci; st.last = k === list.length - 1; t += st.dur; });
       strokes.push(...list);
     });
     const maxT = 15 - speed;                                                        // títulos largos: se acelera para no eternizarse
@@ -201,6 +164,7 @@
   };
 
   (async () => {
+    if (document.readyState === 'loading') await new Promise(r => addEventListener('DOMContentLoaded', r));   // espera al motor caligráfico
     try { const cs = getComputedStyle(h1); await document.fonts.load(`${cs.fontStyle} ${cs.fontWeight} 64px ${cs.fontFamily}`, text); await document.fonts.ready; } catch { /* fuente de reserva */ }
     build();
     let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (Math.abs(innerWidth - builtW) > 40) build(); }, 350); });
