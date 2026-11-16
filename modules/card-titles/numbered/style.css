@@ -2,4 +2,4 @@
 .ct-numbered b{font:var(--st-title,normal) 300 clamp(3.6rem,7vw,5.8rem)/.9 var(--f-title);color:transparent;-webkit-text-stroke:1px rgba(242,239,233,.7);transition:color .8s var(--ease),-webkit-text-stroke-color .8s}
 .ccard:hover .ct-numbered b{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
 .ct-numbered h2{color:var(--ct-c,inherit);font:var(--st-title,normal) var(--w-title,300) calc(clamp(1.6rem,2.6vw,2.2rem) * var(--ct-s,1))/1.1 var(--f-title);margin:0 0 .35rem}
-.ct-numbered small{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.ct-numbered small{font-family:var(--f-sub,var(--f-menu));font-weight:var(--w-sub,var(--w-menu,inherit));font-style:var(--st-sub,var(--st-menu,normal));font-size:calc(.66rem * var(--cs-s,1));letter-spacing:.3em;text-transform:uppercase;color:var(--cs-c,var(--muted))}

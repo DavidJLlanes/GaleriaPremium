@@ -1,5 +1,5 @@
 .ct-centered{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;text-align:center;padding:1.5rem}
-.ct-centered-count{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--accent)}
+.ct-centered-count{font-family:var(--f-sub,var(--f-menu));font-weight:var(--w-sub,var(--w-menu,inherit));font-style:var(--st-sub,var(--st-menu,normal));font-size:calc(.68rem * var(--cs-s,1));letter-spacing:.34em;text-transform:uppercase;color:var(--cs-c,var(--accent))}
 .ct-centered h2{color:var(--ct-c,inherit);font:var(--st-title,normal) var(--w-title,300) calc(clamp(2rem,3.6vw,3rem) * var(--ct-s,1))/1.05 var(--f-title);margin:0;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.45)}
 .ct-centered i{display:block;width:2.6rem;height:1px;background:var(--accent);transition:width .9s var(--ease)}
 .ccard:hover .ct-centered i{width:5.5rem}

@@ -1,4 +1,4 @@
 .ct-caption{padding:1.1rem .2rem 0}
 .ct-caption h2{color:var(--ct-c,inherit);font:var(--st-title,normal) var(--w-title,300) calc(clamp(1.5rem,2.4vw,2rem) * var(--ct-s,1))/1.15 var(--f-title);margin:0 0 .3rem}
-.ct-caption span{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.ct-caption span{font-family:var(--f-sub,var(--f-menu));font-weight:var(--w-sub,var(--w-menu,inherit));font-style:var(--st-sub,var(--st-menu,normal));font-size:calc(.68rem * var(--cs-s,1));letter-spacing:.3em;text-transform:uppercase;color:var(--cs-c,var(--accent))}
 .ct-caption p{font-family:var(--f-body);color:var(--muted);font-size:.9rem;max-width:42ch;margin:.7rem 0 0}

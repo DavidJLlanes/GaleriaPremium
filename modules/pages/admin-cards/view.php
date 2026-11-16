@@ -81,6 +81,64 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
         <p class="ad-hint">Valen para todos los diseños de título. En el diseño «Luz» el color de la pluma se elige en sus propios ajustes.</p>
     </section>
 
+    <section class="ad-card cd-look">
+        <h2>Aspecto de la tarjeta</h2>
+        <p class="ad-hint" style="margin-bottom:1rem">Valen para los diseños que usan tarjeta (Rejilla y Carrusel). Se ven al momento en la vista previa de arriba.</p>
+        <div class="ad-row">
+            <div>
+                <label for="cdRatio">Proporción de la foto</label>
+                <select id="cdRatio" name="cards_ratio">
+                    <?php foreach (App\Services\Cards::RATIOS as $rv => $rl): ?><option value="<?= e($rv) ?>" <?= $c['ratio'] === $rv ? 'selected' : '' ?>><?= e($rl) ?></option><?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="cdRadius">Redondeo de esquinas: <b id="cdRadiusVal"><?= (int) $c['radius'] ?></b> px</label>
+                <input id="cdRadius" type="range" name="cards_radius" min="0" max="48" step="1" value="<?= (int) $c['radius'] ?>">
+            </div>
+        </div>
+        <div class="ad-row" style="margin-top:1rem">
+            <div>
+                <label for="cdVeil">Velo bajo el título: <b id="cdVeilVal"><?= (int) $c['veil'] ?></b> %</label>
+                <input id="cdVeil" type="range" name="cards_veil" min="0" max="100" step="5" value="<?= (int) $c['veil'] ?>">
+            </div>
+            <div><label for="cdVeilColor">Color del velo</label><input id="cdVeilColor" type="color" name="cards_veil_color" value="<?= e($c['veil_color']) ?>"></div>
+        </div>
+        <p class="ad-hint">El velo es el degradado que oscurece la parte baja de la foto para que se lea el título. Solo se ve cuando el título va sobre la foto.</p>
+    </section>
+
+    <section class="ad-card cd-type">
+        <h2>Textos secundarios de la tarjeta</h2>
+        <p class="ad-hint" style="margin-bottom:1rem">El contador («12 fotos») y las etiquetas pequeñas que acompañan al título.</p>
+        <?php $byCat ??= []; if (!$byCat) foreach (App\Services\Fonts::catalog() as $fid => $fm) $byCat[$fm['cat'] ?? 'custom'][$fid] = $fm; ?>
+        <div class="ad-row">
+            <div>
+                <label for="cdSubFont">Tipografía</label>
+                <select id="cdSubFont" name="cards_sub_font" data-font-search>
+                    <option value="" <?= $c['sub_font'] === '' ? 'selected' : '' ?>>La de Sitio → Tipografías («Menú y etiquetas»)</option>
+                    <?php foreach (App\Services\Fonts::CATS as $cat => $catLabel): if (empty($byCat[$cat])) continue; ?>
+                        <optgroup label="<?= e($catLabel) ?>"><?php foreach ($byCat[$cat] as $fid => $fm): ?><option value="<?= e($fid) ?>" data-fam="<?= e(App\Services\Fonts::family($fid)) ?>" <?= $c['sub_font'] === $fid ? 'selected' : '' ?>><?= e($fm['label']) ?></option><?php endforeach; ?></optgroup>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="cdSubWeight">Grosor</label>
+                <select id="cdSubWeight" name="cards_sub_weight">
+                    <option value="0" <?= !$c['sub_weight'] ? 'selected' : '' ?>>El de Sitio</option>
+                    <?php foreach (App\Services\Fonts::WEIGHTS as $w => $wl): ?><option value="<?= $w ?>" <?= $c['sub_weight'] === $w ? 'selected' : '' ?>><?= e($wl) ?> (<?= $w ?>)</option><?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="cdSubSize">Tamaño: <b id="cdSubSizeVal"><?= (int) $c['sub_size'] ?></b> %</label>
+                <input id="cdSubSize" type="range" name="cards_sub_size" min="60" max="200" step="5" value="<?= (int) $c['sub_size'] ?>">
+            </div>
+        </div>
+        <div class="ad-row" style="margin-top:1rem">
+            <label class="ad-check"><input type="checkbox" name="cards_sub_italic" id="cdSubItalic" value="1" <?= $c['sub_italic'] ? 'checked' : '' ?>><span>Cursiva (si la fuente la tiene)</span></label>
+            <label class="ad-check"><input type="checkbox" name="cards_sub_color_on" id="cdSubColorOn" value="1" <?= $c['sub_color_on'] ? 'checked' : '' ?>><span>Usar un color propio</span></label>
+            <div><label for="cdSubColor">Color</label><input id="cdSubColor" type="color" name="cards_sub_color" value="<?= e($c['sub_color']) ?>"></div>
+        </div>
+    </section>
+
     <?php foreach ($titles as $tid => $tm): if (empty($tm['options'])) continue; ?>
         <section class="ad-card" data-title-opts="<?= e($tid) ?>" hidden>
             <h2>Ajustes: título «<?= e($tm['label']) ?>»</h2>

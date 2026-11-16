@@ -28,6 +28,18 @@
   };
   ['cdFont', 'cdWeight', 'cdSize', 'cdItalic', 'cdColorOn', 'cdColor'].forEach(id => g(id).addEventListener('input', type)); type();
 
+  // Aspecto de la tarjeta y textos secundarios: también al momento
+  const look = () => {
+    const opt = g('cdSubFont').selectedOptions[0], w = +g('cdSubWeight').value;
+    const set = (k, v) => v ? pv.style.setProperty(k, v) : pv.style.removeProperty(k);
+    pv.style.setProperty('--cc-ar', g('cdRatio').value); pv.style.setProperty('--cc-rad', g('cdRadius').value + 'px'); g('cdRadiusVal').textContent = g('cdRadius').value;
+    pv.style.setProperty('--cc-vs', g('cdVeil').value); g('cdVeilVal').textContent = g('cdVeil').value; pv.style.setProperty('--cc-vc', g('cdVeilColor').value);
+    set('--f-sub', opt && opt.dataset.fam); set('--w-sub', w ? String(w) : ''); set('--st-sub', g('cdSubItalic').checked ? 'italic' : '');
+    pv.style.setProperty('--cs-s', String(g('cdSubSize').value / 100)); g('cdSubSizeVal').textContent = g('cdSubSize').value;
+    set('--cs-c', g('cdSubColorOn').checked ? g('cdSubColor').value : '');
+  };
+  ['cdRatio', 'cdRadius', 'cdVeil', 'cdVeilColor', 'cdSubFont', 'cdSubWeight', 'cdSubSize', 'cdSubItalic', 'cdSubColorOn', 'cdSubColor'].forEach(id => g(id).addEventListener('input', look)); look();
+
   // Vista previa del efecto: se vuelve al estado inicial y se reproduce
   const prev = document.getElementById('cdPrev'), cards = [...prev.querySelectorAll('.ccard')];
   const play = () => {

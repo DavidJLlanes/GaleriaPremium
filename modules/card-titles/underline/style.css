@@ -2,4 +2,4 @@
 .ct-underline h2{color:var(--ct-c,inherit);font:var(--st-title,normal) var(--w-title,300) calc(clamp(1.7rem,2.8vw,2.4rem) * var(--ct-s,1))/1.2 var(--f-title);margin:0 0 .6rem}
 .ct-underline h2 span{background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 1px no-repeat;padding-bottom:.15em;transition:background-size 1.3s var(--ease) .35s}
 .ccard.is-in .ct-underline h2 span,.ccard:hover .ct-underline h2 span{background-size:100% 1px}
-.ct-underline small{font-family:var(--f-menu);font-weight:var(--w-menu,inherit);font-style:var(--st-menu,normal);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.ct-underline small{font-family:var(--f-sub,var(--f-menu));font-weight:var(--w-sub,var(--w-menu,inherit));font-style:var(--st-sub,var(--st-menu,normal));font-size:calc(.68rem * var(--cs-s,1));letter-spacing:.3em;text-transform:uppercase;color:var(--cs-c,var(--muted))}
