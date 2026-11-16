@@ -1,0 +1,1 @@
+<?php return ['label' => 'Buscador de tipografías', 'desc' => 'Convierte cualquier <select data-font-search> en una lista con buscador (el select original sigue siendo el que se envía). Para opciones de módulos: \'search\' => true.'];

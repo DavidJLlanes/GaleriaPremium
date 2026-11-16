@@ -1,4 +1,5 @@
-<?php use App\Services\{Fonts, Site};
+<?php use App\Core\Module; use App\Services\{Fonts, Site};
+echo Module::render('components/font-search');
 $cat = Fonts::catalog();
 $meta = []; foreach ($cat as $id => $_) $meta[$id] = Fonts::meta($id);
 $groups = []; foreach ($cat as $id => $f) $groups[$f['cat']][$id] = $f['label'];
@@ -25,7 +26,7 @@ $opt = static function (array $groups, string $sel): string {
         <div class="fp-row" data-def="<?= e($def) ?>">
             <div class="fp-ctl">
                 <label for="fp_<?= e($role) ?>"><?= e($label) ?></label>
-                <select id="fp_<?= e($role) ?>" name="site_font_<?= e($role) ?>" class="fp-font">
+                <select id="fp_<?= e($role) ?>" name="site_font_<?= e($role) ?>" class="fp-font" data-font-search>
                     <option value="" <?= $saved === '' ? 'selected' : '' ?>><?= $role === 'herobtn' ? 'Igual que «Botones»' : 'Por defecto (' . e($cat[$def]['label']) . ')' ?></option>
                     <?= $opt($groups, $saved) ?>
                 </select>

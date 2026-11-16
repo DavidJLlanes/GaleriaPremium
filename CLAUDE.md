@@ -51,6 +51,8 @@
 
 32. **Pie de página totalmente personalizable** (Admin → Pie, `App\Services\Footer`, ajustes `footer_*`; el texto y el enlace «Admin» que antes estaban en Sitio viven ahora aquí): tres piezas intercambiables, cada una en su carpeta: **diseño** `modules/footers/<nombre>/` (linea, centrado, columnas, gigante, llamada; su `view.php` recibe `$f` —`Footer::data()`— y `$opts`; los elementos que deben animarse en cascada llevan la clase `ftr-i`), **llegada / visualización** `modules/footer-reveals/<nombre>/` (ninguna, subir, cascada, cortina, difuminado, desvelar; su `module.php` declara `armed` —si `components/footer` debe «armarla» con `is-armed`/`is-in` al entrar el pie en pantalla— y sus `options` llegan al CSS como `--fr-<clave>`) y **contenido** (copyright con `{year}`, fondo web/oscuro/claro/acento, eslogan, redes, Contacto, lista de galerías, «Arriba», Admin y **firma** con texto, enlace y estilo). Piezas comunes: `components/footer-links` y `components/footer-sig`. Tipografía: rol `footer` (+ `brand` para el nombre grande). Vista previa en el panel: la web en un iframe con `?footer_preview=1&ft[...]` (solo con sesión de administrador). Todo respeta `prefers-reduced-motion`.
 
+33. **Toda lista de tipografías del panel lleva buscador y muestra cada fuente con su propia letra**: se marca el `<select>` con `data-font-search` (o `'search' => true` en una opción de módulo) y se renderiza `components/font-search` (buscador con teclado y @font-face del catálogo; las fuentes solo se descargan al verse). El `<select>` original sigue siendo el que se envía.
+
 ## Arquitectura (cómo cumplir la regla 8)
 ```
 modules/<tipo>/<nombre>/{view.php, style.css, script.js, module.php}

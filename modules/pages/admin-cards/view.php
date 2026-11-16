@@ -1,5 +1,5 @@
 <?php use App\Core\Module; use App\Models\Photo; use App\Services\Csrf;
-Module::use('components/card-reveal'); Module::use('components/collection-card'); foreach (array_keys($reveals) as $r) Module::use("reveals/$r"); Module::use('card-titles/classic');
+Module::use('components/card-reveal');  Module::use('components/collection-card'); foreach (array_keys($reveals) as $r) Module::use("reveals/$r"); Module::use('card-titles/classic');
 $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' => '', 'cover' => null, 'cover_w' => 4, 'cover_h' => 5, 'photo_count' => 12]; ?>
 <h1>Tarjetas</h1>
 <p class="ad-sub">Cómo se ven las galerías en la página principal: cómo aparecen al hacer scroll y cómo se muestra el título de cada una.</p>
@@ -36,11 +36,11 @@ $sample = $sample ?? ['slug' => '', 'title' => 'Otoño en León', 'description' 
 
     <section class="ad-card cd-type">
         <h2>Tipografía, tamaño y color de los títulos</h2>
-        <style><?php foreach (App\Services\Fonts::catalog() as $fid => $_) echo App\Services\Fonts::face($fid); ?></style>
+        <?= Module::render('components/font-search') ?>
         <div class="ad-row">
             <div>
                 <label for="cdFont">Tipografía</label>
-                <select id="cdFont" name="cards_title_font">
+                <select id="cdFont" name="cards_title_font" data-font-search>
                     <option value="" <?= $c['font'] === '' ? 'selected' : '' ?>>La de Sitio → Tipografías («Títulos de galerías»)</option>
                     <?php $byCat = []; foreach (App\Services\Fonts::catalog() as $fid => $fm) $byCat[$fm['cat'] ?? 'custom'][$fid] = $fm;
                     foreach (App\Services\Fonts::CATS as $cat => $catLabel): if (empty($byCat[$cat])) continue; ?>
