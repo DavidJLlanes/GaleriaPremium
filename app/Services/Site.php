@@ -38,6 +38,14 @@ final class Site
         'youtube'      => ['url',   ''],
         'linkedin'     => ['url',   ''],
         'tiktok'       => ['url',   ''],
+        // Tipografía por tipo de texto ('' = la de por defecto). Ver App\Services\Fonts::ROLES
+        'font_brand'   => ['font',  ''],
+        'font_hero'    => ['font',  ''],
+        'font_title'   => ['font',  ''],
+        'font_menu'    => ['font',  ''],
+        'font_body'    => ['font',  ''],
+        'font_caption' => ['font',  ''],
+        'font_button'  => ['font',  ''],
     ];
     public const SOCIALS = ['instagram' => 'Instagram', 'x' => 'X', 'facebook' => 'Facebook', 'threads' => 'Threads', 'youtube' => 'YouTube', 'linkedin' => 'LinkedIn', 'tiktok' => 'TikTok'];
 
@@ -77,6 +85,7 @@ final class Site
                 $v = trim((string) $raw);
                 if ($type === 'color' && !preg_match('/^#[0-9a-fA-F]{6}$/', $v)) $v = $f[1];
                 if ($type === 'enum' && !in_array($v, $f[2], true)) $v = $f[1];
+                if ($type === 'font' && !isset(Fonts::catalog()[$v])) $v = '';
                 if ($type === 'url' && $v !== '' && !preg_match('#^https?://#i', $v)) $v = 'https://' . ltrim($v, '/');
                 if ($type === 'url' && $v !== '' && !filter_var($v, FILTER_VALIDATE_URL)) $v = '';
                 if ($type === 'text') $v = mb_substr($v, 0, 300);

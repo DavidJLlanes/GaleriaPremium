@@ -1,0 +1,5 @@
+.fp-row{display:grid;grid-template-columns:minmax(200px,320px) 1fr;gap:1.2rem;align-items:center;padding:1rem 0;border-top:1px solid rgba(242,239,233,.07)}
+.fp-row:first-of-type{border-top:0}
+.fp-prev{font-size:clamp(1.3rem,3.4vw,2rem);line-height:1.25;color:var(--fg);padding:.8rem 1rem;background:#0d0d0f;border:1px solid rgba(242,239,233,.08);border-radius:8px;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s;min-height:3.4rem;display:flex;align-items:center}
+.fp-prev.is-loading{opacity:.4}
+@media(max-width:700px){.fp-row{grid-template-columns:1fr}}

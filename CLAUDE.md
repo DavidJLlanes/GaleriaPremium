@@ -31,6 +31,7 @@
 19. **Subida global por arrastre**: arrastrar una foto a cualquier zona de la web la sube, mostrando título, descripción y galería (igual que la subida normal, siempre vía `ImageProcessor`).
 20. **Gestión masiva en el panel**: borrado masivo de fotos y de galerías, y mover fotos entre galerías (selección múltiple con casillas; componente `components/bulk`).
 21. **Panel «Fotos»**: sección de administración para gestionar todas las fotos de todas las galerías (filtro, búsqueda, mover y borrar en bloque).
+22. **Tipografías alojadas en local** (nada de Google Fonts/CDN): cada tipo de texto (nombre de la web, título de portada, títulos de galería, menú y etiquetas, texto normal, pies de foto, botones) tiene su tipografía, elegida en Admin → Sitio → Tipografías. Catálogo en `config/fonts.php` + `public/fonts/<id>/*.woff2` (subset latin); servicio `App\Services\Fonts`; los módulos usan las variables `--f-<rol>`, nunca un nombre de fuente fijo.
 
 ## Arquitectura (cómo cumplir la regla 8)
 ```
@@ -44,4 +45,5 @@ app/Services/ImageProcessor.php   ÚNICO punto de conversión de fotos (WebP 75%
 - Nuevo hero → `modules/heroes/<nombre>/` (se elige con el ajuste `hero_type`).
 - Los CSS/JS de un módulo solo afectan a ese módulo (clases con prefijo propio). Nada de CSS/JS global salvo `layouts/main`.
 - Toda subida o importación de fotos DEBE pasar por `ImageProcessor` (WebP 75%).
+- Tipografías: en el CSS de un módulo se usa `var(--f-brand|hero|title|menu|body|caption|button)`. Para añadir una fuente: carpeta `public/fonts/<id>/` con su `.woff2` + una entrada en `config/fonts.php`.
 - Tras cada cambio: commit + push a `main` y dar el comando de despliegue: `bash /var/www/luxaeterna.es/deploy/deploy.sh`.

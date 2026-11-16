@@ -8,8 +8,8 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
 <meta name="robots" content="noindex,nofollow">
 <meta name="csrf" content="<?= e(Csrf::token()) ?>">
 <title><?= e($title ?? 'Admin') ?> · <?= e(Config::get('app.name')) ?></title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <!--assets:css-->
+<?= App\Core\Module::render('components/typography', ['defaults' => true]) ?>
 <?= App\Core\Module::render('components/head-meta', ['title' => $title ?? 'Admin', 'description' => 'Panel de administración']) ?>
 </head>
 <body class="ad <?= $bare ? 'ad-bare' : '' ?>">

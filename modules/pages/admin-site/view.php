@@ -77,6 +77,8 @@ $img = static fn (?string $u, string $alt) => $u ? '<img src="' . e($u) . '" alt
         </div>
     </section>
 
+    <?= \App\Core\Module::render('components/font-picker') ?>
+
     <section class="ad-card">
         <h2>Barra superior y pie</h2>
         <label class="ad-check st-line"><input type="checkbox" name="site_header_home" <?= $chk('header_home') ?>><span>Mostrar la barra superior en la <b>portada</b></span></label>

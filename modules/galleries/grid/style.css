@@ -2,8 +2,8 @@
 .gg-item{position:relative;display:block;overflow:hidden;aspect-ratio:3/4;border-radius:3px;background:#111;cursor:zoom-in}
 .gg-item img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease)}
 .gg-item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,11,.85),transparent 45%);opacity:.7;transition:opacity .6s}
-.gg-cap{position:absolute;z-index:2;left:1.2rem;bottom:1.1rem;font:300 1.25rem var(--serif);transform:translateY(10px);opacity:0;transition:all .6s var(--ease)}
-.gg-cap small{display:block;font:400 .65rem var(--sans);letter-spacing:.3em;color:var(--accent);margin-bottom:.2rem}
+.gg-cap{position:absolute;z-index:2;left:1.2rem;bottom:1.1rem;font:300 1.25rem var(--f-caption);transform:translateY(10px);opacity:0;transition:all .6s var(--ease)}
+.gg-cap small{display:block;font:400 .65rem var(--f-menu);letter-spacing:.3em;color:var(--accent);margin-bottom:.2rem}
 .gg-item:hover img{transform:scale(1.08)}
 .gg-item:hover .gg-cap{opacity:1;transform:none}
 .gg-item:hover::after{opacity:1}

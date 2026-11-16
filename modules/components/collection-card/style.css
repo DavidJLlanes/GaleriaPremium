@@ -3,8 +3,8 @@
 .ccard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,11,.88),transparent 55%)}
 .ccard:hover img{transform:scale(1.07);filter:brightness(1.08) saturate(1.1)}
 .ccard-info{position:absolute;z-index:2;inset:auto 0 0 0;padding:2rem}
-.ccard-count{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
-.ccard h2{font:300 clamp(1.8rem,3vw,2.6rem)/1.1 var(--serif);margin:.4rem 0}
+.ccard-count{font-family:var(--f-menu);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.ccard h2{font:300 clamp(1.8rem,3vw,2.6rem)/1.1 var(--f-title);margin:.4rem 0}
 .ccard p{color:var(--muted);font-size:.9rem;max-width:34ch;transform:translateY(8px);opacity:0;transition:all .7s var(--ease)}
 .ccard:hover p{opacity:1;transform:none}
 @media(hover:none){.ccard p{opacity:1;transform:none}}

@@ -10,7 +10,7 @@
 .gs-crop img{position:absolute;max-width:none;height:auto;pointer-events:none;transition:transform 1.2s var(--ease)}
 .gs-crop img.is-cover{inset:0;width:100%;height:100%;object-fit:cover}
 .gs-slide:hover .gs-crop img{transform:scale(1.04)}
-.gs-cap{display:block;margin-top:.7rem;font:300 .95rem var(--serif);color:rgba(242,239,233,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-cap{display:block;margin-top:.7rem;font:300 .95rem var(--f-caption);color:rgba(242,239,233,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gs-nav{display:flex;align-items:center;justify-content:center;gap:1.4rem;margin-top:1.6rem}
 .gs-btn{width:2.8rem;height:2.8rem;border-radius:50%;border:1px solid rgba(242,239,233,.25);background:none;color:var(--fg);font-size:1.1rem;cursor:pointer;transition:all .3s}
 .gs-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
