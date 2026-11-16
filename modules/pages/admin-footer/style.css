@@ -1,2 +1,8 @@
 .ft-prev{display:block;width:100%;height:clamp(380px,60vh,600px);border:1px solid rgba(242,239,233,.12);border-radius:12px;background:#0a0a0b}
 .ft-prevcard .ad-hint{margin-top:.8rem}
+
+/* Campos ordenados: el texto a todo el ancho, las casillas en una cuadrícula uniforme y la firma en tres columnas */
+.ft-wide .ad-row{grid-template-columns:1fr}
+.ft-checks .ad-row{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.9rem 1.5rem}
+.ft-checks .ad-check{align-items:center}
+.ft-sig .ad-row{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}

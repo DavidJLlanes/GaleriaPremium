@@ -1,5 +1,5 @@
 <?php use App\Core\Module; use App\Services\{Csrf, Footer};
-$groups = ['Contenido' => ['text', 'tag', 'social', 'contact', 'galleries', 'top', 'admin'], 'Firma' => ['sig_text', 'sig_url', 'sig_style']];
+$groups = ['Texto' => [['text'], 'ft-wide'], 'Qué mostrar' => [['tag', 'social', 'contact', 'galleries', 'top', 'admin'], 'ft-checks'], 'Firma' => [['sig_text', 'sig_url', 'sig_style'], 'ft-sig']];
 $fv = fn(array $keys) => array_intersect_key(Footer::SPEC, array_flip($keys)); ?>
 <h1>Pie</h1>
 <p class="ad-sub">El pie de página de toda la web: cómo es (diseño), cómo llega al final de la página (efecto), qué contiene y tu firma.</p>
@@ -33,8 +33,8 @@ $fv = fn(array $keys) => array_intersect_key(Footer::SPEC, array_flip($keys)); ?
     <?php endforeach; ?>
 
     <section class="ad-card"><h2>Aspecto</h2><?= Module::render('components/option-fields', ['spec' => $fv(['tone']), 'values' => $v, 'name' => 'ft']) ?></section>
-    <?php foreach ($groups as $title => $keys): ?>
-        <section class="ad-card"><h2><?= e($title) ?></h2><?= Module::render('components/option-fields', ['spec' => $fv($keys), 'values' => $v, 'name' => 'ft']) ?></section>
+    <?php foreach ($groups as $title => [$keys, $cls]): ?>
+        <section class="ad-card <?= e($cls) ?>"><h2><?= e($title) ?></h2><?= Module::render('components/option-fields', ['spec' => $fv($keys), 'values' => $v, 'name' => 'ft']) ?></section>
     <?php endforeach; ?>
     <p class="ad-hint">La tipografía se elige en <a href="/admin/sitio">Sitio → Tipografías</a>: «Pie de página» (textos) y «Nombre de la web» (nombre grande en los diseños que lo usan). Redes y correo se editan en Sitio.</p>
     <button class="ad-btn">Guardar pie</button>
