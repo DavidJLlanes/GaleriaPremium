@@ -5,17 +5,22 @@
 
 
 <h2 class="ad-listh">Tus galerías <span class="ad-badge"><?= count($galleries) ?></span></h2>
-<?php if (count($galleries) > 1): ?><p class="ad-hint" style="margin-bottom:.8rem">Arrastra el icono ⠿ para cambiar el orden de las galerías en la web. Se guarda solo.</p><?php endif; ?>
+<?php if (count($galleries) > 1): ?><p class="ad-hint" style="margin-bottom:.8rem">Arrastra el icono ⠿ para cambiar el orden (se guarda solo). El chincheta <b>fija</b> una galería como la primera (solo una) y la estrella la marca como <b>destacada</b>.</p><?php endif; ?>
 <div class="adg" data-bulk data-sortable data-reorder-url="/admin/galerias/orden">
     <?php foreach ($galleries as $g): ?>
-        <a class="adg-card" data-id="<?= (int) $g['id'] ?>" href="/admin/galeria/<?= (int) $g['id'] ?>">
+        <a class="adg-card<?= $g['pinned'] ? ' is-pinned' : '' ?><?= $g['featured'] ? ' is-featured' : '' ?>" data-id="<?= (int) $g['id'] ?>"<?= $g['pinned'] ? ' data-fixed="1"' : '' ?> href="/admin/galeria/<?= (int) $g['id'] ?>">
             <span class="bk-box" role="checkbox" aria-checked="false" tabindex="0" title="Seleccionar">✓</span>
-            <span class="srt-handle" title="Arrastra para reordenar" aria-label="Reordenar">⠿</span>
+            <?php if (!$g['pinned']): ?><span class="srt-handle" title="Arrastra para reordenar" aria-label="Reordenar">⠿</span><?php endif; ?>
+            <span class="adg-flags">
+                <button type="button" class="adg-flag<?= $g['pinned'] ? ' is-on' : '' ?>" data-flag="pin" data-url="/admin/galeria/<?= (int) $g['id'] ?>/marca" aria-pressed="<?= $g['pinned'] ? 'true' : 'false' ?>" title="<?= $g['pinned'] ? 'Quitar de «primera»' : 'Fijar como la primera (solo una)' ?>" aria-label="Fijar como primera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l-1 6 3 3v2H7v-2l3-3zM12 14v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button type="button" class="adg-flag<?= $g['featured'] ? ' is-on' : '' ?>" data-flag="featured" data-url="/admin/galeria/<?= (int) $g['id'] ?>/marca" aria-pressed="<?= $g['featured'] ? 'true' : 'false' ?>" title="<?= $g['featured'] ? 'Quitar destacada' : 'Marcar como destacada' ?>" aria-label="Destacar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+            </span>
             <div class="adg-img"><?php if ($g['cover']): ?><img src="<?= e(Photo::thumbUrl($g['cover'])) ?>" alt="" loading="lazy"><?php endif; ?></div>
             <div class="adg-info">
                 <strong><?= e($g['title']) ?></strong>
                 <span><?= (int) $g['photo_count'] ?> fotos · <?= e($styles[$g['style']]['label'] ?? $g['style']) ?></span>
                 <span class="ad-badge <?= $g['is_published'] ? '' : 'is-off' ?>"><?= $g['is_published'] ? 'Publicada' : 'Oculta' ?></span>
+                <?php if ($g['pinned']): ?><span class="ad-badge">Fijada</span><?php endif; ?><?php if ($g['featured']): ?><span class="ad-badge">Destacada</span><?php endif; ?>
             </div>
         </a>
     <?php endforeach; ?>

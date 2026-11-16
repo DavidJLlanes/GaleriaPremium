@@ -1,0 +1,9 @@
+/* Insignias: «Fijada» = relleno de acento; «Destacada» = cristal oscuro con filete y texto de acento. */
+.gbd{font-style:normal;position:absolute;z-index:6;top:.8rem;left:.8rem;display:flex;flex-wrap:wrap;gap:.35rem;pointer-events:none}
+.gbd--inline{position:static;display:inline-flex;vertical-align:middle;margin-left:.6rem}
+.gbd-i{display:inline-flex;align-items:center;gap:.32rem;padding:.32rem .7rem .32rem .55rem;border-radius:999px;font:var(--st-menu,normal) var(--w-menu,600) .62rem/1 var(--f-menu);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.gbd-i svg{width:.78rem;height:.78rem}
+.gbd-i--pin{background:var(--accent);color:#111;box-shadow:0 6px 18px -6px color-mix(in srgb,var(--accent) 70%,transparent)}
+.gbd-i--feat{background:rgba(10,10,11,.7);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 65%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+/* Marco de acento de las destacadas: se pone sobre el elemento de la foto (el filete va por encima de la imagen) */
+.gfx{outline:1.5px solid var(--accent);outline-offset:-1.5px;box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 30%,transparent),0 22px 60px -24px color-mix(in srgb,var(--accent) 60%,transparent)}

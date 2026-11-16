@@ -22,6 +22,7 @@ $router->post('/admin/login',                [$auth, 'login']);
 $router->post('/admin/logout',               [$auth, 'logout']);
 $router->post('/admin/galerias',             [$ag, 'create']);
 $router->post('/admin/galerias/orden',       [$ag, 'reorderAll']);
+$router->post('/admin/galeria/{id}/marca',   [$ag, 'flag']);
 $router->post('/admin/galerias/borrar',      [$ag, 'bulkDelete']);
 $router->post('/admin/fotos/borrar',         [$ph, 'bulkDelete']);
 $router->post('/admin/fotos/mover',          [$ph, 'move']);

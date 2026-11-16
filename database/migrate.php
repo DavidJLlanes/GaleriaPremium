@@ -15,6 +15,7 @@ return static function (\PDO $pdo): void {
         ['photos',    'exif',       'TEXT'],   // datos de cámara en JSON (solo fotos subidas con EXIF; sin GPS)
         ['galleries', 'crop_ratio', 'REAL'],
         ['galleries', 'options',    "TEXT NOT NULL DEFAULT '{}'"],
+        ['galleries', 'featured',   'INTEGER NOT NULL DEFAULT 0'],   // destacada (badge + marco de acento)
         ['galleries', 'lightbox',   "TEXT NOT NULL DEFAULT 'fade'"],
     ];
     foreach ($add as [$t, $c, $def]) if (!$has($t, $c)) $pdo->exec("ALTER TABLE $t ADD COLUMN $c $def");

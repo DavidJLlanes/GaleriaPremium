@@ -4,6 +4,7 @@
   background:rgba(10,10,11,.75);color:var(--fg);font-size:1.1rem;line-height:1;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
   border:1px solid rgba(242,239,233,.15);backdrop-filter:blur(6px)}
 .srt-handle:hover{border-color:var(--accent);color:var(--accent)}
-[data-sortable]>.is-dragging{opacity:.55;outline:1px solid var(--accent);box-shadow:0 14px 40px rgba(0,0,0,.5);z-index:10}
+[data-sortable]>.is-dragging{opacity:.85;outline:1px solid var(--accent);box-shadow:0 14px 40px rgba(0,0,0,.5);z-index:10}
 .is-dragging .srt-handle{cursor:grabbing}
 [data-sortable].is-sorting{user-select:none;-webkit-user-select:none}
+@media(pointer:coarse){.srt-handle{width:2.6rem;height:2.6rem;font-size:1.3rem}}

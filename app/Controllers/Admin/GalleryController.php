@@ -36,6 +36,16 @@ final class GalleryController
         Response::json(['ok' => true]);
     }
 
+    /** Fijar como primera / destacar (alterna). POST flag = pin | featured. */
+    public function flag(array $p): void
+    {
+        Auth::guard(true); Csrf::verify();
+        $g = Gallery::find((int) $p['id']);
+        if (!$g) Response::json(['ok' => false, 'error' => 'Galería no encontrada.'], 404);
+        $on = ($_POST['flag'] ?? '') === 'pin' ? \App\Services\Pinned::toggle('g', (int) $g['id']) : Gallery::toggleFeatured((int) $g['id']);
+        Response::json(['ok' => true, 'on' => $on]);
+    }
+
     public function reorder(array $p): void
     {
         Auth::guard(true); Csrf::verify();

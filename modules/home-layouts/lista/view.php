@@ -5,8 +5,8 @@
         <li class="hll-row" style="--i:<?= $i ?>">
             <a href="/galeria/<?= e($g['slug']) ?>" data-pt data-i="<?= $i ?>">
                 <span class="hll-n"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
-                <?php if ($g['cover']): ?><span class="hll-th" data-pt-media><img src="<?= e(Photo::thumbUrl($g['cover'])) ?>" alt="" loading="lazy" width="<?= (int) $g['cover_w'] ?>" height="<?= (int) $g['cover_h'] ?>"></span><?php endif; ?>
-                <h2 class="hll-t"><span><?= e($g['title']) ?></span></h2>
+                <?php if ($g['cover']): ?><span class="hll-th<?= !empty($g['featured']) ? ' gfx' : '' ?>" data-pt-media><img src="<?= e(Photo::thumbUrl($g['cover'])) ?>" alt="" loading="lazy" width="<?= (int) $g['cover_w'] ?>" height="<?= (int) $g['cover_h'] ?>"></span><?php endif; ?>
+                <h2 class="hll-t"><span><?= e($g['title']) ?></span><?= \App\Core\Module::render('components/gallery-badge', ['g' => $g, 'inline' => true]) ?></h2>
                 <span class="hll-c"><?= (int) $g['photo_count'] ?> fotos</span>
                 <i class="hll-arrow" aria-hidden="true">↗</i>
             </a>

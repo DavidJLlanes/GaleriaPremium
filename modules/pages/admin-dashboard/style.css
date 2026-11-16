@@ -12,3 +12,12 @@
 .ad-new>summary::-webkit-details-marker{display:none}
 .ad-new[open]>summary{margin-bottom:1.2rem}
 .ad-new .ad-newbody{max-width:100%}
+
+/* Fijar / destacar: botones sobre la tarjeta (arriba a la derecha) y marcas visibles */
+.adg-flags{position:absolute;z-index:3;top:2.7rem;right:.4rem;display:flex;flex-direction:column;gap:.35rem}
+.adg-flag{display:grid;place-items:center;width:2.2rem;height:2.2rem;padding:0;border-radius:50%;border:1px solid rgba(242,239,233,.18);background:rgba(10,10,11,.75);color:var(--fg);cursor:pointer;backdrop-filter:blur(6px);transition:border-color .3s,color .3s,background .3s}
+.adg-flag svg{width:1.05rem;height:1.05rem}
+.adg-flag:hover{border-color:var(--accent);color:var(--accent)}
+.adg-flag.is-on{background:var(--accent);border-color:var(--accent);color:#111}
+.adg-card.is-pinned{outline:1px solid var(--accent);outline-offset:-1px}
+.adg-card.is-featured:not(.is-pinned){box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent)}

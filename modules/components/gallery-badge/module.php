@@ -1,0 +1,1 @@
+<?php return ['label' => 'Insignias «Fijada» / «Destacada»', 'desc' => 'Badge con el color de acento para galerías (y sliders) fijados o destacados, y la clase .gfx (marco de acento). Datos: $g con `pinned` y `featured`; `inline` => true para ponerlo en línea con el texto.'];

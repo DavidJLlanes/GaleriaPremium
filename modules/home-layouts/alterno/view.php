@@ -2,7 +2,8 @@
 <div class="hla">
     <?php foreach ($galleries as $i => $g): ?>
     <article class="hla-row">
-        <a class="hla-media" href="/galeria/<?= e($g['slug']) ?>" data-pt aria-label="<?= e($g['title']) ?>" tabindex="-1">
+        <a class="hla-media<?= !empty($g['featured']) ? ' gfx' : '' ?>" href="/galeria/<?= e($g['slug']) ?>" data-pt aria-label="<?= e($g['title']) ?>" tabindex="-1">
+            <?= \App\Core\Module::render('components/gallery-badge', ['g' => $g]) ?>
             <?php if ($g['cover']): ?><img src="<?= e(Photo::url($g['cover'])) ?>" alt="" loading="lazy" width="<?= (int) $g['cover_w'] ?>" height="<?= (int) $g['cover_h'] ?>"><?php endif; ?>
         </a>
         <div class="hla-txt">

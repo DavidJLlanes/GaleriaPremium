@@ -9,7 +9,7 @@ final class Gallery
     /** Galerías publicadas con su foto de portada y nº de fotos. */
     public static function published(): array
     {
-        return Database::all(
+        return \App\Services\Pinned::apply(Database::all(
             'SELECT g.*, p.filename AS cover, p.width AS cover_w, p.height AS cover_h,
                     (SELECT COUNT(*) FROM photos WHERE gallery_id = g.id) AS photo_count
              FROM galleries g
@@ -17,7 +17,7 @@ final class Gallery
                     (SELECT id FROM photos WHERE gallery_id = g.id ORDER BY sort_order, id LIMIT 1))
              WHERE g.is_published = 1
              ORDER BY g.sort_order, g.id'
-        );
+        ), 'g');
     }
 
     public static function find(int $id): ?array
@@ -33,12 +33,19 @@ final class Gallery
     /** Todas (incluidas ocultas), para el panel. */
     public static function all(): array
     {
-        return Database::all(
+        return \App\Services\Pinned::apply(Database::all(
             'SELECT g.*, (SELECT COUNT(*) FROM photos WHERE gallery_id = g.id) AS photo_count,
                     (SELECT filename FROM photos WHERE id = COALESCE(g.cover_photo_id,
                         (SELECT id FROM photos WHERE gallery_id = g.id ORDER BY sort_order, id LIMIT 1))) AS cover
              FROM galleries g ORDER BY g.sort_order, g.id'
-        );
+        ), 'g');
+    }
+
+    /** Alterna «destacada». */
+    public static function toggleFeatured(int $id): bool
+    {
+        Database::pdo()->prepare('UPDATE galleries SET featured = 1 - featured WHERE id = ?')->execute([$id]);
+        return (bool) (self::find($id)['featured'] ?? 0);
     }
 
     public static function setLightbox(int $id, string $fx): void
@@ -143,5 +150,6 @@ final class Gallery
     {
         foreach (Photo::forGallery($id) as $p) Photo::delete((int) $p['id']);
         Database::pdo()->prepare('DELETE FROM galleries WHERE id = ?')->execute([$id]);
+        \App\Services\Pinned::clear('g', $id);
     }
 }
