@@ -22,6 +22,7 @@ final class Site
         'short_name'   => ['text',  ''],
         'tagline'      => ['text',  ''],
         'description'  => ['text',  ''],
+        'og_text'      => ['text',  ''],
         'lang'         => ['enum',  'es', ['es', 'en', 'ca', 'gl', 'eu', 'fr', 'pt', 'de', 'it']],
         'accent'       => ['color', '#d8b36a'],
         'theme'        => ['color', '#0a0a0b'],
@@ -109,7 +110,7 @@ final class Site
                 if ($type === 'weight') $v = isset(Fonts::WEIGHTS[(int) $v]) ? (string) (int) $v : '';
                 if ($type === 'url' && $v !== '' && !preg_match('#^https?://#i', $v)) $v = 'https://' . ltrim($v, '/');
                 if ($type === 'url' && $v !== '' && !filter_var($v, FILTER_VALIDATE_URL)) $v = '';
-                if ($type === 'text') $v = mb_substr($v, 0, 300);
+                if ($type === 'text') $v = mb_substr($v, 0, $k === 'og_text' ? 200 : 300);
             }
             Setting::set("site_$k", $v);
         }
