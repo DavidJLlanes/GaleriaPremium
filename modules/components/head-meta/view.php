@@ -2,7 +2,8 @@
 $name = Site::get('name'); $desc = $description ?? (Site::get('description') ?: Site::get('tagline'));
 $icon = Site::hasBrand('icon-source.png'); $fav = Site::hasBrand('favicon.ico');
 $v = static fn (string $f): string => (string) (int) @filemtime(Site::brandFile($f));
-$og = !empty($ogImage) ? Site::absolute(Photo::url($ogImage)) : (Site::hasBrand('icon-512.png') ? Site::absolute('/uploads/brand/icon-512.png') : null);
+$og = Site::hasBrand('og.webp') ? Site::absolute('/uploads/brand/og.webp?v=' . (int) @filemtime(Site::brandFile('og.webp'))) : (!empty($ogImage) ? Site::absolute(Photo::url($ogImage)) : (Site::hasBrand('icon-512.png') ? Site::absolute('/uploads/brand/icon-512.png') : null));
+$ogDesc = Site::get('og_text') ?: $desc;
 $self = Site::absolute(strtok($_SERVER['REQUEST_URI'] ?? '/', '?'));
 ?>
 <meta name="description" content="<?= e($desc) ?>">
