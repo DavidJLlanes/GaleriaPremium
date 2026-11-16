@@ -1,2 +1,2 @@
-<?php return ['label' => 'Línea', 'desc' => 'Una sola fila: copyright y eslogan a la izquierda, enlaces y firma a la derecha.',
-  'icon' => '<rect x="8" y="16" width="14" height="2" opacity=".6"/><rect x="38" y="16" width="18" height="2"/><rect x="8" y="22" width="48" height=".8" opacity=".3"/>'];
+<?php return ['label' => 'Línea', 'desc' => 'Todo centrado: copyright, iconos de redes, pequeño menú desplegable (legal y Admin) y botón «Arriba» al final.',
+  'icon' => '<rect x="22" y="8" width="20" height="2" opacity=".6"/><rect x="18" y="14" width="28" height="3"/><rect x="26" y="21" width="12" height="2" opacity=".5"/><circle cx="32" cy="28" r="2.5" opacity=".7"/>'];

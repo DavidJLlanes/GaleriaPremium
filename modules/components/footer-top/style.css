@@ -1,0 +1,16 @@
+/* «Arriba»: aro fino con flecha; al pasar el cursor se rellena con el acento y la flecha sube con suavidad. */
+.ft{--ft-e:cubic-bezier(.16,1,.3,1);display:inline-flex;flex-direction:column;align-items:center;gap:.65rem;text-decoration:none}
+.ft-r{position:relative;display:grid;place-items:center;width:3rem;height:3rem;border:1px solid color-mix(in srgb,currentColor 28%,transparent);border-radius:50%;overflow:hidden;
+  transition:border-color .6s var(--ft-e),color .6s var(--ft-e),transform .8s var(--ft-e)}
+.ft-r::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--fh,var(--accent));transform:translateY(101%);transition:transform .8s var(--ft-e)}
+.ft-r svg{position:relative;width:1.15rem;height:1.15rem;transition:transform .8s var(--ft-e)}
+.ft-t{font-size:.62rem;letter-spacing:.36em;text-transform:uppercase;padding-left:.36em;transition:color .5s var(--ft-e)}
+.ft:hover .ft-r,.ft:focus-visible .ft-r{border-color:var(--fh,var(--accent));color:#111;transform:translateY(-3px)}
+.ft:hover .ft-r::before,.ft:focus-visible .ft-r::before{transform:none}
+.ft:hover .ft-r svg,.ft:focus-visible .ft-r svg{transform:translateY(-2px)}
+.ft:hover .ft-t,.ft:focus-visible .ft-t{color:var(--fh,var(--accent))}
+.ft:focus-visible{outline:0}
+.ft:focus-visible .ft-r{box-shadow:0 0 0 3px color-mix(in srgb,var(--fh,var(--accent)) 35%,transparent)}
+@media(prefers-reduced-motion:reduce){.ft *,.ft{transition:none!important}}
+.ftr--accent .ft:hover .ft-r,.ftr--accent .ft:focus-visible .ft-r{color:var(--accent)}
+.ftr--light .ft:hover .ft-r,.ftr--light .ft:focus-visible .ft-r{color:#f2efe9}

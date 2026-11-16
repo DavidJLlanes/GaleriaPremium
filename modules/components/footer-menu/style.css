@@ -1,0 +1,19 @@
+/* Desplegable del pie: botón fino + lista que se abre en línea (filas de grid 0fr→1fr), entrada escalonada y muy suave. */
+.fm{--fm-e:cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;align-items:center}
+.fm-b{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.05rem .5rem 1.2rem;border:1px solid color-mix(in srgb,currentColor 22%,transparent);border-radius:999px;background:transparent;color:inherit;
+  font:inherit;font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;cursor:pointer;transition:border-color .5s var(--fm-e),color .5s var(--fm-e),background .5s var(--fm-e)}
+.fm-b:hover,.fm-b[aria-expanded="true"]{border-color:color-mix(in srgb,var(--fh,var(--accent)) 60%,transparent);color:var(--fh,var(--accent))}
+.fm-b:focus-visible{outline:1px solid var(--fh,var(--accent));outline-offset:3px}
+.fm-c{width:.7rem;height:.7rem;transition:transform .8s var(--fm-e)}
+.fm-b[aria-expanded="true"] .fm-c{transform:rotate(180deg)}
+.fm-w{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .9s var(--fm-e),opacity .6s ease}
+.fm-w.is-open{grid-template-rows:1fr;opacity:1}
+.fm-l{min-height:0;overflow:hidden;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:.1rem}
+.fm-l::before{content:"";display:block;width:1px;height:.9rem;margin:.9rem 0 .35rem;background:linear-gradient(transparent,color-mix(in srgb,var(--fh,var(--accent)) 70%,transparent))}
+.fm-l li{opacity:0;transform:translateY(-6px);transition:opacity .5s ease,transform .8s var(--fm-e)}
+.fm-w.is-open .fm-l li{opacity:1;transform:none;transition-delay:calc(.12s + var(--n,0) * .08s)}
+.fm-i{display:inline-block;position:relative;padding:.45rem .9rem;border:0;background:none;color:inherit;font:inherit;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.fm-i::after{content:"";position:absolute;left:50%;right:50%;bottom:.2rem;height:1px;background:var(--fh,var(--accent));transition:left .6s var(--fm-e),right .6s var(--fm-e)}
+.fm-i:hover::after,.fm-i:focus-visible::after{left:.9rem;right:.9rem}
+.fm-i:focus-visible{outline:0;color:var(--fh,var(--accent))}
+@media(prefers-reduced-motion:reduce){.fm *,.fm{transition:none!important}}
