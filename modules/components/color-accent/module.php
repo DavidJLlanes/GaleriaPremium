@@ -1,0 +1,1 @@
+<?php return ['label' => 'Color de acento en los selectores de color', 'desc' => 'Añade a cada <input type="color"> del panel un botón «Color de acento» que pone el acento de la web. Se carga en layouts/admin.'];

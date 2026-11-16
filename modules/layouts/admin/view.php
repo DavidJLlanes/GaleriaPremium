@@ -12,7 +12,8 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
 <?= App\Core\Module::render('components/typography', ['defaults' => true]) ?>
 <?= App\Core\Module::render('components/head-meta', ['title' => $title ?? 'Admin', 'description' => 'Panel de administración']) ?>
 </head>
-<body class="ad <?= $bare ? 'ad-bare' : '' ?>">
+<body class="ad <?= $bare ? 'ad-bare' : '' ?>" data-accent="<?= e(\App\Services\Site::get('accent')) ?>">
+<?php App\Core\Module::use('components/color-accent'); ?>
 <?php if (!$bare): ?>
 <header class="ad-top">
     <a class="ad-logo" href="/admin"><?= e(Config::get('app.name')) ?> <small>Admin</small></a>

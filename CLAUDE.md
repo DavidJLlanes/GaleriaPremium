@@ -53,6 +53,8 @@
 
 33. **Toda lista de tipografías del panel lleva buscador y muestra cada fuente con su propia letra**: se marca el `<select>` con `data-font-search` (o `'search' => true` en una opción de módulo) y se renderiza `components/font-search` (buscador con teclado y @font-face del catálogo; las fuentes solo se descargan al verse). El `<select>` original sigue siendo el que se envía.
 
+34. **«Color de acento» en todo selector de color del panel**: `components/color-accent` (cargado en `layouts/admin`) añade junto a cada `<input type="color">` un botón que pone el acento de la web (el que se esté editando en Sitio, o el guardado). Es automático: basta con usar `<input type="color">`; solo el propio selector del acento (`site_accent`, o cualquiera con `data-no-accent`) no lo lleva.
+
 ## Arquitectura (cómo cumplir la regla 8)
 ```
 modules/<tipo>/<nombre>/{view.php, style.css, script.js, module.php}

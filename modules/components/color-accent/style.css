@@ -1,0 +1,5 @@
+.ca{display:inline-flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.ca-btn{display:inline-flex;align-items:center;gap:.5rem;font:inherit;font-size:.78rem;letter-spacing:.04em;color:var(--fg);background:#0b0b0d;border:1px solid rgba(242,239,233,.16);border-radius:999px;padding:.4rem .8rem;cursor:pointer;transition:border-color .2s,background .2s}
+.ca-btn i{width:.85rem;height:.85rem;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
+.ca-btn:hover,.ca-btn:focus-visible{border-color:var(--accent);outline:0}
+.ca-btn.is-on{border-color:var(--accent);background:rgba(242,239,233,.07)}
