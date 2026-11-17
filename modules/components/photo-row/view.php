@@ -12,6 +12,7 @@ $crop = !empty($canCrop) ? Crop::of($p) : null; ?>
             <?php if ($aiConfigured): ?><button type="button" class="ad-btn is-ghost is-small" data-ai="title" title="Generar un nombre con IA">✨ Nombre</button><?php endif; ?></div>
         <div class="pr-line"><textarea class="d" rows="2" placeholder="Descripción" aria-label="Descripción"><?= e($p['caption']) ?></textarea>
             <?php if ($aiConfigured): ?><button type="button" class="ad-btn is-ghost is-small" data-ai="description" title="Generar una descripción con IA">✨ Descripción</button><?php endif; ?></div>
+        <div class="pr-line pr-cats"><?= \App\Core\Module::render('components/cat-picker', ['selected' => $p['cats'] ?? []]) ?></div>
         <div class="pr-actions">
             <button type="button" class="ad-btn is-small" data-act="save">Guardar</button>
             <?php if (!empty($canCrop)): ?><button type="button" class="ad-btn is-ghost is-small" data-crop-open><?= !empty($isFirst) ? '✂ Recortar · fija la proporción' : '✂ Recortar' ?></button><?php endif; ?>

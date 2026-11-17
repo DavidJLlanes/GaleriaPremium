@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Core\{Module, Page, Response};
 use App\Models\{Gallery, Photo};
-use App\Services\{Auth, Csrf, Flash, PhotoService};
+use App\Services\{Auth, Categories, Csrf, Flash, PhotoService};
 use App\Services\Ai\AiService;
 
 final class GalleryController
@@ -65,7 +65,7 @@ final class GalleryController
         if ($g['kind'] === 'slider') Response::redirect('/admin/slider/' . (int) $g['id']);   // los sliders tienen su propia pantalla
         Page::render('pages/admin-gallery', [
             'gallery'      => $g,
-            'photos'       => Photo::forGallery((int) $g['id']),
+            'photos'       => Photo::forGallery((int) $g['id'], true),
             'styles'       => Module::all('galleries'),
             'aiConfigured' => AiService::isConfigured(),
             'aiAuto'       => AiService::settings()['auto'],
@@ -85,6 +85,7 @@ final class GalleryController
         Gallery::saveOptions($id, $this->options());
         $fx = (string) ($_POST['lightbox'] ?? 'fade');
         Gallery::setLightbox($id, Module::exists("lightboxes/$fx") ? $fx : 'fade');
+        Gallery::setShowCats($id, isset($_POST['show_cats']));
         Gallery::syncCrops($id);
         Flash::set('Galería guardada.');
         Response::redirect("/admin/galeria/$id");
@@ -123,6 +124,7 @@ final class GalleryController
                 (string) ($_POST['description'] ?? ''),
                 ($_POST['ai'] ?? '0') === '1',
             );
+            if (isset($_POST['cats'])) { Categories::set((int) $photo['id'], Categories::fromPost($_POST['cats'])); $photo['cats'] = Categories::fromPost($_POST['cats']); }
             Gallery::syncCrops($gid);
             Response::json(['ok' => true, 'photo' => $photo]);
         } catch (\RuntimeException $e) {

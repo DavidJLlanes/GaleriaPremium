@@ -75,6 +75,11 @@ final class Gallery
         return (bool) (self::find($id)['featured'] ?? 0);
     }
 
+    public static function setShowCats(int $id, bool $on): void
+    {
+        Database::pdo()->prepare('UPDATE galleries SET show_cats = ? WHERE id = ?')->execute([$on ? 1 : 0, $id]);
+    }
+
     public static function setLightbox(int $id, string $fx): void
     {
         Database::pdo()->prepare('UPDATE galleries SET lightbox = ? WHERE id = ?')->execute([$fx, $id]);

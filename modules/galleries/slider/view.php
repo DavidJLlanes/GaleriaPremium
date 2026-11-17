@@ -1,4 +1,4 @@
-<?php use App\Models\Photo; use App\Services\Crop;
+<?php use App\Core\Module; use App\Models\Photo; use App\Services\Crop;
 $o = $options ?? []; $ratio = (float) ($gallery['crop_ratio'] ?? 0) ?: 1.5;
 $hh = ['s' => 52, 'm' => 66, 'l' => 80][$o['size'] ?? 'm'] ?? 66; $n = count($photos); ?>
 <section class="gs" data-ratio="<?= round($ratio, 5) ?>" data-fit="<?= (int) ($o['fit'] ?? 1) ?>" data-spacing="<?= e($o['spacing'] ?? 'm') ?>" data-h="<?= $hh ?>"
@@ -12,6 +12,7 @@ $hh = ['s' => 52, 'm' => 66, 'l' => 80][$o['size'] ?? 'm'] ?? 66; $n = count($ph
                     : 'class="is-cover"'; ?>
                 <a class="gs-slide" href="<?= e(Photo::url($p['filename'])) ?>" data-title="<?= e($p['title']) ?>" draggable="false">
                     <span class="gs-crop" data-lb-thumb><img src="<?= e(Photo::url($p['filename'])) ?>" alt="<?= e($p['title']) ?>" draggable="false" <?= $img ?> <?= $i > 2 ? 'loading="lazy"' : '' ?>></span>
+                    <?= Module::render('components/photo-cats', ['cats' => $p['cats'] ?? []]) ?>
                     <?php if (!empty($o['captions'])): ?><span class="gs-cap"><?= e($p['title']) ?></span><?php endif; ?>
                 </a>
             <?php endforeach; ?>

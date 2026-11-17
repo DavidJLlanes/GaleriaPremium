@@ -13,7 +13,7 @@
     const fd = data instanceof FormData ? data : Object.entries(data).reduce((f, [k, v]) => (f.append(k, v), f), new FormData());
     const r = await fetch(url, { method: 'POST', body: fd, headers: { 'X-CSRF-Token': csrf, 'Accept': 'application/json' } });
     let j = null; try { j = await r.json(); } catch { /* respuesta no JSON */ }
-    if (!r.ok || !j?.ok) throw new Error(j?.error || `Error ${r.status}`);
+    if (!r.ok || !j?.ok) throw Object.assign(new Error(j?.error || `Error ${r.status}`), { data: j });
     return j;
   };
 

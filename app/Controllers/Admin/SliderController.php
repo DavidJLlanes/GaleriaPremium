@@ -36,7 +36,7 @@ final class SliderController
             $pick[$k] = (isset($s['none']) ? ['none' => ['label' => $s['none'], 'desc' => 'No se muestra.', 'icon' => '<path d="M20 20h24" stroke="currentColor" stroke-opacity=".4"/>']] : []) + Module::all($s['kind']);
         }
         Page::render('pages/admin-slider', [
-            'gallery' => $g, 'photos' => Photo::forGallery((int) $g['id']), 'cfg' => Slider::config($g), 'pick' => $pick,
+            'gallery' => $g, 'photos' => Photo::forGallery((int) $g['id'], true), 'cfg' => Slider::config($g), 'pick' => $pick,
             'lightboxes' => Module::all('lightboxes'), 'aiConfigured' => AiService::isConfigured(), 'aiAuto' => AiService::settings()['auto'],
         ], ['title' => $g['title'], 'nav' => 'sliders'], 'layouts/admin');
     }
@@ -51,6 +51,7 @@ final class SliderController
         Slider::save($id, $_POST);
         $fx = (string) ($_POST['lightbox'] ?? 'fade');
         Gallery::setLightbox($id, Module::exists("lightboxes/$fx") ? $fx : 'fade');
+        Gallery::setShowCats($id, isset($_POST['show_cats']));
         Flash::set('Slider guardado.');
         Response::redirect("/admin/slider/$id");
     }

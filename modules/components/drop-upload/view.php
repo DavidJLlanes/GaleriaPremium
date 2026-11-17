@@ -1,7 +1,7 @@
 <?php
 use App\Models\Gallery; use App\Services\{Auth, Csrf}; use App\Services\Ai\AiService;
 if (!Auth::check()) return;
-$galleries = array_map(fn ($g) => ['id' => (int) $g['id'], 'title' => $g['title']], Gallery::all());
+$galleries = array_map(fn ($g) => ['id' => (int) $g['id'], 'title' => $g['title']], Gallery::allMixed());
 $ai = AiService::isConfigured();
 ?>
 <div class="du" id="dropUpload" hidden data-csrf="<?= e(Csrf::token()) ?>" data-galleries="<?= e(json_encode($galleries, JSON_UNESCAPED_UNICODE)) ?>" data-ai="<?= $ai ? '1' : '0' ?>" data-ai-auto="<?= $ai && AiService::settings()['auto'] ? '1' : '0' ?>">
@@ -14,6 +14,7 @@ $ai = AiService::isConfigured();
         <label class="du-row">Galería
             <select class="du-gal"><?php foreach ($galleries as $g): ?><option value="<?= $g['id'] ?>"><?= e($g['title']) ?></option><?php endforeach; ?></select>
         </label>
+        <div class="du-cats"><?= \App\Core\Module::render('components/cat-picker', ['label' => 'Categorías (opcional)']) ?></div>
         <div class="du-list"></div>
         <label class="du-ai"><input type="checkbox" class="du-aichk" <?= $ai ? '' : 'disabled' ?>> Generar con IA el nombre y la descripción que deje vacíos<?= $ai ? '' : ' (IA sin configurar)' ?></label>
         <div class="du-foot">

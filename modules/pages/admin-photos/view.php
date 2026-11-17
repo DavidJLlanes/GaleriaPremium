@@ -10,7 +10,7 @@ $qs = static fn (array $o): string => '?' . http_build_query(array_filter(['gale
             <option value="">Todas (<?= count($galleries) ?>)</option>
             <?php foreach ($galleries as $g): ?><option value="<?= (int) $g['id'] ?>" <?= (int) $gallery === (int) $g['id'] ? 'selected' : '' ?>><?= e($g['title']) ?> · <?= (int) $g['photo_count'] ?></option><?php endforeach; ?>
         </select></div>
-    <div><label>Buscar en nombre y descripción</label><input type="text" name="q" value="<?= e($q) ?>" placeholder="Escribe y pulsa Intro"></div>
+    <div><label>Buscar en nombre, descripción y categorías</label><input type="text" name="q" value="<?= e($q) ?>" placeholder="Escribe y pulsa Intro"></div>
     <button class="ad-btn is-ghost">Buscar</button>
     <?php if ($gallery || $q !== ''): ?><a class="ad-link" href="/admin/fotos">Quitar filtros</a><?php endif; ?>
 </form>
@@ -25,7 +25,7 @@ $qs = static fn (array $o): string => '?' . http_build_query(array_filter(['gale
             <span class="bk-box" role="checkbox" aria-checked="false" tabindex="0" title="Seleccionar">✓</span>
             <a class="ph-link" href="/admin/galeria/<?= (int) $p['gallery_id'] ?>#foto-<?= (int) $p['id'] ?>">
                 <img src="<?= e(Photo::thumbUrl($p['filename'])) ?>" alt="" loading="lazy">
-                <span class="ph-info"><strong><?= e($p['title'] !== '' ? $p['title'] : 'Sin nombre') ?></strong><small><?= e($p['gallery_title']) ?> · <?= (int) $p['width'] ?>×<?= (int) $p['height'] ?></small></span>
+                <span class="ph-info"><strong><?= e($p['title'] !== '' ? $p['title'] : 'Sin nombre') ?></strong><small><?= e($p['gallery_title']) ?> · <?= (int) $p['width'] ?>×<?= (int) $p['height'] ?></small><?php if (!empty($p['cats'])): ?><small class="ph-cats"><?= e(implode(' · ', $p['cats'])) ?></small><?php endif; ?>></span>
             </a>
         </div>
     <?php endforeach; ?>
@@ -37,5 +37,5 @@ $qs = static fn (array $o): string => '?' . http_build_query(array_filter(['gale
     <?php if ($page < $pages): ?><a class="ad-btn is-ghost is-small" href="<?= e($qs(['p' => $page + 1])) ?>">Siguiente →</a><?php endif; ?>
 </nav>
 <?php endif; ?>
-<?= Module::render('components/bulk', ['kind' => 'photos', 'listSel' => '.ph-grid', 'galleries' => $galleries]) ?>
+<?= Module::render('components/bulk', ['kind' => 'photos', 'listSel' => '.ph-grid', 'galleries' => $galleries, 'extra' => Module::render('components/bulk-cats', ['all' => \App\Services\Categories::all()])]) ?>
 <?php endif; ?>

@@ -5,6 +5,7 @@
         <a class="gj-item reveal" href="<?= e(Photo::url($p['filename'])) ?>" data-title="<?= e($p['title']) ?>"
            style="--ar:<?= $ar ?>;--d:<?= ($i % 5) * 70 ?>ms">
             <img src="<?= e(Photo::thumbUrl($p['filename'])) ?>" alt="<?= e($p['title']) ?>" loading="lazy">
+            <?= Module::render('components/photo-cats', ['cats' => $p['cats'] ?? []]) ?>
         </a>
     <?php endforeach; ?>
 </section>

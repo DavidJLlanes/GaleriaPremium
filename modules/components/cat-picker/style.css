@@ -1,0 +1,17 @@
+.cp{position:relative;font-family:var(--sans,Inter,system-ui,sans-serif)}
+.cp-label{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#9a968e);margin-bottom:.35rem}
+.cp-box{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;background:#0d0d0f;border:1px solid rgba(242,239,233,.14);border-radius:6px;padding:.35rem .5rem;transition:border-color .2s,box-shadow .2s;cursor:text}
+.cp-box:focus-within{border-color:var(--accent,#c9a96a);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent,#c9a96a) 18%,transparent)}
+.cp-chips{display:contents}
+.cp-chip{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .35rem .2rem .65rem;border-radius:99px;font-size:.78rem;background:color-mix(in srgb,var(--accent,#c9a96a) 18%,transparent);border:1px solid color-mix(in srgb,var(--accent,#c9a96a) 55%,transparent);color:var(--fg,#f2efe9)}
+.cp-chip button{all:unset;cursor:pointer;width:1.1rem;height:1.1rem;display:grid;place-items:center;border-radius:50%;font-size:.95rem;line-height:1;opacity:.7}
+.cp-chip button:hover{opacity:1;background:rgba(255,255,255,.14)}
+.cp .cp-in{flex:1;min-width:7rem;width:auto;border:0;background:none;box-shadow:none;padding:.3rem .2rem;color:var(--fg,#f2efe9);font:300 .9rem var(--sans,Inter,system-ui,sans-serif);outline:0}
+.cp .cp-in:focus{box-shadow:none;border:0}
+.cp.is-full .cp-in{display:none}
+.cp-list{position:absolute;z-index:60;left:0;right:0;top:calc(100% + 4px);max-height:14rem;overflow:auto;margin:0;padding:.3rem;list-style:none;background:#1a1a1e;border:1px solid rgba(242,239,233,.16);border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.cp-list[hidden]{display:none}
+.cp-opt{padding:.45rem .6rem;border-radius:5px;font-size:.85rem;cursor:pointer;color:var(--fg,#f2efe9);display:flex;justify-content:space-between;gap:.6rem}
+.cp-opt small{opacity:.5;font-size:.72rem}
+.cp-opt.is-hi,.cp-opt:hover{background:color-mix(in srgb,var(--accent,#c9a96a) 24%,transparent)}
+.cp-empty{padding:.5rem .6rem;font-size:.8rem;opacity:.55}

@@ -39,6 +39,7 @@
     fd.append('title', it.el.querySelector('.t').value);
     fd.append('description', it.el.querySelector('.d').value);
     fd.append('ai', ai && ai.checked ? '1' : '0');
+    const cp = root.querySelector('[data-cp]'); if (cp && cp._cp) fd.append('cats', cp._cp.json());
     const state = it.el.querySelector('.up-state'), bar = it.el.querySelector('.up-prog i');
     state.textContent = 'Subiendo…'; state.className = 'up-state';
 

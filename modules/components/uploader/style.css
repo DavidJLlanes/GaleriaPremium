@@ -17,3 +17,5 @@
 .up-x{background:none;border:0;color:var(--muted);cursor:pointer;font-size:1.3rem;line-height:1}
 .up-x:hover{color:#e07a6e}
 @media(max-width:640px){.up-item{grid-template-columns:72px 1fr}.up-item img{width:72px;height:72px}.up-state{grid-column:1/-1;text-align:left}}
+
+.up-cats{margin:1rem 0 0}

@@ -4,6 +4,7 @@
 .pr.is-gone{opacity:0;transform:scale(.98)}
 .pr>img{width:120px;height:120px;object-fit:cover;border-radius:5px}
 .pr-fields{display:grid;gap:.5rem}
+.pr-cats{grid-template-columns:1fr}
 .pr-line{display:grid;grid-template-columns:1fr 124px;gap:.5rem;align-items:start}
 .pr-actions{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 .pr-meta{margin-left:auto;font-size:.72rem;color:var(--muted)}

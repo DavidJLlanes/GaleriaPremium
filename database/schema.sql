@@ -23,6 +23,19 @@ CREATE TABLE IF NOT EXISTS photos (
 );
 CREATE INDEX IF NOT EXISTS idx_photos_gallery ON photos(gallery_id, sort_order);
 
+-- Categorías de las fotos: se guardan para reutilizarlas (máx. 3 por foto, ver App\Services\Categories)
+CREATE TABLE IF NOT EXISTS categories (
+    id    INTEGER PRIMARY KEY AUTOINCREMENT,
+    name  TEXT NOT NULL UNIQUE COLLATE NOCASE
+);
+CREATE TABLE IF NOT EXISTS photo_categories (
+    photo_id     INTEGER NOT NULL REFERENCES photos(id) ON DELETE CASCADE,
+    category_id  INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+    pos          INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (photo_id, category_id)
+);
+CREATE INDEX IF NOT EXISTS idx_pc_category ON photo_categories(category_id);
+
 CREATE TABLE IF NOT EXISTS settings (
     key   TEXT PRIMARY KEY,
     value TEXT NOT NULL DEFAULT ''

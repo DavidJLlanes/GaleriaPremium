@@ -8,6 +8,7 @@
     try { await fn(); } catch (e) { Admin.toast(e.message, 'error'); } finally { btn.classList.remove('is-busy'); }
   };
 
+  list.addEventListener('cp:change', e => e.target.closest('.pr')?.classList.add('is-dirty'));
   list.addEventListener('input', e => e.target.closest('.pr')?.classList.add('is-dirty'));
 
   list.addEventListener('click', e => {
@@ -25,7 +26,7 @@
     });
 
     if (btn.dataset.act === 'save') run(btn, async () => {
-      await Admin.post(`/admin/foto/${id}/editar`, { title: t.value, description: d.value });
+      await Admin.post(`/admin/foto/${id}/editar`, { title: t.value, description: d.value, cats: row.querySelector('[data-cp]')._cp.json() });
       row.classList.remove('is-dirty'); Admin.toast('Guardado');
     });
 

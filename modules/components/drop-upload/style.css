@@ -22,3 +22,5 @@
 .du-btn.is-main{background:var(--accent,#c9a96a);border-color:var(--accent,#c9a96a);color:#111}.du-btn:disabled{opacity:.5;cursor:default}
 .du-empty{color:#c8c4bb}.du-empty a{color:var(--accent,#c9a96a)}
 @media(max-width:520px){.du-item{grid-template-columns:64px 1fr}.du-item img{width:64px;height:64px}}
+
+.du-cats{margin:0 0 .9rem}.du .cp-box{margin-top:.3rem}

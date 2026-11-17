@@ -52,6 +52,7 @@
     const fd = new FormData();
     fd.append('file', it.file); fd.append('title', it.el.querySelector('.t').value); fd.append('description', it.el.querySelector('.d').value);
     fd.append('ai', aiChk && aiChk.checked ? '1' : '0');
+    const cp = root.querySelector('[data-cp]'); if (cp && cp._cp) fd.append('cats', cp._cp.json());
     const st = it.el.querySelector('.du-st'), bar = it.el.querySelector('.du-bar i');
     st.className = 'du-st'; st.textContent = 'Subiendo…';
     const x = new XMLHttpRequest(); x.open('POST', `/admin/galeria/${gid}/subir`);

@@ -1,6 +1,6 @@
 .gm{column-count:3;column-gap:clamp(.6rem,1.2vw,1.2rem);padding:0 var(--pad) 6rem}
 @media(max-width:1000px){.gm{column-count:2}}
 @media(max-width:560px){.gm{column-count:1}}
-.gm-item{display:block;margin-bottom:clamp(.6rem,1.2vw,1.2rem);break-inside:avoid;overflow:hidden;border-radius:3px;background:#111;cursor:zoom-in}
+.gm-item{position:relative;display:block;margin-bottom:clamp(.6rem,1.2vw,1.2rem);break-inside:avoid;overflow:hidden;border-radius:3px;background:#111;cursor:zoom-in}
 .gm-item img{width:100%;height:auto;transition:transform 1.2s var(--ease),filter .6s}
 .gm-item:hover img{transform:scale(1.05);filter:brightness(1.1)}

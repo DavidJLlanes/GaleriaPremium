@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Core\{Config, Response};
 use App\Models\{Gallery, Photo};
-use App\Services\{Auth, Csrf};
+use App\Services\{Auth, Categories, Csrf};
 use App\Services\Ai\{AiException, AiService};
 
 final class PhotoController
@@ -42,6 +42,7 @@ final class PhotoController
         $title = trim((string) ($_POST['title'] ?? ''));
         if ($title === '') Response::json(['ok' => false, 'error' => 'El nombre no puede estar vacío'], 422);
         Photo::update((int) $photo['id'], $title, trim((string) ($_POST['description'] ?? '')));
+        if (isset($_POST['cats'])) Categories::set((int) $photo['id'], Categories::fromPost($_POST['cats']));
         Response::json(['ok' => true]);
     }
 

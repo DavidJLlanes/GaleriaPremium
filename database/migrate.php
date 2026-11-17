@@ -7,6 +7,7 @@ return static function (\PDO $pdo): void {
         return false;
     };
     $add = [
+        ['galleries', 'show_cats',  'INTEGER NOT NULL DEFAULT 1'],   // ¿se muestran las categorías de sus fotos?
         ['photos',    'crop_x',     'REAL'],
         ['photos',    'crop_y',     'REAL'],
         ['photos',    'crop_w',     'REAL'],

@@ -3,6 +3,7 @@
     <?php foreach ($photos as $i => $p): ?>
         <a class="gm-item reveal" href="<?= e(Photo::url($p['filename'])) ?>" data-title="<?= e($p['title']) ?>" style="--d:<?= ($i % 6) * 70 ?>ms">
             <img src="<?= e(Photo::thumbUrl($p['filename'])) ?>" alt="<?= e($p['title']) ?>" width="<?= (int) $p['width'] ?>" height="<?= (int) $p['height'] ?>" loading="lazy">
+            <?= Module::render('components/photo-cats', ['cats' => $p['cats'] ?? []]) ?>
         </a>
     <?php endforeach; ?>
 </section>

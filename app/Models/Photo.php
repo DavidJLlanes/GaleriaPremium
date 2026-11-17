@@ -6,12 +6,12 @@ use App\Core\{Config, Database};
 
 final class Photo
 {
-    public static function forGallery(int $galleryId): array
+    /** Fotos de una galería. Lleva «cats» si el panel las pide ($cats) o si la galería muestra categorías (show_cats). */
+    public static function forGallery(int $galleryId, bool $cats = false): array
     {
-        return Database::all(
-            'SELECT * FROM photos WHERE gallery_id = ? ORDER BY sort_order, id',
-            [$galleryId]
-        );
+        $rows = Database::all('SELECT * FROM photos WHERE gallery_id = ? ORDER BY sort_order, id', [$galleryId]);
+        if (!$cats) $cats = (bool) (Database::one('SELECT show_cats FROM galleries WHERE id = ?', [$galleryId])['show_cats'] ?? 0);
+        return $cats ? \App\Services\Categories::attach($rows) : $rows;
     }
 
     /** Guarda el orden de las fotos de una galería. $ids = ids en el orden deseado. */
@@ -56,9 +56,9 @@ final class Photo
     public static function search(?int $gallery, string $q, int $limit, int $offset): array
     {
         [$w, $args] = self::filter($gallery, $q);
-        return Database::all(
+        return \App\Services\Categories::attach(Database::all(
             "SELECT p.*, g.title AS gallery_title FROM photos p JOIN galleries g ON g.id = p.gallery_id $w
-             ORDER BY g.sort_order, g.id, p.sort_order, p.id LIMIT $limit OFFSET $offset", $args);
+             ORDER BY g.sort_order, g.id, p.sort_order, p.id LIMIT $limit OFFSET $offset", $args));
     }
 
     public static function countSearch(?int $gallery, string $q): int
@@ -71,7 +71,7 @@ final class Photo
     {
         $w = []; $args = [];
         if ($gallery) { $w[] = 'p.gallery_id = ?'; $args[] = $gallery; }
-        if ($q !== '') { $w[] = "(p.title LIKE ? ESCAPE '\\' OR p.caption LIKE ? ESCAPE '\\')"; $args[] = $args[] = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $q) . '%'; }
+        if ($q !== '') { $w[] = "(p.title LIKE ? ESCAPE '\\' OR p.caption LIKE ? ESCAPE '\\' OR EXISTS (SELECT 1 FROM photo_categories pc JOIN categories c ON c.id = pc.category_id WHERE pc.photo_id = p.id AND c.name LIKE ? ESCAPE '\\'))"; $args[] = $args[] = $args[] = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $q) . '%'; }
         return [$w ? 'WHERE ' . implode(' AND ', $w) : '', $args];
     }
 

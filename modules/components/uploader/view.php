@@ -5,6 +5,7 @@
         <strong>Arrastra tus fotos aquí</strong><span>o pulsa para elegirlas · JPG, PNG, WebP · se convierten a WebP 75%</span>
     </label>
 
+    <div class="up-cats"><?= \App\Core\Module::render('components/cat-picker', ['label' => 'Categorías de estas fotos (opcional)']) ?></div>
     <div class="up-queue" id="upQueue"></div>
 
     <div class="up-bar" id="upBar" hidden>

@@ -16,5 +16,6 @@ $noun = $kind === 'galleries' ? 'galería' : 'foto';
             <?php foreach ($galleries as $g): ?><option value="<?= (int) $g['id'] ?>"><?= e($g['title']) ?></option><?php endforeach; ?>
         </select>
     <?php endif; ?>
+    <?= $extra ?? '' ?>
     <button type="button" class="bk-btn is-danger" data-bk="delete">Borrar</button>
 </div>

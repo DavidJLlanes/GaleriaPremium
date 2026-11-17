@@ -17,7 +17,9 @@
     const glow = Object.assign(document.createElement('div'), { className: 'lbx-glow' }); bg.after(glow);
     const box = Object.assign(document.createElement('div'), { className: 'lbx-info' });
     const desc = Object.assign(document.createElement('p'), { className: 'lbx-desc' }), exif = Object.assign(document.createElement('p'), { className: 'lbx-exif' });
-    box.append(desc, exif); lb.append(box);
+    const cats = Object.assign(document.createElement('div'), { className: 'pcats pcats--inline' }), infoEl = document.getElementById('lbxInfo');
+    cats.style.setProperty('--pc-k', infoEl?.dataset.pck || '1');
+    box.append(cats, desc, exif); lb.append(box);
     const strip = Object.assign(document.createElement('div'), { className: 'lbx-strip' });
     let ths = [];
     const buildStrip = () => {   // (re)crea las miniaturas; se repite si se abre la foto de OTRO contenedor (varios sliders en la portada)
@@ -126,6 +128,7 @@
     };
     const show = async (i) => {
       const a = links[i], d = info[key(a)] || {};
+      cats.replaceChildren(...(d.c || []).map(n => Object.assign(document.createElement('i'), { className: 'pc pc--' + (infoEl?.dataset.pcs || 'glass'), textContent: n }))); cats.hidden = !(d.c || []).length;
       desc.textContent = d.d || ''; desc.hidden = !d.d;
       exif.replaceChildren(...(d.x || []).map(t => Object.assign(document.createElement('span'), { textContent: t }))); exif.hidden = !(d.x || []).length;
       ths.forEach((t, k) => t.classList.toggle('is-on', k === i));
