@@ -9,7 +9,7 @@ $galleries = $showHeader ? Gallery::published() : []; $m = SiteMenu::values(); ?
 <html lang="<?= e(Site::get('lang')) ?>">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title><?= e($title ?? Config::get('app.name')) ?></title>
 <!--assets:css-->
 <script>document.documentElement.classList.add('lq')</script>

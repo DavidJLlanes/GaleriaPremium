@@ -4,7 +4,7 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="robots" content="noindex,nofollow">
 <meta name="csrf" content="<?= e(Csrf::token()) ?>">
 <title><?= e($title ?? 'Admin') ?> · <?= e(Config::get('app.name')) ?></title>
