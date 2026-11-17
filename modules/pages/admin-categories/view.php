@@ -1,4 +1,4 @@
-<?php use App\Services\{Categories, Csrf, HeroButton}; $untagged = Categories::untaggedCount(); ?>
+<?php use App\Core\Module; use App\Services\{Categories, Csrf, HeroButton}; Module::use('components/photo-cats'); $untagged = Categories::untaggedCount(); ?>
 <h1>Categorías</h1>
 <p class="ad-sub">Las categorías se crean al subir o editar una foto (máximo 3 por foto) y quedan guardadas para reutilizarlas. Aquí las gestionas, eliges cómo se ve el indicador y cada galería o slider decide si las muestra.</p>
 
