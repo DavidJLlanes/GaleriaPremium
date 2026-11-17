@@ -11,6 +11,7 @@ use App\Core\{Config, Database};
 final class Passkeys
 {
     private const TTL = 300;   // el reto caduca a los 5 min
+    public const MAX = 10;     // dispositivos por usuario
 
     public static function b64e(string $s): string { return rtrim(strtr(base64_encode($s), '+/', '-_'), '='); }
     public static function b64d(string $s): string { return (string) base64_decode(strtr($s, '-_', '+/') . str_repeat('=', (4 - strlen($s) % 4) % 4), true); }
@@ -82,6 +83,7 @@ final class Passkeys
         $type = $k ? (openssl_pkey_get_details($k)['type'] ?? -1) : -1;
         if (($alg === -7 && $type !== OPENSSL_KEYTYPE_EC) || ($alg === -257 && $type !== OPENSSL_KEYTYPE_RSA)) return 'La clave pública no es válida.';
         if (Database::one('SELECT id FROM passkeys WHERE cred_id = ?', [$id])) return 'Este dispositivo ya está registrado.';
+        if (count(self::all($uid)) >= self::MAX) return 'Has llegado al máximo de ' . self::MAX . ' dispositivos. Quita alguno primero.';
         $name = trim((string) preg_replace('/[\x00-\x1F\x7F<>]/u', '', (string) ($in['name'] ?? '')));
         $name = mb_substr($name !== '' ? $name : 'Mi dispositivo', 0, 40);
         Database::pdo()->prepare('INSERT INTO passkeys (user_id, cred_id, public_key, alg, name, created_at) VALUES (?,?,?,?,?,?)')
