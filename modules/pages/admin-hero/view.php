@@ -2,54 +2,54 @@
 $ids = implode(',', array_map(fn ($p) => $p['id'], $selected)); $byGallery = [];
 foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
 <h1>Portada</h1>
-<p class="ad-sub">La sección grande con la que empieza tu web. En orden: el tipo (y sus ajustes), las fotos y su ritmo, y el botón. El título y el eslogan se editan en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
+<p class="pnl-sub">La sección grande con la que empieza tu web. En orden: el tipo (y sus ajustes), las fotos y su ritmo, y el botón. El título y el eslogan se editan en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
 
 <?php $modes = array_map(fn ($m) => $m['photos'] ?? 'many', $heroes); $withInterval = array_keys(array_filter($heroes, fn ($m) => !empty($m['interval']))); $hints = array_filter(array_map(fn ($m) => $m['photo_hint'] ?? '', $heroes)); ?>
 <form method="post" action="/admin/portada" id="heroForm" data-type="<?= e($type) ?>" data-modes="<?= e(json_encode($modes)) ?>" data-intervals="<?= e(json_encode($withInterval)) ?>" data-hints="<?= e(json_encode($hints, JSON_UNESCAPED_UNICODE)) ?>">
     <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
     <input type="hidden" name="hero_photo_ids" id="heroIds" value="<?= e($ids) ?>">
 
-    <section class="ad-card">
+    <section class="pnl-card">
         <h2>Tipo de portada</h2>
         <?= Module::render('components/style-picker', ['styles' => $heroes, 'name' => 'hero_type', 'selected' => $type]) ?>
     </section>
 
     <?php foreach ($heroes as $hid => $hm): if (empty($hm['options'])) continue; ?>
-        <section class="ad-card" data-hero-opts="<?= e($hid) ?>" hidden>
+        <section class="pnl-card" data-hero-opts="<?= e($hid) ?>" hidden>
             <h2>Ajustes: <?= e($hm['label']) ?></h2>
-            <div class="ad-row">
+            <div class="pnl-row">
                 <?php foreach ($hm['options'] as $k => $o): $v = $optVals[$hid][$k] ?? ($o['default'] ?? ''); $nm = 'hero_opt[' . $hid . '][' . $k . ']'; ?>
                     <div>
                         <?php if ($o['type'] === 'bool'): ?>
-                            <label class="ad-check"><input type="checkbox" name="<?= e($nm) ?>" value="1" <?= $v === '1' ? 'checked' : '' ?>><span><?= e($o['label']) ?></span></label>
+                            <label class="pnl-check"><input type="checkbox" name="<?= e($nm) ?>" value="1" <?= $v === '1' ? 'checked' : '' ?>><span><?= e($o['label']) ?></span></label>
                         <?php else: ?>
                             <label><?= e($o['label']) ?></label>
                             <?php if ($o['type'] === 'video'): ?>
                                 <div class="hv" data-video-box data-base="<?= e(\App\Services\HeroVideo::url('')) ?>">
                                     <input type="hidden" name="<?= e($nm) ?>" value="<?= e($v) ?>" data-video-input>
                                     <video class="hv-prev" muted loop playsinline controls preload="metadata" <?= $v ? 'src="' . e(\App\Services\HeroVideo::url($v)) . '"' : 'hidden' ?>></video>
-                                    <p class="ad-hint hv-state"><?= $v ? 'Vídeo subido. Pulsa «Guardar portada» para aplicar los cambios.' : 'Aún no hay vídeo: se verá solo la foto de respaldo.' ?></p>
+                                    <p class="pnl-hint hv-state"><?= $v ? 'Vídeo subido. Pulsa «Guardar portada» para aplicar los cambios.' : 'Aún no hay vídeo: se verá solo la foto de respaldo.' ?></p>
                                     <input type="file" accept="video/mp4,video/webm" data-video-file>
-                                    <div class="hv-btns"><button type="button" class="ad-btn is-small" data-video-up>Subir vídeo</button> <button type="button" class="ad-btn is-ghost is-small" data-video-del <?= $v ? '' : 'hidden' ?>>Quitar vídeo</button></div>
+                                    <div class="hv-btns"><button type="button" class="pnl-btn is-small" data-video-up>Subir vídeo</button> <button type="button" class="pnl-btn is-ghost is-small" data-video-del <?= $v ? '' : 'hidden' ?>>Quitar vídeo</button></div>
                                 </div>
                             <?php elseif ($o['type'] === 'color'): ?><input type="color" name="<?= e($nm) ?>" value="<?= e($v) ?>">
-                            <?php elseif ($o['type'] === 'range'): ?><input type="range" name="<?= e($nm) ?>" min="<?= e($o['min']) ?>" max="<?= e($o['max']) ?>" step="<?= e($o['step'] ?? 1) ?>" value="<?= e($v) ?>" oninput="this.nextElementSibling.textContent=this.value"><output class="ad-hint"><?= e($v) ?></output>
+                            <?php elseif ($o['type'] === 'range'): ?><input type="range" name="<?= e($nm) ?>" min="<?= e($o['min']) ?>" max="<?= e($o['max']) ?>" step="<?= e($o['step'] ?? 1) ?>" value="<?= e($v) ?>" oninput="this.nextElementSibling.textContent=this.value"><output class="pnl-hint"><?= e($v) ?></output>
                             <?php elseif ($o['type'] === 'select'): ?><select name="<?= e($nm) ?>"><?php foreach ($o['choices'] as $cv => $cl): ?><option value="<?= e($cv) ?>" <?= (string) $cv === $v ? 'selected' : '' ?>><?= e($cl) ?></option><?php endforeach; ?></select>
                             <?php endif; ?>
                         <?php endif; ?>
-                        <?php if (!empty($o['hint'])): ?><p class="ad-hint"><?= e($o['hint']) ?></p><?php endif; ?>
+                        <?php if (!empty($o['hint'])): ?><p class="pnl-hint"><?= e($o['hint']) ?></p><?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
         </section>
     <?php endforeach; ?>
 
-    <section class="ad-card" id="heroPhotosCard">
+    <section class="pnl-card" id="heroPhotosCard">
         <h2>Fotos de la portada</h2>
-        <p class="ad-hint" id="heroPhotoHint" hidden></p>
+        <p class="pnl-hint" id="heroPhotoHint" hidden></p>
         <div class="hr-source" id="heroSource">
-            <label class="ad-check"><input type="radio" name="hero_source" value="gallery" <?= $source === 'gallery' ? 'checked' : '' ?>><span>Todas las fotos de una galería</span></label>
-            <label class="ad-check"><input type="radio" name="hero_source" value="custom" <?= $source === 'custom' ? 'checked' : '' ?>><span>Mi selección (elijo y ordeno las fotos)</span></label>
+            <label class="pnl-check"><input type="radio" name="hero_source" value="gallery" <?= $source === 'gallery' ? 'checked' : '' ?>><span>Todas las fotos de una galería</span></label>
+            <label class="pnl-check"><input type="radio" name="hero_source" value="custom" <?= $source === 'custom' ? 'checked' : '' ?>><span>Mi selección (elijo y ordeno las fotos)</span></label>
         </div>
 
         <div class="hr-gallery" id="heroGallery">
@@ -58,13 +58,13 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
                 <option value="0">La primera galería</option>
                 <?php foreach ($galleries as $g): ?><option value="<?= (int) $g['id'] ?>" <?= $galleryId === (int) $g['id'] ? 'selected' : '' ?>><?= e($g['title']) ?> (<?= (int) $g['photo_count'] ?> fotos)</option><?php endforeach; ?>
             </select>
-            <p class="ad-hint">El orden es el de las fotos dentro de la galería.</p>
+            <p class="pnl-hint">El orden es el de las fotos dentro de la galería.</p>
         </div>
 
         <div class="hr-custom" id="heroCustom">
-            <label>Seleccionadas <span class="ad-hint" id="heroHint"></span></label>
+            <label>Seleccionadas <span class="pnl-hint" id="heroHint"></span></label>
             <div class="hr-sel" id="heroSel" data-sortable></div>
-            <p class="ad-hint hr-empty" id="heroEmpty">Aún no has elegido ninguna: toca fotos abajo.</p>
+            <p class="pnl-hint hr-empty" id="heroEmpty">Aún no has elegido ninguna: toca fotos abajo.</p>
 
             <label style="margin-top:1.4rem">Toca las fotos que quieras en la portada</label>
             <?php foreach ($byGallery as $title => $list): ?>
@@ -77,34 +77,34 @@ foreach ($photos as $p) $byGallery[$p['gallery_title']][] = $p; ?>
                     <?php endforeach; ?>
                 </div>
             <?php endforeach; ?>
-            <?php if (!$photos): ?><p class="ad-hint">Todavía no hay fotos subidas.</p><?php endif; ?>
+            <?php if (!$photos): ?><p class="pnl-hint">Todavía no hay fotos subidas.</p><?php endif; ?>
         </div>
     </section>
 
-    <section class="ad-card" id="heroSpeed" hidden>
+    <section class="pnl-card" id="heroSpeed" hidden>
         <h2>Pase de fotos</h2>
-        <div class="ad-row">
+        <div class="pnl-row">
             <div><label for="hi">Segundos entre cambios de foto</label><input id="hi" type="text" inputmode="decimal" name="hero_interval" value="<?= e($interval) ?>"></div>
         </div>
     </section>
 
-    <section class="ad-card">
+    <section class="pnl-card">
         <h2>Botón de la portada</h2>
         <div class="hb-prev" id="hbPrev"><?= Module::render('components/hero-button', ['href' => '#', 'label' => $cta ?: 'Explorar galerías', 'preview' => true]) ?></div>
-        <div class="ad-row">
+        <div class="pnl-row">
             <div><label for="hc">Texto del botón</label><input id="hc" type="text" name="hero_cta" value="<?= e($cta) ?>" maxlength="40"></div>
             <div><label for="hbs">Diseño</label>
                 <select id="hbs" name="hero_btn_style"><?php foreach (HeroButton::STYLES as $k => $l): ?><option value="<?= e($k) ?>" <?= $btn['style'] === $k ? 'selected' : '' ?>><?= e($l) ?></option><?php endforeach; ?></select></div>
         </div>
-        <div class="ad-row">
+        <div class="pnl-row">
             <div><label for="hbz">Tamaño: <b id="hbzv"><?= e(HeroButton::SIZES[$btn['size']]) ?></b></label>
                 <input id="hbz" type="range" name="hero_btn_size" min="1" max="5" step="1" value="<?= (int) $btn['size'] ?>"></div>
             <div><label for="hbd">Separación del título: <b id="hbdv"><?= e(HeroButton::DOWNS[$btn['down']]) ?></b></label>
                 <input id="hbd" type="range" name="hero_btn_down" min="1" max="5" step="1" value="<?= (int) $btn['down'] ?>"></div>
         </div>
-        <p class="ad-hint">Tamaño y separación se adaptan solos al móvil y al escritorio. Tipografía, grosor y cursiva del botón: <a href="/admin/sitio">Sitio → Tipografías → «Botón de la portada»</a>. El título (nombre de la web) y el texto pequeño (eslogan) se cambian en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
+        <p class="pnl-hint">Tamaño y separación se adaptan solos al móvil y al escritorio. Tipografía, grosor y cursiva del botón: <a href="/admin/sitio">Sitio → Tipografías → «Botón de la portada»</a>. El título (nombre de la web) y el texto pequeño (eslogan) se cambian en <a href="/admin/sitio">Sitio → Identidad</a>.</p>
     </section>
 
-    <button class="ad-btn">Guardar portada</button>
-    <a class="ad-btn is-ghost" href="/" target="_blank" rel="noopener" style="margin-left:.5rem">Ver la web ↗</a>
+    <button class="pnl-btn">Guardar portada</button>
+    <a class="pnl-btn is-ghost" href="/" target="_blank" rel="noopener" style="margin-left:.5rem">Ver la web ↗</a>
 </form>

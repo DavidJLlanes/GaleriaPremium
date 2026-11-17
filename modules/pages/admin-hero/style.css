@@ -18,7 +18,7 @@
 .hr-p:hover{transform:translateY(-2px)}
 .hr-p.is-sel{border-color:var(--accent)}
 .hr-p.is-sel i{opacity:1;transform:none}
-#heroForm>.ad-btn{margin-bottom:3rem}
+#heroForm>.pnl-btn{margin-bottom:3rem}
 .hv{display:grid;gap:.7rem;max-width:520px}.hv-prev{width:100%;max-height:240px;background:#000;border-radius:8px}.hv-btns{display:flex;gap:.5rem}
 .hb-prev{display:flex;justify-content:center;align-items:center;min-height:7rem;margin:0 0 1.2rem;background:#000;border:1px solid var(--line,rgba(255,255,255,.1));border-radius:12px;--fg:#f2efe9;--bg:#0b0b0c}
 .hb-prev .hb{pointer-events:none}

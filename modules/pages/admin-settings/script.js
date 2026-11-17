@@ -5,11 +5,11 @@
 
   const btn = document.getElementById('aiTest'), out = document.getElementById('aiTestOut');
   btn.addEventListener('click', async () => {
-    btn.disabled = true; out.className = 'ad-hint'; out.textContent = 'Probando…';
+    btn.disabled = true; out.className = 'pnl-hint'; out.textContent = 'Probando…';
     try {
       const r = await Admin.post('/admin/ajustes/probar');
-      out.className = 'ad-hint is-ok'; out.textContent = `✓ Funciona. Ejemplo de título: «${r.title}»`;
-    } catch (e) { out.className = 'ad-hint is-err'; out.textContent = '✗ ' + e.message; }
+      out.className = 'pnl-hint is-ok'; out.textContent = `✓ Funciona. Ejemplo de título: «${r.title}»`;
+    } catch (e) { out.className = 'pnl-hint is-err'; out.textContent = '✗ ' + e.message; }
     finally { btn.disabled = false; }
   });
 
@@ -27,7 +27,7 @@
       count.textContent = `${rows.length} de ${models.length}`;
       list.innerHTML = rows.slice(0, 300).map(m => `<button type="button" class="as-m ${m.id === input.value ? 'is-sel' : ''}" data-id="${esc(m.id)}">
         <b>${esc(m.name)}${m.vision ? '<i>visión</i>' : ''}</b><small>${esc(m.id)}</small>${m.price ? `<em>${esc(m.price)}</em>` : ''}</button>`).join('')
-        || '<p class="ad-hint" style="padding:.6rem">Sin resultados. Prueba a quitar el filtro «Solo con visión».</p>';
+        || '<p class="pnl-hint" style="padding:.6rem">Sin resultados. Prueba a quitar el filtro «Solo con visión».</p>';
     };
 
     btn.addEventListener('click', async () => {

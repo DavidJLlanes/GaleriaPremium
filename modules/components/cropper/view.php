@@ -16,8 +16,8 @@
         <div class="cr-foot">
             <label class="cr-zoom">Zoom <input type="range" min="10" max="100" value="100"></label>
             <span class="cr-info"></span>
-            <button type="button" class="ad-btn is-ghost cr-cancel">Cancelar</button>
-            <button type="button" class="ad-btn cr-save">Guardar recorte</button>
+            <button type="button" class="pnl-btn is-ghost cr-cancel">Cancelar</button>
+            <button type="button" class="pnl-btn cr-save">Guardar recorte</button>
         </div>
     </div>
 </div>

@@ -47,7 +47,7 @@
     meta[j.id] = j.meta; loaded.delete(j.id); addOption(j.id, j.label);
     let li = list.querySelector(`li[data-id="${j.id}"]`);
     if (!li) { li = document.createElement('li'); li.dataset.id = j.id; list.appendChild(li); }
-    li.innerHTML = `<b></b> <small></small> <button type="button" class="ad-btn is-ghost is-small fp-del">Borrar</button>`;
+    li.innerHTML = `<b></b> <small></small> <button type="button" class="pnl-btn is-ghost is-small fp-del">Borrar</button>`;
     li.querySelector('b').textContent = j.label; li.querySelector('b').style.fontFamily = j.meta.fam;
     li.querySelector('small').textContent = j.variants.join(' · '); own.hidden = false;
     document.head.appendChild(Object.assign(document.createElement('style'), { textContent: j.meta.css }));
@@ -65,7 +65,7 @@
     try {
       const j = await Admin.post('/admin/fuentes/subir', fd); setItem(j);
       Admin.toast(`Fuente «${j.label}» añadida. Ya puedes elegirla arriba.`);
-      document.getElementById('fpuFile').value = ''; const nm = document.querySelector('.fp-up-file .ad-file span'); if (nm) nm.textContent = 'Ningún archivo seleccionado';
+      document.getElementById('fpuFile').value = ''; const nm = document.querySelector('.fp-up-file .pnl-file span'); if (nm) nm.textContent = 'Ningún archivo seleccionado';
     } catch (err) { Admin.toast(err.message, 'error'); }
     btn.disabled = false; btn.textContent = 'Subir fuente';
   });

@@ -1,6 +1,6 @@
 .cd-px{margin-top:1.2rem}
 .cd-play{display:grid;gap:1rem;margin-top:1.2rem}
-.cd-play .ad-btn{justify-self:start}
+.cd-play .pnl-btn{justify-self:start}
 .cd-prev{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:480px;padding:1rem;background:#0b0b0c;border:1px solid var(--line,rgba(255,255,255,.1));border-radius:12px;overflow:hidden;pointer-events:none}
 .cd-prev .ct-classic h2{font-size:1.25rem}.cd-prev .ct-classic{padding:.9rem}
 #cdTitleBox{margin-top:1.2rem}#cdTitleBox.is-off{opacity:.35;pointer-events:none}

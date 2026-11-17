@@ -15,9 +15,9 @@ $opt = static function (array $groups, string $sel): string {
     return $h;
 };
 ?>
-<section class="ad-card fp">
+<section class="pnl-card fp">
     <h2>Tipografías</h2>
-    <p class="ad-hint" style="margin:-.6rem 0 1.2rem">Una tipografía, un grosor y (si la fuente lo permite) cursiva para cada tipo de texto. Todo está alojado en tu servidor: rápido y sin enviar datos a Google. La vista previa se actualiza al elegir.</p>
+    <p class="pnl-hint" style="margin:-.6rem 0 1.2rem">Una tipografía, un grosor y (si la fuente lo permite) cursiva para cada tipo de texto. Todo está alojado en tu servidor: rápido y sin enviar datos a Google. La vista previa se actualiza al elegir.</p>
     <script type="application/json" id="fpMeta"><?= json_encode($meta, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?></script>
     <script type="application/json" id="fpWeights"><?= json_encode(Fonts::WEIGHTS, JSON_UNESCAPED_UNICODE) ?></script>
     <?php foreach (Fonts::ROLES as $role => [$label, $desc, $def, $sample]):
@@ -37,7 +37,7 @@ $opt = static function (array $groups, string $sel): string {
                     </select>
                     <label class="fp-it"><input type="checkbox" name="site_fonti_<?= e($role) ?>" value="1" class="fp-italic" <?= $si ? 'checked' : '' ?> <?= $m['i'] ? '' : 'disabled' ?>> <span>Cursiva</span></label>
                 </div>
-                <p class="ad-hint"><?= e($desc) ?></p>
+                <p class="pnl-hint"><?= e($desc) ?></p>
             </div>
             <div class="fp-prev" style="font-family:<?= e($m['fam']) ?>"><?= e($sample) ?></div>
         </div>
@@ -45,7 +45,7 @@ $opt = static function (array $groups, string $sel): string {
 
     <div class="fp-up">
         <h3>Subir fuente propia</h3>
-        <p class="ad-hint">Acepta .woff2, .woff, .ttf y .otf (máx. 4 MB). Se usan tal cual; .woff2 es el más ligero. Para añadir otro grosor o la cursiva de la misma familia, sube otro archivo con el mismo nombre.</p>
+        <p class="pnl-hint">Acepta .woff2, .woff, .ttf y .otf (máx. 4 MB). Se usan tal cual; .woff2 es el más ligero. Para añadir otro grosor o la cursiva de la misma familia, sube otro archivo con el mismo nombre.</p>
         <div class="fp-up-grid">
             <div><label for="fpuName">Nombre de la fuente</label><input type="text" id="fpuName" maxlength="60" placeholder="Mi fuente"></div>
             <div><label for="fpuWeight">Grosor del archivo</label>
@@ -53,7 +53,7 @@ $opt = static function (array $groups, string $sel): string {
                     <?php foreach (Fonts::WEIGHTS as $w => $n): ?><option value="<?= $w ?>" <?= $w === 400 ? 'selected' : '' ?>><?= $w ?> · <?= e($n) ?></option><?php endforeach; ?></select></div>
             <label class="fp-it"><input type="checkbox" id="fpuItalic"> <span>Es cursiva</span></label>
             <div class="fp-up-file"><input type="file" id="fpuFile" accept=".woff2,.woff,.ttf,.otf"></div>
-            <button type="button" class="ad-btn" id="fpuBtn">Subir fuente</button>
+            <button type="button" class="pnl-btn" id="fpuBtn">Subir fuente</button>
         </div>
         <div class="fp-own" id="fpOwn" <?= $customs ? '' : 'hidden' ?>>
             <h3>Mis fuentes</h3>
@@ -61,7 +61,7 @@ $opt = static function (array $groups, string $sel): string {
                 <?php foreach ($customs as $id => $f): ?>
                     <li data-id="<?= e($id) ?>"><b style="font-family:<?= e(Fonts::family($id)) ?>"><?= e($f['label']) ?></b>
                         <small><?= e(implode(' · ', \App\Controllers\Admin\FontController::variants($id))) ?></small>
-                        <button type="button" class="ad-btn is-ghost is-small fp-del">Borrar</button></li>
+                        <button type="button" class="pnl-btn is-ghost is-small fp-del">Borrar</button></li>
                 <?php endforeach; ?>
             </ul>
         </div>

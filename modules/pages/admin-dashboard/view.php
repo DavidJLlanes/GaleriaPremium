@@ -1,11 +1,11 @@
 <?php use App\Core\Module; use App\Models\Photo; use App\Services\Csrf; Module::use('components/sortable'); ?>
 <h1>Galerías</h1>
-<p class="ad-sub">Tus galerías, en el orden en que salen en la web. Pulsa una para gestionar sus fotos y su diseño.</p>
+<p class="pnl-sub">Tus galerías, en el orden en que salen en la web. Pulsa una para gestionar sus fotos y su diseño.</p>
 
 
 
-<h2 class="ad-listh">Tus galerías <span class="ad-badge"><?= count($galleries) ?></span></h2>
-<?php if (count($galleries) > 1): ?><p class="ad-hint" style="margin-bottom:.8rem">Arrastra el icono ⠿ para cambiar el orden (se guarda solo). El chincheta <b>fija</b> una galería como la primera (solo una) y la estrella la marca como <b>destacada</b>.</p><?php endif; ?>
+<h2 class="pnl-listh">Tus galerías <span class="pnl-badge"><?= count($galleries) ?></span></h2>
+<?php if (count($galleries) > 1): ?><p class="pnl-hint" style="margin-bottom:.8rem">Arrastra el icono ⠿ para cambiar el orden (se guarda solo). El chincheta <b>fija</b> una galería como la primera (solo una) y la estrella la marca como <b>destacada</b>.</p><?php endif; ?>
 <div class="adg" data-bulk data-sortable data-reorder-url="/admin/galerias/orden">
     <?php foreach ($galleries as $g): ?>
         <a class="adg-card<?= $g['pinned'] ? ' is-pinned' : '' ?><?= $g['featured'] ? ' is-featured' : '' ?>" data-id="<?= (int) $g['id'] ?>"<?= $g['pinned'] ? ' data-fixed="1"' : '' ?> href="/admin/<?= $g['kind'] === 'slider' ? 'slider' : 'galeria' ?>/<?= (int) $g['id'] ?>">
@@ -19,25 +19,25 @@
             <div class="adg-info">
                 <strong><?= e($g['title']) ?></strong>
                 <span><?= (int) $g['photo_count'] ?> fotos · <?= $g['kind'] === 'slider' ? 'Slider' : e($styles[$g['style']]['label'] ?? $g['style']) ?></span>
-                <span class="ad-badge <?= $g['is_published'] ? '' : 'is-off' ?>"><?= $g['is_published'] ? 'Publicada' : 'Oculta' ?></span>
-                <?php if ($g['pinned']): ?><span class="ad-badge">Fijada</span><?php endif; ?><?php if ($g['featured']): ?><span class="ad-badge">Destacada</span><?php endif; ?>
+                <span class="pnl-badge <?= $g['is_published'] ? '' : 'is-off' ?>"><?= $g['is_published'] ? 'Publicada' : 'Oculta' ?></span>
+                <?php if ($g['pinned']): ?><span class="pnl-badge">Fijada</span><?php endif; ?><?php if ($g['featured']): ?><span class="pnl-badge">Destacada</span><?php endif; ?>
             </div>
         </a>
     <?php endforeach; ?>
 </div>
 <?php if ($galleries) echo Module::render('components/bulk', ['kind' => 'galleries', 'listSel' => '.adg']); ?>
 
-<details class="ad-card ad-new" <?= $galleries ? '' : 'open' ?>>
+<details class="pnl-card pnl-new" <?= $galleries ? '' : 'open' ?>>
     <summary>+ Nueva galería</summary>
-    <form method="post" action="/admin/galerias" class="ad-newbody">
+    <form method="post" action="/admin/galerias" class="pnl-newbody">
         <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
-        <div class="ad-row">
+        <div class="pnl-row">
             <div><label>Nombre</label><input type="text" name="title" required placeholder="Ej.: Otoño en León"></div>
             <div><label>Descripción (opcional)</label><textarea name="description" rows="1"></textarea></div>
         </div>
         <label>Diseño</label>
         <?= Module::render('components/style-picker', ['styles' => $styles, 'name' => 'style', 'selected' => 'masonry']) ?>
-        <label class="ad-check" style="margin:1.2rem 0"><input type="checkbox" name="published" checked><span>Publicada en la web</span></label>
-        <button class="ad-btn">Crear y subir fotos →</button>
+        <label class="pnl-check" style="margin:1.2rem 0"><input type="checkbox" name="published" checked><span>Publicada en la web</span></label>
+        <button class="pnl-btn">Crear y subir fotos →</button>
     </form>
 </details>

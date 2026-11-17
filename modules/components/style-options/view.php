@@ -6,7 +6,7 @@ foreach ($styles as $sid => $m): if (empty($m['options'])) continue; ?>
         <legend>Opciones de «<?= e($m['label']) ?>»</legend>
         <?php foreach ($m['options'] as $k => $o): $v = $saved[$sid][$k] ?? $o['default']; $name = "opt[$sid][$k]"; ?>
             <?php if ($o['type'] === 'bool'): ?>
-                <label class="ad-check so-row"><input type="checkbox" name="<?= e($name) ?>" <?= $v ? 'checked' : '' ?>><span><?= e($o['label']) ?></span></label>
+                <label class="pnl-check so-row"><input type="checkbox" name="<?= e($name) ?>" <?= $v ? 'checked' : '' ?>><span><?= e($o['label']) ?></span></label>
             <?php elseif ($o['type'] === 'number'): ?>
                 <div class="so-row"><label><?= e($o['label']) ?></label>
                     <input type="number" name="<?= e($name) ?>" value="<?= (int) $v ?>" min="<?= (int) $o['min'] ?>" max="<?= (int) $o['max'] ?>" style="max-width:140px"></div>

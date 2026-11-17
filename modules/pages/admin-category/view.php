@@ -1,14 +1,14 @@
 <?php use App\Core\Module; use App\Models\Photo; $id = (int) $cat['id'];
 Module::use('pages/admin-photos'); ?>
 <span data-cat-current="<?= $id ?>" hidden></span>
-<a class="ad-sub" href="/admin/categorias" style="display:inline-block;margin-bottom:.8rem">← Categorías</a>
+<a class="pnl-sub" href="/admin/categorias" style="display:inline-block;margin-bottom:.8rem">← Categorías</a>
 <div class="cd-head">
     <div><h1><?= e($cat['name']) ?></h1>
-        <p class="ad-sub" style="margin:0"><?= (int) $cat['n'] ?> <?= (int) $cat['n'] === 1 ? 'foto' : 'fotos' ?><?= $id === 0 ? ' sin ninguna categoría: selecciónalas y añádeles una desde la barra de abajo' : '' ?></p></div>
+        <p class="pnl-sub" style="margin:0"><?= (int) $cat['n'] ?> <?= (int) $cat['n'] === 1 ? 'foto' : 'fotos' ?><?= $id === 0 ? ' sin ninguna categoría: selecciónalas y añádeles una desde la barra de abajo' : '' ?></p></div>
     <?php if ($id > 0): ?><div class="cd-acts" data-cat-id="<?= $id ?>" data-cat-name="<?= e($cat['name']) ?>" data-cat-n="<?= (int) $cat['n'] ?>">
-        <button type="button" class="ad-btn is-ghost is-small" data-cd="rename">Renombrar</button>
-        <button type="button" class="ad-btn is-ghost is-small" data-cd="del">Borrar categoría (conserva las fotos)</button>
-        <?php if ((int) $cat['n'] > 0): ?><button type="button" class="ad-btn is-danger is-small" data-cd="delall">Borrar categoría y sus <?= (int) $cat['n'] ?> fotos</button><?php endif; ?>
+        <button type="button" class="pnl-btn is-ghost is-small" data-cd="rename">Renombrar</button>
+        <button type="button" class="pnl-btn is-ghost is-small" data-cd="del">Borrar categoría (conserva las fotos)</button>
+        <?php if ((int) $cat['n'] > 0): ?><button type="button" class="pnl-btn is-danger is-small" data-cd="delall">Borrar categoría y sus <?= (int) $cat['n'] ?> fotos</button><?php endif; ?>
     </div><?php endif; ?>
 </div>
 <?php if (!$photos): ?><p class="cd-empty">No hay fotos <?= $id === 0 ? 'sin categoría: todas tienen alguna.' : 'en esta categoría todavía. Añádela a fotos desde Fotos o al editar una foto.' ?></p>

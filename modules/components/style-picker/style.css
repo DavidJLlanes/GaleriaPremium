@@ -1,5 +1,5 @@
 .sp{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
-:where(.ad) .sp-opt{display:block;margin:0;text-transform:none;letter-spacing:0;cursor:pointer}
+:where(.pnl) .sp-opt{display:block;margin:0;text-transform:none;letter-spacing:0;cursor:pointer}
 .sp-opt input{position:absolute;opacity:0;pointer-events:none}
 .sp-card{display:grid;gap:.35rem;height:100%;padding:.8rem;background:#0d0d0f;border:1px solid rgba(242,239,233,.1);border-radius:8px;color:var(--muted);transition:border-color .25s,background .25s,color .25s}
 .sp-card svg{width:100%;height:auto;color:rgba(242,239,233,.35);margin-bottom:.2rem}

@@ -3,8 +3,8 @@
   const csrf = document.querySelector('meta[name=csrf]')?.content || '';
 
   const toast = (msg, type = 'ok') => {
-    const box = document.getElementById('adToasts'); if (!box) return;
-    const t = document.createElement('div'); t.className = 'ad-toast is-' + type; t.textContent = msg;
+    const box = document.getElementById('pnlToasts'); if (!box) return;
+    const t = document.createElement('div'); t.className = 'pnl-toast is-' + type; t.textContent = msg;
     box.appendChild(t); setTimeout(() => t.remove(), type === 'error' ? 7000 : 3500);
   };
 
@@ -19,8 +19,8 @@
 
   // Selector de archivos en español (el texto nativo depende del idioma del navegador)
   document.querySelectorAll('input[type=file]:not([hidden])').forEach(inp => {
-    const wrap = document.createElement('div'); wrap.className = 'ad-file';
-    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'ad-btn is-ghost is-small'; btn.textContent = 'Elegir archivo';
+    const wrap = document.createElement('div'); wrap.className = 'pnl-file';
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'pnl-btn is-ghost is-small'; btn.textContent = 'Elegir archivo';
     const name = document.createElement('span'); name.textContent = 'Ningún archivo seleccionado';
     inp.before(wrap); wrap.append(btn, name); inp.hidden = true;
     btn.onclick = () => inp.click();
@@ -31,6 +31,6 @@
 })();
 // En pantallas estrechas la navegación se desplaza: deja a la vista la sección activa
 (() => {
-  const nav = document.querySelector('.ad-nav'), on = nav && nav.querySelector('.is-on');
+  const nav = document.querySelector('.pnl-nav'), on = nav && nav.querySelector('.is-on');
   if (on && nav.scrollWidth > nav.clientWidth) nav.scrollLeft = on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2;
 })();

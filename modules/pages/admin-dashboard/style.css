@@ -4,14 +4,14 @@
 .adg-img{aspect-ratio:4/3;background:#0d0d0f}
 .adg-img img{width:100%;height:100%;object-fit:cover}
 .adg-info{display:grid;gap:.3rem;padding:1rem;justify-items:start}
-.adg-info span:not(.ad-badge){font-size:.8rem;color:var(--muted)}
+.adg-info span:not(.pnl-badge){font-size:.8rem;color:var(--muted)}
 .adg-card{position:relative}.adg-card .bk-box{right:.5rem;top:.5rem}
-.ad-listh{display:flex;align-items:center;gap:.6rem}
-.ad-new{margin-top:2rem}
-.ad-new>summary{cursor:pointer;list-style:none;font:400 1.05rem var(--sans);display:flex;align-items:center;gap:.6rem;color:var(--accent)}
-.ad-new>summary::-webkit-details-marker{display:none}
-.ad-new[open]>summary{margin-bottom:1.2rem}
-.ad-new .ad-newbody{max-width:100%}
+.pnl-listh{display:flex;align-items:center;gap:.6rem}
+.pnl-new{margin-top:2rem}
+.pnl-new>summary{cursor:pointer;list-style:none;font:400 1.05rem var(--sans);display:flex;align-items:center;gap:.6rem;color:var(--accent)}
+.pnl-new>summary::-webkit-details-marker{display:none}
+.pnl-new[open]>summary{margin-bottom:1.2rem}
+.pnl-new .pnl-newbody{max-width:100%}
 
 /* Fijar / destacar: botones sobre la tarjeta (arriba a la derecha) y marcas visibles */
 .adg-flags{position:absolute;z-index:3;top:2.7rem;right:.4rem;display:flex;flex-direction:column;gap:.35rem}
