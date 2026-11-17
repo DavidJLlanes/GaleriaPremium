@@ -171,10 +171,9 @@ final class IconBuilder
         }
         file_put_contents("$dir/favicon.ico", self::ico($pngs));
 
-        // Muchos navegadores piden /favicon.ico y /apple-touch-icon.png en la raíz: copias físicas en public/
+        // Antes se copiaban a public/ (a veces sin permiso de escritura, y quedaban copias viejas): se eliminan, los <link> apuntan a /uploads/brand/
         $pub = dirname(rtrim((string) Config::get('uploads.dir'), '/'));
-        @copy("$dir/favicon.ico", "$pub/favicon.ico");
-        @copy("$dir/apple-touch-icon.png", "$pub/apple-touch-icon.png");
+        @unlink("$pub/favicon.ico"); @unlink("$pub/apple-touch-icon.png");
         return true;
     }
 

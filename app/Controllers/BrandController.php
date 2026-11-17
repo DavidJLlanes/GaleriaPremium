@@ -14,7 +14,7 @@ final class BrandController
             if (Site::hasBrand($file)) $icons[] = ['src' => '/uploads/brand/' . $file . '?v=' . (int) @filemtime(Site::brandFile($file)), 'sizes' => "{$size}x{$size}", 'type' => 'image/png', 'purpose' => $purpose];
         }
         header('Content-Type: application/manifest+json; charset=utf-8');
-        header('Cache-Control: public, max-age=3600');
+        header('Cache-Control: no-cache');
         echo json_encode([
             'id' => '/', 'name' => Site::get('name'), 'short_name' => Site::shortName(),
             'description' => Site::get('description') ?: Site::get('tagline'),

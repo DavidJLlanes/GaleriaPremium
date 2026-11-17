@@ -11,12 +11,12 @@ $self = Site::absolute(strtok($_SERVER['REQUEST_URI'] ?? '/', '?'));
 <?php if (Site::on('noindex')): ?><meta name="robots" content="noindex,nofollow"><?php endif; ?>
 <link rel="canonical" href="<?= e($self) ?>">
 <?php if ($fav): ?>
-<link rel="icon" href="/favicon.ico?v=<?= $v('favicon.ico') ?>" sizes="48x48">
+<link rel="icon" href="/uploads/brand/favicon.ico?v=<?= $v('favicon.ico') ?>" sizes="48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="/uploads/brand/favicon-32.png?v=<?= $v('favicon-32.png') ?>">
 <link rel="icon" type="image/png" sizes="16x16" href="/uploads/brand/favicon-16.png?v=<?= $v('favicon-16.png') ?>">
 <?php else: ?><link rel="icon" href="data:,"><?php endif; ?>
 <?php if ($icon): ?>
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=<?= $v('apple-touch-icon.png') ?>">
+<link rel="apple-touch-icon" sizes="180x180" href="/uploads/brand/apple-touch-icon.png?v=<?= $v('apple-touch-icon.png') ?>">
 <meta name="msapplication-config" content="/browserconfig.xml">
 <meta name="msapplication-TileColor" content="<?= e(Site::get('theme')) ?>">
 <?php endif; ?>
