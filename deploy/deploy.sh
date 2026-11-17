@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Uso en el VPS:  bash /var/www/warpstudio.es/deploy/deploy.sh
+# Uso en el VPS:  bash /var/www/luxaeterna.es/deploy/deploy.sh
 # Opcional: WEB_USER=www-data bash deploy/deploy.sh   (usuario con el que corre PHP-FPM)
 set -euo pipefail
 APP="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -9,6 +9,7 @@ git config --global --add safe.directory "$APP" 2>/dev/null || true
 git pull --ff-only origin main
 php bin/install.php          # crea/actualiza el esquema (idempotente)
 php bin/backfill.php         # datos derivados de las fotos existentes (idempotente)
+php bin/icons.php            # iconos de la webapp (iPhone/Android) con el algoritmo actual
 php bin/assets.php           # publica el CSS/JS de los módulos
 
 # Permisos: PHP debe poder escribir en la BD y en las fotos

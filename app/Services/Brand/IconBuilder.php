@@ -82,6 +82,55 @@ final class IconBuilder
         return $c;
     }
 
+
+    /** Quita los márgenes transparentes (y las bandas que dejaba el antiguo «encajar en cuadrado»). */
+    private static function trim(\GdImage $img): \GdImage
+    {
+        $c = @imagecropauto($img, IMG_CROP_TRANSPARENT);
+        return $c instanceof \GdImage ? self::alpha($c) : $img;
+    }
+
+    /** Analiza el borde: ['opaque' => ¿la imagen llega opaca hasta los bordes?, 'color' => color medio del borde, 'uniform' => ¿es un color liso?] */
+    private static function edges(\GdImage $img): array
+    {
+        $w = imagesx($img); $h = imagesy($img); $n = 0; $op = 0; $rs = $gs = $bs = 0; $px = [];
+        $steps = 96;
+        for ($i = 0; $i < $steps; $i++) {
+            $x = (int) round(($w - 1) * $i / ($steps - 1)); $y = (int) round(($h - 1) * $i / ($steps - 1));
+            foreach ([[$x, 0], [$x, $h - 1], [0, $y], [$w - 1, $y]] as [$a, $b]) {
+                $c = imagecolorat($img, $a, $b); $n++;
+                if ((($c >> 24) & 0x7F) < 8) { $op++; $r = ($c >> 16) & 255; $g = ($c >> 8) & 255; $bl = $c & 255; $rs += $r; $gs += $g; $bs += $bl; $px[] = [$r, $g, $bl]; }
+            }
+        }
+        if ($op < $n * .95 || !$px) return ['opaque' => false, 'color' => null, 'uniform' => false];
+        $m = [$rs / $op, $gs / $op, $bs / $op]; $dev = 0;
+        foreach ($px as $p) $dev += abs($p[0] - $m[0]) + abs($p[1] - $m[1]) + abs($p[2] - $m[2]);
+        return ['opaque' => true, 'color' => sprintf('#%02x%02x%02x', (int) round($m[0]), (int) round($m[1]), (int) round($m[2])), 'uniform' => $dev / $op / 3 < 14];
+    }
+
+    /** Lienzo cuadrado a sangre: la imagen cubre todo el cuadrado (se recorta el sobrante, centrado). */
+    private static function cover(\GdImage $src, int $size): \GdImage
+    {
+        $sw = imagesx($src); $sh = imagesy($src); $m = min($sw, $sh);
+        $c = imagecreatetruecolor($size, $size);
+        imagealphablending($c, false); imagesavealpha($c, true);
+        imagecopyresampled($c, $src, 0, 0, (int) (($sw - $m) / 2), (int) (($sh - $m) / 2), $size, $size, $m, $m);
+        return $c;
+    }
+
+    /**
+     * Icono cuadrado de $size px. $safe = fracción que ocupa el dibujo cuando hay que dejar margen (iconos adaptativos de Android).
+     * - Imagen opaca de color liso en el borde: se encaja entera sobre ese mismo color (sin bandas ni costuras).
+     * - Imagen opaca con fondo variado (foto, degradado): se recorta a sangre.
+     * - Imagen con transparencia (logotipo): se coloca sobre el color del tema.
+     */
+    private static function tile(\GdImage $art, array $e, int $size, float $safe, string $themeBg, bool $solid): \GdImage
+    {
+        if ($e['opaque'] && $e['uniform']) return self::square($art, $size, $e['color'], $safe);
+        if ($e['opaque']) return self::cover($art, $size);   // el sistema solo recorta las esquinas: el fondo llega hasta el borde
+        return self::square($art, $size, $solid ? $themeBg : null, $solid ? $safe : 1.0);
+    }
+
     private static function png(\GdImage $img, string $file): void { imagepng($img, $file, 9); }
 
     private static function pngBytes(\GdImage $img): string { ob_start(); imagepng($img, null, 9); return (string) ob_get_clean(); }
@@ -106,15 +155,19 @@ final class IconBuilder
         $icon = self::read($iconSrc);
         $fav = is_file("$dir/favicon-source.png") ? self::read("$dir/favicon-source.png") : $icon;
 
-        self::png(self::square($icon, 192), "$dir/icon-192.png");
-        self::png(self::square($icon, 512), "$dir/icon-512.png");
-        self::png(self::square($icon, 512, $bg, .62), "$dir/maskable-512.png");      // zona segura de Android (≈ 80 % del círculo)
-        self::png(self::square($icon, 180, $bg, .84), "$dir/apple-touch-icon.png");   // iOS rellena la transparencia con negro: se aplana
-        self::png(self::square($icon, 150, $bg, .8), "$dir/mstile-150.png");
+        $art = self::trim($icon); $e = self::edges($art);
+        // «any» (192/512): sin bandas; el dibujo opaco ocupa todo el cuadrado, el logotipo transparente se queda transparente
+        self::png(self::tile($art, $e, 192, 1.0, $bg, false), "$dir/icon-192.png");
+        self::png(self::tile($art, $e, 512, 1.0, $bg, false), "$dir/icon-512.png");
+        // Android adaptativo: el sistema recorta (círculo, squircle…); lo importante va en la zona segura (≈ 80 %)
+        self::png(self::tile($art, $e, 512, $e['opaque'] ? .8 : .66, $bg, true), "$dir/maskable-512.png");
+        // iOS pone sus propias esquinas y rellena la transparencia de negro: icono opaco y a sangre
+        self::png(self::tile($art, $e, 180, $e['opaque'] ? 1.0 : .8, $bg, true), "$dir/apple-touch-icon.png");
+        self::png(self::tile($art, $e, 150, $e['opaque'] ? 1.0 : .8, $bg, true), "$dir/mstile-150.png");
 
         $pngs = [];
         foreach ([16, 32, 48] as $s) {
-            $im = self::square($fav, $s); self::png($im, "$dir/favicon-$s.png"); $pngs[$s] = self::pngBytes($im);
+            $im = self::square(self::trim($fav), $s); self::png($im, "$dir/favicon-$s.png"); $pngs[$s] = self::pngBytes($im);
         }
         file_put_contents("$dir/favicon.ico", self::ico($pngs));
 
@@ -129,7 +182,9 @@ final class IconBuilder
     public static function setIcon(string $tmp): void
     {
         $img = self::read($tmp, 192);
-        self::png(self::square($img, min(1024, max(imagesx($img), imagesy($img)))), self::dir() . '/icon-source.png');
+        $img = self::trim($img); $m = max(imagesx($img), imagesy($img));
+        if ($m > 1024) $img = self::alpha(imagescale($img, (int) round(imagesx($img) * 1024 / $m), (int) round(imagesy($img) * 1024 / $m)));
+        self::png($img, self::dir() . '/icon-source.png');
         self::rebuild();
     }
 
