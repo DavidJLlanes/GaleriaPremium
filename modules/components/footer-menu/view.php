@@ -11,7 +11,7 @@ $id = 'fm-' . substr(md5('fm'), 0, 6); ?>
             <?php $n = 0; ?>
             <li style="--n:<?= $n++ ?>"><button type="button" class="fm-i" data-legal-open>Información legal</button></li>
             <?php if ($f['mail'] !== ''): ?><li style="--n:<?= $n++ ?>"><a class="fm-i" href="mailto:<?= e($f['mail']) ?>">Contacto</a></li><?php endif; ?>
-            <?php if ($f['admin']): ?><li style="--n:<?= $n++ ?>"><a class="fm-i" href="/admin" rel="nofollow">Administración</a></li><?php endif; ?>
+            <?php if ($f['admin']): ?><li style="--n:<?= $n++ ?>"><a class="fm-i" href="/admin/login" rel="nofollow">Administración</a></li><?php endif; ?>
         </ul>
     </div>
 </div>

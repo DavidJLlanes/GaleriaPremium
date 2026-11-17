@@ -5,8 +5,14 @@
   const cardFor = (slug) => { const a = [...document.querySelectorAll('.ccard,a[data-pt]')].find(a => slugOf(a.href) === slug); return a && (a.querySelector('.ccard-media,[data-pt-media]') || a); };   // cualquier diseño de portada: enlace con data-pt (+ data-pt-media)
   const mark = (el, vt) => { if (!el) return; el.style.viewTransitionName = 'pt-card'; vt.finished.finally(() => { el.style.viewTransitionName = ''; }); };
 
+  // El panel (/admin) no usa transiciones: en iOS (web app) la animación con redirección al login dejaba la pantalla en negro.
+  const toAdmin = (u) => { try { return new URL(u, location.href).pathname.startsWith('/admin'); } catch { return false; } };
+  document.addEventListener('click', (e) => { const a = e.target.closest?.('a[href]'); if (a && toAdmin(a.href)) try { sessionStorage.setItem('pt_skip', '1'); } catch {} }, true);
+
   addEventListener('pageswap', (e) => {             // página que se abandona
     if (!e.viewTransition) return;
+    let skip = false; try { skip = sessionStorage.getItem('pt_skip') === '1'; sessionStorage.removeItem('pt_skip'); } catch {}
+    if (skip || toAdmin(e.activation?.entry?.url || '')) { e.viewTransition.skipTransition(); return; }
     const to = e.activation?.entry?.url;
     const toSlug = slugOf(to || '');
     if (toSlug) mark(cardFor(toSlug), e.viewTransition);                       // portada → galería: la tarjeta pulsada
