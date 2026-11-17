@@ -47,15 +47,27 @@ final class Auth
         // password_verify también con hash falso, para no revelar si el usuario existe por tiempo
         $hash = $user['password_hash'] ?? '$2y$10$usesomesillystringforsalt.abcdefghijklmnopqrstuvwxyz012';
         if ($user && password_verify($password, $hash)) {
-            Database::pdo()->prepare('DELETE FROM login_attempts WHERE ip = ?')->execute([self::ip()]);
-            session_regenerate_id(true);
-            $_SESSION['uid'] = (int) $user['id'];
-            $_SESSION['user'] = $user['username'];
+            self::signIn($user);
             return true;
         }
+        self::recordFailure();
+        return false;
+    }
+
+    /** Inicia la sesión de un usuario ya verificado (contraseña o passkey). */
+    public static function signIn(array $user): void
+    {
+        self::start();
+        Database::pdo()->prepare('DELETE FROM login_attempts WHERE ip = ?')->execute([self::ip()]);
+        session_regenerate_id(true);
+        $_SESSION['uid'] = (int) $user['id'];
+        $_SESSION['user'] = $user['username'];
+    }
+
+    public static function recordFailure(): void
+    {
         Database::pdo()->prepare('INSERT INTO login_attempts (ip, at) VALUES (?, ?)')->execute([self::ip(), time()]);
         Database::pdo()->prepare('DELETE FROM login_attempts WHERE at < ?')->execute([time() - 86400]);   // la tabla no crece sin fin
-        return false;
     }
 
     public static function logout(): void
@@ -64,6 +76,8 @@ final class Auth
         $_SESSION = [];
         session_destroy();
     }
+
+    public static function userId(): int { self::start(); return (int) ($_SESSION['uid'] ?? 0); }
 
     public static function username(): string { self::start(); return (string) ($_SESSION['user'] ?? ''); }
 

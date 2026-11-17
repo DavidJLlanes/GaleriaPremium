@@ -1,0 +1,6 @@
+.pk-or{display:flex;align-items:center;gap:.8rem;margin:1.1rem 0 .9rem;color:var(--muted,#8a8a90);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.pk-or::before,.pk-or::after{content:"";flex:1;height:1px;background:currentColor;opacity:.25}
+.pk-btn{width:100%;justify-content:center;gap:.6rem}
+.pk-btn svg{width:1.25em;height:1.25em;flex:none}
+.pk-msg{margin:.8rem 0 0;font-size:.85rem;min-height:1.2em;color:var(--muted,#8a8a90)}
+.pk-msg.is-err{color:#ff8b8b}

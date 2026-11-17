@@ -32,6 +32,7 @@ $flash = Flash::pull(); $nav = $nav ?? ''; $bare = $bare ?? false; ?>
         <a href="/admin/sitio" title="Identidad, marca, colores, tipografías, webapp y buscadores" class="<?= $nav === 'sitio' ? 'is-on' : '' ?>">Sitio</a>
         <a href="/admin/efectos" title="Cursor, scroll, transiciones, grano y sonido" class="<?= $nav === 'efectos' ? 'is-on' : '' ?>">Efectos</a>
         <a href="/admin/ajustes" title="Inteligencia artificial para nombres y descripciones" class="<?= $nav === 'ajustes' ? 'is-on' : '' ?>">IA</a>
+        <a href="/admin/acceso" title="Entrar con huella o Face ID" class="<?= $nav === 'acceso' ? 'is-on' : '' ?>">Acceso</a>
         <a href="/" target="_blank" rel="noopener" class="ad-nav-web">Ver web ↗</a>
     </nav>
     <form method="post" action="/admin/logout" class="ad-logout">

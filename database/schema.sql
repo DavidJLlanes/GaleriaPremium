@@ -53,3 +53,16 @@ CREATE TABLE IF NOT EXISTS login_attempts (
     at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_login_attempts ON login_attempts(ip, at);
+
+-- Passkeys (huella, Face ID, Windows Hello, llaves de seguridad): solo se guarda la clave PÚBLICA
+CREATE TABLE IF NOT EXISTS passkeys (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    cred_id    TEXT NOT NULL UNIQUE,      -- identificador de la credencial (base64url)
+    public_key TEXT NOT NULL,             -- PEM (SPKI)
+    alg        INTEGER NOT NULL,          -- -7 ES256 | -257 RS256
+    counter    INTEGER NOT NULL DEFAULT 0,
+    name       TEXT NOT NULL DEFAULT '',
+    created_at INTEGER NOT NULL,
+    last_used  INTEGER
+);

@@ -10,6 +10,7 @@ final class AuthController
     public function form(array $p = []): void
     {
         if (Auth::check()) Response::redirect('/admin');
+        header('Cache-Control: private, no-cache, must-revalidate');   // sin «no-store»: el navegador puede ofrecer guardar la contraseña
         Page::render('pages/admin-login', [], ['title' => 'Acceso', 'bare' => true], 'layouts/admin');
     }
 
