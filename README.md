@@ -1,4 +1,4 @@
-# GaleriaPremium (WarpStudio)
+# GaleriaPremium
 
 Galería fotográfica premium, modular. PHP 8.3 · SQLite · HTML5/CSS/JS vanilla.
 
