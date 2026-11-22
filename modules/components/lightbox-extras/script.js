@@ -130,7 +130,10 @@
       const a = links[i], d = info[key(a)] || {};
       cats.replaceChildren(...(d.c || []).map(n => Object.assign(document.createElement('i'), { className: 'pc pc--' + (infoEl?.dataset.pcs || 'glass'), textContent: n }))); cats.hidden = !(d.c || []).length;
       desc.textContent = d.d || ''; desc.hidden = !d.d;
-      exif.replaceChildren(...(d.x || []).map(t => Object.assign(document.createElement('span'), { textContent: t }))); exif.hidden = !(d.x || []).length;
+      exif.replaceChildren(...(d.x || []).map(t => Object.assign(document.createElement('span'), { textContent: t }))); const active = links[i]?.closest('[data-lightbox]');
+      const slider = active?.closest('[data-slider]');
+      const exifOn = (slider?.dataset.showExif ?? infoEl?.dataset.showExif ?? '1') === '1';
+      exif.hidden = !exifOn || !(d.x || []).length;
       ths.forEach((t, k) => t.classList.toggle('is-on', k === i));
       ths[i]?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
       try { await img.decode(); } catch { /* sigue */ }
