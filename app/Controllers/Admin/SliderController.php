@@ -52,6 +52,7 @@ final class SliderController
         $fx = (string) ($_POST['lightbox'] ?? 'fade');
         Gallery::setLightbox($id, Module::exists("lightboxes/$fx") ? $fx : 'fade');
         Gallery::setShowCats($id, isset($_POST['show_cats']));
+        Gallery::setShowExif($id, isset($_POST['show_exif']));
         Flash::set('Slider guardado.');
         Response::redirect("/admin/slider/$id");
     }
