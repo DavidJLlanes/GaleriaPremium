@@ -24,8 +24,10 @@
 .lbx-zoomhint{position:absolute;top:1.7rem;left:50%;transform:translateX(-50%);font:var(--st-menu,normal) var(--w-menu,400) .62rem var(--f-menu);letter-spacing:.22em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .4s;pointer-events:none}
 .lbx-zoomhint.is-on{opacity:1}
 @media(max-width:700px){
-  .lbx-strip{display:none}
-  .lbx .lb-count{top:1.4rem;left:1.2rem}
+  .lbx-strip{display:flex;left:0;right:0;bottom:env(safe-area-inset-bottom,.5rem);transform:none;max-width:none;width:100%;justify-content:flex-start;gap:.55rem;padding:.45rem .8rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .lbx-th{width:3rem;height:3rem;scroll-snap-align:center}
+  .lbx .lb-count{top:max(1rem,env(safe-area-inset-top));left:1.2rem}
+  .lbx .lb-img{max-width:94vw;max-height:calc(100dvh - 230px);object-fit:contain}
 }
 @media(prefers-reduced-motion:reduce){.lbx.is-animating .lb-img{transition:none}.lbx-glow{transition:none}}
 .lbx-strip[hidden]{display:none}
