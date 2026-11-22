@@ -135,7 +135,12 @@
       const exifOn = (slider?.dataset.showExif ?? infoEl?.dataset.showExif ?? '1') === '1';
       exif.hidden = !exifOn || !(d.x || []).length;
       ths.forEach((t, k) => t.classList.toggle('is-on', k === i));
-      ths[i]?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+      // Mover solo la tira: scrollIntoView también puede desplazar la página horizontalmente.
+      const selected = ths[i];
+      if (selected && strip.scrollWidth > strip.clientWidth) {
+        const left = selected.offsetLeft - (strip.clientWidth - selected.offsetWidth) / 2;
+        strip.scrollTo({ left, behavior: 'smooth' });
+      }
       try { await img.decode(); } catch { /* sigue */ }
       const c = avg(); if (c) lb.style.setProperty('--lbx-tint', c);
     };
