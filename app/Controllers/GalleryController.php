@@ -20,6 +20,7 @@ final class GalleryController
             'photos'  => Photo::forGallery((int) $gallery['id']),
             'style'   => $style,
             'options' => Gallery::options($gallery),
+            'showExif' => Gallery::showExif($gallery),
         ], [
             'title' => $gallery['title'] . ' — ' . Config::get('app.name'),
             'description' => $gallery['description'] ?: null,
