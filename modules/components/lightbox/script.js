@@ -19,7 +19,7 @@
     const nw = +img.dataset.nw, nh = +img.dataset.nh; if (!nw) return;
     const vw = window.visualViewport?.width || innerWidth, vh = window.visualViewport?.height || innerHeight;
     const aw = vw * .96, ah = vh - (vw < 700 ? 118 : 100) - (+lb.dataset.extra || 0);   // data-extra: espacio extra que reservan los complementos (miniaturas, datos…)
-    const s = Math.min(aw / nw, ah / nh, 3);
+    const s = Math.max(.05, Math.min(aw / nw, Math.max(80, ah) / nh, 3));
     img.style.width = Math.round(nw * s) + 'px'; img.style.height = Math.round(nh * s) + 'px';
   };
   const setContent = async (i) => {
