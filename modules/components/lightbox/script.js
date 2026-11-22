@@ -17,7 +17,8 @@
   // Escala la foto para llenar el área útil de la pantalla actual (hasta 3× su tamaño) sin deformarla
   const fit = () => {
     const nw = +img.dataset.nw, nh = +img.dataset.nh; if (!nw) return;
-    const aw = innerWidth * .96, ah = innerHeight - (innerWidth < 700 ? 118 : 100) - (+lb.dataset.extra || 0);   // data-extra: espacio extra que reservan los complementos (miniaturas, datos…)
+    const vw = window.visualViewport?.width || innerWidth, vh = window.visualViewport?.height || innerHeight;
+    const aw = vw * .96, ah = vh - (vw < 700 ? 118 : 100) - (+lb.dataset.extra || 0);   // data-extra: espacio extra que reservan los complementos (miniaturas, datos…)
     const s = Math.min(aw / nw, ah / nh, 3);
     img.style.width = Math.round(nw * s) + 'px'; img.style.height = Math.round(nh * s) + 'px';
   };
@@ -84,6 +85,7 @@
     if (e.key === 'ArrowLeft') swap(idx - 1, -1);
   });
   addEventListener('resize', fit);
+  window.visualViewport?.addEventListener('resize', fit);
   // Gesto de deslizar para cambiar de foto: solo horizontal, con un dedo y sin zoom (el zoom/arrastre lo gestiona components/lightbox-extras)
   let x0 = null, y0 = null;
   lb.addEventListener('touchstart', e => { if (e.touches.length > 1 || lb.dataset.zoom === '1') { x0 = null; return; } x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
