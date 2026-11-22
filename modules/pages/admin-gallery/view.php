@@ -16,7 +16,7 @@
     <label style="margin-top:1.4rem">Efecto al ampliar una foto (lightbox)</label>
     <?= Module::render('components/style-picker', ['styles' => $lightboxes, 'name' => 'lightbox', 'selected' => $gallery['lightbox'] ?? 'fade']) ?>
     <label class="pnl-check" style="margin:1.2rem 0 0"><input type="checkbox" name="show_cats" <?= ($gallery['show_cats'] ?? 1) ? 'checked' : '' ?>><span>Mostrar las categorías de las fotos</span></label>
-    <label class="pnl-check" style="margin:.6rem 0 0"><input type="checkbox" name="show_exif" <?= \\App\\Models\\Gallery::showExif($gallery) ? 'checked' : '' ?>><span>Mostrar datos EXIF en el lightbox</span></label>
+    <label class="pnl-check" style="margin:.6rem 0 0"><input type="checkbox" name="show_exif" <?= \App\Models\Gallery::showExif($gallery) ? 'checked' : '' ?>><span>Mostrar datos EXIF en el lightbox</span></label>
     <label class="pnl-check" style="margin:.6rem 0 1.2rem"><input type="checkbox" name="published" <?= $gallery['is_published'] ? 'checked' : '' ?>><span>Publicada en la web</span></label>
     <button class="pnl-btn">Guardar</button>
 </form>
