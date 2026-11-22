@@ -39,7 +39,7 @@
     box.prepend(lb.querySelector('.lb-cap'));      // el pie de foto pasa al bloque inferior (título, descripción y datos van apilados)
     // Reparte el alto: arriba contador/cierre, abajo pie + datos (+ miniaturas en escritorio); la foto se ajusta al hueco que queda
     const reserve = () => {
-      const strip3 = desktop() && links.length > 1, pt = 56, pb = desktop() ? (strip3 ? 156 : 104) : 132, ib = desktop() ? (strip3 ? 78 : 24) : 28;
+      const strip3 = links.length > 1, pt = 56, pb = desktop() ? (strip3 ? 156 : 104) : (strip3 ? 190 : 132), ib = desktop() ? (strip3 ? 78 : 24) : 68;
       lb.style.setProperty('--lbx-pt', pt + 'px'); lb.style.setProperty('--lbx-pb', pb + 'px'); lb.style.setProperty('--lbx-ib', ib + 'px');
       lb.dataset.extra = String(pt + pb + 24 - (desktop() ? 100 : 118)); dispatchEvent(new Event('resize'));
     };
