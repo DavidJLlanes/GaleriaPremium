@@ -23,6 +23,7 @@ final class GalleryController
             'showExif' => Gallery::showExif($gallery),
         ], [
             'title' => $gallery['title'] . ' — ' . Config::get('app.name'),
+            'noPageTransition' => true,
             'description' => $gallery['description'] ?: null,
             'ogImage' => ($ph = Photo::forGallery((int) $gallery['id'])) ? $ph[0]['filename'] : null,
         ]);
