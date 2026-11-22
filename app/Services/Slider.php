@@ -77,8 +77,8 @@ final class Slider
     public static function attrs(array $d, string $mode, string $design): string
     {
         $c = $d['cfg'];
-        return sprintf('class="sl sl--%s" data-slider data-mode="%s" data-fx="%s" data-auto="%s" data-int="%s" data-loop="%s" data-hover="%s" style="--r:%s" tabindex="0" role="region" aria-roledescription="carrusel" aria-label="%s"',
-            e($design), e($mode), e($c['fx']), $c['autoplay'], e($c['interval']), $c['loop'], $c['hover'], round($d['ratio'], 5), e($d['g']['title']));
+        return sprintf('class="sl sl--%s" data-slider data-mode="%s" data-fx="%s" data-auto="%s" data-int="%s" data-loop="%s" data-hover="%s" data-show-exif="%s" style="--r:%s" tabindex="0" role="region" aria-roledescription="carrusel" aria-label="%s"',
+            e($design), e($mode), e($c['fx']), $c['autoplay'], e($c['interval']), $c['loop'], $c['hover'], Gallery::showExif($d['g']) ? '1' : '0', round($d['ratio'], 5), e($d['g']['title']));
     }
 
     /** Datos listos para pintar un slider en la web. */
