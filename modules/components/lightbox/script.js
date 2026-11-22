@@ -24,12 +24,16 @@
   };
   const setContent = async (i) => {
     const a = items[i], pre = new Image(); pre.src = a.href;
-    try { await pre.decode(); } catch { /* se mostrará igualmente */ }
+    let src = a.href;
+    try { await pre.decode(); } catch {
+      const t = thumb(i), mini = t?.tagName === 'IMG' ? t : t?.querySelector('img');
+      if (mini?.src) src = mini.src;
+    }
     img.dataset.nw = pre.naturalWidth || 1600; img.dataset.nh = pre.naturalHeight || 1067;
-    img.src = a.href; img.alt = a.dataset.title || ''; fit();
+    img.src = src; img.alt = a.dataset.title || ''; fit();
     cap.textContent = a.dataset.title || '';
     count.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
-    bg.style.backgroundImage = `url("${a.href}")`;
+    bg.style.backgroundImage = `url("${src}")`;
     [i + 1, i - 1].forEach(n => { new Image().src = items[(n + items.length) % items.length].href; });
   };
   const thumb = (i) => items[i].querySelector('[data-lb-thumb]') || items[i].querySelector('img');
