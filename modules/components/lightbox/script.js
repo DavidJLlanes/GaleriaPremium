@@ -4,6 +4,8 @@
   const lb = document.getElementById('lightbox');
   const boxes = [...document.querySelectorAll('[data-lightbox]')];   // puede haber varios en la portada (un slider cada uno): al pulsar una foto se usa SU contenedor
   if (!lb || !boxes.length) return;
+  // El lightbox debe vivir en body: dentro de main puede quedar recortado por efectos y contextos de apilamiento.
+  document.body.appendChild(lb);
 
   let items = [...boxes[0].querySelectorAll('a[href]')];
   if (!items.length && boxes.length === 1) return;
