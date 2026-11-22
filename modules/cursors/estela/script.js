@@ -3,12 +3,14 @@
   const c = document.querySelector('.cur--estela'); if (!c || !matchMedia('(pointer:fine)').matches) return;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   const cv = document.createElement('canvas'); cv.className = 'cur-trail'; cv.setAttribute('aria-hidden', 'true'); document.body.appendChild(cv);
-  const g = cv.getContext('2d'); let dpr = 1, W = 0, H = 0, pts = [], raf = 0;
+  const g = cv.getContext('2d'); let dpr = 1, W = 0, H = 0, pts = [], raf = 0, lightboxOpen = false;
   const colour = getComputedStyle(c).getPropertyValue('--cur-c').trim() || '#d8b36a';
   const len = Math.max(1, Math.min(10, +(c.dataset.length || 5))), life = 140 + len * 70;      // ms que dura cada punto de la cola
   const size = () => { dpr = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); };
   size(); addEventListener('resize', size);
-  addEventListener('pointermove', (e) => { if (e.pointerType === 'touch') return; pts.push({ x: e.clientX, y: e.clientY, t: performance.now() }); if (!raf) raf = requestAnimationFrame(draw); }, { passive: true });
+  addEventListener('lb:open', () => { lightboxOpen = true; pts = []; g.clearRect(0, 0, W, H); });
+  addEventListener('lb:close', () => { lightboxOpen = false; pts = []; g.clearRect(0, 0, W, H); });
+  addEventListener('pointermove', (e) => { if (lightboxOpen || e.pointerType === 'touch') return; pts.push({ x: e.clientX, y: e.clientY, t: performance.now() }); if (!raf) raf = requestAnimationFrame(draw); }, { passive: true });
   function draw(now) {
     g.clearRect(0, 0, W, H);
     pts = pts.filter(p => now - p.t < life);
