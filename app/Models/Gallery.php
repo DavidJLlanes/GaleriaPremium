@@ -97,6 +97,20 @@ final class Gallery
         return $out;
     }
 
+    public static function showExif(array $g): bool
+    {
+        $o = json_decode((string) ($g['options'] ?? '{}'), true) ?: [];
+        return (string) ($o['show_exif'] ?? '1') === '1';
+    }
+
+    public static function setShowExif(int $id, bool $on): void
+    {
+        $g = self::find($id); if (!$g) return;
+        $o = json_decode((string) ($g['options'] ?? '{}'), true) ?: [];
+        $o['show_exif'] = $on ? '1' : '0';
+        self::saveOptions($id, $o);
+    }
+
     public static function saveOptions(int $id, array $all): void
     {
         Database::pdo()->prepare('UPDATE galleries SET options = ? WHERE id = ?')->execute([json_encode($all, JSON_UNESCAPED_UNICODE), $id]);
