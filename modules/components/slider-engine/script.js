@@ -29,13 +29,17 @@
     if (dotsBox) {
       dotsBox.innerHTML = s.slides.map((_, k) => `<button type="button" class="sl-dot" data-sl-dot="${k}" aria-label="Foto ${k + 1}"></button>`).join('');
     }
-    const dots = [...root.querySelectorAll('[data-sl-dot]')].concat(thumbs);
+    const dots = [...root.querySelectorAll('[data-sl-dot]')];
     const cur = root.querySelector('[data-sl-cur]'), tot = root.querySelector('[data-sl-tot]');
     if (tot) tot.textContent = String(s.n).padStart(2, '0');
     const prev = root.querySelector('[data-sl-prev]'), next = root.querySelector('[data-sl-next]');
 
     const ui = () => {
-      dots.forEach((d, k) => { d.classList.toggle('is-on', k === s.i); if (k === s.i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+      [...dots, ...thumbs].forEach((d) => {
+        const k = +(d.dataset.slDot ?? d.dataset.slThumb);
+        d.classList.toggle('is-on', k === s.i);
+        if (k === s.i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
       thumbs.forEach((t, k) => { if (k === s.i && t.parentElement) t.parentElement.scrollTo({ left: t.offsetLeft - t.parentElement.clientWidth / 2 + t.clientWidth / 2, behavior: calm ? 'auto' : 'smooth' }); });
       if (cur) cur.textContent = String(s.i + 1).padStart(2, '0');
       if (!s.loop) { if (prev) prev.disabled = s.i === 0; if (next) next.disabled = s.i === s.n - 1; }
