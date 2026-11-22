@@ -1,5 +1,10 @@
 /* Lightbox base (los efectos viven en modules/lightboxes/<efecto>/). La foto se escala SIEMPRE para llenar la pantalla activa sin deformarse. */
-.lb{position:fixed;inset:0;z-index:100;background:rgba(6,6,7,.97);opacity:0;transition:opacity .4s var(--ease);overflow:hidden;--lb-in:450;--lb-out:250;--lb-close:380}
+/* El visor ocupa también el espacio que reservaba la barra de desplazamiento. */
+html:has(> body > .lb:not([hidden])){
+  overflow:hidden;
+  scrollbar-gutter:auto;
+}
+.lb{position:fixed;inset:0;z-index:100;background:#060607;opacity:0;transition:opacity .4s var(--ease);overflow:hidden;--lb-in:450;--lb-out:250;--lb-close:380}
 .lb.is-open{opacity:1}
 .lb.is-closing{opacity:0;transition-duration:.38s}
 .lb[hidden]{display:none}

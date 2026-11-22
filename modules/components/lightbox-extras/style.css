@@ -1,12 +1,11 @@
 @property --lbx-tint{syntax:'<color>';inherits:true;initial-value:#060607}
-.lbx{background:rgb(6,6,7)}   /* opaco: con el resplandor, la web de detrás se transparentaría */
 .lbx .lb-img{touch-action:none;will-change:transform,scale,translate}
 .lbx .lb-fig{touch-action:none}
 .lbx[data-zoom="1"] .lb-img{cursor:grab}
 .lbx[data-zoom="1"].is-drag .lb-img{cursor:grabbing}
 .lbx.is-animating .lb-img{transition:scale .45s var(--ease),translate .45s var(--ease)}
 /* Resplandor del color medio de la foto */
-.lbx-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 50% 45%,color-mix(in srgb,var(--lbx-tint) 42%,transparent),transparent 78%);transition:--lbx-tint 1.2s ease}
+.lbx-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse closest-side at 50% 50%,color-mix(in srgb,var(--lbx-tint) 42%,transparent),transparent);transition:--lbx-tint 1.2s ease}
 /* Contador arriba; abajo, pie, datos y miniaturas */
 .lbx .lb-count{top:1.7rem;bottom:auto;left:1.9rem;transform:none}
 .lbx .lb-fig{padding:var(--lbx-pt,56px) 0 var(--lbx-pb,120px)}

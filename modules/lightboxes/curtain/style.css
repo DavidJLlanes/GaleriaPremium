@@ -1,5 +1,9 @@
 /* Lightbox · Cortina: clip-path desde la línea central + resplandor desenfocado de la propia foto */
-.lb[data-fx=curtain]{--lb-in:800;--lb-out:380;background:rgba(4,4,5,.98)}
+.lb[data-fx=curtain]{--lb-in:800;--lb-out:380}
+.lb[data-fx=curtain] .lb-bg{
+  inset:0;
+  mask-image:radial-gradient(ellipse closest-side, #000 45%, transparent 100%);
+}
 .lb[data-fx=curtain].is-open .lb-bg{opacity:.5}
 .lb[data-fx=curtain] .lb-img.is-in{animation:lbct-in .8s var(--ease) both}
 .lb[data-fx=curtain] .lb-img.is-out{animation:lbct-out .38s cubic-bezier(.6,0,.9,.4) forwards}
