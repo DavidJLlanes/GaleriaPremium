@@ -1,0 +1,32 @@
+/* Galería "Baraja": fotos de pie, una tras otra; la delantera se vuelca sobre su borde inferior. CSS 3D puro. Prefijo gv- */
+.gv{position:relative;height:calc(100vh + (var(--n) - 1) * var(--per) * 38vh + 12vh);height:calc(100svh + (var(--n) - 1) * var(--per) * 38svh + 12svh)}
+.gv-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;outline:none;background:radial-gradient(ellipse at 50% 38%,#18161b 0%,#0a0a0b 72%);user-select:none;-webkit-user-select:none}
+.gv-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 62%,rgba(216,179,106,.09),transparent 55%)}
+.gv-scene{position:absolute;inset:0;transform-style:preserve-3d}
+.gv-card{position:absolute;left:50%;top:var(--gv-top,30%);width:var(--gv-w,300px);height:var(--gv-h,200px);margin-left:calc(var(--gv-w,300px) / -2);
+  transform-origin:50% 100%;transform-style:preserve-3d;backface-visibility:visible;will-change:transform;overflow:hidden;border-radius:3px;
+  background:#141316;box-shadow:0 0 0 1px rgba(255,255,255,.08);visibility:hidden}
+.gv-card img{position:absolute;max-width:none;height:auto;display:block;pointer-events:none}
+.gv-card img.is-cover{inset:0;width:100%;height:100%;object-fit:cover}
+.gv-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:#000;opacity:var(--gv-shade,0)}
+
+/* capa de enlaces: misma caja que la carta delantera (el lightbox anima desde ella) */
+.gv-src{position:absolute;left:50%;top:var(--gv-top,30%);width:var(--gv-w,300px);height:var(--gv-h,200px);margin-left:calc(var(--gv-w,300px) / -2);pointer-events:none;opacity:0}
+.gv-src a{position:absolute;inset:0;display:block;overflow:hidden}
+.gv-src img{position:absolute;max-width:none;height:auto}
+.gv-src img.is-cover{inset:0;width:100%;height:100%;object-fit:cover}
+.gv-stage:not(.is-ready) .gv-src{position:static;opacity:1;width:auto;height:auto;margin:0;display:flex;flex-wrap:wrap;gap:8px;padding:var(--pad);pointer-events:auto}
+.gv-stage:not(.is-ready) .gv-src a{position:relative;inset:auto;width:min(46%,320px);aspect-ratio:var(--gv-ar,1.5)}
+
+.gv-hud{position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;padding:2.4rem var(--pad) 1.4rem;pointer-events:none;background:linear-gradient(to top,rgba(10,10,11,.7),transparent)}
+.gv-count{font:var(--st-menu,normal) var(--w-menu,400) .72rem var(--f-menu);letter-spacing:.3em;color:var(--muted)}
+.gv-count b{color:var(--accent);font-weight:400}
+.gv-title{flex:1;text-align:center;font:var(--st-title,normal) var(--w-title,300) clamp(1.1rem,2.6vw,1.8rem) var(--f-title);transition:opacity .4s}
+.gv-btns{display:flex;gap:.5rem;margin-left:auto;pointer-events:auto}
+.gv-b{width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,10,11,.45);color:var(--fg);font:inherit;font-size:1.05rem;cursor:pointer;backdrop-filter:blur(6px);transition:border-color .4s,color .4s,background .4s}
+.gv-b:hover,.gv-b:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.gv-hint{position:absolute;left:0;right:0;bottom:4.4rem;z-index:5;text-align:center;pointer-events:none;font:var(--st-menu,normal) var(--w-menu,400) .65rem var(--f-menu);letter-spacing:.3em;text-transform:uppercase;color:var(--muted);transition:opacity .6s}
+.gv.is-moved .gv-hint{opacity:0}
+.gv-stage:focus-visible{box-shadow:inset 0 0 0 2px var(--accent)}
+@media(max-width:640px){.gv-hud{flex-wrap:wrap;justify-content:center;text-align:center;padding-bottom:1.1rem}.gv-title{order:-1;flex-basis:100%}.gv-btns{margin:0 auto}.gv-hint{bottom:8.2rem}}
+@media(prefers-reduced-motion:reduce){.gv-title,.gv-hint{transition:none}}
