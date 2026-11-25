@@ -1,0 +1,34 @@
+/* Galería "Círculo": cada foto brota de su punto (círculo que crece) y la anterior rebota hasta el suyo. La geometría la calcula script.js. Prefijo gc- */
+.gc{padding:0 var(--pad) clamp(2.5rem,6vw,5rem);--gc-w:min(88vw,620px,calc(68vh * var(--gc-ar)));--gc-w:min(88vw,620px,calc(68svh * var(--gc-ar)))}
+.gc-stage{position:relative;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1rem;outline:none}
+.gc-frame{position:relative;width:var(--gc-w);aspect-ratio:var(--gc-ar);overflow:hidden;border-radius:20px;background:#141316;touch-action:pan-y;user-select:none;-webkit-user-select:none;
+  box-shadow:0 2.8px 2.2px rgba(0,0,0,.06),0 12.5px 10px rgba(0,0,0,.1),0 41.8px 33.4px rgba(0,0,0,.16),0 100px 80px rgba(0,0,0,.28)}
+.gc-ly{position:absolute;inset:0;display:block;z-index:1;pointer-events:none;transition:opacity .15s;-webkit-tap-highlight-color:transparent}
+.gc-ly.is-now{pointer-events:auto;cursor:zoom-in}
+.gc-ly img{position:absolute;display:block;max-width:none;-webkit-user-drag:none;user-select:none}
+.gc-ly img.is-cover{inset:0;width:100%;height:100%;object-fit:cover}
+.gc-ly img.gc-c{height:auto}
+.gc-ly .pcats{opacity:0;transition:opacity .4s}.gc-ly.is-now .pcats{opacity:1}
+.gc-ly:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+/* Sin JavaScript solo se ve la primera */
+.gc:not(.is-js) .gc-ly:not(:first-child){display:none}
+.gc-tabs{position:absolute;inset:0;z-index:30;pointer-events:none}
+.gc-tabs button{position:absolute;padding:0;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:transparent;cursor:pointer;pointer-events:auto;transform:translate(-50%,-50%);transition:border-color .3s,box-shadow .3s}
+.gc-tabs button:hover,.gc-tabs button:focus-visible{border-color:#fff;outline:none}
+.gc-tabs button.is-on{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+.gc-tabs button::after{content:"";position:absolute;inset:-6px}
+.gc-b{width:3.4rem;height:3.4rem;display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.94);color:#222;cursor:pointer;
+  box-shadow:0 8px 32px rgba(0,0,0,.25);transition:transform .3s,background .3s,box-shadow .3s}
+.gc-b:hover{transform:scale(1.1);background:#fff;box-shadow:0 12px 48px rgba(0,0,0,.35)}
+.gc-b:active{transform:scale(.95)}
+.gc-b:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.gc-b:disabled{opacity:.4;pointer-events:none}
+.gc-prev{order:2}.gc-next{order:3}.gc-frame{order:1;flex:0 0 100%;margin:0 auto}
+.gc-cap{margin:1.1rem 0 0;text-align:center;font:var(--st-title,normal) var(--w-title,300) clamp(1.2rem,2.6vw,1.8rem) var(--f-title);color:var(--fg);transition:opacity .35s}
+.gc-cap.is-sw{opacity:0}
+@media(min-width:900px){
+  .gc-stage{flex-wrap:nowrap;gap:2.2rem}
+  .gc-frame{order:2;flex:0 0 auto;margin:0}.gc-prev{order:1}.gc-next{order:3}
+  .gc-b{width:4rem;height:4rem}
+}
+@media(prefers-reduced-motion:reduce){.gc-ly,.gc-cap,.gc-b{transition:none}}
