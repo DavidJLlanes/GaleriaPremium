@@ -46,7 +46,7 @@ Está construido con **PHP 8.3 puro, SQLite y HTML/CSS/JS vanilla**: sin Compose
 ### 🖼️ Galerías y fotos
 | | |
 |---|---|
-| **10 diseños de galería** | `masonry` · `justified` · `grid` · `filmstrip` · `lumina` · `tunnel` · `slider` · `baraja` · `bento` · `morph` — cada galería elige el suyo |
+| **11 diseños de galería** | `masonry` · `justified` · `grid` · `filmstrip` · `lumina` · `tunnel` · `slider` · `baraja` · `bento` · `morph` · `abanico` — cada galería elige el suyo |
 | **Lightbox con 5 efectos** | `fade` · `slide` · `flip` · `curtain` · `zoom` — configurable por galería, la foto se adapta a la pantalla |
 | **Lightbox ampliado** | zoom con rueda, doble toque y pellizco; arrastrar para cerrar; miniaturas; descripción; datos de cámara (EXIF); resplandor con el color medio de la foto |
 | **Subida con título y descripción** | la descripción puede generarla una IA si se deja vacía |
@@ -105,7 +105,7 @@ GaleriaPremium/
 │   └── Services/            # ImageProcessor, Auth, Passkeys, Categories, Ai/…
 ├── modules/                 # TODO lo visual: view.php · style.css · script.js · module.php
 │   ├── layouts/ pages/ sections/ components/ (51)
-│   ├── heroes/ (20)  galleries/ (10)  lightboxes/ (5)  sliders/ (6)
+│   ├── heroes/ (20)  galleries/ (11)  lightboxes/ (5)  sliders/ (6)
 │   ├── slider-fx/ slider-arrows/ slider-dots/
 │   ├── home-layouts/ reveals/ card-titles/ intros/ cursors/
 │   └── menu-icons/ menu-reveals/ menu-styles/ footers/ footer-reveals/
@@ -273,7 +273,7 @@ modules/galleries/mi-diseno/
 
 ## 🗺️ Estado del proyecto
 
-- [x] Galerías (10 diseños), lightbox (5 efectos) y sliders (6 diseños)
+- [x] Galerías (11 diseños), lightbox (5 efectos) y sliders (6 diseños)
 - [x] 20 portadas, entrada, tarjetas, menú y pie configurables
 - [x] Panel completo con subida, gestión masiva, categorías y vistas previas
 - [x] IA multi-proveedor para títulos y descripciones

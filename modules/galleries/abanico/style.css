@@ -1,0 +1,33 @@
+/* Galería "Abanico": cartas inclinadas, la central de frente. La posición de cada carta la calcula script.js (variables --x --y --r --s --o --z). Prefijo gf- */
+.gf{padding:0 0 clamp(2.5rem,6vw,5rem);overflow:hidden}
+.gf-stage{position:relative;height:clamp(380px,68vh,760px);height:clamp(380px,68svh,760px);outline:none;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.gf-row{position:absolute;inset:0}
+.gf-card{position:absolute;left:50%;top:50%;width:var(--gf-w,260px);height:var(--gf-h,380px);z-index:var(--z,1);opacity:var(--o,0);
+  transform:translate(-50%,-50%) translate(var(--x,0),var(--y,0)) rotate(var(--r,0deg)) scale(var(--s,1));
+  transition:transform .95s cubic-bezier(.16,1,.3,1),opacity .6s;will-change:transform;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gf-card.is-off{pointer-events:none;visibility:hidden}
+.gf-card.is-now{cursor:zoom-in}
+.gf-card.is-jump{transition:none}
+.gf-card:focus-visible{outline:none}
+.gf-card:focus-visible .gf-box{outline:2px solid var(--accent);outline-offset:3px}
+.gf-box{position:absolute;inset:0;display:block;overflow:hidden;border-radius:var(--gf-r,28px);background:#141316;box-shadow:0 30px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.1)}
+.gf-box img{position:absolute;display:block;max-width:none;user-select:none;-webkit-user-drag:none}
+.gf-box img.is-cover{inset:0;width:100%;height:100%;object-fit:cover}
+.gf-box img.gf-c{height:auto}
+.gf-sh{position:absolute;inset:0;background:#0a0a0b;opacity:var(--sh,0);transition:opacity .8s var(--ease);pointer-events:none}
+.gf-card .pcats{opacity:0;transition:opacity .5s}.gf-card.is-now .pcats{opacity:1}
+.gf-foot{display:flex;flex-direction:column;align-items:center;gap:1.1rem;padding:0 var(--pad);margin-top:.4rem}
+.gf-cap{margin:0;min-height:1.6em;text-align:center;font:var(--st-title,normal) var(--w-title,300) clamp(1.2rem,2.6vw,1.8rem) var(--f-title);color:var(--fg);transition:opacity .35s}
+.gf-cap.is-sw{opacity:0}
+.gf-ctl{display:flex;align-items:center;gap:1rem}
+.gf-b{width:2.9rem;height:2.9rem;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:var(--fg);cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:border-color .3s,color .3s,background .3s}
+.gf-b:hover,.gf-b:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.gf-b:disabled{opacity:.3;pointer-events:none}
+.gf-dots{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;justify-content:center;max-width:60vw}
+.gf-dots button{width:.5rem;height:.5rem;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer;transition:background .3s,transform .4s var(--ease),width .4s var(--ease);position:relative}
+.gf-dots button::after{content:"";position:absolute;inset:-.5rem}
+.gf-dots button.is-on{background:var(--fg);width:.8rem;height:.8rem}
+.gf-dots button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.gf-num{font:var(--st-menu,normal) var(--w-menu,400) .72rem var(--f-menu);letter-spacing:.3em;color:var(--muted);min-width:6rem;text-align:center}
+.gf-num b{color:var(--accent);font-weight:inherit}
+@media(prefers-reduced-motion:reduce){.gf-card,.gf-sh,.gf-cap{transition:none}}
